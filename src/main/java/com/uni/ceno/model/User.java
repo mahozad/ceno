@@ -15,7 +15,7 @@ import java.util.*;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
-import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @NoArgsConstructor
@@ -25,7 +25,7 @@ import static javax.persistence.GenerationType.AUTO;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     @ManyToMany(mappedBy = "likers", fetch = EAGER)
