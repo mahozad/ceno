@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Article title</title>
+    <meta name="description"
+          content="Stamina is where users view and share their favorite content."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/main-styles.css">
+    <link rel="stylesheet" href="/css/post-styles.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/scripts.js" defer></script>
+</head>
+
+<body>
+
+<nav th:replace="fragments::navigation"></nav>
+<div th:replace="fragments::login-dialog"></div>
+
+<main>
+    <div class="article-container" th:attr="data-post-id=${post.id}">
+        <img th:src="${'/posts/images/'+post.id}" alt="cover">
+        <div class="main-content">
+            <div class="article-header">
+                <div class="info">
+                    <h1 class="article-title" th:text="${post.title}">
+                        Title
+                    </h1>
+                    <div class="subheading">
+                        <div class="creator">
+                            <img th:src="${'/users/avatars/'+post.author.name}"
+                                 th:alt="${post.author.name}"/>
+                            <span class="creator-name" th:text="${post.author.name}">
+                           Author
+                        </span>
+                        </div>
+                        <div class="time" th:text="${post.dateTime}">
+                            DateTime
+                        </div>
+                    </div>
+                </div>
+                <div class="icons">
+                    <div class="meters">
+                        <div class="likes likes-right">
+                            <span th:text="${post.favoritesCount}"
+                                  class="like-num">Likes count</span>
+                            <div th:if="${authenticated}" class="heart"
+                                 th:classappend="(${authenticated}and${user.favorites.contains(post)})?'liked':'not-liked'">
+                            </div>
+                            <div th:unless="${authenticated}"
+                                 title="You're not Logged in"
+                                 th:class="heart-static">
+                            </div>
+                        </div>
+                        <div class="comm-count">
+                            <span th:text="${post.commentsCount}">Comments count</span>
+                            <img src="/images/ic-comment.svg" class="comm-icon" alt="Comments">
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <img src="/images/ic-pin.svg" alt="pin" title="Pin to home page">
+                        <img src="/images/ic-delete.svg" alt="delete" title="Delete">
+                        <img src="/images/ic-tag.svg" alt="tags" title="Change categories">
+                        <img src="/images/ic-report.svg" alt="report" title="Report">
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-content" th:text="${post.article}">
+                Article
+            </div>
+            <div class="separator"></div>
+            <div class="cat-share-container">
+                <div class="article-cats">
+                    <a class="chip" th:each="category:${post.categories}"
+                       th:href="${'/posts/categories/'+category.name}"
+                       th:text="${category.name}">Category
+                    </a>
+                </div>
+                <div class="article-share">
+                    <a th:each="share:${post.shareUrls}" th:href="${share.url}">
+                        <img th:src="${'/images/soc-'+share.name+'.svg'}" th:alt="${share.name}">
+                    </a>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="wrt-comment" th:if="${authenticated}">
+                <p>your comment:</p>
+                <form th:action="${'/posts/comments'}" method="post">
+                    <textarea class="multiline-text" name="comment"></textarea>
+                    <input type="hidden" name="postId" th:value="${post.id}">
+                    <br>
+                    <button type="submit" class="btn">Send</button>
+                </form>
+            </div>
+            <div class="comments">
+                <p th:text="'Comments ('+${post.commentsCount}+')'+(${post.commentsCount gt 0}?':':'')">
+                    Comments count
+                </p>
+                <div class="comment" th:each="comment:${post.comments}">
+                    <div class="comment-author">
+                        <img th:src="${'/users/avatars/'+comment.author.name}"
+                             th:alt="${comment.author.name}"/>
+                        <div class="com-auth-name" th:text="${comment.author.name}">
+                            Commenter
+                        </div>
+                    </div>
+                    <div class="comment-text" th:text="${comment.getComment()}">
+                        Comment
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- similar articles -->
+    <div class="similar-container">
+        <div class="card">
+            <div class="top-container">
+                <div class="card-image">
+                    <img class="card-img top-radius" src="images/photo-1.jpg"
+                         alt="img"/>
+                </div>
+                <article>
+                    <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                        do
+                        eiusmod te mpor incididunt ut labore
+                    </h1>
+                    <p class="block-with-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                        do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </article>
+            </div>
+            <div class="card-bottom">
+                <div class="hr"></div>
+                <footer class="card-footer">
+                    <div class="chip-container">
+                        <div class="chips">
+                            <a href="#">Sports</a>
+                        </div>
+                        <div class="chips">
+                            <a href="#">Fun</a>
+                        </div>
+                    </div>
+                    <div class="card-date hidden">
+                        2018-03-04
+                    </div>
+                    <div class="read-more">
+                        <a href="#">Read more...</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div class="card">
+            <div class="top-container">
+                <div class="card-image">
+                    <img class="card-img top-radius" src="/images/photo-1.jpg"
+                         alt="img"/>
+                </div>
+                <article>
+                    <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                        do
+                        eiusmod te mpor incididunt ut labore
+                    </h1>
+                    <p class="block-with-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                        do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </article>
+            </div>
+            <div class="card-bottom">
+                <div class="hr"></div>
+                <footer class="card-footer">
+                    <div class="chip-container">
+                        <div class="chips">
+                            <a href="#">Sports</a>
+                        </div>
+                        <div class="chips">
+                            <a href="#">Fun</a>
+                        </div>
+                    </div>
+                    <div class="card-date hidden">
+                        2018-03-04
+                    </div>
+                    <div class="read-more">
+                        <a href="#">Read more...</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div class="card">
+            <div class="top-container">
+                <div class="card-image">
+                    <img class="card-img top-radius" src="images/photo-1.jpg"
+                         alt="img"/>
+                </div>
+                <article>
+                    <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                        do
+                        eiusmod te mpor incididunt ut labore
+                    </h1>
+                    <p class="block-with-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                        do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </article>
+            </div>
+            <div class="card-bottom">
+                <div class="hr"></div>
+                <footer class="card-footer">
+                    <div class="chip-container">
+                        <div class="chips">
+                            <a href="#">Sports</a>
+                        </div>
+                        <div class="chips">
+                            <a href="#">Fun</a>
+                        </div>
+                    </div>
+                    <div class="card-date hidden">
+                        2018-03-04
+                    </div>
+                    <div class="read-more">
+                        <a href="#">Read more...</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+
+</body>
+</html>

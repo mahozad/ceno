@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create a new post</title>
+    <meta name="description"
+          content="Stamina is where users view and share their favorite content."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/main-styles.css">
+    <link rel="stylesheet" href="/css/new-post-styles.css">
+    <script th:src="@{/js/jquery-3.3.1.min.js}" defer></script>
+    <script th:src="@{/js/scripts.js}" defer></script>
+</head>
+<body>
+
+<nav th:replace="fragments::navigation"></nav>
+
+<main>
+    <div class="form-container">
+        <form action="/posts/submit" method="post" enctype="multipart/form-data"
+              novalidate>
+            <div class="left-container">
+                <input type="hidden" name="userId" th:value="${user.id}">
+                <div class="input-np inp-title">
+                    <input id="inp-title" class="flat-inp-np" type="text"
+                           name="title"
+                           maxlength="60" autofocus required>
+                    <span class="highlight-np"></span>
+                    <label for="inp-title" class="label-np">Title</label>
+                    <div class="prompt">Already taken</div>
+                </div>
+                <div class="input-np inp-sum">
+                    <input id="inp-sum" class="flat-inp-np" type="text"
+                           name="summary"
+                           maxlength="100"
+                           required>
+                    <span class="highlight-np"></span>
+                    <label for="inp-sum" class="label-np">Summary</label>
+                    <div class="prompt">Already taken</div>
+                </div>
+                <div class="input-np inp-article">
+                <textarea class="flat-inp-np multiline-text" name="article"
+                          id="inp-article"
+                          required></textarea>
+                    <span class="highlight-np"></span>
+                    <label for="inp-article" class="label-np">Article</label>
+                    <div class="prompt">Already taken</div>
+                </div>
+            </div>
+            <div class="right-container">
+                <fieldset class="post-file">
+                    <legend>Add an Image or Video</legend>
+                    <div class="file-select">
+                        <img class="file-prev" src="/images/placeholder-3.svg"/>
+                        <label class="file-upload post-input">
+                            <input type="file" name="file" accept="image/*, video/*">
+                            Select file
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="input-np inp-cats">
+                    <input id="inp-cats" class="flat-inp-np" type="text"
+                           name="category" required>
+                    <span class="highlight-np"></span>
+                    <label for="inp-cats" class="label-np">Category(s)</label>
+                    <div class="prompt">Already taken</div>
+                </div>
+            </div>
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </div>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+
+</body>
+</html>

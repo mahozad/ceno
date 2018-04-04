@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${@environment.getProperty('title')}">Title</title>
+    <meta name="description" th:content="${@environment.getProperty('desc')}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="Mahdi Hosseinzadeh, Babak Shahriari"/>
+    <link rel="shortcut icon" th:href="@{images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{css/main-styles.css}"/>
+    <script th:src="@{/js/jquery-3.3.1.min.js}" defer></script>
+    <script th:src="@{/js/scripts.js}" defer></script>
+</head>
+
+<body>
+<nav th:replace="fragments::navigation"></nav>
+<div th:replace="fragments::login-dialog"></div>
+<main>
+    <section class="top-cards">
+        <div class="card" th:each="post:${topPosts}" th:attr="data-post-id=${post.id}">
+            <div th:replace="fragments::card-top-section"></div>
+            <div class="card-bottom">
+                <div class="hr"></div>
+                <footer class="card-footer">
+                    <div th:replace="fragments::card-chip-container"></div>
+                    <div th:replace="fragments::card-read-more"></div>
+                </footer>
+            </div>
+        </div>
+    </section>
+    <div class="rest">
+        <section class="ordinary">
+            <div class="category" th:each="categoryPosts:${categoriesPosts}">
+                <h2 class="subject" th:text="${categoryPosts.key}">Subject</h2>
+                <div class="card" th:each="post:${categoryPosts.value}" th:attr="data-post-id=${post.id}">
+                    <div th:replace="fragments::card-top-section"></div>
+                    <div class="card-bottom">
+                        <div class="hr"></div>
+                        <footer class="card-footer">
+                            <div th:replace="fragments::card-datetime"></div>
+                            <div th:replace="fragments::card-read-more"></div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="editors">
+            <div class="card sum" th:each="post:${pinedPosts}">
+                <img class="card-img" th:src="${'/posts/images/'+post.id}"/>
+                <h1 th:text="${post.title}">
+                    Title
+                </h1>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+</body>
+</html>

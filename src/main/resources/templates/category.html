@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${categoryName}">Category name</title>
+    <meta name="description" content="Stamina is where users view and share their favorite content."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/main-styles.css">
+    <link rel="stylesheet" href="/css/category-styles.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/scripts.js" defer></script>
+</head>
+<body>
+<nav th:replace="fragments::navigation"></nav>
+<div th:replace="fragments::login-dialog"></div>
+<main>
+    <div id="cat-page-container">
+        <div class="card" th:fragment="card" th:each="post:${posts}" th:attr="data-post-id=${post.id}">
+            <div th:replace="fragments::card-top-section"></div>
+            <div class="card-bottom">
+                <div class="hr"></div>
+                <footer class="card-footer">
+                    <div th:replace="fragments::card-datetime"></div>
+                    <div th:replace="fragments::card-read-more"></div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <div id="spinner" th:if="${posts.hasNext()}">
+        <div class="loader">
+            <div class="flipper">
+                <div class="load-front"></div>
+                <div class="load-back"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="fragments::footer"></footer>
+
+</body>
+</html>

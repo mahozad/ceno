@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- navigation -->
+
+<nav th:fragment="navigation">
+    <div class="nav-container">
+        <div class="hamburger-icon hidden">
+            &#9776;
+        </div>
+        <div class="side-nav">
+            <span class="close-cat">&times;</span>
+            <div class="vert-cat">
+                <a th:each="category:${@environment.getProperty('cats').split(',')}"
+                   th:href="${'/posts/categories/'+category}"
+                   th:text="${category}">
+                    Category name
+                </a>
+            </div>
+        </div>
+        <a href="/">
+            <img class="brand" src="/images/logo.svg" alt="logo"
+                 th:title="${@environment.getProperty('title')}"/>
+        </a>
+        <div class="cat-container">
+            <a th:each="category:${@environment.getProperty('cats').split(',')}"
+               th:href="${'/posts/categories/'+category}"
+               th:text="${category}">
+                Category name
+            </a>
+        </div>
+        <div class="usr">
+            <div class="usr-log" th:unless="${authenticated}">
+                <a id="log-in" class="btn">Log in</a>
+                <a id="sign-up" class="btn">Sing up</a>
+            </div>
+            <div class="usr-inf-container" th:if="${authenticated}">
+                <a id="new-post" class="btn" href="/posts/new">New post</a>
+                <div class="author-inf-nav">
+                    <img class="card-avatar" th:alt="${user.name}"
+                         th:src="${user.avatar.length==0}?'/images/placeholder-1.svg':${'/users/avatars/'+user.name}"/>
+                    <div class="author">
+                        <div class="usr-name" th:text="${user.name}">
+                            Username
+                        </div>
+                        <div class="score">
+                            <h4 th:text="${user.score}">Score</h4>
+                            <img th:if="${user.score lt 100}" title="Novice!"
+                                 src="/images/ic-medal-beginner.svg" alt="medal"/>
+                            <img th:if="${user.score gt 99 and user.score lt 1000}"
+                                 src="/images/ic-medal-bronze.svg" alt="medal"/>
+                            <img th:if="${user.score gt 999 and user.score lt 50000 }"
+                                 src="/images/ic-medal-silver.svg" alt="medal"/>
+                            <img th:if="${user.score gt 49999}"
+                                 src="/images/ic-medal-gold.svg" alt="medal"/>
+                        </div>
+                    </div>
+                </div>
+                <a href="/logout">
+                    <img id="logout" src="/images/ic-logout.svg" alt="logout"
+                         title="Logout"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- login and sign up -->
+
+<div th:fragment="login-dialog" id="login-dialog" th:unless="${authenticated}">
+    <div class="log-form">
+        <span class="close">&times;</span>
+        <div id="register-wrapper">
+            <form class="register-form" action="/register" method="post"
+                  novalidate enctype="multipart/form-data">
+                <div class="input">
+                    <input id="log-name" class="flat-inp" type="text" name="username"
+                           required>
+                    <span class="highlight"></span>
+                    <label for="log-name" class="label">Username</label>
+                    <div class="prompt">Already taken</div>
+                </div>
+                <div class="input">
+                    <input id="log-pass" class="flat-inp" type="password"
+                           name="password" required>
+                    <span class="highlight"></span>
+                    <label for="log-pass" class="label">Password</label>
+                    <div class="prompt">Invalid</div>
+                </div>
+                <div class="avatar-upload">
+                    <img src="/images/placeholder-1.svg" alt="avatar"/>
+                    <label class="file-upload">
+                        <input type="file" name="avatar" accept="image/*">
+                        Change avatar
+                    </label>
+                </div>
+                <button class="btn" type="submit">Sign up</button>
+                <p>Already registered? <span class="log-prompt">Log In</span></p>
+            </form>
+        </div>
+        <div id="login-wrapper">
+            <form class="login-form" method="post" action="/login" novalidate>
+                <div class="input">
+                    <input id="reg-name" class="flat-inp" type="text" name="username"
+                           required>
+                    <span class="highlight"></span>
+                    <label for="reg-name" class="label">Username</label>
+                    <div class="prompt">Required</div>
+                </div>
+                <div class="input">
+                    <input id="reg-pass" class="flat-inp" type="password"
+                           name="password" required>
+                    <span class="highlight"></span>
+                    <label for="reg-pass" class="label">Password</label>
+                    <div class="prompt">Required</div>
+                </div>
+                <button class="btn" type="submit">Log in</button>
+                <div class="invalid-login">Incorrect username or password</div>
+                <p>Not registered? <span class="log-prompt">Create an account</span>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- card top section -->
+
+<div class="top-container" th:fragment="card-top-section">
+    <header class="card-header">
+        <div class="author-info">
+            <img class="card-avatar" th:alt="${post.author.name}"
+                 th:src="${post.author.avatar.length==0}?'/images/placeholder-1.svg':${'/users/avatars/'+post.author.name}"/>
+            <div class="author">
+                <div class="usr-name" th:text="${post.author.name}">
+                    Username
+                </div>
+                <div class="score" th:with="score=${post.author.score}">
+                    <h4 th:text="${score}">Score</h4>
+                    <img th:if="${score lt 100}"
+                         src="/images/ic-medal-beginner.svg" alt="medal"
+                         title="Novice!"/>
+                    <img th:if="${score gt 99 and score lt 1000}"
+                         src="/images/ic-medal-bronze.svg" alt="medal"/>
+                    <img th:if="${score gt 999 and score lt 50000 }"
+                         src="/images/ic-medal-silver.svg" alt="medal"/>
+                    <img th:if="${score gt 49999}"
+                         src="/images/ic-medal-gold.svg" alt="medal"/>
+                </div>
+            </div>
+        </div>
+        <div class="status-icons">
+            <div class="meters">
+                <div class="like-num" th:text="${post.favoritesCount}">
+                    Likes count
+                </div>
+                <div class="heart" th:if="${authenticated}"
+                     th:classappend="(${authenticated}and${user.favorites.contains(post)})?'liked':'not-liked'">
+                </div>
+                <div class="heart-static" th:unless="${authenticated}"
+                     title="You're not Logged in">
+                </div>
+            </div>
+            <div class="hot-icon"
+                 th:if="${post.commentsCount}gt${@environment.getProperty('hot-min')}">
+                <img src="/images/ic-fire.svg" alt="hot"
+                     title="Hot!"/>
+            </div>
+            <div class="share-container">
+                <div class="share-icon"></div>
+                <div class="share-content">
+                    <div class="arrow"></div>
+                    <a th:each="share:${post.shareUrls}" th:href="${share.url}">
+                        <img th:src="${'/images/soc-'+share.name+'.svg'}" th:alt="${share.name}">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <img class="card-img" th:src="${'/posts/images/'+post.id}"
+         alt="cover"/>
+    <article>
+        <h1 th:text="${post.title}">
+            Title
+        </h1>
+        <p th:text="${post.summary}">
+            Summary
+        </p>
+    </article>
+</div>
+
+<!-- card chip container -->
+
+<div class="chip-container" th:fragment="card-chip-container">
+    <div th:each="cat:${post.categories}">
+        <a class="chip" th:text="${cat.name}"
+           th:href="${'/posts/categories/'+cat.name}">
+            Category
+        </a>
+    </div>
+</div>
+
+<!-- card read more -->
+
+<a class="read-more" th:fragment="card-read-more" th:href="${'/posts/'+post.url}">
+    Read more...
+</a>
+
+<!-- card date -->
+
+<div class="card-date" th:fragment="card-datetime" th:text="${post.dateTime}">
+    DateTime
+</div>
+
+<!-- footer -->
+
+<footer class="page-footer" th:fragment="footer">
+    <div class="footer-container">
+        <div class="up-foot">
+            <div class="foot-links">
+                <div>
+                    <img src="/images/logo.svg" alt="logo">
+                </div>
+                <div class="foot-sec-1">
+                    <a href="/">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact Us</a>
+                </div>
+                <div class="foot-sec-2">
+                    <a href="/faq">FAQ</a>
+                    <a href="/help">Help</a>
+                    <a href="/tos">Terms of service</a>
+                    <a href="/privacy">Privacy policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright" th:text="${@environment.getProperty('title')+' © 2018'}">
+        Copyright
+    </div>
+</footer>
+
+</body>
+</html>
