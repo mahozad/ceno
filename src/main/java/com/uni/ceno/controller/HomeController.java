@@ -27,7 +27,7 @@ public class HomeController {
         this.postService = postService;
     }
 
-    @GetMapping({"/", "/index.html"})
+    @GetMapping({"/", "/index"})
     public String home(Authentication authentication, Model model) {
         if (authentication != null) {
             User user = (User) authentication.getPrincipal();
