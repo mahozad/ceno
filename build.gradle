@@ -29,6 +29,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-devtools')
     compile('org.apache.tika:tika-core:1.17')
     runtime('mysql:mysql-connector-java')
     compileOnly('org.projectlombok:lombok')
