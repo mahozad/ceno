@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Article title</title>
-    <meta name="description"
-          content="Stamina is where users view and share their favorite content."/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/css/main-styles.css">
-    <link rel="stylesheet" href="/css/post-styles.css">
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/scripts.js" defer></script>
+    <th:block
+            th:include="fragments::head(title=${@environment.getProperty('title') + ' - ' + post.title}, desc='')"/>
+    <link rel="stylesheet" th:href="@{/css/post-styles.css}">
 </head>
 
 <body>
@@ -20,7 +14,7 @@
 
 <main>
     <div class="article-container" th:attr="data-post-id=${post.id}">
-        <img th:src="${'/posts/images/'+post.id}" alt="cover">
+        <img th:src="${'/posts/images/' + post.id}" alt="cover">
         <div class="main-content">
             <div class="article-header">
                 <div class="info">
@@ -29,14 +23,14 @@
                     </h1>
                     <div class="subheading">
                         <div class="creator">
-                            <img th:src="${'/users/avatars/'+post.author.name}"
+                            <img th:src="${'/users/avatars/' + post.author.name}"
                                  th:alt="${post.author.name}"/>
                             <span class="creator-name" th:text="${post.author.name}">
                            Author
                         </span>
                         </div>
-                        <div class="time" th:text="${post.dateTime}">
-                            DateTime
+                        <div th:with="now=${T(java.time.LocalDateTime).now()}, duration=${T(java.time.Duration).between(post.dateTime,now)}"
+                             th:include="fragments::card-datetime" class="time">
                         </div>
                     </div>
                 </div>
@@ -46,7 +40,7 @@
                             <span th:text="${post.favoritesCount}"
                                   class="like-num">Likes count</span>
                             <div th:if="${authenticated}" class="heart"
-                                 th:classappend="(${authenticated}and${user.favorites.contains(post)})?'liked':'not-liked'">
+                                 th:classappend="(${authenticated} and ${user.favorites.contains(post)}) ? 'liked' : 'not-liked'">
                             </div>
                             <div th:unless="${authenticated}"
                                  title="You're not Logged in"
@@ -74,13 +68,14 @@
             <div class="cat-share-container">
                 <div class="article-cats">
                     <a class="chip" th:each="category:${post.categories}"
-                       th:href="${'/posts/categories/'+category.name}"
+                       th:href="${'/posts/categories/' + category.name}"
                        th:text="${category.name}">Category
                     </a>
                 </div>
                 <div class="article-share">
                     <a th:each="share:${post.shareUrls}" th:href="${share.url}">
-                        <img th:src="${'/images/soc-'+share.name+'.svg'}" th:alt="${share.name}">
+                        <img th:src="${'/images/soc-' + share.name + '.svg'}"
+                             th:alt="${share.name}">
                     </a>
                 </div>
             </div>
@@ -95,12 +90,12 @@
                 </form>
             </div>
             <div class="comments">
-                <p th:text="'Comments ('+${post.commentsCount}+')'+(${post.commentsCount gt 0}?':':'')">
+                <p th:text="'Comments (' + ${post.commentsCount} + ')' + (${post.commentsCount gt 0} ? ':' : '')">
                     Comments count
                 </p>
                 <div class="comment" th:each="comment:${post.comments}">
                     <div class="comment-author">
-                        <img th:src="${'/users/avatars/'+comment.author.name}"
+                        <img th:src="${'/users/avatars/' + comment.author.name}"
                              th:alt="${comment.author.name}"/>
                         <div class="com-auth-name" th:text="${comment.author.name}">
                             Commenter

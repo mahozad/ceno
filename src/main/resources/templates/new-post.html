@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Create a new post</title>
-    <meta name="description"
-          content="Stamina is where users view and share their favorite content."/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/css/main-styles.css">
-    <link rel="stylesheet" href="/css/new-post-styles.css">
-    <script th:src="@{/js/jquery-3.3.1.min.js}" defer></script>
-    <script th:src="@{/js/scripts.js}" defer></script>
+    <th:block
+            th:include="fragments::head(title=${@environment.getProperty('title') + ' - Create new post'}, desc='')"/>
+    <link rel="stylesheet" th:href="@{/css/new-post-styles.css}">
 </head>
+
 <body>
 
 <nav th:replace="fragments::navigation"></nav>

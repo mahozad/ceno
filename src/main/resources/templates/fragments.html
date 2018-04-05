@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+<!-- head -->
+
+<head th:fragment="head(title, desc)">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Title</title>
+    <meta name="description" th:if="${desc} != ''" th:content="${desc}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="Mahdi Hosseinzadeh, Babak Shahriari"/>
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <script th:src="@{/js/jquery-3.3.1.min.js}" defer></script>
+    <script th:src="@{/js/scripts.js}" defer></script>
 </head>
+
 <body>
 
 <!-- navigation -->
@@ -17,7 +28,7 @@
             <span class="close-cat">&times;</span>
             <div class="vert-cat">
                 <a th:each="category:${@environment.getProperty('cats').split(',')}"
-                   th:href="${'/posts/categories/'+category}"
+                   th:href="${'/posts/categories/' + category}"
                    th:text="${category}">
                     Category name
                 </a>
@@ -29,7 +40,7 @@
         </a>
         <div class="cat-container">
             <a th:each="category:${@environment.getProperty('cats').split(',')}"
-               th:href="${'/posts/categories/'+category}"
+               th:href="${'/posts/categories/' + category}"
                th:text="${category}">
                 Category name
             </a>
@@ -43,7 +54,7 @@
                 <a id="new-post" class="btn" href="/posts/new">New post</a>
                 <div class="author-inf-nav">
                     <img class="card-avatar" th:alt="${user.name}"
-                         th:src="${user.avatar.length==0}?'/images/placeholder-1.svg':${'/users/avatars/'+user.name}"/>
+                         th:src="${user.avatar.length == 0} ? '/images/placeholder-1.svg' : ${'/users/avatars/' + user.name}"/>
                     <div class="author">
                         <div class="usr-name" th:text="${user.name}">
                             Username
@@ -134,7 +145,7 @@
     <header class="card-header">
         <div class="author-info">
             <img class="card-avatar" th:alt="${post.author.name}"
-                 th:src="${post.author.avatar.length==0}?'/images/placeholder-1.svg':${'/users/avatars/'+post.author.name}"/>
+                 th:src="${post.author.avatar.length==0} ? '/images/placeholder-1.svg' : ${'/users/avatars/' + post.author.name}"/>
             <div class="author">
                 <div class="usr-name" th:text="${post.author.name}">
                     Username
@@ -142,14 +153,12 @@
                 <div class="score" th:with="score=${post.author.score}">
                     <h4 th:text="${score}">Score</h4>
                     <img th:if="${score lt 100}"
-                         src="/images/ic-medal-beginner.svg" alt="medal"
-                         title="Novice!"/>
+                         src="/images/ic-medal-beginner.svg" alt="medal" title="Novice!"/>
                     <img th:if="${score gt 99 and score lt 1000}"
                          src="/images/ic-medal-bronze.svg" alt="medal"/>
                     <img th:if="${score gt 999 and score lt 50000 }"
                          src="/images/ic-medal-silver.svg" alt="medal"/>
-                    <img th:if="${score gt 49999}"
-                         src="/images/ic-medal-gold.svg" alt="medal"/>
+                    <img th:if="${score gt 49999}" src="/images/ic-medal-gold.svg" alt="medal"/>
                 </div>
             </div>
         </div>
@@ -159,14 +168,14 @@
                     Likes count
                 </div>
                 <div class="heart" th:if="${authenticated}"
-                     th:classappend="(${authenticated}and${user.favorites.contains(post)})?'liked':'not-liked'">
+                     th:classappend="(${authenticated} and ${user.favorites.contains(post)}) ? 'liked' : 'not-liked'">
                 </div>
                 <div class="heart-static" th:unless="${authenticated}"
                      title="You're not Logged in">
                 </div>
             </div>
             <div class="hot-icon"
-                 th:if="${post.commentsCount}gt${@environment.getProperty('hot-min')}">
+                 th:if="${post.commentsCount} gt ${@environment.getProperty('hot-min')}">
                 <img src="/images/ic-fire.svg" alt="hot"
                      title="Hot!"/>
             </div>
@@ -175,13 +184,13 @@
                 <div class="share-content">
                     <div class="arrow"></div>
                     <a th:each="share:${post.shareUrls}" th:href="${share.url}">
-                        <img th:src="${'/images/soc-'+share.name+'.svg'}" th:alt="${share.name}">
+                        <img th:src="${'/images/soc-' + share.name+'.svg'}" th:alt="${share.name}">
                     </a>
                 </div>
             </div>
         </div>
     </header>
-    <img class="card-img" th:src="${'/posts/images/'+post.id}"
+    <img class="card-img" th:src="${'/posts/images/' + post.id}"
          alt="cover"/>
     <article>
         <h1 th:text="${post.title}">
@@ -198,7 +207,7 @@
 <div class="chip-container" th:fragment="card-chip-container">
     <div th:each="cat:${post.categories}">
         <a class="chip" th:text="${cat.name}"
-           th:href="${'/posts/categories/'+cat.name}">
+           th:href="${'/posts/categories/' + cat.name}">
             Category
         </a>
     </div>
@@ -206,14 +215,30 @@
 
 <!-- card read more -->
 
-<a class="read-more" th:fragment="card-read-more" th:href="${'/posts/'+post.url}">
+<a class="read-more" th:fragment="card-read-more" th:href="${'/posts/' + post.url}">
     Read more...
 </a>
 
 <!-- card date -->
 
-<div class="card-date" th:fragment="card-datetime" th:text="${post.dateTime}">
-    DateTime
+<div class="card-date" th:fragment="card-datetime"
+     th:with="now=${T(java.time.LocalDateTime).now()},duration=${T(java.time.Duration).between(post.dateTime,now)}">
+    <span th:if="${duration.toSeconds() lt 60}" th:text="'seconds ago'"></span>
+    <span th:if="${duration.toSeconds() gt 59 and duration.toMinutes() lt 60}"
+          th:text="${duration.toMinutes() + (duration.toMinutes() lt 2 ? ' minute' : ' minutes') + ' ago'}">
+    </span>
+    <span th:if="${duration.toMinutes() gt 59 and duration.toHours() lt 24}"
+          th:text="${duration.toHours() + (duration.toHours() lt 2 ? ' hour' : ' hours') + ' ago'}">
+    </span>
+    <span th:if="${duration.toHours() gt 23 and duration.toDays() lt 3}"
+          th:text="${duration.toDays() + (duration.toDays() lt 2 ? ' day' : ' days') + ' ago'}">
+    </span>
+    <span th:if="${duration.toDays() gt 2 and now.getYear() == post.dateTime.year}"
+          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('MMMM d'))}">
+    </span>
+    <span th:if="${now.getYear()!=post.dateTime.year}"
+          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('uuuu-MM-dd'))}">
+    </span>
 </div>
 
 <!-- footer -->
@@ -239,7 +264,8 @@
             </div>
         </div>
     </div>
-    <div class="copyright" th:text="${@environment.getProperty('title')+' © 2018'}">
+    <div class="copyright"
+         th:text="${@environment.getProperty('title') + ' © ' + T(java.time.LocalDate).now().getYear()}">
         Copyright
     </div>
 </footer>

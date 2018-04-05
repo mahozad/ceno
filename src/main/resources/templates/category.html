@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title th:text="${categoryName}">Category name</title>
-    <meta name="description" content="Stamina is where users view and share their favorite content."/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/css/main-styles.css">
-    <link rel="stylesheet" href="/css/category-styles.css">
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/scripts.js" defer></script>
+    <th:block
+            th:include="fragments::head(title=${@environment.getProperty('title') + ' - ' + categoryName + ' posts'}, desc='')"/>
+    <link rel="stylesheet" th:href="@{/css/category-styles.css}">
 </head>
+
 <body>
+
 <nav th:replace="fragments::navigation"></nav>
 <div th:replace="fragments::login-dialog"></div>
+
 <main>
     <div id="cat-page-container">
-        <div class="card" th:fragment="card" th:each="post:${posts}" th:attr="data-post-id=${post.id}">
+        <div class="card" th:fragment="card" th:each="post:${posts}"
+             th:attr="data-post-id=${post.id}">
             <div th:replace="fragments::card-top-section"></div>
             <div class="card-bottom">
                 <div class="hr"></div>
