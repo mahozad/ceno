@@ -41,6 +41,7 @@ public class Post {
     private Set<User> likers = new HashSet<>();
 
     @OneToMany(mappedBy = "post", cascade = ALL)
+    //@OrderBy("dateTime DESC")
     private List<Comment> comments = new ArrayList<>();
 
     @ElementCollection

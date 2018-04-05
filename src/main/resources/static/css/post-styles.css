@@ -128,7 +128,7 @@ main {
 .article-share img {
     margin-right: 18px;
     width: 22px;
-
+    margin-top: 4px;
 }
 
 .article-content {
@@ -153,7 +153,7 @@ main {
 
 .separator {
     border-top: 1px solid #E6E6E6;
-    margin: 20px 0;
+    margin: 16px 0;
 }
 
 .top-radius {

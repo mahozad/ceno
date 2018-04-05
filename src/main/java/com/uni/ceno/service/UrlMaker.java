@@ -16,7 +16,7 @@ public class UrlMaker {
     private static final String FACEBOOK_SHR = "http://facebook.com/sharer/sharer.php?u=";
     private static final String TWITTER_SHR = "http://twitter.com/home?status=";
     private static final String TUMBLR_SHR = "http://tumblr.com/widgets/share/tool?canonicalUrl=";
-    private static final String PINTEREST_SHR = "https://pinterest.com/pin/create/button/?url=";
+    private static final String PINTEREST_SHR = "http://pinterest.com/pin/create/button/?url=";
 
     public String makeUrlOf(String base) {
         String rawUrl = base + LocalDate.now() + LocalTime.now().hashCode();
