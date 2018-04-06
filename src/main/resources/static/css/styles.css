@@ -2,6 +2,7 @@
 /*************** Common ****************/
 :root {
     --nav-height: 56px;
+    --footer-height: 280px;
 }
 
 @font-face {
@@ -22,6 +23,8 @@
 body {
     background: #efefef;
     margin: 0;
+    min-height: 100vh;
+    position: relative;
 }
 
 main {
@@ -437,6 +440,7 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
 main {
     margin: auto;
     padding-top: var(--nav-height);
+    padding-bottom: var(--footer-height);
 }
 
 .top-cards {
@@ -940,6 +944,8 @@ main {
     -webkit-box-shadow: 0 -2px 3px 0 rgba(0, 0, 0, 0.14);
     margin-top: 20px;
     width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 .footer-container {
