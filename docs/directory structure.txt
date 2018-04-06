@@ -1,0 +1,101 @@
+﻿.\main
+   ├─── 🗁 java
+   │   └─── 🗁 com
+   │       └─── 🗁 uni
+   │           └─── 🗁 ceno
+   │               ├─── 🗁 configuration
+   │               │   └─── SecurityConfiguration.java
+   │               ├─── 🗁 controller
+   │               │   ├─── HomeController.java
+   │               │   ├─── LoginController.java
+   │               │   ├─── PostController.java
+   │               │   └─── UserController.java
+   │               ├─── 🗁 model
+   │               │   ├─── Category.java
+   │               │   ├─── Comment.java
+   │               │   ├─── Post.java
+   │               │   ├─── Role.java
+   │               │   └─── User.java
+   │               ├─── 🗁 repository
+   │               │   ├─── CategoryRepository.java
+   │               │   ├─── CommentRepository.java
+   │               │   ├─── PostRepository.java
+   │               │   └─── UserRepository.java
+   │               ├─── 🗁 service
+   │               │   ├─── CategoryService.java
+   │               │   ├─── PostService.java
+   │               │   ├─── UrlMaker.java
+   │               │   └─── UserService.java
+   │               └─── CenoApplication.java
+   └─── 🗁 resources
+       ├─── 🗁 static
+       │   ├─── 🗁 css
+       │   │   ├─── category-styles.css
+       │   │   ├─── new-post-styles.css
+       │   │   ├─── normalize.css
+       │   │   ├─── post-styles.css
+       │   │   └─── styles.css
+       │   ├─── 🗁 fonts
+       │   │   ├─── Molengo.ttf
+       │   │   └─── Roboto-Regular.ttf
+       │   ├─── 🗁 images
+       │   │   ├─── avatar-1.jpg
+       │   │   ├─── avatar-2.jpg
+       │   │   ├─── avatar-3.jpg
+       │   │   ├─── avatar-4.jpg
+       │   │   ├─── avatar-5.jpg
+       │   │   ├─── avatar-6.jpg
+       │   │   ├─── favicon.ico
+       │   │   ├─── ic-comment.svg
+       │   │   ├─── ic-delete.svg
+       │   │   ├─── ic-fire-alt.svg
+       │   │   ├─── ic-fire.svg
+       │   │   ├─── ic-heart-animated.png
+       │   │   ├─── ic-heart-static.svg
+       │   │   ├─── ic-logout-alt.svg
+       │   │   ├─── ic-logout.svg
+       │   │   ├─── ic-medal-beginner.svg
+       │   │   ├─── ic-medal-bronze.svg
+       │   │   ├─── ic-medal-gold.svg
+       │   │   ├─── ic-medal-silver.svg
+       │   │   ├─── ic-pin.svg
+       │   │   ├─── ic-report.svg
+       │   │   ├─── ic-share.svg
+       │   │   ├─── ic-tag.svg
+       │   │   ├─── logo.svg
+       │   │   ├─── photo-1.jpg
+       │   │   ├─── photo-10.jpg
+       │   │   ├─── photo-11.jpg
+       │   │   ├─── photo-12.jpg
+       │   │   ├─── photo-13.jpg
+       │   │   ├─── photo-14.jpg
+       │   │   ├─── photo-2.jpg
+       │   │   ├─── photo-3.jpg
+       │   │   ├─── photo-4.jpg
+       │   │   ├─── photo-5.jpg
+       │   │   ├─── photo-6.jpg
+       │   │   ├─── photo-7.jpg
+       │   │   ├─── photo-8.jpg
+       │   │   ├─── photo-9.jpg
+       │   │   ├─── placeholder-1.svg
+       │   │   ├─── placeholder-2.svg
+       │   │   ├─── placeholder-3.svg
+       │   │   ├─── soc-facebook.svg
+       │   │   ├─── soc-gp.svg
+       │   │   ├─── soc-instagram.svg
+       │   │   ├─── soc-linkedin.svg
+       │   │   ├─── soc-pinterest.svg
+       │   │   ├─── soc-telegram.svg
+       │   │   ├─── soc-tumblr.svg
+       │   │   └─── soc-twitter.svg
+       │   └─── 🗁 js
+       │       ├─── jquery-3.3.1.min.js
+       │       └─── scripts.js
+       ├─── 🗁 templates
+       │   ├─── category.html
+       │   ├─── fragments.html
+       │   ├─── index.html
+       │   ├─── new-post.html
+       │   └─── post.html
+       ├─── application.properties
+       └─── banner.txt
