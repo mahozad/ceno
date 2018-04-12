@@ -14,6 +14,7 @@ main {
     border-radius: 2px;
     display: flex;
     flex-flow: column;
+    height: fit-content;
     margin: 30px 0;
 }
 
@@ -31,23 +32,27 @@ main {
 
 .info {
     margin-right: 24px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 
 .article-title {
     margin: 0;
+    font-size: 26px;
+    line-height: 36px;
 }
 
 .subheading {
     align-items: center;
     display: flex;
     font-size: 14px;
-    margin-left: 24px;
     margin-top: 8px;
 }
 
 .subheading img {
     border-radius: 50%;
-    width: 32px;
+    width: 30px;
 }
 
 .subheading .creator-name {
@@ -56,6 +61,8 @@ main {
 
 .subheading .time {
     margin-left: 24px;
+    color: #9a9a9a;
+    font-size: 12px;
 }
 
 .creator {
@@ -75,7 +82,7 @@ main {
     height: fit-content;
     justify-content: center;
     /*border: 1px solid #e7e7e7;*/
-    padding: 8px;
+    padding: 0 8px;
 }
 
 .icons img {
@@ -132,7 +139,7 @@ main {
 }
 
 .article-content {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 26px;
     margin-top: 16px;
     text-align: justify;

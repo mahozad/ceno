@@ -76,7 +76,7 @@ nav {
     padding: 0 20px;
     text-decoration: none;
     text-transform: capitalize;
-    transition: all 0.12s;
+    transition: all 0.1s;
 }
 
 .cat-container a:hover:not(.active) {
@@ -468,13 +468,14 @@ main {
 /* color of secondary text: #757575 */
 
 .card article {
-    margin: 16px;
-    word-break: break-all;
+    margin: 10px 16px 16px;
+    /*word-break: break-all;*/
 }
 
 .card article p {
     color: #444444;
     font-size: 14px;
+    line-height: 20px;
     margin: 8px 0;
     text-align: justify;
     text-justify: distribute;
@@ -580,6 +581,8 @@ main {
 
 .card h1 {
     color: #212121;
+    font-size: 19px;
+    line-height: 26px;
     margin: 0;
     text-align: justify;
 }
@@ -660,6 +663,7 @@ main {
     align-items: center;
     display: flex;
     margin-top: 4px;
+    margin-left: 20px;
 }
 
 /*********** like icon ***********/
@@ -767,6 +771,10 @@ main {
     text-align: left;
 }
 
+.sum a {
+    text-decoration: none;
+}
+
 .hr {
     border-top: 1px solid #E6E6E6;
 }
@@ -854,7 +862,7 @@ main {
 
     .rest {
         margin: auto;
-        width: 80%;
+        width: 90%;
         grid-template-columns: 1fr;
     }
 
@@ -904,6 +912,10 @@ main {
         margin: auto;
         width: 90%;
         grid-template-columns: 1fr;
+    }
+
+    .rest {
+        width: 70%;
     }
 
     .foot-links > div:first-child {
@@ -970,7 +982,7 @@ main {
     align-items: center;
     display: flex;
     flex-flow: column;
-    font-size: 18px;
+    font-size: 17px;
     justify-content: center;
 }
 
