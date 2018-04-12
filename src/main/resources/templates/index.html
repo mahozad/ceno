@@ -24,7 +24,7 @@
     <div class="rest">
         <section class="ordinary">
             <div class="category" th:each="categoryPosts:${categoriesPosts}">
-                <h2 class="subject" th:text="${categoryPosts.key}">Subject</h2>
+                <h2 class="subject" th:text="${categoryPosts.key.name().toLowerCase()}">Subject</h2>
                 <div class="card" th:each="post:${categoryPosts.value}"
                      th:attr="data-post-id=${post.id}">
                     <div th:replace="fragments::card-top-section"></div>
@@ -42,9 +42,11 @@
         <section class="editors">
             <div class="card sum" th:each="post:${pinedPosts}">
                 <img class="card-img" th:src="${'/posts/images/' + post.id}"/>
-                <h1 th:text="${post.title}">
-                    Title
-                </h1>
+                <a th:href="${'/posts/' + post.url}">
+                    <h1 th:text="${post.title}">
+                        Title
+                    </h1>
+                </a>
             </div>
         </section>
     </div>

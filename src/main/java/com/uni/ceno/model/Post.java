@@ -9,6 +9,7 @@ import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,6 +26,21 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @EqualsAndHashCode(of = {"id"})
 public class Post {
+
+    @Embeddable
+    @NoArgsConstructor
+    @Getter
+    @Setter
+    public static class ShareUrl {
+
+        private String name;
+        private String url;
+
+        public ShareUrl(String name, String url) {
+            this.name = name;
+            this.url = url;
+        }
+    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -56,6 +72,7 @@ public class Post {
 
     //@URL
     //@NaturalId
+    @NotNull
     private String url;
 
     @Size(min = 1, max = 60)
@@ -78,8 +95,8 @@ public class Post {
 
     boolean pined;
 
-    public Post(User author, String url, String title, String summary, String article, Set<Category>
-            categories, List<ShareUrl> shareUrls, byte[] imageOrVideo) {
+    public Post(User author, String url, String title, String summary, String article,
+                Set<Category> categories, List<ShareUrl> shareUrls, byte[] imageOrVideo) {
         this.author = author;
         this.url = url;
         this.title = title;
@@ -88,20 +105,5 @@ public class Post {
         this.categories = categories;
         this.shareUrls = shareUrls;
         this.imageOrVideo = imageOrVideo;
-    }
-
-    @Embeddable
-    @NoArgsConstructor
-    @Getter
-    @Setter
-    public static class ShareUrl {
-
-        private String name;
-        private String url;
-
-        public ShareUrl(String name, String url) {
-            this.name = name;
-            this.url = url;
-        }
     }
 }

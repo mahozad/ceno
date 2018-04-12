@@ -24,6 +24,9 @@ import java.util.Set;
 @Service
 public class PostService {
 
+    private static final int MIN_SCORE_CHANGE = 10;
+    private static final int MAX_SCORE_CHANGE = 100;
+
     @Value("${top-posts.size}")
     private int topPostsSize;
 
@@ -56,8 +59,8 @@ public class PostService {
         return postRepository.findAll(pageRequest);
     }
 
-    public Page<Post> getTopCategoryPosts(String categoryName) {
-        categoryName = categoryName.toLowerCase().trim();
+    public Page<Post> getTopCategoryPosts(Category.HomepageCategory category) {
+        String categoryName = category.name().toLowerCase().trim();
         Sort sort = Sort.by(Sort.Direction.DESC, "score");
         PageRequest pageRequest = PageRequest.of(0, topCategoryPostsSize, sort);
         return postRepository.findByCategoriesName(categoryName, pageRequest);
@@ -74,21 +77,21 @@ public class PostService {
         }
         if (like) {
             user.getFavorites().add(post);
-            long score = post.getAuthor().getScore() + 10 + Math.max(0,
-                    50 - ChronoUnit.HOURS.between(post.getDateTime(), LocalDateTime.now()));
+            long score = post.getAuthor().getScore() + MIN_SCORE_CHANGE + Math.min(MAX_SCORE_CHANGE,
+                    ChronoUnit.WEEKS.between(post.getDateTime(), LocalDateTime.now()));
             post.getAuthor().setScore(score);
             post.getLikers().add(user);
             post.setFavoritesCount(post.getFavoritesCount() + 1);
         } else {
             user.getFavorites().remove(post);
-            long score = post.getAuthor().getScore() - 10 - Math.max(0,
-                    50 - ChronoUnit.HOURS.between(post.getDateTime(), LocalDateTime.now()));
+            long score = Math.max(0, post.getAuthor().getScore() - MIN_SCORE_CHANGE - Math.min
+                    (MAX_SCORE_CHANGE, ChronoUnit.WEEKS.between(post.getDateTime(), LocalDateTime
+                            .now())));
             post.getAuthor().setScore(score);
             post.getLikers().remove(user);
             post.setFavoritesCount(post.getFavoritesCount() - 1);
         }
         postRepository.save(post);
-        //userRepository.save(user);
         return true;
     }
 

@@ -9,7 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class CenoApplication {
 
     // TODO: be able to upload and show either photo or video for the post
-    // TODO: privileged users should be able to pin a post, remove a post, or change a post categories
+    // TODO: privileged users should be able to pin a post, remove a post, or change a post
+    // categories
+    // TODO: check for nulls and use Optional
+    // TODO: user be able to stay logged in after closing the browser (remember me option)
 
     public static void main(String[] args) {
         SpringApplication.run(CenoApplication.class, args);
@@ -17,6 +20,6 @@ public class CenoApplication {
 
     @Bean
     public BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(5);
+        return new BCryptPasswordEncoder(10);
     }
 }

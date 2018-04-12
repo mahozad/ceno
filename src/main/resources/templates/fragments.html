@@ -27,9 +27,9 @@
         <div class="side-nav">
             <span class="close-cat">&times;</span>
             <div class="vert-cat">
-                <a th:each="category:${@environment.getProperty('cats').split(',')}"
-                   th:href="${'/posts/categories/' + category}"
-                   th:text="${category}">
+                <a th:fragment="cats" th:each="category:${categories}"
+                   th:href="${'/posts/categories/' + category.name().toLowerCase()}"
+                   th:text="${category.name().toLowerCase()}">
                     Category name
                 </a>
             </div>
@@ -39,11 +39,7 @@
                  th:title="${@environment.getProperty('title')}"/>
         </a>
         <div class="cat-container">
-            <a th:each="category:${@environment.getProperty('cats').split(',')}"
-               th:href="${'/posts/categories/' + category}"
-               th:text="${category}">
-                Category name
-            </a>
+            <a th:replace="this :: cats"></a>
         </div>
         <div class="usr">
             <div class="usr-log" th:unless="${authenticated}">
@@ -186,8 +182,9 @@
                 </svg>
                 <div class="share-content">
                     <div class="arrow"></div>
-                    <a th:each="share:${post.shareUrls}" th:href="${share.url}">
-                        <img th:src="${'/images/soc-' + share.name+'.svg'}" th:alt="${share.name}">
+                    <a th:each="share:${post.shareUrls}" th:href="${share.url}" target="_blank">
+                        <img th:src="${'/images/soc-' + share.name+'.svg'}" th:alt="${share.name}"
+                             th:title="${'Share on ' + share.name}">
                     </a>
                 </div>
             </div>
@@ -225,7 +222,7 @@
 <!-- card date -->
 
 <div class="card-date" th:fragment="card-datetime"
-     th:with="now=${T(java.time.LocalDateTime).now()},duration=${T(java.time.Duration).between(post.dateTime,now)}">
+     th:with="now=${T(java.time.LocalDateTime).now()}, duration=${T(java.time.Duration).between(post.dateTime,now)}">
     <span th:if="${duration.toSeconds() lt 60}" th:text="'seconds ago'"></span>
     <span th:if="${duration.toSeconds() gt 59 and duration.toMinutes() lt 60}"
           th:text="${duration.toMinutes() + (duration.toMinutes() lt 2 ? ' minute' : ' minutes') + ' ago'}">
@@ -237,10 +234,10 @@
           th:text="${duration.toDays() + (duration.toDays() lt 2 ? ' day' : ' days') + ' ago'}">
     </span>
     <span th:if="${duration.toDays() gt 2 and now.getYear() == post.dateTime.year}"
-          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('MMMM d'))}">
+          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('d MMMM'))}">
     </span>
     <span th:if="${now.getYear()!=post.dateTime.year}"
-          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('uuuu-MM-dd'))}">
+          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('d MMMM uuuu'))}">
     </span>
 </div>
 
