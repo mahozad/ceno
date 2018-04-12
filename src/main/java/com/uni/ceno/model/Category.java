@@ -21,6 +21,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 @EqualsAndHashCode(of = {"id"})
 public class Category {
 
+    public enum HomepageCategory {
+        TRENDING, FUNNY, NEWS, CELEBRITIES
+    }
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private long id;

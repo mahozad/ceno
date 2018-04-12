@@ -1,5 +1,6 @@
 package com.uni.ceno.controller;
 
+import com.uni.ceno.model.Category;
 import com.uni.ceno.model.Comment;
 import com.uni.ceno.model.Post;
 import com.uni.ceno.model.User;
@@ -36,6 +37,7 @@ public class PostController {
             User user = (User) authentication.getPrincipal();
             model.addAttribute("user", user);
             model.addAttribute("authenticated", true);
+            model.addAttribute("categories", Category.HomepageCategory.values());
             return "new-post";
         } else {
             return "redirect:/";
@@ -65,6 +67,7 @@ public class PostController {
         Page<Post> posts = postService.getCategoryPosts(category, page);
         model.addAttribute("categoryName", category);
         model.addAttribute("posts", posts);
+        model.addAttribute("categories", Category.HomepageCategory.values());
         return "category";
     }
 
@@ -111,6 +114,7 @@ public class PostController {
         }
         Post post = postService.getPostByUrl(postUrl);
         model.addAttribute("post", post);
+        model.addAttribute("categories", Category.HomepageCategory.values());
         return "post";
     }
 
@@ -118,12 +122,14 @@ public class PostController {
     public void createNewComment(@RequestParam long postId, @RequestParam String comment,
                                  Authentication authentication, HttpServletRequest request,
                                  HttpServletResponse response) throws IOException {
-        Post post = postService.getById(postId);
-        User user = (User) authentication.getPrincipal();
-        Comment comm = new Comment(comment, user, post);
-        post.getComments().add(comm);
-        post.setCommentsCount(post.getCommentsCount() + 1);
-        postService.savePost(post);
+        if (authentication != null) {
+            Post post = postService.getById(postId);
+            User user = (User) authentication.getPrincipal();
+            Comment comm = new Comment(comment, user, post);
+            post.getComments().add(comm);
+            post.setCommentsCount(post.getCommentsCount() + 1);
+            postService.savePost(post);
+        }
         response.sendRedirect(request.getHeader("referer"));
     }
 }
