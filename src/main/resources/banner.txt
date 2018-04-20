@@ -1,4 +1,4 @@
-﻿${AnsiColor.BRIGHT_CYAN}
+﻿${AnsiColor.CYAN}
  .d8888b.                             
 d88P  Y88b                            
 888    888                            
