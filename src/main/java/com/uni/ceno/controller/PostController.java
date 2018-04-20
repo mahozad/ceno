@@ -25,10 +25,12 @@ import java.io.IOException;
 public class PostController {
 
     private PostService postService;
+    private Tika fileTypeDetector;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostService postService, Tika fileTypeDetector) {
         this.postService = postService;
+        this.fileTypeDetector = fileTypeDetector;
     }
 
     @GetMapping("/new")
@@ -96,12 +98,12 @@ public class PostController {
         }
     }
 
-    @GetMapping("/images/{id}")
+    @GetMapping({"/images/{id}", "/videos/{id}"})
     @ResponseBody
-    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
-        byte[] image = postService.getPostImageById(id);
-        MediaType mimeType = MediaType.valueOf(new Tika().detect(image));
-        return ResponseEntity.ok().contentType(mimeType).body(image);
+    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
+        byte[] file = postService.getPostFileById(id);
+        MediaType mimeType = MediaType.valueOf(fileTypeDetector.detect(file));
+        return ResponseEntity.ok().contentType(mimeType).body(file);
     }
 
     @GetMapping("/{postUrl}")

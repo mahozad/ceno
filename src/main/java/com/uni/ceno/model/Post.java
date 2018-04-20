@@ -90,13 +90,17 @@ public class Post {
     @Min(0)
     private long commentsCount;
 
+    @Enumerated(EnumType.STRING)
+    private FileType fileType;
+
     @Lob
     private byte[] imageOrVideo;
 
     boolean pined;
 
     public Post(User author, String url, String title, String summary, String article,
-                Set<Category> categories, List<ShareUrl> shareUrls, byte[] imageOrVideo) {
+                Set<Category> categories, List<ShareUrl> shareUrls,
+                FileType fileType, byte[] imageOrVideo) {
         this.author = author;
         this.url = url;
         this.title = title;
@@ -104,6 +108,11 @@ public class Post {
         this.article = article;
         this.categories = categories;
         this.shareUrls = shareUrls;
+        this.fileType = fileType;
         this.imageOrVideo = imageOrVideo;
+    }
+
+    public enum FileType {
+        IMAGE, VIDEO
     }
 }

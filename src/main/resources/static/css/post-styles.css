@@ -18,7 +18,15 @@ main {
     margin: 30px 0;
 }
 
-.article-container img {
+.article-img {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    width: 100%;
+}
+
+.article-video {
+    max-height: 500px;
+    background-color: #000;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     width: 100%;
@@ -130,11 +138,18 @@ main {
 
 .article-share a {
     text-decoration: none;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+
+.article-share a:hover {
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
 }
 
 .article-share img {
     margin-right: 18px;
-    width: 22px;
+    width: 20px;
     margin-top: 4px;
 }
 
@@ -160,7 +175,7 @@ main {
 
 .separator {
     border-top: 1px solid #E6E6E6;
-    margin: 16px 0;
+    margin: 12px 0;
 }
 
 .top-radius {

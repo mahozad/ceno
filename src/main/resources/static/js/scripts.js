@@ -298,3 +298,47 @@ $(".login-form").submit(function () {
     return submit;
 });
 
+//=========== play/pause video ============\\
+$("body").on("click touch", ".ply-btn", function () {
+    var video = $(this).siblings("video")[0];
+    var button = $(this);
+
+    if (video.paused) {
+        video.play();
+        setTimeout(function () {
+            if (!button.is(":hover")) {
+                button.fadeTo(200, 0);
+            }
+        }, 1000);
+    } else {
+        video.pause();
+        $(this).fadeTo(80, 1);
+    }
+});
+
+$(".ply-btn").hover(
+    function () { //on mouse enter
+        $(this).fadeTo(60, 1);
+    },
+    function () { //on mouse leave
+        var button = $(this);
+        var video = $(this).siblings("video")[0];
+        if (!video.paused) {
+            setTimeout(function () {
+                if (!button.is(":hover")) {
+                    button.fadeTo(80, 0);
+                }
+            }, 300);
+        }
+    }
+);
+
+$(".ply-btn").on("click touch", function () {
+    $(this).find(".ply-ico").toggleClass("ply-ico-active");
+});
+
+$("video").on('timeupdate', function () {
+    var video = $(this)[0];
+    var progressBar = $(this).siblings(".prog-bar");
+    progressBar.stop().animate({width: video.currentTime / video.duration * 100 + "%"}, 400);
+});

@@ -56,7 +56,8 @@ nav {
 .brand {
     display: flex;
     height: 36px;
-    margin: 0 40px;
+    margin: 2px 0 0 40px;
+    fill: #00acc1;
 }
 
 .cat-container {
@@ -99,15 +100,30 @@ nav {
 }
 
 #log-in {
-    margin-right: 16px;
-    min-width: fit-content;
-    width: 90px;
+    margin-right: 36px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all ease 0.12s;
+    color: #757575;
+}
+
+#sign-up:hover, #log-in:hover {
+    color: #00acc1;
 }
 
 #sign-up {
     margin-right: 36px;
-    min-width: fit-content;
-    width: 90px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all ease 0.12s;
+    color: #757575;
+    /*margin-right: 36px;*/
+    /*min-width: fit-content;*/
+    /*width: 90px;*/
+    /*font-weight: bold;*/
+    /*font-size: 15px;*/
 }
 
 #new-post {
@@ -435,6 +451,13 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
     }
 }
 
+.logout {
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 24px;
+    fill: #aab8c2;
+}
+
 /****************************************/
 /************ Main content ************/
 main {
@@ -567,16 +590,106 @@ main {
     color: #555555;
 }
 
-.card-img {
+.card-img, .card-video {
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     transition: filter ease 0.25s;
     width: 100%;
 }
 
-.card:hover .card-img {
+.video-container {
+    position: relative;
+}
+
+.card-video {
+    max-height: 185px;
+    min-height: 144px;
+    background-color: #000;
+}
+
+.subject .card-video {
+    height: 144px;
+}
+
+.card:hover .card-img, .card:hover .card-video {
     filter: grayscale(0%);
     -webkit-filter: grayscale(0%);
+}
+
+.ply-btn {
+    width: 60px;
+    height: 40px;
+    background-color: rgba(23, 33, 35, .75);
+    position: absolute;
+    cursor: pointer;
+    border-radius: 5px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 3px;
+    margin: auto;
+}
+
+.ply-btn:hover {
+    background-color: #00acc1;
+}
+
+.ply-ico {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: transparent;
+    border: 0;
+    text-indent: 30px;
+    outline: none;
+    width: 30px;
+    height: 32px;
+    transform: scale(.5, .5);
+}
+
+.ply-ico::before, .ply-ico::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 0 solid transparent;
+    border-width: 8px 0 8px 15px;
+    border-left-color: #eee;
+    width: 0;
+    height: 0;
+    transition: all 0.2s linear;
+}
+
+.ply-ico::before {
+    height: 16px;
+}
+
+.ply-ico::after {
+    left: 15px;
+    top: 8px;
+}
+
+.ply-ico-active::before, .ply-ico-active::after {
+    border-width: 0 0 0 12px;
+    height: 32px;
+}
+
+.ply-ico-active::after {
+    left: 18px;
+    top: 0;
+}
+
+.prog-bar {
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    background-color: #00acc1;
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card h1 {
@@ -588,13 +701,10 @@ main {
 }
 
 .hot-icon {
-    margin-right: 20px;
-}
-
-.hot-icon img {
+    margin-right: 18px;
     height: 18px;
-    margin-bottom: 1px;
     vertical-align: middle;
+    fill: #aab8c2;
 }
 
 .share-container {
@@ -915,7 +1025,7 @@ main {
     }
 
     .rest {
-        width: 70%;
+        width: 90%;
     }
 
     .foot-links > div:first-child {
@@ -958,7 +1068,7 @@ main {
 }
 
 .up-foot {
-    height: 220px;
+    height: 200px;
 }
 
 .copyright {
@@ -966,7 +1076,8 @@ main {
     bottom: 0;
     color: #757575;
     font-size: 14px;
-    padding: 16px;
+    padding-top: 14px;
+    padding-bottom: 11px;
     text-align: center;
     width: 100%;
 }
@@ -982,7 +1093,7 @@ main {
     align-items: center;
     display: flex;
     flex-flow: column;
-    font-size: 17px;
+    font-size: 16px;
     justify-content: center;
 }
 
@@ -997,8 +1108,9 @@ main {
     color: #009aaf;
 }
 
-.foot-links img {
-    height: 80px;
+.foot-brand {
+    height: 70px;
+    fill: #00acc1;
 }
 
 /*******************************/

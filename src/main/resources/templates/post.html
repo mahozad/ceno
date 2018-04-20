@@ -14,20 +14,29 @@
 
 <main>
     <div class="article-container" th:attr="data-post-id=${post.id}">
-        <img th:src="${'/posts/images/' + post.id}" alt="cover">
+        <th:block th:switch="${post.fileType.name()}">
+            <img th:case="IMAGE" class="article-img" th:src="${'/posts/images/' + post.id}"
+                 alt="cover"/>
+            <div th:case="VIDEO" class="video-container">
+                <video class="article-video" loop>
+                    <source th:src="${'/posts/videos/' + post.id}">
+                    Your browser does not support video content!
+                </video>
+                <div class="ply-btn">
+                    <button class="ply-ico"></button>
+                </div>
+                <div class="prog-bar"></div>
+            </div>
+        </th:block>
         <div class="main-content">
             <div class="article-header">
                 <div class="info">
-                    <h1 class="article-title" th:text="${post.title}">
-                        Title
-                    </h1>
+                    <h1 class="article-title" th:text="${post.title}">Title</h1>
                     <div class="subheading">
                         <div class="creator">
                             <img th:src="${'/users/avatars/' + post.author.name}"
                                  th:alt="${post.author.name}"/>
-                            <span class="creator-name" th:text="${post.author.name}">
-                           Author
-                        </span>
+                            <span class="creator-name" th:text="${post.author.name}">Author</span>
                         </div>
                         <div th:with="now=${T(java.time.LocalDateTime).now()}, duration=${T(java.time.Duration).between(post.dateTime,now)}"
                              th:include="fragments::card-datetime" class="time">
@@ -129,7 +138,7 @@
             <div class="card-bottom">
                 <div class="hr"></div>
                 <footer class="card-footer">
-                   <div th:replace="fragments :: card-chip-container"></div>
+                    <div th:replace="fragments :: card-chip-container"></div>
                     <div th:replace="fragments :: card-read-more"></div>
                 </footer>
             </div>

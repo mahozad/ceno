@@ -6,6 +6,7 @@ import com.uni.ceno.model.User;
 import com.uni.ceno.repository.CategoryRepository;
 import com.uni.ceno.repository.PostRepository;
 import com.uni.ceno.repository.UserRepository;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,14 +43,17 @@ public class PostService {
     private UserRepository userRepository;
     private CategoryRepository categoryRepository;
     private UrlMaker urlMaker;
+    private Tika fileTypeDetector;
 
     @Autowired
     public PostService(PostRepository postRepository, UserRepository userRepository,
-                       CategoryRepository categoryRepository, UrlMaker urlMaker) {
+                       CategoryRepository categoryRepository, UrlMaker urlMaker,
+                       Tika fileTypeDetector) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.urlMaker = urlMaker;
+        this.fileTypeDetector = fileTypeDetector;
     }
 
     public Page<Post> getTopPosts() {
@@ -98,27 +101,30 @@ public class PostService {
     public void createPost(String title, String summary, String article, String cats,
                            MultipartFile file, User author) {
         Set<Category> categories = new HashSet<>();
-        Arrays.stream(cats.split(",")).forEach(name -> {
-            name = name.toLowerCase().trim();
-            Category category = categoryRepository.findByName(name);
+        for (String cat : cats.split(",")) {
+            cat = cat.toLowerCase().trim();
+            Category category = categoryRepository.findByName(cat);
             if (category == null) {
-                category = new Category(name);
+                category = new Category(cat);
             }
             categories.add(category);
-        });
+        }
         try {
             byte[] fileBytes = file.getBytes();
+            Post.FileType fileType = fileTypeDetector.detect(fileBytes).startsWith("image") ?
+                    Post.FileType.IMAGE : Post.FileType.VIDEO;
             String url = urlMaker.makeUrlOf(title);
             List<Post.ShareUrl> shareUrls = urlMaker.makeShareUrlsFor(url);
-            Post newPost = new Post(author, url, title, summary, article, categories, shareUrls,
-                    fileBytes);
+            Post newPost = new Post(author, url, title, summary, article, categories,
+                    shareUrls, fileType, fileBytes);
             author.getPosts().add(newPost);
             categories.forEach(cat -> {
                 List<Post> posts = cat.getPosts();
                 posts.add(newPost);
                 cat.setPosts(posts);
             });
-            userRepository.save(author);
+            postRepository.save(newPost);
+            //userRepository.save(author);
         } catch (Exception ignored) {
             ignored.printStackTrace();
         }
@@ -145,7 +151,7 @@ public class PostService {
         return postRepository.findByPinedTrue(pageRequest);
     }
 
-    public byte[] getPostImageById(long id) {
+    public byte[] getPostFileById(long id) {
         return postRepository.getById(id).getImageOrVideo();
     }
 }
