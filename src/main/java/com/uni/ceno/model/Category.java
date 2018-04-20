@@ -18,7 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = "id")
 public class Category {
 
     public enum HomepageCategory {
