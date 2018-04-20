@@ -13,6 +13,11 @@
 <div th:replace="fragments::login-dialog"></div>
 
 <main>
+    <div th:if="${posts.totalElements == 0}" class="cat-emp-prompt">
+        <img src="/images/ic-lamp.svg" alt="empty">
+        <div>Sorry, there is no post in this category.</div>
+        <div>Be the first one and build up the page yourself!</div>
+    </div>
     <div id="cat-page-container">
         <div class="card" th:fragment="card" th:each="post:${posts}"
              th:attr="data-post-id=${post.id}">
