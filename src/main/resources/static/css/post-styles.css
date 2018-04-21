@@ -6,7 +6,7 @@ main {
 }
 
 .main-content {
-    margin: 16px;
+    margin: 14px 16px 16px;
 }
 
 .article-container {
@@ -78,8 +78,136 @@ main {
     display: flex;
 }
 
-.meters img {
-    width: 24px;
+.actions svg {
+    fill: #AAB8C2;
+    cursor: pointer;
+}
+
+.actions svg:not(:first-of-type) {
+    margin-top: 9px;
+}
+
+.pin-icon {
+    height: 18px;
+}
+
+.pin-icon:hover {
+    fill: #00acc1;
+}
+
+.del-icon {
+    height: 17px;
+}
+
+.del-icon:hover {
+    fill: #ff6259;
+}
+
+.chng-cats-icon {
+    height: 15px;
+}
+
+.chng-cats-icon:hover {
+    fill: #00acc1;
+}
+
+.rep-icon {
+    height: 15px;
+}
+
+.rep-icon:hover {
+    fill: #ffaa52;
+}
+
+.chng-cats-container {
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
+    left: calc(50% - 26px);
+    opacity: 0;
+    position: absolute;
+    top: 42px;
+    transform: translate(-20px, 0px);
+    transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+    visibility: hidden;
+    width: fit-content;
+    z-index: 10;
+}
+
+.chng-cats-container:before {
+    border-color: transparent transparent white transparent;
+    border-style: solid;
+    border-width: 0 9px 9px 9px;
+    content: "";
+    position: absolute;
+    right: calc(50% - 9px);
+    top: -8px;
+    z-index: -1;
+}
+
+.chng-cats-content {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.changeable-cat {
+    margin: 0 12px;
+    padding-right: 25px;
+}
+
+.cat-del {
+    position: relative;
+    margin-top: 12px;
+}
+
+.cat-del:last-of-type {
+    margin-bottom: 12px;
+}
+
+.cat-del-ico {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    font-size: 12px;
+    background-color: rgba(255, 0, 0, 0.4);
+    text-align: center;
+    position: absolute;
+    top: 6px;
+    right: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.cat-del-ico:hover {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+.cat-add {
+    position: relative;
+}
+
+.cat-add input {
+    width: 80px;
+    margin-bottom: 8px;
+}
+
+.cat-add-ico {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    font-size: 12px;
+    background-color: rgba(50, 50, 50, 0.5);
+    text-align: center;
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.cat-add-ico:hover {
+    background-color: rgba(50, 50, 50, 0.8);
 }
 
 .icons {
@@ -90,11 +218,7 @@ main {
     height: fit-content;
     justify-content: center;
     /*border: 1px solid #e7e7e7;*/
-    padding: 0 8px;
-}
-
-.icons img {
-    width: 13px;
+    /*padding: 0 8px;*/
 }
 
 .meters {
@@ -111,7 +235,8 @@ main {
 
 .comm-icon {
     direction: rtl;
-    margin-right: 24px;
+    margin-right: 22px;
+    width: 15px;
 }
 
 .comm-count span {
@@ -126,6 +251,7 @@ main {
 .actions {
     display: flex;
     flex-flow: column;
+    position: relative;
 }
 
 .actions img:not(:last-child) {

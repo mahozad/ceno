@@ -31,6 +31,11 @@ main {
     max-width: 1200px;
 }
 
+.primary {
+    color: #00acc1 !important;
+    fill: #00acc1 !important;
+}
+
 /****************************************/
 /************ Top navigation ************/
 nav {
@@ -67,12 +72,10 @@ nav {
 
 .cat-container a {
     align-items: center;
-    -webkit-align-items: center;
     color: #272727;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    -ms-flex-align: center;
     line-height: 100%;
     padding: 0 20px;
     text-decoration: none;
@@ -100,12 +103,12 @@ nav {
 }
 
 #log-in {
-    margin-right: 36px;
+    margin-right: 32px;
     font-weight: bold;
     font-size: 15px;
     cursor: pointer;
     transition: all ease 0.12s;
-    color: #757575;
+    color: #666;
 }
 
 #sign-up:hover, #log-in:hover {
@@ -118,12 +121,7 @@ nav {
     font-size: 15px;
     cursor: pointer;
     transition: all ease 0.12s;
-    color: #757575;
-    /*margin-right: 36px;*/
-    /*min-width: fit-content;*/
-    /*width: 90px;*/
-    /*font-weight: bold;*/
-    /*font-size: 15px;*/
+    color: #666;
 }
 
 #new-post {
@@ -590,10 +588,14 @@ main {
     color: #555555;
 }
 
-.card-img, .card-video {
+.card-img, .card .card-video {
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     transition: filter ease 0.25s;
+    width: 100%;
+}
+
+.card-video {
     width: 100%;
 }
 
@@ -602,8 +604,8 @@ main {
 }
 
 .card-video {
-    max-height: 185px;
-    min-height: 144px;
+    /*max-height: 185px;*/
+    /*min-height: 144px;*/
     background-color: #000;
 }
 
@@ -617,8 +619,10 @@ main {
 }
 
 .ply-btn {
-    width: 60px;
-    height: 40px;
+    width: 20%;
+    height: 26%;
+    max-width: 60px;
+    max-height: 40px;
     background-color: rgba(23, 33, 35, .75);
     position: absolute;
     cursor: pointer;
@@ -631,7 +635,7 @@ main {
 }
 
 .ply-btn:hover {
-    background-color: #00acc1;
+    background-color: rgba(0, 172, 193, .9);
 }
 
 .ply-ico {
@@ -743,7 +747,7 @@ main {
     display: inline-block;
     padding: 6px;
     position: absolute;
-    right: 32%;
+    right: calc(50% - 7px);
     top: -7px;
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
@@ -926,27 +930,10 @@ main {
     margin: 1rem;
 }
 
-.editors-title {
-    align-items: center;
-    color: #aaaaaa;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    font-size: 32px;
-    font-weight: bold;
-    /*background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23cccccc' stroke-width='10' %3E%3Cpath d='M-500%2C75c0%2C0%2C125-30%2C250-30S0%2C75%2C0%2C75s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C45c0%2C0%2C125-30%2C250-30S0%2C45%2C0%2C45s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C105c0%2C0%2C125-30%2C250-30S0%2C105%2C0%2C105s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C15c0%2C0%2C125-30%2C250-30S0%2C15%2C0%2C15s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500-15c0%2C0%2C125-30%2C250-30S0-15%2C0-15s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3Cpath d='M-500%2C135c0%2C0%2C125-30%2C250-30S0%2C135%2C0%2C135s125%2C30%2C250%2C30s250-30%2C250-30s125-30%2C250-30s250%2C30%2C250%2C30s125%2C30%2C250%2C30s250-30%2C250-30'/%3E%3C/g%3E%3C/svg%3E") fixed;*/
-    /*color: #00acc1;*/
-    height: 120px;
-    justify-content: center;
-    margin: 20px 1rem 0;
-    padding: 8px;
-    text-align: center;
-}
-
 /*************************************************/
 /*************** media queries *******************/
 @media screen and (max-width: 1340px) {
-    .editors {
+    .pined-cards {
         display: none;
     }
 
@@ -976,7 +963,7 @@ main {
         grid-template-columns: 1fr;
     }
 
-    .editors {
+    .pined-cards {
         display: none;
     }
 
@@ -1006,7 +993,7 @@ main {
         grid-template-columns: 1fr;
     }
 
-    .editors {
+    .pined-cards {
         display: none;
     }
 

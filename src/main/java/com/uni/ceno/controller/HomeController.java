@@ -43,7 +43,7 @@ public class HomeController {
             categoriesPosts.put(category, posts);
         }
         model.addAttribute("categoriesPosts", categoriesPosts);
-        Page<Post> pinedPosts = postService.getEditorsPick();
+        Page<Post> pinedPosts = postService.getPinedPosts();
         model.addAttribute("pinedPosts", pinedPosts);
         return "index";
     }

@@ -22,7 +22,7 @@
         </div>
     </section>
     <div class="rest">
-        <section class="ordinary">
+        <section class="ordinary-cards">
             <div class="category" th:each="categoryPosts:${categoriesPosts}">
                 <h2 class="subject" th:text="${categoryPosts.key.name().toLowerCase()}">Subject</h2>
                 <div class="card" th:each="post:${categoryPosts.value}"
@@ -39,13 +39,11 @@
             </div>
         </section>
 
-        <section class="editors">
+        <section class="pined-cards">
             <div class="card sum" th:each="post:${pinedPosts}">
-                <img class="card-img" th:src="${'/posts/images/' + post.id}"/>
+                <div th:replace="fragments::card-file"></div>
                 <a th:href="${'/posts/' + post.url}">
-                    <h1 th:text="${post.title}">
-                        Title
-                    </h1>
+                    <h1 th:text="${post.title}">Title</h1>
                 </a>
             </div>
         </section>

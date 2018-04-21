@@ -120,6 +120,53 @@ public class PostController {
         return "post";
     }
 
+    @PostMapping("/pin")
+    public String pinPost(@RequestParam Long postId, Authentication authentication) {
+        if (authentication == null) {
+            return "redirect:/";
+        }
+        postService.pinPost(postId, (User) authentication.getPrincipal());
+        return "redirect:/";
+    }
+
+    @PostMapping("/delete")
+    public String deletePost(@RequestParam Long postId, Authentication authentication) {
+        if (authentication == null) {
+            return "redirect:/";
+        }
+        postService.deletePost(postId, (User) authentication.getPrincipal());
+        return "redirect:/";
+    }
+
+    @PostMapping("/report")
+    public String reportPost(@RequestParam Long postId, Authentication authentication) {
+        if (authentication == null) {
+            return "redirect:/";
+        }
+        postService.reportPost(postId);
+        return "redirect:/";
+    }
+
+    @PostMapping("/cat-del")
+    @ResponseBody
+    public boolean deleteCategory(@RequestParam Long postId, @RequestParam String catName,
+                                  Authentication authentication) {
+        if (authentication == null) {
+            return false;
+        }
+        return postService.deleteCategory(postId, catName);
+    }
+
+    @PostMapping("/cat-add")
+    @ResponseBody
+    public boolean addCategory(@RequestParam Long postId, @RequestParam String catName,
+                               Authentication authentication) {
+        if (authentication == null) {
+            return false;
+        }
+        return postService.addCategory(postId, catName);
+    }
+
     @PostMapping("/comments")
     public void createNewComment(@RequestParam long postId, @RequestParam String comment,
                                  Authentication authentication, HttpServletRequest request,

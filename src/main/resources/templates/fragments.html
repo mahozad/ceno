@@ -134,8 +134,7 @@
                 </div>
                 <button class="btn" type="submit">Log in</button>
                 <div class="invalid-login">Incorrect username or password</div>
-                <p>Not registered? <span class="log-prompt">Create an account</span>
-                </p>
+                <p>Not registered? <span class="log-prompt">Create an account</span></p>
             </form>
         </div>
     </div>
@@ -165,15 +164,12 @@
             </div>
         </div>
         <div class="status-icons">
-            <div class="meters">
-                <div class="like-num" th:text="${post.favoritesCount}">
-                    Likes count
-                </div>
+            <div class="meters" th:fragment="card-like">
+                <div class="like-num" th:text="${post.favoritesCount}">Likes count</div>
                 <div class="heart" th:if="${authenticated}"
                      th:classappend="(${authenticated} and ${user.favorites.contains(post)}) ? 'liked' : 'not-liked'">
                 </div>
-                <div class="heart-static" th:unless="${authenticated}"
-                     title="You're not Logged in">
+                <div class="heart-static" th:unless="${authenticated}" title="You're not Logged in">
                 </div>
             </div>
             <svg class="hot-icon" viewBox="0 0 71 90"
@@ -197,9 +193,9 @@
             </div>
         </div>
     </header>
-    <th:block th:switch="${post.fileType.name()}">
+    <th:block th:switch="${post.fileType.name()}" th:fragment="card-file">
         <img th:case="IMAGE" class="card-img" th:src="${'/posts/images/' + post.id}" alt="cover"/>
-        <div th:case="VIDEO" class="video-container">
+        <div th:case="VIDEO" class="video-container" th:fragment="card-video">
             <video class="card-video" loop>
                 <source th:src="${'/posts/videos/' + post.id}">
                 Your browser does not support video content!

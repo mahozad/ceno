@@ -333,7 +333,7 @@ $(".ply-btn").hover(
     }
 );
 
-$(".ply-btn").on("click touch", function () {
+$("body").on("click touch", ".ply-btn", function () {
     $(this).find(".ply-ico").toggleClass("ply-ico-active");
 });
 
@@ -341,4 +341,101 @@ $("video").on('timeupdate', function () {
     var video = $(this)[0];
     var progressBar = $(this).siblings(".prog-bar");
     progressBar.stop().animate({width: video.currentTime / video.duration * 100 + "%"}, 400);
+});
+
+
+//================= submit post =================\\
+$("#post-submit").submit(function () {
+    var submit = true;
+    $(".input-np").each(function () {
+        var input = $(this).find("input, textarea").val();
+        if (input.length === 0) {
+            var highlight = $(this).find(".highlight-np");
+            highlight.css("background", "#de1e26");
+            highlight.fadeTo(200, 1);
+            $(this).find(".prompt").fadeTo(200, 1);
+            submit = false;
+        }
+    });
+    return submit;
+});
+
+$(".input-np").on("change", function () {
+    var input = $(this).find("input, textarea").val();
+    if (input.length !== 0) {
+        var highlight = $(this).find(".highlight-np");
+        highlight.fadeTo(200, 0);
+        $(this).find(".prompt").fadeTo(200, 0);
+    }
+});
+
+//================= pin, delete & report post, change cats ==================\\
+$(".pin-icon").on("click touch", function () {
+    var postId = $(".article-container").attr("data-post-id");
+    $.post("/posts/pin", {postId: postId}, function (successful) {
+        if (successful) {
+            //
+        }
+    });
+});
+
+$(".del-icon").on("click touch", function () {
+    var postId = $(".article-container").attr("data-post-id");
+    $.post("/posts/delete", {postId: postId}, function (successful) {
+        if (successful) {
+            //
+        }
+    });
+});
+
+$(".rep-icon").on("click touch", function () {
+    var postId = $(".article-container").attr("data-post-id");
+    $.post("/posts/report", {postId: postId}, function (successful) {
+        if (successful) {
+            //
+        }
+    });
+});
+
+$(".chng-cats-icon").on("click touch", function () {
+    var container = $(this).next();
+    if (container.css("visibility") === "visible") {
+        $(this).css("fill", "#aab8c2");
+        container.css({
+            "opacity": "0",
+            "visibility": "hidden",
+            "transform": "translate(-20px, 0)"
+        });
+    } else {
+        $(this).css("fill", "#00acc1");
+        container.css({
+            "opacity": "1",
+            "visibility": "visible",
+            "transform": "translate(-20px, 10px)"
+        });
+    }
+});
+
+$(".cat-del-ico").on("click touch", function () {
+    var postId = $(".article-container").attr("data-post-id");
+    var catName = $(this).siblings(".changeable-cat").text();
+    var toRemove = $(this).parent();
+    $.post("/posts/cat-del", {postId: postId, catName: catName}, function (successful) {
+        if (successful) {
+            toRemove.remove();
+        }
+    });
+
+});
+
+$(".cat-add-ico").on("click touch", function () {
+    var postId = $(".article-container").attr("data-post-id");
+    var catName = $(".cat-add-inp").val();
+    $.post("/posts/cat-add", {postId: postId, catName: catName}, function (successful) {
+        if (successful) {
+            $(".cat-del:last-of-type").after("<a class=\"cat-del\">" +
+                "<div class=\"changeable-cat chip\">" + catName + "</div>" +
+                "<div class=\"cat-del-ico\">&times;</div></a>");
+        }
+    });
 });

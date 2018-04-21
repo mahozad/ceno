@@ -17,14 +17,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = "id")
 public class Post {
 
     @Embeddable
@@ -50,7 +50,7 @@ public class Post {
     //@CreatedBy
     private User author;
 
-    @ManyToMany(mappedBy = "posts", cascade = ALL)
+    @ManyToMany(mappedBy = "posts", cascade = {PERSIST, MERGE})
     private Set<Category> categories = new HashSet<>();
 
     @ManyToMany
@@ -97,6 +97,8 @@ public class Post {
     private byte[] imageOrVideo;
 
     boolean pined;
+
+    boolean reported;
 
     public Post(User author, String url, String title, String summary, String article,
                 Set<Category> categories, List<ShareUrl> shareUrls,

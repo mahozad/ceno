@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 public class CenoApplication {
 
-    // TODO: be able to upload and show either photo or fileTypeVideo for the post
     // TODO: privileged users should be able to pin a post, remove a post, or change a post
     // categories
     // TODO: check for nulls and use Optional

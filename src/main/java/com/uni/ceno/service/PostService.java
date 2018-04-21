@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -33,8 +34,8 @@ public class PostService {
     @Value("${top-category-posts.size}")
     private int topCategoryPostsSize;
 
-    @Value("${editors-pick.size}")
-    private int editorsPickSize;
+    @Value("${pined-posts.size}")
+    private int pinedPostsSize;
 
     @Value("${cats.page.size}")
     private int categoryPageSize;
@@ -124,7 +125,6 @@ public class PostService {
                 cat.setPosts(posts);
             });
             postRepository.save(newPost);
-            //userRepository.save(author);
         } catch (Exception ignored) {
             ignored.printStackTrace();
         }
@@ -145,10 +145,78 @@ public class PostService {
         return postRepository.findByCategoriesName(categoryName, pageRequest);
     }
 
-    public Page<Post> getEditorsPick() {
+    public Page<Post> getPinedPosts() {
         Sort sort = Sort.by(Sort.Direction.DESC, "score", "dateTime");
-        PageRequest pageRequest = PageRequest.of(0, editorsPickSize, sort);
+        PageRequest pageRequest = PageRequest.of(0, pinedPostsSize, sort);
         return postRepository.findByPinedTrue(pageRequest);
+    }
+
+    public boolean pinPost(long postId, User user) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (!optionalPost.isPresent() || user.getScore() < 000_000_000) {
+            return false;
+        }
+        Post post = optionalPost.get();
+        post.setPined(!post.isPined());
+        postRepository.save(post);
+        return true;
+    }
+
+    public boolean deletePost(long postId, User user) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (!optionalPost.isPresent() || user.getScore() < 000_000_000) {
+            return false;
+        }
+        Post post = optionalPost.get();
+        post.getCategories().forEach(category -> category.getPosts().remove(post));
+        postRepository.deleteById(postId);
+        return true;
+    }
+
+    public boolean reportPost(long postId) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (!optionalPost.isPresent()) {
+            return false;
+        }
+        Post post = optionalPost.get();
+        post.setReported(true);
+        postRepository.save(post);
+        return true;
+    }
+
+    public boolean deleteCategory(long postId, String categoryName) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (!optionalPost.isPresent()) {
+            return false;
+        }
+        Post post = optionalPost.get();
+        post.getCategories().forEach(category -> {
+            if (category.getName().equals(categoryName)) {
+                category.getPosts().remove(post);
+                post.getCategories().remove(category);
+            }
+        });
+        postRepository.save(post);
+        return true;
+    }
+
+    public boolean addCategory(long postId, String categoryName) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (!optionalPost.isPresent()) {
+            return false;
+        }
+        Post post = optionalPost.get();
+
+        categoryName = categoryName.toLowerCase().trim();
+        Category category = categoryRepository.findByName(categoryName);
+        if (category == null) {
+            category = new Category(categoryName);
+        }
+        post.getCategories().add(category);
+        List<Post> posts = category.getPosts();
+        posts.add(post);
+        postRepository.save(post);
+        return true;
     }
 
     public byte[] getPostFileById(long id) {

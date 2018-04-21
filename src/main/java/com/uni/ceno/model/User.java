@@ -21,7 +21,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 
     @Id
@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "author", cascade = ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "author", cascade = ALL, fetch = EAGER)
+    @OneToMany(mappedBy = "author", fetch = EAGER)
     private Set<Post> posts = new HashSet<>();
 
     @Lob
