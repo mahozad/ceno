@@ -32,7 +32,7 @@ CREATE TABLE `post` (
   `pined` bit(1) NOT NULL,
   `summary` varchar(150) DEFAULT NULL,
   `title` varchar(60) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `shareUrl` varchar(255) DEFAULT NULL,
   `author_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK12njtf8e0jmyb45lqfpt6ad89` (`author_id`)

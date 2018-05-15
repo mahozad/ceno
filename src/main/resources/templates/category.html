@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <th:block
-            th:include="fragments::head(title=${@environment.getProperty('title') + ' - ' + categoryName + ' posts'}, desc='')"/>
+    <th:block th:include="fragments::head(titleAppend=' - ' + #{${catName}} + ' ' + #{posts})"/>
     <link rel="stylesheet" th:href="@{/css/category-styles.css}">
 </head>
 
-<body>
+<body class="preload">
 
 <nav th:replace="fragments::navigation"></nav>
 <div th:replace="fragments::login-dialog"></div>
 
 <main>
-    <div th:if="${posts.totalElements == 0}" class="cat-emp-prompt">
+    <div th:replace="fragments::prompt"></div>
+    <div class="no-result-prompt" th:if="${posts.numberOfElements == 0}">
         <img src="/images/ic-lamp.svg" alt="empty">
-        <div>Sorry, there is no post in this category.</div>
-        <div>Be the first one and build up the page yourself!</div>
+        <div>
+            Sorry, there is no post in this category.<br/>
+            Be the first one and create a post here!
+        </div>
     </div>
-    <div id="cat-page-container">
+    <section id="results-container">
         <div class="card" th:fragment="card" th:each="post:${posts}"
              th:attr="data-post-id=${post.id}">
             <div th:replace="fragments::card-top-section"></div>
@@ -30,7 +31,7 @@
                 </footer>
             </div>
         </div>
-    </div>
+    </section>
     <div id="spinner" th:if="${posts.hasNext()}">
         <div class="loader">
             <div class="flipper">

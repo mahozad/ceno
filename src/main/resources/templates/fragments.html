@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <!-- head -->
-
-<head th:fragment="head(title, desc)">
+<head th:fragment="head(titleAppend)">
     <meta charset="UTF-8"/>
-    <title th:text="${title}">Title</title>
-    <meta name="description" th:if="${desc} != ''" th:content="${desc}"/>
+    <title th:text="#{name} + ${titleAppend}">Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="Mahdi Hosseinzadeh, Babak Shahriari"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <script th:src="@{/js/jquery-3.3.1.min.js}" defer></script>
@@ -17,144 +18,147 @@
 
 <body>
 
-<!-- navigation -->
+<!--prompt -->
+<div class="page-prompt" th:fragment="prompt" th:if="${prompt != null}">
+    <div class="page-prompt-text" th:text="#{${prompt}}"></div>
+</div>
 
+<!-- navigation -->
 <nav th:fragment="navigation">
     <div class="nav-container">
-        <div class="hamburger-icon hidden">
-            &#9776;
-        </div>
+        <div class="hamburger-icon hidden">&#9776;</div>
         <div class="side-nav">
-            <span class="close-cat">&times;</span>
+            <div class="close-cat">&times;</div>
             <div class="vert-cat">
-                <a th:fragment="cats" th:each="category:${categories}"
-                   th:href="${'/posts/categories/' + category.name().toLowerCase()}"
-                   th:text="${category.name().toLowerCase()}">
-                    Category name
-                </a>
+                <a th:replace="this::cats">Category</a>
             </div>
         </div>
-        <a href="/" th:title="${@environment.getProperty('title')}">
-            <svg class="brand" viewBox="0 0 1305 1100" th:fragment="brand">
-                <path d="m 1094.96,0 h 1.23 c 6.63,12.02 14.38,23.51 19.55,36.28 10.76,30.42 11.67,63.29 9.5,95.17 -2.51,14.01 -3.86,28.43 -9.18,41.76 -1.47,3.3 -2.7,6.91 -5.46,9.39 -33.74,30.05 -73.48,52.93 -115.51,69.28 -5.89,2.23 -11.72,4.65 -17.84,6.2 -37.62,10.13 -76.26,17.29 -115.3,18 -105.66,0.42 -211.32,-0.51 -316.97,0.29 -6.69,-0.05 -13.35,0.55 -20.02,0.8 -28.52,1.36 -57.14,2.49 -85.37,7.09 -53.59,8.28 -103.85,33.38 -144.89,68.49 -52.03,44.55 -90.09,106.6 -101.46,174.53 -7.45,42.18 -7.96,85.75 0.17,127.87 12.65,67.25 50.82,128.49 102.64,172.67 46.6,39.84 105.66,65.73 167.06,69.81 20.93,1.47 42.14,1.6 62.65,6.56 27.51,6.9 50.61,28.5 60.01,55.18 4.72,13.61 5.03,28.24 4.7,42.5 -0.18,4.56 -0.05,9.15 -0.7,13.68 -3.91,20.96 -15.52,40.64 -32.75,53.38 -12.35,8.8 -26.76,14.9 -41.87,16.75 -5.14,0.71 -10.31,1.05 -15.49,1.32 h -17.24 c -11.81,-0.72 -23.69,0.01 -35.46,-1.37 -53.25,-4.97 -105.79,-18.23 -154.78,-39.77 -22.6,-9.78 -44.18,-21.79 -64.71,-35.38 C 175.18,976.12 128.92,932.5 92.03,881.93 53.43,829.09 25.43,768.33 11.91,704.23 4.17,668.23 0.68,631.42 0,594.64 v -20.23 c 0.39,-12.08 0.48,-24.18 1.74,-36.21 5.65,-58.62 21.3,-116.41 47.22,-169.35 14.43,-29.56 32.28,-57.39 52.4,-83.39 61.68,-79.52 146.82,-141.77 243.32,-171.56 25.83,-8.1 52.49,-13.22 79.26,-16.98 35.13,-4.76 70.73,-5.27 106.07,-3.1 80.61,2.36 161.26,-0.14 241.88,1.27 24.9,-0.24 49.61,-3.76 74.21,-7.35 11.71,-1.91 23.58,-2.9 35.16,-5.6 C 916.55,74.78 951.75,65.32 984.15,49.17 1021.37,33.44 1054.41,7.2 1094.96,0 Z"></path>
-                <path d="m 1149.55,315.33 c 10.23,-4.09 20.85,-7.37 31.77,-9.03 4.97,7.56 9.33,15.71 13.82,23.65 8.24,14.31 11.77,30.73 14.22,46.9 2.76,20.29 2.78,40.89 1.26,61.29 -2.91,15.79 -4.16,32.34 -11.67,46.83 -1.26,2.91 -3.92,4.73 -6.2,6.76 -27.47,23.88 -58.83,43.07 -92,57.96 -15.16,6.6 -30.45,13.23 -46.64,16.91 -37.88,9.69 -76.85,16.16 -116.05,15.77 -92.29,0.01 -184.59,0 -276.88,0 -11.66,-60.34 -22,-120.94 -33.94,-181.23 81.92,-0.75 163.84,0.68 245.76,-0.49 6.35,0.09 12.64,-0.95 18.96,-1.53 48.99,-5.29 98.15,-12.97 144.71,-29.61 22.28,-8.54 43.79,-18.99 65.01,-29.87 16.01,-8.01 31.2,-17.68 47.87,-24.31 z"></path>
-                <path d="m 1199.21,636.18 c 19.15,-10.92 39.63,-20.28 61.58,-23.67 7.89,14.57 17.9,28.32 22.21,44.53 7.61,25.86 8.59,53.13 7.31,79.89 -0.1,8.13 -2.14,16.03 -3.29,24.04 -2.06,11.4 -4.23,23.36 -10.76,33.15 -37.28,33.69 -82.16,58.3 -129.37,75.05 -39.04,10.97 -79.27,18.63 -119.91,19.45 -55.66,0.02 -111.32,-0.05 -166.98,0.13 -49.42,-0.24 -98.84,-0.05 -148.26,-0.15 -9.85,-61.27 -21.92,-122.15 -33.47,-183.11 92.22,3.65 184.52,1.31 276.78,1.46 47.16,-4.43 94.44,-10.79 139.95,-24.35 14.01,-4.12 27.77,-9.07 41.06,-15.15 21.51,-9.46 42.5,-20.07 63.15,-31.27 z"></path>
-            </svg>
-        </a>
+        <div class="brand-search-container">
+            <a href="/" th:title="#{name}">
+                <svg class="brand" viewBox="0 0 1305 1100" th:fragment="brand">
+                    <path d="m 1094.96,0 h 1.23 c 6.63,12.02 14.38,23.51 19.55,36.28 10.76,30.42 11.67,63.29 9.5,95.17 -2.51,14.01 -3.86,28.43 -9.18,41.76 -1.47,3.3 -2.7,6.91 -5.46,9.39 -33.74,30.05 -73.48,52.93 -115.51,69.28 -5.89,2.23 -11.72,4.65 -17.84,6.2 -37.62,10.13 -76.26,17.29 -115.3,18 -105.66,0.42 -211.32,-0.51 -316.97,0.29 -6.69,-0.05 -13.35,0.55 -20.02,0.8 -28.52,1.36 -57.14,2.49 -85.37,7.09 -53.59,8.28 -103.85,33.38 -144.89,68.49 -52.03,44.55 -90.09,106.6 -101.46,174.53 -7.45,42.18 -7.96,85.75 0.17,127.87 12.65,67.25 50.82,128.49 102.64,172.67 46.6,39.84 105.66,65.73 167.06,69.81 20.93,1.47 42.14,1.6 62.65,6.56 27.51,6.9 50.61,28.5 60.01,55.18 4.72,13.61 5.03,28.24 4.7,42.5 -0.18,4.56 -0.05,9.15 -0.7,13.68 -3.91,20.96 -15.52,40.64 -32.75,53.38 -12.35,8.8 -26.76,14.9 -41.87,16.75 -5.14,0.71 -10.31,1.05 -15.49,1.32 h -17.24 c -11.81,-0.72 -23.69,0.01 -35.46,-1.37 -53.25,-4.97 -105.79,-18.23 -154.78,-39.77 -22.6,-9.78 -44.18,-21.79 -64.71,-35.38 C 175.18,976.12 128.92,932.5 92.03,881.93 53.43,829.09 25.43,768.33 11.91,704.23 4.17,668.23 0.68,631.42 0,594.64 v -20.23 c 0.39,-12.08 0.48,-24.18 1.74,-36.21 5.65,-58.62 21.3,-116.41 47.22,-169.35 14.43,-29.56 32.28,-57.39 52.4,-83.39 61.68,-79.52 146.82,-141.77 243.32,-171.56 25.83,-8.1 52.49,-13.22 79.26,-16.98 35.13,-4.76 70.73,-5.27 106.07,-3.1 80.61,2.36 161.26,-0.14 241.88,1.27 24.9,-0.24 49.61,-3.76 74.21,-7.35 11.71,-1.91 23.58,-2.9 35.16,-5.6 C 916.55,74.78 951.75,65.32 984.15,49.17 1021.37,33.44 1054.41,7.2 1094.96,0 Z"></path>
+                    <path d="m 1149.55,315.33 c 10.23,-4.09 20.85,-7.37 31.77,-9.03 4.97,7.56 9.33,15.71 13.82,23.65 8.24,14.31 11.77,30.73 14.22,46.9 2.76,20.29 2.78,40.89 1.26,61.29 -2.91,15.79 -4.16,32.34 -11.67,46.83 -1.26,2.91 -3.92,4.73 -6.2,6.76 -27.47,23.88 -58.83,43.07 -92,57.96 -15.16,6.6 -30.45,13.23 -46.64,16.91 -37.88,9.69 -76.85,16.16 -116.05,15.77 -92.29,0.01 -184.59,0 -276.88,0 -11.66,-60.34 -22,-120.94 -33.94,-181.23 81.92,-0.75 163.84,0.68 245.76,-0.49 6.35,0.09 12.64,-0.95 18.96,-1.53 48.99,-5.29 98.15,-12.97 144.71,-29.61 22.28,-8.54 43.79,-18.99 65.01,-29.87 16.01,-8.01 31.2,-17.68 47.87,-24.31 z"></path>
+                    <path d="m 1199.21,636.18 c 19.15,-10.92 39.63,-20.28 61.58,-23.67 7.89,14.57 17.9,28.32 22.21,44.53 7.61,25.86 8.59,53.13 7.31,79.89 -0.1,8.13 -2.14,16.03 -3.29,24.04 -2.06,11.4 -4.23,23.36 -10.76,33.15 -37.28,33.69 -82.16,58.3 -129.37,75.05 -39.04,10.97 -79.27,18.63 -119.91,19.45 -55.66,0.02 -111.32,-0.05 -166.98,0.13 -49.42,-0.24 -98.84,-0.05 -148.26,-0.15 -9.85,-61.27 -21.92,-122.15 -33.47,-183.11 92.22,3.65 184.52,1.31 276.78,1.46 47.16,-4.43 94.44,-10.79 139.95,-24.35 14.01,-4.12 27.77,-9.07 41.06,-15.15 21.51,-9.46 42.5,-20.07 63.15,-31.27 z"></path>
+                </svg>
+            </a>
+            <div class="search-container">
+                <form class="search-form" action="/search">
+                    <input class="search-input" type="text" name="q" autocomplete="off"
+                           placeholder="Search for posts...">
+                    <button type="submit" class="search-button">
+                        <img src="/images/ic-search.svg" alt="search" class="search-icon">
+                    </button>
+                </form>
+            </div>
+        </div>
         <div class="cat-container">
-            <a th:replace="this :: cats"></a>
+            <a th:fragment="cats"
+               th:each="category:${T(ir.ceno.model.Category.HomepageCategory).values()}"
+               th:href="${'/categories/' + category.name().toLowerCase()}"
+               th:text="#{${category.name().toLowerCase()}}"
+               th:classappend="${#httpServletRequest.requestURI.endsWith(category.name().toLowerCase())} ? ' active'">
+            </a>
         </div>
         <div class="usr">
-            <div class="usr-log" th:unless="${authenticated}">
-                <!-- add class="btn" to make these buttons -->
-                <a id="log-in">Log in</a>
-                <a id="sign-up">Sing up</a>
+            <div class="usr-log" sec:authorize="!isAuthenticated()">
+                <a id="log-in" th:text="#{log-in}">Log in</a>
+                <a id="sign-up" th:text="#{sign-up}">Sing up</a>
             </div>
-            <div class="usr-inf-container" th:if="${authenticated}">
-                <a id="new-post" class="btn" href="/posts/new">New post</a>
+            <div class="usr-inf-container" sec:authorize="isAuthenticated()">
+                <a id="new-post" class="btn" href="/posts/new" th:text="#{new-post}">New post</a>
                 <div class="author-inf-nav">
-                    <img class="card-avatar" th:alt="${user.name}"
-                         th:src="${user.avatar.length == 0} ? '/images/placeholder.svg' : ${'/users/avatars/' + user.name}"/>
+                    <img class="card-avatar" th:alt="${#authentication.principal.name}"
+                         th:src="${#authentication.principal.avatar.bytes.length == 0} ? '/images/placeholder.svg' : ${'/users/avatars/' + #authentication.principal.name}"/>
                     <div class="author">
-                        <div class="usr-name" th:text="${user.name}">
+                        <div class="usr-name" th:text="${#authentication.principal.name}">
                             Username
                         </div>
-                        <div class="score">
-                            <h4 th:text="${user.score}">Score</h4>
-                            <img th:if="${user.score lt 100}" title="Novice!"
-                                 src="/images/ic-medal-beginner.svg" alt="medal"/>
-                            <img th:if="${user.score gt 99 and user.score lt 1000}"
-                                 src="/images/ic-medal-bronze.svg" alt="medal"/>
-                            <img th:if="${user.score gt 999 and user.score lt 50000 }"
-                                 src="/images/ic-medal-silver.svg" alt="medal"/>
-                            <img th:if="${user.score gt 49999}"
-                                 src="/images/ic-medal-gold.svg" alt="medal"/>
+                        <div class="score" th:include="this::score"
+                             th:with="score=${#authentication.principal.score}">
                         </div>
                     </div>
                 </div>
-                <a href="/logout" title="Logout">
+                <form action="/logout" method="post" th:title="#{log-out}">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                     <svg viewBox="0 0 105 100" class="logout">
                         <path d=" M 42.47 10.75 C 53.11 8.72 64.72 11.05 73.31 17.76 C 75.80 19.79 73.06 24.36 70.09 23.12 C 67.31 21.89 64.88 19.99 62.01 18.95 C 50.90 14.51 37.55 16.79 28.46 24.54 C 17.12 33.85 13.40 50.96 19.83 64.15 C 25.76 77.28 40.88 85.36 55.11 82.91 C 60.58 82.27 65.35 79.44 70.09 76.88 C 73.01 75.51 75.83 80.23 73.32 82.24 C 61.42 91.49 44.08 92.37 30.97 85.14 C 21.24 79.87 13.83 70.45 11.21 59.68 C 8.79 50.08 10.10 39.59 14.87 30.92 C 20.46 20.54 30.88 12.90 42.47 10.75 Z"></path>
                         <path d=" M 73.76 38.18 C 72.15 35.85 74.89 32.45 77.53 33.46 C 80.44 35.08 82.43 37.91 84.86 40.15 C 87.61 43.14 90.95 45.63 93.24 49.02 C 93.96 51.32 91.72 52.88 90.39 54.36 C 86.21 58.20 82.56 62.61 78.20 66.26 C 75.67 68.14 71.81 64.39 73.72 61.83 C 76.15 58.69 79.26 56.16 81.97 53.27 C 69.95 53.16 57.92 53.46 45.91 53.14 C 42.40 52.96 42.55 46.87 46.03 46.77 C 57.98 46.50 69.95 46.76 81.90 46.66 C 79.26 43.77 76.14 41.30 73.76 38.18 Z"></path>
                     </svg>
-                </a>
+                </form>
             </div>
         </div>
     </div>
 </nav>
 
 <!-- login and sign up -->
-
-<div th:fragment="login-dialog" id="login-dialog" th:unless="${authenticated}">
+<div th:fragment="login-dialog" id="login-dialog" sec:authorize="!isAuthenticated()">
     <div class="log-form">
         <span class="close">&times;</span>
         <div id="register-wrapper">
-            <form class="register-form" action="/register" method="post"
-                  novalidate enctype="multipart/form-data">
+            <form class="register-form" action="/register" method="post" novalidate
+                  enctype="multipart/form-data">
                 <div class="input">
-                    <input id="log-name" class="flat-inp" type="text" name="username"
-                           required>
+                    <input id="log-name" class="flat-inp" type="text" name="username" required
+                           autocomplete="off">
                     <span class="highlight"></span>
-                    <label for="log-name" class="label">Username</label>
-                    <div class="prompt">Already taken</div>
+                    <label for="log-name" class="label" th:text="#{username}">Username</label>
+                    <div class="prompt" th:text="#{prompt.already-taken}">Already taken</div>
                 </div>
                 <div class="input">
-                    <input id="log-pass" class="flat-inp" type="password"
-                           name="password" required>
+                    <input id="log-pass" class="flat-inp" type="password" name="password" required>
                     <span class="highlight"></span>
-                    <label for="log-pass" class="label">Password</label>
-                    <div class="prompt">Invalid</div>
+                    <label for="log-pass" class="label" th:text="#{password}">Password</label>
+                    <div class="prompt" th:text="#{prompt.invalid}">Invalid</div>
                 </div>
                 <div class="avatar-upload">
                     <img src="/images/placeholder.svg" alt="avatar"/>
                     <label class="file-upload">
                         <input type="file" name="avatar" accept="image/*">
-                        Change avatar
+                        <span th:text="#{avatar.change}">Change avatar</span>
                     </label>
                 </div>
-                <button class="btn" type="submit">Sign up</button>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button class="btn" type="submit" th:text="#{sign-up}">Sign up</button>
                 <p>Already registered? <span class="log-prompt">Log In</span></p>
             </form>
         </div>
         <div id="login-wrapper">
-            <form class="login-form" method="post" action="/login" novalidate>
+            <div class="login-form">
                 <div class="input">
-                    <input id="reg-name" class="flat-inp" type="text" name="username"
-                           required>
+                    <input id="reg-name" class="flat-inp" type="text" name="username" required
+                           autocomplete="off">
                     <span class="highlight"></span>
-                    <label for="reg-name" class="label">Username</label>
-                    <div class="prompt">Required</div>
+                    <label for="reg-name" class="label" th:text="#{username}">Username</label>
+                    <div class="prompt" th:text="#{prompt.required}">Required</div>
                 </div>
                 <div class="input">
-                    <input id="reg-pass" class="flat-inp" type="password"
-                           name="password" required>
+                    <input id="reg-pass" class="flat-inp" type="password" name="password" required>
                     <span class="highlight"></span>
-                    <label for="reg-pass" class="label">Password</label>
-                    <div class="prompt">Required</div>
+                    <label for="reg-pass" class="label" th:text="#{password}">Password</label>
+                    <div class="prompt" th:text="#{prompt.required}">Required</div>
                 </div>
-                <button class="btn" type="submit">Log in</button>
-                <div class="invalid-login">Incorrect username or password</div>
+                <div class="invalid-login" th:text="#{prompt.login-fail}">Login failed</div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button class="btn" type="submit" th:text="#{log-in}">Log in</button>
                 <p>Not registered? <span class="log-prompt">Create an account</span></p>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- card top section -->
-
 <div class="top-container" th:fragment="card-top-section">
     <header class="card-header">
         <div class="author-info">
             <img class="card-avatar" th:alt="${post.author.name}"
-                 th:src="${post.author.avatar.length==0} ? '/images/placeholder.svg' : ${'/users/avatars/' + post.author.name}"/>
+                 th:src="${post.author.avatar.bytes.length==0} ? '/images/placeholder.svg' : ${'/users/avatars/' + post.author.name}"/>
             <div class="author">
-                <div class="usr-name" th:text="${post.author.name}">
-                    Username
-                </div>
-                <div class="score" th:with="score=${post.author.score}">
-                    <h4 th:text="${score}">Score</h4>
+                <div class="usr-name" th:text="${post.author.name}">Username</div>
+                <div class="score" th:fragment="score" th:with="score=${post.author.score}">
+                    <span th:text="${score}">Score</span>
                     <img th:if="${score lt 100}"
-                         src="/images/ic-medal-beginner.svg" alt="medal" title="Novice!"/>
+                         src="/images/ic-medal-beginner.svg" alt="medal" th:title="#{novice}"
+                         title="Novice!"/>
                     <img th:if="${score gt 99 and score lt 1000}"
                          src="/images/ic-medal-bronze.svg" alt="medal"/>
                     <img th:if="${score gt 999 and score lt 50000 }"
@@ -165,16 +169,17 @@
         </div>
         <div class="status-icons">
             <div class="meters" th:fragment="card-like">
-                <div class="like-num" th:text="${post.favoritesCount}">Likes count</div>
-                <div class="heart" th:if="${authenticated}"
-                     th:classappend="(${authenticated} and ${user.favorites.contains(post)}) ? 'liked' : 'not-liked'">
+                <div class="like-num" th:text="${post.likesCount}">Likes count</div>
+                <div class="heart" sec:authorize="isAuthenticated()"
+                     th:classappend="${#authentication.principal.favorites.contains(post)} ? 'liked' : 'not-liked'">
                 </div>
-                <div class="heart-static" th:unless="${authenticated}" title="You're not Logged in">
+                <div class="heart-static" sec:authorize="!isAuthenticated()"
+                     th:title="#{prompt.not-logged-in}">
                 </div>
             </div>
             <svg class="hot-icon" viewBox="0 0 71 90"
                  th:if="${post.commentsCount} gt ${@environment.getProperty('hot-min')}">
-                <title>Hot!</title>
+                <title th:text="${post.commentsCount + ' '} + #{comments}">Hot!</title>
                 <path d="m 39.715,0 c 0,0 -5.776,3.879 -4.934,11.329 0.793,7.021 3.832,10.488 3.832,10.488 0,0 4.692,-3.166 2.183,-11.683 C 39.693,6.39 38.877,5.988 39.715,0 Z"></path>
                 <path d="m 46.902,13.322 c 0,0 0.441,2.288 -1.142,5.898 -1.586,3.608 2.197,6.776 2.197,6.776 0,0 5.722,-6.25 -1.055,-12.674 z"></path>
                 <path d="M 65.31,52.568 C 60.734,67.18 55.629,69.38 55.629,69.38 69.976,42.36 44.099,24.931 44.099,24.931 c 12.06,16.987 2.992,31.512 2.992,31.512 0,0 5.633,-12.06 -8.802,-24.733 C 22.184,16.834 30.191,4.601 30.191,4.601 16.023,9.441 15.582,22.205 18.483,27.309 26.846,41.215 23.59,47.995 23.59,47.995 23.413,44.913 21.126,42.624 13.91,37.431 6.691,32.238 11.177,22.732 11.177,22.732 6.516,25.637 2.378,35.142 8.011,41.745 18.309,54.595 9.771,61.988 9.771,61.988 13.204,47.729 0,44.56 0,44.56 10.211,52.834 0.795,58.996 2.377,68.675 5.369,91.474 31.599,89.98 31.599,89.98 c 0.747,-0.007 1.452,-0.053 2.166,-0.09 -9.865,-0.025 -12.61,-6.185 -10.173,-8.542 0,0 4.004,-3.469 -0.827,-9.497 -2.643,-3.101 -0.701,-7.56 1.486,-8.921 0,0 -2.105,4.459 1.281,6.896 3.387,2.437 4.461,3.509 4.542,4.955 0,0 1.528,-3.182 -2.396,-9.704 -1.361,-2.393 -1.155,-8.383 5.494,-10.653 0,0 -3.758,5.738 3.798,12.72 6.772,5.943 4.131,11.604 4.131,11.604 0,0 4.253,-6.814 -1.405,-14.786 0,0 12.143,8.18 5.412,20.855 0,0 -1.569,3.591 -7.495,4.726 C 67.716,85.39 65.31,52.568 65.31,52.568 Z"></path>
@@ -185,56 +190,56 @@
                 </svg>
                 <div class="share-content">
                     <div class="arrow"></div>
-                    <a th:each="share:${post.shareUrls}" th:href="${share.url}" target="_blank">
-                        <img th:src="${'/images/soc-' + share.name+'.svg'}" th:alt="${share.name}"
-                             th:title="${'Share on ' + share.name}">
+                    <a th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}"
+                       th:href="${share.url + post.url}" target="_blank">
+                        <img th:src="${'/images/soc-' + share.name() + '.svg'}"
+                             th:alt="${share.name()}"
+                             th:title="${'Share on ' + share.name().toLowerCase()}">
                     </a>
                 </div>
             </div>
         </div>
     </header>
-    <th:block th:switch="${post.fileType.name()}" th:fragment="card-file">
-        <img th:case="IMAGE" class="card-img" th:src="${'/posts/images/' + post.id}" alt="cover"/>
-        <div th:case="VIDEO" class="video-container" th:fragment="card-video">
-            <video class="card-video" loop>
+    <div th:fragment="card-file">
+        <img th:if="${post.file.mediaType.type == 'image'}" class="card-img"
+             th:src="${'/posts/images/' + post.id}" alt="cover"/>
+        <div th:if="${post.file.mediaType.type != ('image')}" class="video-container"
+             th:fragment="card-video">
+            <video class="card-video" loop preload="metadata">
                 <source th:src="${'/posts/videos/' + post.id}">
-                Your browser does not support video content!
+                <span th:text="#{prompt.video-support}"></span>
             </video>
             <div class="ply-btn">
                 <button class="ply-ico"></button>
             </div>
-            <div class="prog-bar"></div>
+            <progress max="100" value="0" class="prog-bar"></progress>
         </div>
-    </th:block>
-    <article>
+    </div>
+    <article th:fragment="card-article">
         <h1 th:text="${post.title}">Title</h1>
         <p th:text="${post.summary}">Summary</p>
     </article>
 </div>
 
 <!-- card chip container -->
-
 <div class="chip-container" th:fragment="card-chip-container">
     <div th:each="cat:${post.categories}">
-        <a class="chip" th:text="${cat.name}"
-           th:href="${'/posts/categories/' + cat.name}">
+        <a class="chip" th:text="${cat.name}" th:href="${'/categories/' + cat.name}">
             Category
         </a>
     </div>
 </div>
 
 <!-- card read more -->
-
-<a class="read-more" th:fragment="card-read-more" th:href="${'/posts/' + post.url}">
+<a class="read-more" th:fragment="card-read-more" th:href="${'/posts/' + post.url}"
+   th:text="#{card.read-more}">
     Read more...
 </a>
 
 <!-- card date -->
-
 <!-- TODO: very bad, refactor this section -->
-
 <div class="card-date" th:fragment="card-datetime"
-     th:with="now=${T(java.time.LocalDateTime).now()}, duration=${T(java.time.Duration).between(post.dateTime,now)}">
+     th:with="now=${T(java.time.LocalDateTime).now()}, duration=${T(java.time.Duration).between(post.creationDateTime,now)}">
     <span th:if="${duration.toSeconds() lt 60}" th:text="'seconds ago'"></span>
     <span th:if="${duration.toSeconds() gt 59 and duration.toMinutes() lt 60}"
           th:text="${duration.toMinutes() + (duration.toMinutes() lt 2 ? ' minute' : ' minutes') + ' ago'}">
@@ -245,37 +250,52 @@
     <span th:if="${duration.toHours() gt 23 and duration.toDays() lt 3}"
           th:text="${duration.toDays() + (duration.toDays() lt 2 ? ' day' : ' days') + ' ago'}">
     </span>
-    <span th:if="${duration.toDays() gt 2 and now.getYear() == post.dateTime.year}"
-          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('d MMMM'))}">
+    <span th:if="${duration.toDays() gt 2 and now.getYear() == post.creationDateTime.year}"
+          th:text="${post.creationDateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('d MMMM'))}">
     </span>
-    <span th:if="${now.getYear()!=post.dateTime.year}"
-          th:text="${post.dateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('d MMMM uuuu'))}">
+    <span th:if="${now.getYear()!=post.creationDateTime.year}"
+          th:text="${post.creationDateTime.format(T(java.time.format.DateTimeFormatter).ofPattern('d MMMM uuuu'))}">
     </span>
 </div>
 
 <!-- footer -->
-
 <footer class="page-footer" th:fragment="footer">
     <div class="footer-container">
         <div class="up-foot">
             <div class="foot-links">
-                <svg class="foot-brand" viewBox="0 0 1305 1100" th:include="this :: brand"></svg>
+                <div class="foot-sec-left">
+                    <div class="foot-brand">
+                        <svg class="foot-brand-img" viewBox="0 0 1305 1100"
+                             th:include="this :: brand"></svg>
+                        <!--<div class="foot-brand-name">Ceno</div>-->
+                    </div>
+                    <div class="langs">
+                        <div class="lang" data-lang-name="en">
+                            <img class="lang-flag" src="/images/ic-lang-en.png" alt="english">
+                            <span class="lang-name">English</span>
+                        </div>
+                        <div class="lang" data-lang-name="fa">
+                            <img class="lang-flag" src="/images/ic-lang-fa.png" alt="farsi">
+                            <span class="lang-name">فارسی</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="foot-sec-1">
-                    <a href="/">Home</a>
-                    <a href="/about">About</a>
-                    <a href="/contact">Contact Us</a>
+                    <a href="/" th:text="#{footer.home}">Home</a>
+                    <a href="/about" th:text="#{footer.about}">About</a>
+                    <a href="/contact" th:text="#{footer.contact-us}">Contact Us</a>
                 </div>
                 <div class="foot-sec-2">
-                    <a href="/faq">FAQ</a>
-                    <a href="/help">Help</a>
-                    <a href="/tos">Terms of service</a>
-                    <a href="/privacy">Privacy policy</a>
+                    <a href="/faq" th:text="#{footer.faq}">FAQ</a>
+                    <a href="/help" th:text="#{footer.help}">Help</a>
+                    <a href="/tos" th:text="#{footer.tos}">Terms of service</a>
+                    <a href="/privacy" th:text="#{footer.policy}">Privacy policy</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="copyright"
-         th:text="${@environment.getProperty('title') + ' © ' + T(java.time.LocalDate).now().getYear()}">
+         th:text="#{name} + ' © ' + ${T(java.time.LocalDate).now().getYear()}">
         Copyright
     </div>
 </footer>

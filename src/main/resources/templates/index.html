@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments::head(titleAppend='')"/>
+    <meta name="description" th:content="#{description}"/>
+</head>
 
-<head th:replace="fragments::head(title=${@environment.getProperty('title')}, desc=${@environment.getProperty('desc')})"></head>
-
-<body>
+<body class="preload">
 
 <nav th:replace="fragments::navigation"></nav>
 <div th:replace="fragments::login-dialog"></div>
 
 <main>
+    <div th:replace="fragments::prompt"></div>
     <section class="top-cards">
         <div class="card" th:each="post:${topPosts}" th:attr="data-post-id=${post.id}">
             <div th:replace="fragments::card-top-section"></div>
@@ -21,10 +24,12 @@
             </div>
         </div>
     </section>
-    <div class="rest">
+    <section class="rest">
         <section class="ordinary-cards">
             <div class="category" th:each="categoryPosts:${categoriesPosts}">
-                <h2 class="subject" th:text="${categoryPosts.key.name().toLowerCase()}">Subject</h2>
+                <h2 class="subject" th:text="#{${categoryPosts.key.name().toLowerCase()}}">
+                    Subject
+                </h2>
                 <div class="card" th:each="post:${categoryPosts.value}"
                      th:attr="data-post-id=${post.id}">
                     <div th:replace="fragments::card-top-section"></div>
@@ -39,15 +44,15 @@
             </div>
         </section>
 
-        <section class="pined-cards">
-            <div class="card sum" th:each="post:${pinedPosts}">
+        <aside class="pinned-cards">
+            <div class="card sum" th:each="post:${pinnedPosts}">
                 <div th:replace="fragments::card-file"></div>
                 <a th:href="${'/posts/' + post.url}">
                     <h1 th:text="${post.title}">Title</h1>
                 </a>
             </div>
-        </section>
-    </div>
+        </aside>
+    </section>
 </main>
 
 <footer th:replace="fragments::footer"></footer>

@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `post_share_urls`;
 CREATE TABLE `post_share_urls` (
   `post_id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
+  `shareUrl` varchar(255) DEFAULT NULL,
   KEY `FKni8du360mbyjbxpcdxje3au85` (`post_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

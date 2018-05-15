@@ -1,3 +1,15 @@
+//========== prevent animations on page load ==========\\
+$(window).on("load", function () {
+    $("body").removeClass("preload");
+});
+
+//================= page prompt =================\\
+$(".close-prompt").on("click touch", function () {
+    $(".page-prompt").animate({height: 0}, 300, function () {
+        $(this).hide();
+    });
+});
+
 //================= Login modal =================\\
 var closeBtn = $(".close");
 var loginDialog = $("#login-dialog");
@@ -42,16 +54,35 @@ $(".log-prompt").click(function () {
     $(".log-form>div").animate({height: "toggle", opacity: "toggle"}, 450);
 });
 
+//=========== Add comment to post ===========\\
+$(".wrt-comment button").on("click touch", function () {
+    var postId = $(this).siblings("input").val();
+    var comment = $(this).siblings("textarea").val();
+    var userName = $(".usr-name").text();
+    $.post("/posts/comments/add", {postId: postId, comment: comment},
+        function () {
+            var commCount = $(".comments p");
+            commCount.text("Comments (" + (+commCount.text().match(/\d+/) + 1) + "):");
+            commCount.after(
+                "<div class='comment'>\n" +
+                "    <div class='comment-author'>\n" +
+                "        <img src='/users/avatars/" + userName + "'" + " alt='" + userName + "'>\n" +
+                "        <div class='com-auth-name'>" + userName + "</div>\n" +
+                "    </div>\n" +
+                "    <div class='comment-text'>" + comment + "</div>\n" +
+                "</div>");
+        });
+});
+
 //=========== Category page ajax load ===========\\
 var page = 1;
 var hasNext = true;
-if ($(location).attr("pathname").match("^/posts/categories")) {
-    var category = $(location).attr("pathname").replace("/posts/categories/", '');
+if ($(location).attr("pathname").match("^/categories")) {
+    var category = $(location).attr("pathname").replace("/categories/", '');
     $(window).scroll(function () {
         if (hasNext && $(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-            $.post("/posts/category-ajax-load", {
-                category: category,
-                page: page
+            $.post("/categories/ajax-load", {
+                category: category, page: page
             }, function (slice) {
                 if (slice === "") {
                     $("#spinner").hide();
@@ -101,11 +132,10 @@ $("body").on("click touch", ".heart", function () {
 });
 
 function like(postId, isLike, numElement, quantity) {
-    $.post("/posts/like", {postId: postId, like: isLike}, function (successful) {
-        if (successful) {
+    $.post("/posts/like", {postId: postId, like: isLike},
+        function () {
             numElement.text(+numElement.text() + quantity);
-        }
-    });
+        });
 }
 
 $("body").on('animationend', ".heart", function () {
@@ -249,6 +279,13 @@ $(".register-form").submit(function () {
     return submit;
 });
 
+//======== attach csrf header to every ajax post request =========\\
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+$(document).ajaxSend(function (e, xhr) {
+    xhr.setRequestHeader(header, token);
+});
+
 //======================== AJAX login ======================
 var usernameInputLogin = $(".login-form .input:nth-child(1) input");
 var passwordInputLogin = $(".login-form .input:nth-child(2) input");
@@ -275,7 +312,7 @@ passwordInputLogin.blur(function () {
     }
 });
 
-$(".login-form").submit(function () {
+$(".login-form button").on("click touch", function () {
     var submit = true;
     var name = usernameInputLogin.val();
     var pass = passwordInputLogin.val();
@@ -295,7 +332,20 @@ $(".login-form").submit(function () {
         passwordInputLogin.siblings(".prompt").fadeTo(200, 1);
         submit = false;
     }
-    return submit;
+    if (submit) {
+        $.post("/login", {username: name, password: pass}, function (successful) {
+            if (successful) {
+                location.reload();
+            } else {
+                $(".invalid-login").fadeTo(200, 1);
+            }
+        });
+    }
+});
+
+//========= logout ========\\
+$(".logout").on("click touch", function () {
+    $(this).parent().submit();
 });
 
 //=========== play/pause video ============\\
@@ -316,33 +366,33 @@ $("body").on("click touch", ".ply-btn", function () {
     }
 });
 
-$(".ply-btn").hover(
-    function () { //on mouse enter
-        $(this).fadeTo(60, 1);
-    },
-    function () { //on mouse leave
-        var button = $(this);
-        var video = $(this).siblings("video")[0];
-        if (!video.paused) {
-            setTimeout(function () {
-                if (!button.is(":hover")) {
-                    button.fadeTo(80, 0);
-                }
-            }, 300);
-        }
+$("body").on("mouseover", ".ply-btn", function () {
+    $(this).fadeTo(60, 1);
+});
+
+$("body").on("mouseleave", ".ply-btn", function () {
+    $(this).fadeTo(60, 1);
+    var button = $(this);
+    var video = $(this).siblings("video")[0];
+    if (!video.paused) {
+        setTimeout(function () {
+            if (!button.is(":hover")) {
+                button.fadeTo(80, 0);
+            }
+        }, 300);
     }
-);
+});
 
 $("body").on("click touch", ".ply-btn", function () {
     $(this).find(".ply-ico").toggleClass("ply-ico-active");
 });
 
-$("video").on('timeupdate', function () {
-    var video = $(this)[0];
-    var progressBar = $(this).siblings(".prog-bar");
-    progressBar.stop().animate({width: video.currentTime / video.duration * 100 + "%"}, 400);
-});
-
+document.addEventListener("timeupdate", function (e) { // supports dynamically inserted videos as well
+    var video = $(e.target);
+    var progressBar = video.siblings("progress");
+    var percent = video[0].currentTime / video[0].duration * 100;
+    progressBar.stop().animate({value: percent}, (percent === 0) ? 100 : 400);
+}, true);
 
 //================= submit post =================\\
 $("#post-submit").submit(function () {
@@ -370,13 +420,17 @@ $(".input-np").on("change", function () {
 });
 
 //================= pin, delete & report post, change cats ==================\\
-$(".pin-icon").on("click touch", function () {
-    var postId = $(".article-container").attr("data-post-id");
-    $.post("/posts/pin", {postId: postId}, function (successful) {
-        if (successful) {
-            //
-        }
-    });
+// $(".pin-icon").on("click touch", function () {
+//     var postId = $(".article-container").attr("data-post-id");
+//     var url = window.location.href;
+//     $.post("/posts/pin", {postId: postId}, function (successful) {
+//         window.location.href = url;
+//     });
+// });
+
+$(".actions form").submit(function () {
+    var userName = $(".usr-name").text(); // just to check if user is logged in
+    return !!userName;
 });
 
 $(".del-icon").on("click touch", function () {
@@ -398,6 +452,10 @@ $(".rep-icon").on("click touch", function () {
 });
 
 $(".chng-cats-icon").on("click touch", function () {
+    var userName = $(".usr-name").text(); // just to check if user is logged in
+    if (!userName) {
+        return;
+    }
     var container = $(this).next();
     if (container.css("visibility") === "visible") {
         $(this).css("fill", "#aab8c2");
@@ -420,22 +478,27 @@ $(".cat-del-ico").on("click touch", function () {
     var postId = $(".article-container").attr("data-post-id");
     var catName = $(this).siblings(".changeable-cat").text();
     var toRemove = $(this).parent();
-    $.post("/posts/cat-del", {postId: postId, catName: catName}, function (successful) {
-        if (successful) {
+    $.post("/categories/delete", {postId: postId, catName: catName},
+        function () {
             toRemove.remove();
-        }
-    });
-
+        });
 });
 
 $(".cat-add-ico").on("click touch", function () {
     var postId = $(".article-container").attr("data-post-id");
     var catName = $(".cat-add-inp").val();
-    $.post("/posts/cat-add", {postId: postId, catName: catName}, function (successful) {
-        if (successful) {
-            $(".cat-del:last-of-type").after("<a class=\"cat-del\">" +
+    $.post("/categories/add", {postId: postId, catName: catName},
+        function () {
+            $(".cat-del:last-of-type").after(
+                "<a class=\"cat-del\">" +
                 "<div class=\"changeable-cat chip\">" + catName + "</div>" +
-                "<div class=\"cat-del-ico\">&times;</div></a>");
-        }
-    });
+                "<div class=\"cat-del-ico\">&times;</div>" +
+                "</a>");
+        });
+});
+
+//======= change language =========\\
+$(".lang").on("click touch", function () {
+    var lang = $(this).attr("data-lang-name");
+    location.replace('?lang=' + lang);
 });
