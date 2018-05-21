@@ -13,7 +13,6 @@ import javax.persistence.Lob;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-//@Embeddable
 @NoArgsConstructor
 @Getter
 @Setter

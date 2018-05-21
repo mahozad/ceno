@@ -44,7 +44,6 @@ public class SearchService {
         javax.persistence.Query jpaQuery = fullTxtEntityManager.
                 createFullTextQuery(luceneQuery, Post.class);
 
-        // execute the search
         return (List<Post>) jpaQuery.setMaxResults(searchMaxResults).getResultList();
     }
 
@@ -63,7 +62,6 @@ public class SearchService {
         javax.persistence.Query jpaQuery = fullTxtEntityManager.
                 createFullTextQuery(luceneQuery, Post.class);
 
-        // execute the search
         return (List<Post>) jpaQuery.setMaxResults(searchMaxSimilars).getResultList();
     }
 }

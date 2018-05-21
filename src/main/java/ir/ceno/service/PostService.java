@@ -1,8 +1,10 @@
 package ir.ceno.service;
 
+import ir.ceno.exception.NotAllowedException;
 import ir.ceno.model.*;
 import ir.ceno.repository.CategoryRepository;
 import ir.ceno.repository.PostRepository;
+import ir.ceno.util.FeedGenerator;
 import ir.ceno.util.UrlMaker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
@@ -26,6 +28,10 @@ import java.util.Set;
 @Slf4j
 public class PostService {
 
+    private static final Sort byScoreSort = Sort.by(Sort.Direction.DESC, "score");
+    private static final Sort byDateSort = Sort.by(Sort.Direction.DESC, "creationDateTime");
+    private static final Sort byScoreAndDateSort = byScoreSort.and(byDateSort);
+
     @Value("${top-posts.size}")
     private int topPostsSize;
 
@@ -41,31 +47,27 @@ public class PostService {
     private PostRepository postRepository;
     private CategoryRepository categoryRepository;
     private UrlMaker urlMaker;
+    private FeedGenerator feedGenerator;
     private Tika fileTypeDetector;
 
     @Autowired
     public PostService(PostRepository postRepository, CategoryRepository categoryRepository,
-                       UrlMaker urlMaker, Tika fileTypeDetector) {
+                       UrlMaker urlMaker, FeedGenerator feedGenerator, Tika fileTypeDetector) {
         this.postRepository = postRepository;
         this.categoryRepository = categoryRepository;
         this.urlMaker = urlMaker;
+        this.feedGenerator = feedGenerator;
         this.fileTypeDetector = fileTypeDetector;
     }
 
     public Slice<Post> getTopPosts() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "score");
-        PageRequest pageRequest = PageRequest.of(0, topPostsSize, sort);
+        PageRequest pageRequest = PageRequest.of(0, topPostsSize, byScoreSort);
         return postRepository.findAll(pageRequest);
     }
 
     public void createPost(String title, String summary, String article, String cats,
                            MultipartFile multipartFile, User author) {
-        Set<Category> categories = new HashSet<>();
-        for (String catName : cats.split(",")) {
-            catName = catName.toLowerCase().trim();
-            Optional<Category> category = categoryRepository.findByName(catName);
-            categories.add(category.orElse(new Category(catName)));
-        }
+        Set<Category> categories = makeCategorySet(cats);
         try {
             byte[] fileBytes = multipartFile.getBytes();
             String fileMimeType = fileTypeDetector.detect(fileBytes);
@@ -75,9 +77,21 @@ public class PostService {
             author.getPosts().add(newPost);
             categories.forEach(category -> category.getPosts().add(newPost));
             postRepository.save(newPost);
+            feedGenerator.addItem(newPost);
         } catch (IOException e) {
             log.error(e.getMessage());
+            throw new RuntimeException();
         }
+    }
+
+    private Set<Category> makeCategorySet(String cats) {
+        Set<Category> categories = new HashSet<>();
+        for (String catName : cats.split(",")) {
+            catName = catName.toLowerCase().trim();
+            Optional<Category> category = categoryRepository.findByName(catName);
+            categories.add(category.orElse(new Category(catName)));
+        }
+        return categories;
     }
 
     public Optional<Post> findPostByUrl(String url) {
@@ -114,8 +128,7 @@ public class PostService {
 
     @Cacheable("pinnedPosts")
     public Slice<Post> getPinnedPosts() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "score", "creationDateTime");
-        PageRequest pageRequest = PageRequest.of(0, pinnedPostsSize, sort);
+        PageRequest pageRequest = PageRequest.of(0, pinnedPostsSize, byScoreAndDateSort);
         return postRepository.findByPinnedTrue(pageRequest);
     }
 
@@ -130,7 +143,7 @@ public class PostService {
                 return post.isPinned();
             }
         }
-        throw new RuntimeException();
+        throw new NotAllowedException();
     }
 
     @CacheEvict(cacheNames = "pinnedPosts", allEntries = true)
@@ -150,6 +163,7 @@ public class PostService {
                 postRepository.deleteById(postId);
             });
         }
+        throw new NotAllowedException();
     }
 
     public void reportPost(long postId) {

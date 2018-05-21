@@ -10,10 +10,11 @@
     <meta name="author" content="Mahdi Hosseinzadeh, Babak Shahriari"/>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="theme-color" content="#00acc1"/>
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.min.css}"/>
     <script th:src="@{/js/jquery-3.3.1.min.js}" defer></script>
-    <script th:src="@{/js/scripts.js}" defer></script>
+    <script th:src="@{/js/scripts.min.js}" defer></script>
 </head>
 
 <body>
@@ -44,7 +45,7 @@
             <div class="search-container">
                 <form class="search-form" action="/search">
                     <input class="search-input" type="text" name="q" autocomplete="off"
-                           placeholder="Search for posts...">
+                           placeholder="Search for posts..." aria-label="search">
                     <button type="submit" class="search-button">
                         <img src="/images/ic-search.svg" alt="search" class="search-icon">
                     </button>
@@ -191,7 +192,7 @@
                 <div class="share-content">
                     <div class="arrow"></div>
                     <a th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}"
-                       th:href="${share.url + post.url}" target="_blank">
+                       th:href="${share.url + post.url}" target="_blank" rel="noopener">
                         <img th:src="${'/images/soc-' + share.name() + '.svg'}"
                              th:alt="${share.name()}"
                              th:title="${'Share on ' + share.name().toLowerCase()}">
@@ -210,7 +211,7 @@
                 <span th:text="#{prompt.video-support}"></span>
             </video>
             <div class="ply-btn">
-                <button class="ply-ico"></button>
+                <button class="ply-ico" aria-label="play"></button>
             </div>
             <progress max="100" value="0" class="prog-bar"></progress>
         </div>

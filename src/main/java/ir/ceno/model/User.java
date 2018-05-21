@@ -25,7 +25,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class User implements UserDetails {
 
     public enum Role {
-        USER, ADMIN, OTHER
+        USER, ADMIN
     }
 
     @Id
@@ -41,19 +41,14 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "author", cascade = ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToOne(cascade = ALL, orphanRemoval = true)
+    private File avatar;
+
     @NaturalId
     private String name;
 
     @Size(min = 6)
     private String password;
-
-    //@Embedded
-    //@AttributeOverrides({
-    //        @AttributeOverride(name = "bytes", column = @Column(name = "avatar")),
-    //        @AttributeOverride(name = "mediaType", column = @Column(name = "avatarMediaType"))
-    //})
-    @OneToOne(cascade = ALL, orphanRemoval = true)
-    private File avatar;
 
     @Enumerated(EnumType.STRING)
     private Role role;

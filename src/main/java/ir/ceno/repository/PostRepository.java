@@ -12,7 +12,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Optional<Post> findByUrl(String url);
 
     /**
-     * gets a post by its category name; in other words:
+     * gets a post by its category name:
      * post -> categories -> name
      *
      * @param name

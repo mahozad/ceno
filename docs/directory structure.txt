@@ -1,4 +1,4 @@
-﻿ceno/src:
+﻿/ceno/src:
    ├─── 🗁 main
    │   ├─── 🗁 java
    │   │   └─── 🗁 ir
@@ -11,6 +11,7 @@
    │   │           │   ├─── HomeController.java
    │   │           │   ├─── LoginController.java
    │   │           │   ├─── PostController.java
+   │   │           │   ├─── SearchController.java
    │   │           │   └─── UserController.java
    │   │           ├─── 🗁 exception
    │   │           │   ├─── GlobalExceptionHandler.java
@@ -28,6 +29,7 @@
    │   │           ├─── 🗁 service
    │   │           │   ├─── CategoryService.java
    │   │           │   ├─── PostService.java
+   │   │           │   ├─── SearchService.java
    │   │           │   └─── UserService.java
    │   │           ├─── 🗁 util
    │   │           │   └─── UrlMaker.java
@@ -65,6 +67,7 @@
    │       │   │   ├─── ic-medal-bronze.svg
    │       │   │   ├─── ic-medal-gold.svg
    │       │   │   ├─── ic-medal-silver.svg
+   │       │   │   ├─── ic-search.svg
    │       │   │   ├─── ic-sprite.svg
    │       │   │   ├─── load-ripple.svg
    │       │   │   ├─── photo-1.jpg
@@ -106,7 +109,8 @@
    │       │   ├─── fragments.html
    │       │   ├─── index.html
    │       │   ├─── new-post.html
-   │       │   └─── post.html
+   │       │   ├─── post.html
+   │       │   └─── search.html
    │       ├─── application.properties
    │       ├─── banner.txt
    │       ├─── messages.properties
@@ -119,7 +123,3 @@
        │       └─── 🗁 ceno
        │           └─── CenoApplicationTests.java
        └─── 🗁 resources
-
----------------------
-
-Number of songs: 0

@@ -29,8 +29,8 @@ public class UserService implements UserDetailsService {
     private Tika fileTypeDetector;
 
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder, Tika
-            fileTypeDetector) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder,
+                       Tika fileTypeDetector) {
         this.userRepository = userRepository;
         this.encoder = encoder;
         this.fileTypeDetector = fileTypeDetector;

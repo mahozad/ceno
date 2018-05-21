@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments::head(titleAppend=#{post.create})"/>
-    <link rel="stylesheet" th:href="@{/css/new-post-styles.css}">
+    <link rel="stylesheet" th:href="@{/css/new-post-styles.min.css}">
 </head>
 
 <body class="preload">
@@ -40,7 +40,7 @@
                 <fieldset class="post-file">
                     <legend th:text="#{add-file}">Add an Image or Video</legend>
                     <div class="file-select">
-                        <img class="file-prev" src="/images/placeholder-img.svg"/>
+                        <img class="file-prev" src="/images/placeholder-img.svg" alt="preview"/>
                         <label class="file-upload post-input">
                             <input type="file" name="file" accept="image/*, video/*"/>
                             <span th:text="#{file-select}"></span>

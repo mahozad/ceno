@@ -18,6 +18,10 @@ import java.util.Optional;
 @Service
 public class CategoryService {
 
+    private static final Sort byScoreSort = Sort.by(Sort.Direction.DESC, "score");
+    private static final Sort byDateSort = Sort.by(Sort.Direction.DESC, "creationDateTime");
+    private static final Sort byDateAndScoreSort = byDateSort.and(byScoreSort);
+
     @Value("${category.load-size}")
     private int categorySliceSize;
 
@@ -34,8 +38,7 @@ public class CategoryService {
 
     public Map<Category.HomepageCategory, Slice<Post>> getEachCatTopPosts() {
         Map<Category.HomepageCategory, Slice<Post>> categoriesPosts = new LinkedHashMap<>();
-        Sort sort = Sort.by(Sort.Direction.DESC, "score");
-        PageRequest pageRequest = PageRequest.of(0, topCategoryPostsSize, sort);
+        PageRequest pageRequest = PageRequest.of(0, topCategoryPostsSize, byScoreSort);
         for (Category.HomepageCategory category : Category.HomepageCategory.values()) {
             Slice<Post> posts = postRepository.findByCategoriesName(category.name(), pageRequest);
             categoriesPosts.put(category, posts);
@@ -45,8 +48,7 @@ public class CategoryService {
 
     public Slice<Post> getPosts(String categoryName, int page) {
         categoryName = categoryName.toLowerCase().trim();
-        Sort sort = Sort.by(Sort.Direction.DESC, "creationDateTime", "score");
-        PageRequest pageRequest = PageRequest.of(page, categorySliceSize, sort);
+        PageRequest pageRequest = PageRequest.of(page, categorySliceSize, byDateAndScoreSort);
         return postRepository.findByCategoriesName(categoryName, pageRequest);
     }
 

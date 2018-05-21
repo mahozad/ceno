@@ -3,11 +3,13 @@ package ir.ceno.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.builders
+        .AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration
+        .WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -22,8 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder
-            encoder) {
+    public SecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder encoder) {
         this.userDetailsService = userDetailsService;
         this.encoder = encoder;
     }
@@ -35,25 +36,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll().
-                and().formLogin().usernameParameter("username").passwordParameter("password")
-                .loginProcessingUrl("/login").
-                successHandler(
+        http.authorizeRequests().anyRequest().permitAll()
+                .and().formLogin().usernameParameter("username").passwordParameter("password")
+                .loginProcessingUrl("/login")
+                .successHandler(
                         (request, response, authentication) ->
-                                response.getOutputStream().print(true)).
-                failureHandler(
+                                response.getOutputStream().print(true))
+                .failureHandler(
                         (request, response, exception) ->
-                                response.getOutputStream().print("")).
-                and().logout().
-                logoutSuccessHandler(
+                                response.getOutputStream().print(""))
+                .and().logout()
+                .logoutSuccessHandler(
                         (request, response, authentication) ->
-                                response.sendRedirect(request.getHeader("referer"))).
-                and().cors().disable();
+                                response.sendRedirect(request.getHeader("referer")))
+                .and().cors().disable();
     }
 
     @Override
     public void configure(WebSecurity security) {
-        security.ignoring().antMatchers("/resources/**",
-                "/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**");
+        security.ignoring().antMatchers("/resources/**", "/static/**");
     }
 }

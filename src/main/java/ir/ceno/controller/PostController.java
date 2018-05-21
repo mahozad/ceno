@@ -56,7 +56,7 @@ public class PostController {
 
     @PostMapping("/like")
     @ResponseBody
-    public void like(@RequestParam Long postId,
+    public void like(@RequestParam long postId,
                      @RequestParam Boolean like, Authentication authentication) {
         if (authentication != null) {
             User user = (User) authentication.getPrincipal();
@@ -66,14 +66,13 @@ public class PostController {
 
     @GetMapping({"/images/{postId}", "/videos/{postId}"})
     @ResponseBody
-    public ResponseEntity<byte[]> getFile(@PathVariable Long postId) {
+    public ResponseEntity<byte[]> getFile(@PathVariable long postId) {
         Optional<File> optionalFile = postService.getFile(postId);
         if (optionalFile.isPresent()) {
             File file = optionalFile.get();
             return ResponseEntity.ok().contentType(file.getMediaType()).body(file.getBytes());
         }
         throw new ResourceNotFoundException();
-        //return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{postUrl}")
@@ -82,15 +81,15 @@ public class PostController {
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             List<Post> similarPosts = searchService.searchByEntity(post);
-            model.addAttribute("similarPosts", similarPosts);
             model.addAttribute("post", post);
+            model.addAttribute("similarPosts", similarPosts);
             return "post";
         }
         throw new ResourceNotFoundException();
     }
 
     @PostMapping("/pin")
-    public String pinPost(@RequestParam Long postId, @RequestHeader("referer") String referer,
+    public String pinPost(@RequestParam long postId, @RequestHeader("referer") String referer,
                           Authentication authentication, RedirectAttributes redirectAttrs) {
         if (authentication != null) {
             boolean pinned = postService.pinPost(postId, (User) authentication.getPrincipal());
@@ -100,7 +99,7 @@ public class PostController {
     }
 
     @PostMapping("/delete")
-    public String deletePost(@RequestParam Long postId, Authentication authentication,
+    public String deletePost(@RequestParam long postId, Authentication authentication,
                              RedirectAttributes redirectAttrs) {
         if (authentication != null) {
             postService.deletePost(postId, (User) authentication.getPrincipal());
@@ -110,7 +109,7 @@ public class PostController {
     }
 
     @PostMapping("/report")
-    public String reportPost(@RequestParam Long postId, @RequestHeader("referer") String referer,
+    public String reportPost(@RequestParam long postId, @RequestHeader("referer") String referer,
                              Authentication authentication, RedirectAttributes redirectAttrs) {
         if (authentication != null) {
             postService.reportPost(postId);

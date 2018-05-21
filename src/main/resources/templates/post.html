@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <th:block th:include="fragments::head(titleAppend=${' - ' + post.title})"/>
-    <link rel="stylesheet" th:href="@{/css/post-styles.css}">
+    <meta name="description" th:content="${post.summary}"/>
+    <link rel="stylesheet" th:href="@{/css/post-styles.min.css}">
 </head>
 
 <body class="preload">
@@ -130,7 +131,7 @@
                     <div class="article-share">
                         <a class="shr-boxed"
                            th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}"
-                           th:href="${share.url + post.url}" target="_blank">
+                           th:href="${share.url + post.url}" target="_blank" rel="noopener">
                             <img th:src="${'/images/soc-' + share.name() + '.svg'}"
                                  th:alt="${share.name()}">
                         </a>

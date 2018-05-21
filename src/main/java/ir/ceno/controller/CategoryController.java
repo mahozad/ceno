@@ -26,8 +26,8 @@ public class CategoryController {
         return "category";
     }
 
-    @PostMapping("/ajax-load")
-    public String getCategorySlice(@RequestParam String category,
+    @GetMapping("/{category}/slice")
+    public String getCategorySlice(@PathVariable String category,
                                    @RequestParam Integer page, Model model) {
         Slice<Post> posts = categoryService.getPosts(category, page);
         model.addAttribute("posts", posts);
@@ -36,7 +36,7 @@ public class CategoryController {
 
     @PostMapping("/delete")
     @ResponseBody
-    public void deleteCategory(@RequestParam Long postId, @RequestParam String catName,
+    public void deleteCategory(@RequestParam long postId, @RequestParam String catName,
                                Authentication authentication) {
         if (authentication != null) {
             categoryService.deleteCategory(postId, catName);
@@ -45,7 +45,7 @@ public class CategoryController {
 
     @PostMapping("/add")
     @ResponseBody
-    public void addCategory(@RequestParam Long postId, @RequestParam String catName,
+    public void addCategory(@RequestParam long postId, @RequestParam String catName,
                             Authentication authentication) {
         if (authentication != null) {
             categoryService.addCategory(postId, catName);

@@ -1,13 +1,8 @@
+var body = $("body");
+
 //========== prevent animations on page load ==========\\
 $(window).on("load", function () {
     $("body").removeClass("preload");
-});
-
-//================= page prompt =================\\
-$(".close-prompt").on("click touch", function () {
-    $(".page-prompt").animate({height: 0}, 300, function () {
-        $(this).hide();
-    });
 });
 
 //================= Login modal =================\\
@@ -81,15 +76,14 @@ if ($(location).attr("pathname").match("^/categories")) {
     var category = $(location).attr("pathname").replace("/categories/", '');
     $(window).scroll(function () {
         if (hasNext && $(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-            $.post("/categories/ajax-load", {
-                category: category, page: page
-            }, function (slice) {
-                if (slice === "") {
-                    $("#spinner").hide();
-                    hasNext = false;
-                }
-                $(".card:last-child").after(slice);
-            });
+            $.get("/categories/" + category + "/slice", {page: page},
+                function (slice) {
+                    if (slice === "") {
+                        $("#spinner").hide();
+                        hasNext = false;
+                    }
+                    $(".card:last-child").after(slice);
+                });
             page++;
         }
     });
@@ -111,14 +105,13 @@ $(".post-file input").on("change", function () {
         var reader = new FileReader();
         reader.onload = function (e) {
             $(".file-prev").attr("src", e.target.result);
-            $(".file-prev").attr("alt", "preview");
         };
         reader.readAsDataURL(this.files[0]);
     }
 });
 
 //==================== Like =====================\\
-$("body").on("click touch", ".heart", function () {
+body.on("click touch", ".heart", function () {
     var numElement = $(this).siblings(".like-num");
     var postId = $(this).parents(".card,.article-container").attr("data-post-id");
     if ($(this).hasClass("liked")) {
@@ -138,7 +131,7 @@ function like(postId, isLike, numElement, quantity) {
         });
 }
 
-$("body").on('animationend', ".heart", function () {
+body.on('animationend', ".heart", function () {
     $(this).toggleClass('not-liked liked');
 });
 
@@ -152,10 +145,10 @@ $(".close-cat").click(function () {
 });
 
 //================= Share icon ==================\\
-$("body").on("click", ".share-icon", function () {
+body.on("click", ".share-icon", function () {
     var container = $(this).next();
     if (container.css("visibility") === "visible") {
-        $(this).css("fill", "#aab8c2");
+        $(this).css("fill", "#919da5");
         container.css({
             "opacity": "0",
             "visibility": "hidden",
@@ -175,7 +168,7 @@ $(window).click(function (ev) {
     if (ev.target.tagName !== "svg" && ev.target.tagName !== "path") {
         $(".share-content").each(function () {
             if ($(this).is(":visible")) {
-                $(this).siblings(".share-icon").css("fill", "#aab8c2");
+                $(this).siblings(".share-icon").css("fill", "#919da5");
                 $(this).css({
                     "opacity": "0",
                     "visibility": "hidden",
@@ -348,8 +341,7 @@ $(".logout").on("click touch", function () {
     $(this).parent().submit();
 });
 
-//=========== play/pause video ============\\
-$("body").on("click touch", ".ply-btn", function () {
+body.on("click touch", ".ply-btn", function () {
     var video = $(this).siblings("video")[0];
     var button = $(this);
 
@@ -366,11 +358,11 @@ $("body").on("click touch", ".ply-btn", function () {
     }
 });
 
-$("body").on("mouseover", ".ply-btn", function () {
+body.on("mouseover", ".ply-btn", function () {
     $(this).fadeTo(60, 1);
 });
 
-$("body").on("mouseleave", ".ply-btn", function () {
+body.on("mouseleave", ".ply-btn", function () {
     $(this).fadeTo(60, 1);
     var button = $(this);
     var video = $(this).siblings("video")[0];
@@ -383,7 +375,7 @@ $("body").on("mouseleave", ".ply-btn", function () {
     }
 });
 
-$("body").on("click touch", ".ply-btn", function () {
+body.on("click touch", ".ply-btn", function () {
     $(this).find(".ply-ico").toggleClass("ply-ico-active");
 });
 
@@ -458,7 +450,7 @@ $(".chng-cats-icon").on("click touch", function () {
     }
     var container = $(this).next();
     if (container.css("visibility") === "visible") {
-        $(this).css("fill", "#aab8c2");
+        $(this).css("fill", "#919da5");
         container.css({
             "opacity": "0",
             "visibility": "hidden",

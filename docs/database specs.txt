@@ -4,7 +4,7 @@ typical length for user name: varchar(50)
 ---------------------
 name column in Category table: varchar(50)
 ------------------
-comments count & likes count in Post table: meddiumint
+comments count & likes count in Post table: mediumint
 ------------------
 role column in User table: varchar(30)
 ------------------

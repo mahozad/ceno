@@ -1,9 +1,6 @@
 package ir.ceno.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.NaturalId;
@@ -32,18 +29,17 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Post {
 
     @Getter
+    @AllArgsConstructor
+    @SuppressWarnings("unused")
     public enum ShareUrl {
 
-        FACEBOOK("http://facebook.com/sharer/sharer.php?u="),
-        TWITTER("http://twitter.com/home?status="),
-        TUMBLR("http://tumblr.com/widgets/share/tool?canonicalUrl="),
-        PINTEREST("http://pinterest.com/pin/create/button/?shareUrl=");
+        FACEBOOK("Facebook", "http://facebook.com/sharer/sharer.php?u="),
+        TWITTER("Twitter", "http://twitter.com/home?status="),
+        TUMBLR("Tumblr", "http://tumblr.com/widgets/share/tool?canonicalUrl="),
+        PINTEREST("Pinterest", "http://pinterest.com/pin/create/button/?shareUrl=");
 
-        private final String url;
-
-        ShareUrl(String url) {
-            this.url = url;
-        }
+        private String name;
+        private String url;
     }
 
     @Id
@@ -62,8 +58,13 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    // divide timestamp by 100.000 so after each day (86.400 s) score decrements by about 1
-    @Formula("UNIX_TIMESTAMP(creation_date_time) / 100000 + likes_count")
+    @OneToOne(cascade = ALL, orphanRemoval = true)
+    private File file;
+
+    /**
+     * divide timestamp by a day length (86.400.000 ms) so after each day score decrements by 1
+     */
+    @Formula("UNIX_TIMESTAMP(creation_date_time) / 24 * 60 * 60 * 1000 + likes_count")
     private long score;
 
     @CreationTimestamp
@@ -76,7 +77,7 @@ public class Post {
     @Size(min = 1, max = 60)
     private String title;
 
-    @Size(min = 10, max = 150)
+    @Size(min = 50, max = 150)
     private String summary;
 
     @Lob
@@ -87,14 +88,6 @@ public class Post {
 
     @Min(0)
     private long commentsCount;
-
-    //@Embedded
-    //@AttributeOverrides({
-    //        @AttributeOverride(name = "bytes", column = @Column(name = "file")),
-    //        @AttributeOverride(name = "mediaType", column = @Column(name = "fileMediaType"))
-    //})
-    @OneToOne(cascade = ALL, orphanRemoval = true)
-    private File file;
 
     private boolean pinned;
     private boolean reported;
