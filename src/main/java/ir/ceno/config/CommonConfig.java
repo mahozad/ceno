@@ -1,6 +1,6 @@
 package ir.ceno.config;
 
-import ir.ceno.util.FeedGenerator;
+import ir.ceno.service.FeedService;
 import org.apache.tika.Tika;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
@@ -17,11 +17,11 @@ import javax.transaction.Transactional;
 @Configuration
 public class CommonConfig {
 
-    private FeedGenerator feedGenerator;
+    private FeedService feedService;
 
     @Autowired
-    public CommonConfig(FeedGenerator feedGenerator) {
-        this.feedGenerator = feedGenerator;
+    public CommonConfig(FeedService feedService) {
+        this.feedService = feedService;
     }
 
     @Bean
@@ -30,7 +30,7 @@ public class CommonConfig {
             @Override
             @Transactional
             public void run(ApplicationArguments args) throws Exception {
-                feedGenerator.initialize();
+                feedService.initialize();
                 FullTextEntityManager fullTxtEntityManager =
                         Search.getFullTextEntityManager(entityManager);
                 fullTxtEntityManager.createIndexer().startAndWait();

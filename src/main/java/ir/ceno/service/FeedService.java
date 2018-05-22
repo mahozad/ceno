@@ -1,4 +1,4 @@
-package ir.ceno.util;
+package ir.ceno.service;
 
 import com.rometools.rome.feed.rss.Category;
 import com.rometools.rome.feed.rss.Channel;
@@ -20,19 +20,19 @@ import java.time.ZoneId;
 import java.util.*;
 
 @Component
-public class FeedGenerator {
+public class FeedService {
 
     // FIXME: it may be better to place this class in another package like support or...
     // FIXME: feeds contain duplicate items
 
-    @Value("${feed.max-items}")
+    @Value("${feed-max-items}")
     private int maxItems = 10;
 
     private Map<String, Feed> feeds = new HashMap<>();
     private PostRepository postRepository;
 
     @Autowired
-    public FeedGenerator(PostRepository postRepository) {
+    public FeedService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 

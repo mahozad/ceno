@@ -11,10 +11,10 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta name="theme-color" content="#00acc1"/>
-    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
-    <link rel="stylesheet" th:href="@{/css/styles.min.css}"/>
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/main.min.css}"/>
     <script th:src="@{/js/jquery-3.3.1.min.js}" defer></script>
-    <script th:src="@{/js/scripts.min.js}" defer></script>
+    <script th:src="@{/js/main.min.js}" defer></script>
 </head>
 
 <body>
@@ -47,7 +47,7 @@
                     <input class="search-input" type="text" name="q" autocomplete="off"
                            placeholder="Search for posts..." aria-label="search">
                     <button type="submit" class="search-button">
-                        <img src="/images/ic-search.svg" alt="search" class="search-icon">
+                        <img src="/img/ic-search.svg" alt="search" class="search-icon">
                     </button>
                 </form>
             </div>
@@ -69,7 +69,7 @@
                 <a id="new-post" class="btn" href="/posts/new" th:text="#{new-post}">New post</a>
                 <div class="author-inf-nav">
                     <img class="card-avatar" th:alt="${#authentication.principal.name}"
-                         th:src="${#authentication.principal.avatar.bytes.length == 0} ? '/images/placeholder.svg' : ${'/users/avatars/' + #authentication.principal.name}"/>
+                         th:src="${#authentication.principal.avatar.bytes.length == 0} ? '/img/placeholder.svg' : ${'/users/avatars/' + #authentication.principal.name}"/>
                     <div class="author">
                         <div class="usr-name" th:text="${#authentication.principal.name}">
                             Username
@@ -112,7 +112,7 @@
                     <div class="prompt" th:text="#{prompt.invalid}">Invalid</div>
                 </div>
                 <div class="avatar-upload">
-                    <img src="/images/placeholder.svg" alt="avatar"/>
+                    <img src="/img/placeholder.svg" alt="avatar"/>
                     <label class="file-upload">
                         <input type="file" name="avatar" accept="image/*">
                         <span th:text="#{avatar.change}">Change avatar</span>
@@ -152,19 +152,19 @@
     <header class="card-header">
         <div class="author-info">
             <img class="card-avatar" th:alt="${post.author.name}"
-                 th:src="${post.author.avatar.bytes.length==0} ? '/images/placeholder.svg' : ${'/users/avatars/' + post.author.name}"/>
+                 th:src="${post.author.avatar.bytes.length==0} ? '/img/placeholder.svg' : ${'/users/avatars/' + post.author.name}"/>
             <div class="author">
                 <div class="usr-name" th:text="${post.author.name}">Username</div>
                 <div class="score" th:fragment="score" th:with="score=${post.author.score}">
                     <span th:text="${score}">Score</span>
                     <img th:if="${score lt 100}"
-                         src="/images/ic-medal-beginner.svg" alt="medal" th:title="#{novice}"
+                         src="/img/ic-medal-beginner.svg" alt="medal" th:title="#{novice}"
                          title="Novice!"/>
                     <img th:if="${score gt 99 and score lt 1000}"
-                         src="/images/ic-medal-bronze.svg" alt="medal"/>
+                         src="/img/ic-medal-bronze.svg" alt="medal"/>
                     <img th:if="${score gt 999 and score lt 50000 }"
-                         src="/images/ic-medal-silver.svg" alt="medal"/>
-                    <img th:if="${score gt 49999}" src="/images/ic-medal-gold.svg" alt="medal"/>
+                         src="/img/ic-medal-silver.svg" alt="medal"/>
+                    <img th:if="${score gt 49999}" src="/img/ic-medal-gold.svg" alt="medal"/>
                 </div>
             </div>
         </div>
@@ -193,7 +193,7 @@
                     <div class="arrow"></div>
                     <a th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}"
                        th:href="${share.url + post.url}" target="_blank" rel="noopener">
-                        <img th:src="${'/images/soc-' + share.name() + '.svg'}"
+                        <img th:src="${'/img/soc-' + share.name() + '.svg'}"
                              th:alt="${share.name()}"
                              th:title="${'Share on ' + share.name().toLowerCase()}">
                     </a>
@@ -237,8 +237,8 @@
     Read more...
 </a>
 
-<!-- card date -->
 <!-- TODO: very bad, refactor this section -->
+<!-- card date -->
 <div class="card-date" th:fragment="card-datetime"
      th:with="now=${T(java.time.LocalDateTime).now()}, duration=${T(java.time.Duration).between(post.creationDateTime,now)}">
     <span th:if="${duration.toSeconds() lt 60}" th:text="'seconds ago'"></span>
@@ -272,11 +272,11 @@
                     </div>
                     <div class="langs">
                         <div class="lang" data-lang-name="en">
-                            <img class="lang-flag" src="/images/ic-lang-en.png" alt="english">
+                            <img class="lang-flag" src="/img/ic-lang-en.png" alt="english">
                             <span class="lang-name">English</span>
                         </div>
                         <div class="lang" data-lang-name="fa">
-                            <img class="lang-flag" src="/images/ic-lang-fa.png" alt="farsi">
+                            <img class="lang-flag" src="/img/ic-lang-fa.png" alt="farsi">
                             <span class="lang-name">فارسی</span>
                         </div>
                     </div>

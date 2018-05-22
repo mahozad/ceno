@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="fragments::head(titleAppend=' - ' + #{${catName}} + ' ' + #{posts})"/>
-    <link rel="stylesheet" th:href="@{/css/category-styles.min.css}">
+    <link rel="stylesheet" th:href="@{/css/category.min.css}">
 </head>
 
 <body class="preload">
@@ -13,7 +13,7 @@
 <main>
     <div th:replace="fragments::prompt"></div>
     <div class="no-result-prompt" th:if="${posts.numberOfElements == 0}">
-        <img src="/images/ic-lamp.svg" alt="empty">
+        <img src="/img/ic-lamp.svg" alt="empty">
         <div>
             Sorry, there is no post in this category.<br/>
             Be the first one and create a post here!

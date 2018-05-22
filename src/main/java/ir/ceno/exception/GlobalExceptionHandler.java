@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public String handle() {
-        return "error404";
+    public String handleNotFoundError() {
+        return "error";
     }
 
     @ExceptionHandler(RuntimeException.class)
     public String handleInternalError() {
-        return "error500";
+        return "error";
     }
 }

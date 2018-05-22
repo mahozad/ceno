@@ -4,7 +4,6 @@ import ir.ceno.exception.NotAllowedException;
 import ir.ceno.model.*;
 import ir.ceno.repository.CategoryRepository;
 import ir.ceno.repository.PostRepository;
-import ir.ceno.util.FeedGenerator;
 import ir.ceno.util.UrlMaker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
@@ -32,31 +31,31 @@ public class PostService {
     private static final Sort byDateSort = Sort.by(Sort.Direction.DESC, "creationDateTime");
     private static final Sort byScoreAndDateSort = byScoreSort.and(byDateSort);
 
-    @Value("${top-posts.size}")
+    @Value("${top-posts-size}")
     private int topPostsSize;
 
-    @Value("${pinned-posts.size}")
+    @Value("${pinned-posts-size}")
     private int pinnedPostsSize;
 
-    @Value("${like.score}")
+    @Value("${like-score}")
     private int likeScore;
 
-    @Value("${user.min-edit-score}")
+    @Value("${user-min-edit-score}")
     private int minEditScore;
 
     private PostRepository postRepository;
     private CategoryRepository categoryRepository;
     private UrlMaker urlMaker;
-    private FeedGenerator feedGenerator;
+    private FeedService feedService;
     private Tika fileTypeDetector;
 
     @Autowired
     public PostService(PostRepository postRepository, CategoryRepository categoryRepository,
-                       UrlMaker urlMaker, FeedGenerator feedGenerator, Tika fileTypeDetector) {
+                       UrlMaker urlMaker, FeedService feedService, Tika fileTypeDetector) {
         this.postRepository = postRepository;
         this.categoryRepository = categoryRepository;
         this.urlMaker = urlMaker;
-        this.feedGenerator = feedGenerator;
+        this.feedService = feedService;
         this.fileTypeDetector = fileTypeDetector;
     }
 
@@ -77,7 +76,7 @@ public class PostService {
             author.getPosts().add(newPost);
             categories.forEach(category -> category.getPosts().add(newPost));
             postRepository.save(newPost);
-            feedGenerator.addItem(newPost);
+            feedService.addItem(newPost);
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException();

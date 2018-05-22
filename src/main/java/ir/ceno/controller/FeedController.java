@@ -1,7 +1,7 @@
 package ir.ceno.controller;
 
 import com.rometools.rome.feed.rss.Channel;
-import ir.ceno.util.FeedGenerator;
+import ir.ceno.service.FeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FeedController {
 
-    private FeedGenerator feedGenerator;
+    private FeedService feedService;
 
     @Autowired
-    public FeedController(FeedGenerator feedGenerator) {
-        this.feedGenerator = feedGenerator;
+    public FeedController(FeedService feedService) {
+        this.feedService = feedService;
     }
 
-    @GetMapping("/rss/{name}")
-    public Channel rss(@PathVariable String name) {
-        return feedGenerator.getFeed(name);
+    @GetMapping("/rss/{categoryName}")
+    public Channel rss(@PathVariable String categoryName) {
+        return feedService.getFeed(categoryName);
     }
 }

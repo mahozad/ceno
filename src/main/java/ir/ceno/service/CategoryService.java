@@ -22,10 +22,10 @@ public class CategoryService {
     private static final Sort byDateSort = Sort.by(Sort.Direction.DESC, "creationDateTime");
     private static final Sort byDateAndScoreSort = byDateSort.and(byScoreSort);
 
-    @Value("${category.load-size}")
+    @Value("${category-slice-size}")
     private int categorySliceSize;
 
-    @Value("${top-category-posts.size}")
+    @Value("${top-category-posts-size}")
     private int topCategoryPostsSize;
 
     private PostRepository postRepository;

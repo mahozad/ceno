@@ -15,10 +15,10 @@ import java.util.List;
 @Service
 public class SearchService {
 
-    @Value("${search.max-results}")
+    @Value("${search-max-results}")
     private int searchMaxResults;
 
-    @Value("${search.max-similars}")
+    @Value("${search-max-similars}")
     private int searchMaxSimilars;
 
     private EntityManager entityManager;

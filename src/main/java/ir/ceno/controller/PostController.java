@@ -38,7 +38,7 @@ public class PostController {
             redirectAttrs.addFlashAttribute("prompt", "not-allowed");
             return "redirect:" + referer;
         }
-        return "new-post";
+        return "create-post";
     }
 
     @PostMapping("/submit")

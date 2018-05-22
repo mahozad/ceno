@@ -7,25 +7,25 @@
 
 @font-face {
     font-family: Sahel;
-    src: url(../fonts/Sahel-FD.ttf);
+    src: url(../font/Sahel-FD.ttf);
     unicode-range: U+0600-06FF;
 }
 
 @font-face {
     font-family: Sahel;
-    src: url(../fonts/Sahel-FD-Bold.ttf);
+    src: url(../font/Sahel-FD-Bold.ttf);
     unicode-range: U+0600-06FF;
     font-weight: bold;
 }
 
 @font-face {
     font-family: Roboto;
-    src: url(../fonts/Roboto-Regular.ttf);
+    src: url(../font/Roboto-Regular.ttf);
 }
 
 @font-face {
     font-family: Roboto;
-    src: url(../fonts/Roboto-Bold.ttf);
+    src: url(../font/Roboto-Bold.ttf);
     font-weight: bold;
 }
 
@@ -574,7 +574,7 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
 }
 
 .invalid-login {
-    color: #c61e23;
+    color: #DE1E26;
     display: none;
     font-size: 13px;
     margin-top: 40px;
@@ -1011,7 +1011,7 @@ progress::-webkit-progress-value {
 /*********** like icon ***********/
 
 .heart-static {
-    background: url('../images/ic-heart-animated.png') no-repeat left;
+    background: url('../img/ic-heart.png') no-repeat left;
     background-size: 2900%;
     height: 48px;
     margin-right: 6px;
@@ -1019,7 +1019,7 @@ progress::-webkit-progress-value {
 }
 
 .not-liked {
-    background: url('../images/ic-heart-animated.png') no-repeat left;
+    background: url('../img/ic-heart.png') no-repeat left;
     background-size: 2900%;
     cursor: pointer;
     height: 48px;
@@ -1032,7 +1032,7 @@ progress::-webkit-progress-value {
 }
 
 .liked {
-    background: url('../images/ic-heart-animated.png') no-repeat right;
+    background: url('../img/ic-heart.png') no-repeat right;
     background-size: 2900%;
     cursor: pointer;
     height: 48px;

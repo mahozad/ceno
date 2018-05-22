@@ -3,7 +3,7 @@
 <head>
     <th:block th:include="fragments::head(titleAppend=${' - ' + post.title})"/>
     <meta name="description" th:content="${post.summary}"/>
-    <link rel="stylesheet" th:href="@{/css/post-styles.min.css}">
+    <link rel="stylesheet" th:href="@{/css/post.min.css}">
 </head>
 
 <body class="preload">
@@ -40,7 +40,7 @@
                             <div class="likes likes-right" th:include="fragments::card-like"></div>
                             <div class="comm-count">
                                 <span th:text="${post.commentsCount}">Comments count</span>
-                                <img src="/images/ic-comment.svg" class="comm-icon" alt="Comments">
+                                <img src="/img/ic-comment.svg" class="comm-icon" alt="Comments">
                             </div>
                         </div>
                         <div class="actions">
@@ -132,7 +132,7 @@
                         <a class="shr-boxed"
                            th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}"
                            th:href="${share.url + post.url}" target="_blank" rel="noopener">
-                            <img th:src="${'/images/soc-' + share.name() + '.svg'}"
+                            <img th:src="${'/img/soc-' + share.name() + '.svg'}"
                                  th:alt="${share.name()}">
                         </a>
                     </div>

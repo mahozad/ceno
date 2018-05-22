@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${queries.users-query}")
+    @Value("${users-query}")
     private String usersQuery;
 
     private UserDetailsService userDetailsService;

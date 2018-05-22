@@ -19,14 +19,16 @@ group = 'ir'
 version = '0.9.0-SNAPSHOT'
 sourceCompatibility = 9
 
+compileJava.dependsOn(processResources) // for custom props
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
     compile('com.github.ben-manes.caffeine:caffeine')
-    compile ('com.rometools:rome:1.9.0')
-    compile ('org.hibernate:hibernate-search-orm:5.9.1.Final')
+    compile('com.rometools:rome:1.9.0')
+    compile('org.hibernate:hibernate-search-orm:5.9.1.Final')
     // compile('javax.annotation:javax.annotation-api') // for @PostConstruct and...
     compile('org.apache.tika:tika-core:1.17')
     compile('org.springframework.boot:spring-boot-starter-cache')
@@ -38,6 +40,7 @@ dependencies {
     compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
     runtime('mysql:mysql-connector-java')
     compileOnly('org.projectlombok:lombok')
+    compileOnly('org.springframework.boot:spring-boot-configuration-processor') // for custom props
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 }
