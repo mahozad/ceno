@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * Controller that deals with full-text search operations.
+ */
 @Controller
 public class SearchController {
 
@@ -20,6 +23,13 @@ public class SearchController {
         this.searchService = searchService;
     }
 
+    /**
+     * Searches for the given query.
+     *
+     * @param q     the query to search for
+     * @param model the model to add attributes to
+     * @return view name of the result page
+     */
     @GetMapping("/search")
     public String search(@RequestParam String q, Model model) {
         List<Post> posts = searchService.searchByQuery(q);

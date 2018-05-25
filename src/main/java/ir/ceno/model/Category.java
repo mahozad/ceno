@@ -15,6 +15,9 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity representing category of one or more {@link Post post}s.
+ */
 @Entity
 @NoArgsConstructor
 @Getter

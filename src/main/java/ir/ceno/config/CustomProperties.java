@@ -4,6 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * Adds default value and documentation for custom properties used in application.properties and
+ * application.yml files.
+ * <p>
+ * Rebuild is required after adding/editing contents of the class.
+ */
 @ConfigurationProperties
 @Getter
 @Setter
@@ -11,6 +17,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CustomProperties {
 
     private String usersQuery = "select name, password, true from user where name=?";
+    private int encoderStrength = 10;
     private int likeScore = 20;
     private int hotMin = 10;
     private int topPostsSize = 3;

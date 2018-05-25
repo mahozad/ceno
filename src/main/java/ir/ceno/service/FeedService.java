@@ -13,16 +13,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 
-@Component
+@Service
 public class FeedService {
 
-    // FIXME: it may be better to place this class in another package like support or...
     // FIXME: feeds contain duplicate items
 
     @Value("${feed-max-items}")

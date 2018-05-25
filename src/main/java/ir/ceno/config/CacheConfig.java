@@ -1,6 +1,7 @@
 package ir.ceno.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import ir.ceno.model.Post;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCache;
@@ -11,10 +12,18 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Configuration for creating and managing caches.
+ */
 @Configuration
 @EnableCaching
 public class CacheConfig {
 
+    /**
+     * Creates caffeine caches for {@link Post}s or just files.
+     *
+     * @return {@link CacheManager} bean
+     */
     @Bean
     public CacheManager cacheManager() {
         CaffeineCache cache1 = new CaffeineCache("pinnedPosts", Caffeine.newBuilder().build());

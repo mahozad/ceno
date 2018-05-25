@@ -28,7 +28,12 @@ public class SearchService {
         this.entityManager = entityManager;
     }
 
-    //@Transactional
+    /**
+     * Searches for the given query.
+     *
+     * @param query the query to search for
+     * @return {@link List} of posts that matched the query
+     */
     @SuppressWarnings("unchecked")
     public List<Post> searchByQuery(String query) {
         FullTextEntityManager fullTxtEntityManager = Search.getFullTextEntityManager(entityManager);
@@ -47,6 +52,12 @@ public class SearchService {
         return (List<Post>) jpaQuery.setMaxResults(searchMaxResults).getResultList();
     }
 
+    /**
+     * Searches for posts that are similar to the given post.
+     *
+     * @param post the post to find similars to
+     * @return {@link List} of posts that were similar to the given post
+     */
     @SuppressWarnings("unchecked")
     public List<Post> searchByEntity(Post post) {
         FullTextEntityManager fullTxtEntityManager = Search.getFullTextEntityManager(entityManager);

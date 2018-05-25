@@ -8,6 +8,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An object encapsulating a {@link Channel}, its {@link Item}s and some other related attributes.
+ */
 @Getter
 @Setter
 public class Feed {

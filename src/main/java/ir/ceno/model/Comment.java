@@ -9,6 +9,9 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity representing comment for a {@link Post post}.
+ */
 @Entity
 @NoArgsConstructor
 @Getter

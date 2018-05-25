@@ -12,6 +12,9 @@ import javax.persistence.Lob;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity representing a file belonging to a user or to a post.
+ */
 @Entity
 @NoArgsConstructor
 @Getter

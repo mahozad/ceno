@@ -17,6 +17,9 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity representing a user of the site whether regular or admin.
+ */
 @Entity
 @NoArgsConstructor
 @Getter

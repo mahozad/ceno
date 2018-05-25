@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Map;
 
+/**
+ * Controller that deals with homepage operations.
+ */
 @Controller
 public class HomeController {
 
@@ -24,6 +27,13 @@ public class HomeController {
         this.categoryService = categoryService;
     }
 
+    /**
+     * Gets top {@link Post post}s, top posts of default categories and top pinned posts and adds
+     * them to the model.
+     *
+     * @param model the model to add attributes to
+     * @return view name of the homepage
+     */
     @GetMapping({"/", "/index"})
     public String home(Model model) {
         // top posts

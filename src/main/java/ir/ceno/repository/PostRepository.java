@@ -9,17 +9,31 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+    /**
+     * Finds a post by its url.
+     *
+     * @param url the url of the post to find
+     * @return {@link Optional} containing the post or empty if not found
+     */
     Optional<Post> findByUrl(String url);
 
     /**
-     * gets a post by its category name:
-     * post -> categories -> name
+     * Finds posts by their category name.
+     * <p>
+     * Tries to match the given category name to the name of the post category:<br>
+     * post -> category -> name
      *
-     * @param name
-     * @param pageable
-     * @return
+     * @param name     the name of the category to find posts by
+     * @param pageable the pageable object to paginate and sort results
+     * @return {@link Slice} containing posts
      */
     Slice<Post> findByCategoriesName(String name, Pageable pageable);
 
+    /**
+     * Finds a post by its pinned flag.
+     *
+     * @param pageable the pageable object to paginate and sort results
+     * @return {@link Slice} containing posts
+     */
     Slice<Post> findByPinnedTrue(Pageable pageable);
 }

@@ -20,6 +20,9 @@ import java.util.Set;
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity representing a post in the site.
+ */
 @Entity
 @Indexed
 @NoArgsConstructor
