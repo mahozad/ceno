@@ -55,6 +55,6 @@ public class UserController {
             File avatar = optionalAvatar.get();
             return ResponseEntity.ok().contentType(avatar.getMediaType()).body(avatar.getBytes());
         }
-        throw new ResourceNotFoundException();
+        throw new ResourceNotFoundException("File not found");
     }
 }

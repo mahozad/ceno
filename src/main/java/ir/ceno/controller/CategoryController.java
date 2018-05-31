@@ -24,7 +24,7 @@ public class CategoryController {
     }
 
     /**
-     * Gets latest {@link Post post}s for the specified category and adds them to the model.
+     * Gets latest {@link Post posts} for the specified category and adds them to the model.
      *
      * @param category name of the category to get its posts
      * @param model    the model to add attributes to

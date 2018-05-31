@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
     public synchronized void addUser(String username, String password, MultipartFile avatar)
             throws IOException {
         if (userRepository.existsByName(username)) {
-            throw new DuplicateUsernameException();
+            throw new DuplicateUsernameException("Username <" + username + "> already exists.");
         }
         username = username.toLowerCase().trim();
         String encodedPassword = encoder.encode(password);

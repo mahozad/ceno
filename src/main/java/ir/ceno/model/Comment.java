@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -23,6 +24,7 @@ public class Comment {
     private long id;
 
     @Lob
+    @Size(min = 1)
     private String comment;
 
     @ManyToOne(fetch = LAZY)

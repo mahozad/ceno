@@ -24,7 +24,7 @@ public class CommonConfig {
     /**
      * Creates an {@link ApplicationRunner} bean that initializes the application on its startup.
      * <p>
-     * feedService is initialized with latest {@link Post post}s of each category and Lucene indexes
+     * feedService is initialized with latest {@link Post posts} of each category and Lucene indexes
      * existing posts for hibernate full text search.
      *
      * @param entityMgr   for hibernate search to create lucene index
@@ -47,6 +47,7 @@ public class CommonConfig {
     /**
      * Creates a password encoder bean with the given strength.
      *
+     * @param strength the strength of the encoder
      * @return {@link BCryptPasswordEncoder} bean
      */
     @Bean

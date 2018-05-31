@@ -10,6 +10,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.*;
 
@@ -48,6 +50,7 @@ public class User implements UserDetails {
     private File avatar;
 
     @NaturalId
+    @NotEmpty
     private String name;
 
     @Size(min = 6)
@@ -56,6 +59,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Min(0)
     private long score;
 
     public User(String name, String password, File avatar, Role role) {

@@ -43,7 +43,7 @@ form {
 }
 
 .highlight-np {
-    background: #00acc1;
+    background: var(--primary-color);
     bottom: 0;
     height: 2px;
     opacity: 0;
@@ -78,7 +78,7 @@ fieldset {
 }
 
 fieldset legend {
-    color: #00acc1;
+    color: var(--primary-color);
     font-size: 15px;
     padding: 0 4px;
 }

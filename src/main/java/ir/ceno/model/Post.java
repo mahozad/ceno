@@ -10,6 +10,7 @@ import org.hibernate.search.annotations.TermVector;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Entity representing a post in the site.
+ * Annotated with @Indexed for the hibernate search to index the entity.
  */
 @Entity
 @Indexed
@@ -37,7 +39,7 @@ public class Post {
     public enum ShareUrl {
 
         FACEBOOK("Facebook", "http://facebook.com/sharer/sharer.php?u="),
-        TWITTER("Twitter", "http://twitter.com/home?status="),
+        TWITTER("Twitter", "http://twitter.com/intent/tweet?url="),
         TUMBLR("Tumblr", "http://tumblr.com/widgets/share/tool?canonicalUrl="),
         PINTEREST("Pinterest", "http://pinterest.com/pin/create/button/?shareUrl=");
 
@@ -70,10 +72,12 @@ public class Post {
     @Formula("UNIX_TIMESTAMP(creation_date_time) / 24 * 60 * 60 * 1000 + likes_count")
     private long score;
 
+    @Past
     @CreationTimestamp
     private LocalDateTime creationDateTime;
 
     @NaturalId
+    @Size(max = 2000)
     private String url;
 
     @Field(termVector = TermVector.YES)

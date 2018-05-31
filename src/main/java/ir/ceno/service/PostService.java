@@ -157,7 +157,7 @@ public class PostService {
     }
 
     /**
-     * Returns pinned {@link Post post}s and caches them in <i>pinnedPosts</i> cache.
+     * Returns pinned {@link Post posts} and caches them in <i>pinnedPosts</i> cache.
      *
      * @return {@link Slice} containing pinned posts
      */
@@ -185,7 +185,7 @@ public class PostService {
                 return post.isPinned();
             }
         }
-        throw new NotAllowedException();
+        throw new NotAllowedException("You do not have minimum score to pin the post");
     }
 
     /**
@@ -213,7 +213,7 @@ public class PostService {
                 postRepository.deleteById(postId);
             });
         }
-        throw new NotAllowedException();
+        throw new NotAllowedException("You do not have minimum score to delete the post");
     }
 
     /**

@@ -21,7 +21,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * Finds posts by their category name.
      * <p>
      * Tries to match the given category name to the name of the post category:<br>
-     * post -> category -> name
+     * post -&gt; category -&gt; name
      *
      * @param name     the name of the category to find posts by
      * @param pageable the pageable object to paginate and sort results

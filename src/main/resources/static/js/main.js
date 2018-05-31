@@ -1,4 +1,5 @@
 var body = $("body");
+var primaryColor = $("html").css("--primary-color");
 
 //========== prevent animations on page load ==========\\
 $(window).on("load", function () {
@@ -41,7 +42,7 @@ $(window).add(closeBtn).click(function (event) {
 function emptyInput(input) {
     input.val("");
     input.siblings(".highlight").hide();
-    input.siblings(".highlight").css("background", "#00acc1");
+    input.siblings(".highlight").css("background", primaryColor);
     input.siblings(".prompt").hide();
 }
 
@@ -54,6 +55,9 @@ $(".wrt-comment button").on("click touch", function () {
     var postId = $(this).siblings("input").val();
     var comment = $(this).siblings("textarea").val();
     var userName = $(".usr-name").text();
+    if (comment.length === 0) {
+        return;
+    }
     $.post("/posts/comments/add", {postId: postId, comment: comment},
         function () {
             var commCount = $(".comments p");
@@ -70,13 +74,13 @@ $(".wrt-comment button").on("click touch", function () {
 });
 
 //=========== Category page ajax load ===========\\
-var page = 1;
+var sliceNumber = 1;
 var hasNext = true;
 if ($(location).attr("pathname").match("^/categories")) {
     var category = $(location).attr("pathname").replace("/categories/", '');
     $(window).scroll(function () {
         if (hasNext && $(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-            $.get("/categories/" + category + "/slice", {page: page},
+            $.get("/categories/" + category + "/slice", {sliceNumber: sliceNumber},
                 function (slice) {
                     if (slice === "") {
                         $("#spinner").hide();
@@ -84,7 +88,7 @@ if ($(location).attr("pathname").match("^/categories")) {
                     }
                     $(".card:last-child").after(slice);
                 });
-            page++;
+            sliceNumber++;
         }
     });
 }
@@ -137,7 +141,7 @@ body.on('animationend', ".heart", function () {
 
 //============== Side navigation ================\\
 $(".hamburger-icon").click(function () {
-    $(".side-nav").css("width", "50%");
+    $(".side-nav").css({"width": "240px", "max-width": "100%"});
 });
 
 $(".close-cat").click(function () {
@@ -155,7 +159,7 @@ body.on("click", ".share-icon", function () {
             "transform": "translate(-20px, 0)"
         });
     } else {
-        $(this).css("fill", "#00acc1");
+        $(this).css("fill", primaryColor);
         container.css({
             "opacity": "1",
             "visibility": "visible",
@@ -211,7 +215,7 @@ usernameInput.blur(function () {
     var highlight = usernameInput.siblings(".highlight");
     if (name === "") {
         highlight.fadeTo(200, 0, function () {
-            highlight.css("background", "#00acc1");
+            highlight.css("background", primaryColor);
         });
         usernameInput.siblings(".prompt").fadeTo(200, 0);
     } else {
@@ -224,7 +228,7 @@ passwordInput.blur(function () {
     var highlight = passwordInput.siblings(".highlight");
     if (pass.length === 0) {
         highlight.fadeTo(180, 0, function () {
-            highlight.css("background", "#00acc1");
+            highlight.css("background", primaryColor);
         });
         passwordInput.siblings(".prompt").fadeTo(200, 0);
     } else if (pass.length < 6 || !passRegex.test(pass)) {
@@ -288,7 +292,7 @@ usernameInputLogin.blur(function () {
     var highlight = usernameInputLogin.siblings(".highlight");
     if (name.length === 0) {
         highlight.fadeTo(200, 0, function () {
-            highlight.css("background", "#00acc1");
+            highlight.css("background", primaryColor);
         });
         usernameInputLogin.siblings(".prompt").fadeTo(200, 0);
     }
@@ -299,7 +303,7 @@ passwordInputLogin.blur(function () {
     var highlight = passwordInputLogin.siblings(".highlight");
     if (pass.length === 0) {
         highlight.fadeTo(200, 0, function () {
-            highlight.css("background", "#00acc1");
+            highlight.css("background", primaryColor);
         });
         passwordInputLogin.siblings(".prompt").fadeTo(200, 0);
     }
@@ -457,7 +461,7 @@ $(".chng-cats-icon").on("click touch", function () {
             "transform": "translate(-20px, 0)"
         });
     } else {
-        $(this).css("fill", "#00acc1");
+        $(this).css("fill", primaryColor);
         container.css({
             "opacity": "1",
             "visibility": "visible",
@@ -492,5 +496,11 @@ $(".cat-add-ico").on("click touch", function () {
 //======= change language =========\\
 $(".lang").on("click touch", function () {
     var lang = $(this).attr("data-lang-name");
-    location.replace('?lang=' + lang);
+    location.replace("?lang=" + lang);
+});
+
+//======= change theme ========\\
+$(".theme").on("click touch", function () {
+    var theme = $(this).attr("data-theme-name");
+    location.replace("?theme=" + theme);
 });

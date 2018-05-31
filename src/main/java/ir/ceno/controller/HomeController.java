@@ -28,7 +28,7 @@ public class HomeController {
     }
 
     /**
-     * Gets top {@link Post post}s, top posts of default categories and top pinned posts and adds
+     * Gets top {@link Post posts}, top posts of default categories and top pinned posts and adds
      * them to the model.
      *
      * @param model the model to add attributes to

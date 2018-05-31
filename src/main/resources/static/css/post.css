@@ -91,7 +91,7 @@
 }
 
 .pin-icon:not(.disabled):hover {
-    fill: #00acc1;
+    fill: var(--primary-color);
 }
 
 .del-icon {
@@ -108,7 +108,7 @@
 }
 
 .chng-cats-icon:not(.disabled):hover {
-    fill: #00acc1 !important;
+    fill: var(--primary-color) !important;
 }
 
 .rep-icon {
@@ -396,5 +396,5 @@
     border: none;
     font-size: 15px;
     margin-bottom: 24px;
-    width: 8%;
+    padding: 8px 12px;
 }

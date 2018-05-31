@@ -10,13 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Entity representing category of one or more {@link Post post}s.
+ * Entity representing category of one or more {@link Post posts}.
  */
 @Entity
 @NoArgsConstructor
@@ -26,7 +27,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Category {
 
     public enum HomepageCategory {
-        TRENDING, FUNNY, NEWS, CELEBRITIES
+        FUNNY, TRENDING, NEWS, CELEBRITIES
     }
 
     @Id
@@ -37,6 +38,7 @@ public class Category {
     private Set<Post> posts = new HashSet<>();
 
     @NaturalId
+    @NotEmpty
     private String name;
 
     public Category(String name) {

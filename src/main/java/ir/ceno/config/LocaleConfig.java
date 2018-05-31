@@ -25,7 +25,7 @@ public class LocaleConfig implements WebMvcConfigurer {
      * Creates locale interceptor bean.
      * <p>
      * The url query parameter to change the language is
-     * set with setParamName method of the interceptor.
+     * specified with setParamName method of the interceptor.
      *
      * @return {@link LocaleChangeInterceptor} bean
      */
@@ -37,9 +37,9 @@ public class LocaleConfig implements WebMvcConfigurer {
     }
 
     /**
-     * Creates locale resolver bean.
+     * Creates locale resolver bean based on the session.
      * <p>
-     * Default locale is set with setDefaultLocale method of the resolver.
+     * Default locale is specified with setDefaultLocale method of the resolver.
      *
      * @return {@link LocaleResolver} bean
      */

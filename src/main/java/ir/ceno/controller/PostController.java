@@ -119,7 +119,7 @@ public class PostController {
             File file = optionalFile.get();
             return ResponseEntity.ok().contentType(file.getMediaType()).body(file.getBytes());
         }
-        throw new ResourceNotFoundException();
+        throw new ResourceNotFoundException("File not found");
     }
 
     /**
@@ -140,7 +140,7 @@ public class PostController {
             model.addAttribute("similarPosts", similarPosts);
             return "post";
         }
-        throw new ResourceNotFoundException();
+        throw new ResourceNotFoundException("Post not found");
     }
 
     /**

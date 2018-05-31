@@ -1,0 +1,26 @@
+overal design inspired by: https://material.io
+
+color palette used:
+https://material.io/design/color/the-color-system.html
+(#00ACC1 as the primary color)
+
+categories page loader animation copied from:
+http://tobiasahlin.com/spinkit/
+
+heart icon copied from:
+https://codepen.io/chrismabry/pen/ZbjZEj
+
+video play icon copied from:
+https://codepen.io/daviddarnes/pen/waRVMm
+
+cards box-shadow effect copied from:
+https://codepen.io/sdthornton/pen/wBZdXq
+
+sidebar navigation copied from:
+https://www.w3schools.com/howto/howto_js_sidenav.asp
+
+login dialog inspired by a work from:
+https://codepen.io
+
+most major icons downloaded from:
+https://thenounproject.com

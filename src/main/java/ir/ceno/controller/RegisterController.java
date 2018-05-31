@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * Controller that deals with registration of new {@link User user}s.
+ * Controller that deals with registration of new {@link User users}.
  */
 @Controller
 @Slf4j

@@ -24,8 +24,8 @@
                         <h1 class="article-title" th:text="${post.title}">Title</h1>
                         <div class="subheading">
                             <div class="creator">
-                                <img th:src="${'/users/avatars/' + post.author.name}"
-                                     th:alt="${post.author.name}"/>
+                                <img th:alt="${post.author.name}"
+                                     th:src="${post.author.avatar.bytes.length==0} ? '/img/placeholder.svg' : ${'/users/avatars/' + post.author.name}"/>
                                 <span class="creator-name" th:text="${post.author.name}">
                                     Author
                                 </span>
@@ -150,8 +150,8 @@
                     </p>
                     <div class="comment" th:each="comment:${post.comments}">
                         <div class="comment-author">
-                            <img th:src="${'/users/avatars/' + comment.author.name}"
-                                 th:alt="${comment.author.name}"/>
+                            <img th:alt="${comment.author.name}"
+                                 th:src="${comment.author.avatar.bytes.length==0} ? '/img/placeholder.svg' : ${'/users/avatars/' + comment.author.name}"/>
                             <div class="com-auth-name" th:text="${comment.author.name}">
                                 Commenter
                             </div>
