@@ -25,9 +25,9 @@ public class Feed {
         this.name = categoryName.toLowerCase();
         this.channel = new Channel("rss_2.0");
         this.channel.setItems(items);
-        this.channel.setTitle("Ceno feed of " + name + " posts");
+        this.channel.setTitle("Ceno " + name + " posts");
         this.channel.setDescription("Latest " + name + " posts");
-        this.channel.setLink("www.ceno.ir/categories/" + name);
+        this.channel.setLink("http://www.ceno.ir/categories/" + name);
         this.channel.setLanguage("en");
     }
 }

@@ -84,13 +84,13 @@ public class FeedService {
         Item item = new Item();
         item.setTitle(post.getTitle());
         item.setAuthor(post.getAuthor().getName());
-        item.setLink("www.ceno.ir/posts/" + post.getUrl());
+        item.setLink("http://www.ceno.ir/posts/" + post.getUrl());
         item.setCategories(extractCategoriesOf(post));
         Description description = new Description();
         description.setValue(post.getSummary());
         item.setDescription(description);
         LocalDateTime creationDateTime = post.getCreationDateTime();
-        Date publishDate = Date.from(creationDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date publishDate = Date.from(creationDateTime.atZone(ZoneId.of("Iran")).toInstant());
         item.setPubDate(publishDate);
         return item;
     }
