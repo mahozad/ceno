@@ -31,7 +31,7 @@ public class FeedController {
     /**
      * Returns the feed ({@link Channel}) for the specified category name.
      *
-     * @param categoryName name of the category to get feed for
+     * @param categoryName name of the category to get its feed
      * @return the channel containing feed items
      */
     @GetMapping("/{categoryName}")
