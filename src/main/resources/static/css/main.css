@@ -1,5 +1,7 @@
 /*=======================================*/
 /*************** Common ****************/
+/*todo: extract #919da5 as icons color*/
+
 :root {
     --nav-height: 52px;
     --footer-height: 300px;
@@ -113,7 +115,7 @@ main {
     align-items: center;
     animation: comeUp 0.5s, fadeout 0.5s 5s;
     -webkit-animation: comeUp 0.5s, fadeout 0.5s 5s;
-    background: #00838F;
+    background: var(--tertiary-color);
     background-size: cover;
     border-radius: 2px;
     bottom: 30px;
@@ -1108,6 +1110,7 @@ progress::-webkit-progress-value {
     flex-flow: column;
     justify-content: space-between;
     margin: 20px 16px 10px;
+    overflow: hidden;
     transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
 }
 
@@ -1403,7 +1406,7 @@ progress::-webkit-progress-value {
 }
 
 .lang-prompt {
-    margin-top: 32px;
+    margin-top: 36px;
 }
 
 .theme-choose {
@@ -1426,7 +1429,7 @@ progress::-webkit-progress-value {
 
 .theme {
     border-radius: 3px;
-    box-shadow: 0 1px 20px var(--theme-color), 0 -1px 20px var(--theme-color);
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     filter: contrast(0%) brightness(120%);
     height: 10px;
@@ -1439,28 +1442,28 @@ progress::-webkit-progress-value {
 
 .theme-cyan {
     background: #00ACC1;
-    --theme-color: rgba(0, 172, 193, 0.25);
+    color: rgba(0, 172, 193, 0.5);
 }
 
 .theme-orange {
     background: #FF9800;
-    --theme-color: rgba(255, 152, 0, 0.25);
+    color: rgba(255, 152, 0, 0.5);
 }
 
 .theme-pink {
     background: #E91E63;
-    --theme-color: rgba(233, 30, 99, 0.25);
+    color: rgba(233, 30, 99, 0.5);
 }
 
 .theme:hover {
     animation: glow 1s infinite alternate;
+    box-shadow: none;
     filter: none;
 }
 
 @keyframes glow {
     to {
-        box-shadow: 10px 10px 15px var(--theme-color), -10px 10px 15px var(--theme-color),
-        -10px -10px 15px var(--theme-color), 10px -10px 15px var(--theme-color);
+        box-shadow: 0 0 0 10px;
     }
 }
 
