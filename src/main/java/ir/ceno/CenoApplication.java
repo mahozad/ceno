@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CenoApplication {
 
+    // TODO: fix cards box shadows (shadow is pale around card file). use pseudo element for
+    // shadow (performance will also be better with this approach)
     // TODO: update favicon to new logo
     // TODO: add character counter to new post fields
     // TODO: change site theme color based on primary color of the post image
