@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CenoApplication {
 
+    // TODO: add layout rtl support by adding in css direction:rtl;
+    // TODO: store rss feeds in database
     // TODO: fix cards box shadows (shadow is pale around card file). use pseudo element for
     // shadow (performance will also be better with this approach)
     // TODO: update favicon to new logo
