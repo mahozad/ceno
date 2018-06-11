@@ -1,13 +1,10 @@
 package ir.ceno.controller;
 
+import com.rometools.rome.feed.atom.Feed;
 import com.rometools.rome.feed.rss.Channel;
 import ir.ceno.service.FeedService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller that deals with rss-related operations.
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * an implicit {@link ResponseBody} annotation on it.
  */
 @RestController
-@RequestMapping("/rss")
+@RequestMapping({"/rss", "/feed"})
 public class FeedController {
 
     private FeedService feedService;
@@ -30,6 +27,9 @@ public class FeedController {
 
     /**
      * Returns the feed ({@link Channel}) for the specified category name.
+     * <p>
+     * Note that when the return type of the controller is of type Channel or {@link Feed},
+     * Spring automatically converts the return value into appropriate xml form.
      *
      * @param categoryName name of the category to get its feed
      * @return the channel containing feed items

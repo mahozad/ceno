@@ -39,7 +39,6 @@ public class CommonConfig {
             public void run(ApplicationArguments args) throws Exception {
                 FullTextEntityManager fullTxtEntityMgr = Search.getFullTextEntityManager(entityMgr);
                 fullTxtEntityMgr.createIndexer().startAndWait();
-                feedService.initialize();
             }
         };
     }
