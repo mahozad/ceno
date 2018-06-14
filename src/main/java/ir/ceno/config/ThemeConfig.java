@@ -35,7 +35,7 @@ public class ThemeConfig implements WebMvcConfigurer {
     @Bean
     public ThemeSource themeSource() {
         ResourceBundleThemeSource source = new ResourceBundleThemeSource();
-        source.setBasenamePrefix("themes_");
+        source.setBasenamePrefix("themes.");
         return source;
     }
 }
