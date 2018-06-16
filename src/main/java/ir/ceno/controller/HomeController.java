@@ -1,6 +1,6 @@
 package ir.ceno.controller;
 
-import ir.ceno.model.Category;
+import ir.ceno.model.Category.HomepageCategory;
 import ir.ceno.model.Post;
 import ir.ceno.service.CategoryService;
 import ir.ceno.service.PostService;
@@ -40,7 +40,7 @@ public class HomeController {
         Slice<Post> topPosts = postService.getTopPosts();
         model.addAttribute("topPosts", topPosts);
         // categories posts
-        Map<Category.HomepageCategory, Slice<Post>> catPosts = categoryService.getEachCatTopPosts();
+        Map<HomepageCategory, Slice<Post>> catPosts = categoryService.getEachCatTopPosts();
         model.addAttribute("categoriesPosts", catPosts);
         // pinned posts
         Slice<Post> pinnedPosts = postService.getPinnedPosts();
