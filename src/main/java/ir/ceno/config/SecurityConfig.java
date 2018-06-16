@@ -42,16 +42,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().permitAll()
                 .and().formLogin().usernameParameter("username").passwordParameter("password")
                 .loginProcessingUrl("/login")
-                .successHandler(
-                        (request, response, authentication) ->
-                                response.getOutputStream().print(true))
-                .failureHandler(
-                        (request, response, exception) ->
-                                response.getOutputStream().print(""))
+                .successHandler((request, response, authentication) ->
+                        response.getOutputStream().print(true))
+                .failureHandler((request, response, exception) ->
+                        response.getOutputStream().print(""))
                 .and().logout()
-                .logoutSuccessHandler(
-                        (request, response, authentication) ->
-                                response.sendRedirect(request.getHeader("referer")))
+                .logoutSuccessHandler((request, response, authentication) ->
+                        response.sendRedirect(request.getHeader("referer")))
                 .and().cors().disable();
     }
 
