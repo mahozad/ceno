@@ -26,14 +26,14 @@ public class SearchController {
     /**
      * Searches for the given query.
      *
-     * @param q     the query to search for
+     * @param query the query to search for
      * @param model the model to add attributes to
      * @return view name of the result page
      */
     @GetMapping("/search")
-    public String search(@RequestParam String q, Model model) {
-        List<Post> posts = searchService.searchByQuery(q);
-        model.addAttribute("query", q);
+    public String search(@RequestParam("q") String query, Model model) {
+        List<Post> posts = searchService.searchByQuery(query);
+        model.addAttribute("query", query);
         model.addAttribute("posts", posts);
         return "search";
     }
