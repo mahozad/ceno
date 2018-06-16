@@ -34,7 +34,7 @@ public class HomeController {
      * @param model the model to add attributes to
      * @return view name of the homepage
      */
-    @GetMapping({"/", "/index"})
+    @GetMapping({"/", "/index", "/home"})
     public String home(Model model) {
         // top posts
         Slice<Post> topPosts = postService.getTopPosts();
