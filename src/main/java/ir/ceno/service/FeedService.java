@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class FeedService {
 
-    // FIXME: feed and item dates are not correct
+    // FIXME: feed and item dates are not correct (Dates are correct but displayed wrong by spring)
 
     @Value("${feed-max-items}")
     private int feedMaxSize;
@@ -50,6 +50,7 @@ public class FeedService {
         channel.setDescription("Latest " + categoryName + " posts");
         channel.setLink("http://www.ceno.ir/categories/" + categoryName);
         channel.setLanguage("en");
+        channel.setLastBuildDate(items.size() == 0 ? new Date() : items.get(0).getPubDate());
         return channel;
     }
 
@@ -61,7 +62,7 @@ public class FeedService {
         item.setCategories(makeCategoriesOf(post));
         item.setDescription(makeDescriptionOf(post));
         LocalDateTime creationDateTime = post.getCreationDateTime();
-        item.setPubDate(Date.from(creationDateTime.atZone(ZoneId.of("Iran")).toInstant()));
+        item.setPubDate(Date.from(creationDateTime.atZone(ZoneId.systemDefault()).toInstant()));
         return item;
     }
 
