@@ -13,10 +13,10 @@ import java.util.regex.Pattern;
 public class UrlMaker {
 
     /**
-     * Compiled pattern to avoid {@link String} methods like <i>replaceAll</i> that compile the
-     * regex in every invocation of them.
+     * Compiled pattern to avoid using {@link String} methods like <i>replaceAll</i>
+     * that compile the regex in every invocation of them.
      */
-    private static final Pattern URL_PATTERN = Pattern.compile("[^a-zA-Z0-9ا-ی۱-۹$\\-_.+!*'()]");
+    private static final Pattern URL_PATTERN = Pattern.compile("[^a-zA-Z0-9ا-ی۰-۹$\\-_.+!*'()]");
 
     /**
      * Makes url for the given {@link CharSequence}.
