@@ -49,8 +49,8 @@ public class User implements UserDetails {
     @OneToOne(cascade = ALL, orphanRemoval = true)
     private File avatar;
 
-    @NaturalId
     @NotEmpty
+    @NaturalId
     private String name;
 
     @Size(min = 6)
