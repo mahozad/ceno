@@ -9,21 +9,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CenoApplication {
 
-    // TODO: add layout rtl support by adding in css direction:rtl;
-    // TODO: store rss feeds in database
+    // TODO: validate user inputs (by @Valid)
+    // TODO: check for long words and force break them (by inserting a special character)
+    // TODO: add layout rtl support in css with the property direction:rtl;
     // TODO: fix cards box shadows (shadow is pale around card file). use pseudo element for
     // shadow (performance will also be better with this approach)
-    // TODO: update favicon to new logo
-    // TODO: add character counter to new post fields
-    // TODO: change site theme color based on primary color of the post image
+    // TODO: add character counter to new-post input fields
     // TODO: add page hit counter: https://kodejava.org/tag/hit-counter/
-    // TODO: add scroll to top fo the page button
+    // TODO: add button for "scroll to top" of the page
     // TODO: spring.io site mostly throws "*NotFoundException"s in its controllers
     // TODO: throw exceptions in service layer and handle them in an @ExceptionHandler
     // TODO: add remember me option for login
     // TODO: add permanent link for posts
-    // TODO: prompt default categories when user attempts to add a category to post
-    // TODO: add http2 support
+    // TODO: prompt default categories when user attempts to add a category to new post
 
     /**
      * Everything starts from here!
