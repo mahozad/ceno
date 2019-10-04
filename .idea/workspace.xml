@@ -6,7 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Correct travis ci file name" />
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Fix gradlew file permission for travis ci">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +139,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ceno" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -300,7 +306,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CenoApplication">
+  <component name="RunManager" selected="Gradle.Build">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -341,6 +347,63 @@
           </list>
         </option>
         <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ceno [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ceno [cleanAll]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanAll" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ceno [wrapper]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="wrapper" />
+          </list>
+        </option>
+        <option name="vmOptions" />
       </ExternalSystemSettings>
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
@@ -399,7 +462,17 @@
       <item itemvalue="JUnit.Integrate test ALL" />
       <item itemvalue="JUnit.Unit test All" />
       <item itemvalue="Spring Boot.CenoApplication" />
+      <item itemvalue="Gradle.ceno [assemble]" />
+      <item itemvalue="Gradle.ceno [cleanAll]" />
+      <item itemvalue="Gradle.ceno [wrapper]" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ceno [wrapper]" />
+        <item itemvalue="Gradle.ceno [cleanAll]" />
+        <item itemvalue="Gradle.ceno [assemble]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
@@ -500,7 +573,7 @@
       <workItem from="1570171850942" duration="69000" />
       <workItem from="1570172201538" duration="7486000" />
       <workItem from="1570184169827" duration="2409000" />
-      <workItem from="1570211471747" duration="486000" />
+      <workItem from="1570211471747" duration="1356000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -677,7 +750,21 @@
       <option name="project" value="LOCAL" />
       <updated>1570211956583</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Add jdk property to travis script">
+      <created>1570212037514</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1570212037514</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Fix gradlew file permission for travis ci">
+      <created>1570212173006</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1570212173007</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -731,8 +818,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Add spring boot version to banner" />
-    <MESSAGE value="Update banner to include spring boot version" />
     <MESSAGE value="Remove javadocs" />
     <MESSAGE value="Update gitignore entries" />
     <MESSAGE value="Remove folder icon" />
@@ -756,7 +841,9 @@
     <MESSAGE value="Add some more entries to gitignore" />
     <MESSAGE value="Update logo" />
     <MESSAGE value="Correct travis ci file name" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correct travis ci file name" />
+    <MESSAGE value="Add jdk property to travis script" />
+    <MESSAGE value="Fix gradlew file permission for travis ci" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix gradlew file permission for travis ci" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
