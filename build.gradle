@@ -3,6 +3,7 @@ buildscript {
         springBootVersion = '2.1.0.RELEASE'
     }
     repositories {
+        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -22,6 +23,7 @@ sourceCompatibility = 9
 compileJava.dependsOn(processResources) // for custom props
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
