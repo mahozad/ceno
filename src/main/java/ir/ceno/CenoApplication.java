@@ -2,11 +2,13 @@ package ir.ceno;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * Main class that boots the application.
  */
 @SpringBootApplication
+@EnableAspectJAutoProxy // to enable aspects
 public class CenoApplication {
 
     // TODO: use elvis (?:) and safe navigation (?.) operators in thymeleaf
