@@ -43,21 +43,44 @@ task cleanAll {
 }
 
 dependencies {
+    // compile('org.jcodec:jcodec:0.2.3')
+    // compile('org.imgscalr:imgscalr-lib:4.2')
     compile('com.github.ben-manes.caffeine:caffeine')
-    compile('com.rometools:rome:1.9.0')
-    compile('org.hibernate:hibernate-search-orm:5.9.1.Final')
-    // compile('javax.annotation:javax.annotation-api') // for @PostConstruct and...
-    compile('org.apache.tika:tika-core:1.17')
+    compile('com.rometools:rome:1.11.1')
+    // required modules deprecated in java 10
+    compile('javax.xml.bind:jaxb-api')
+    // to resolve error pertaining to "entityManagerFactory" bean. remove this if possible
+    compile('org.hibernate:hibernate-core')
+    compile('org.hibernate:hibernate-search-orm:5.10.4.Final')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-cache')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-devtools')
-    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
-    runtime('mysql:mysql-connector-java')
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity5')
+    compile('org.webjars:jquery:3.3.1-1')
+    // for automatic versions of webjars (note that this must be webjars-locator-core)
+    compile('org.webjars:webjars-locator-core')
+
+    // for custom properties
+    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
     compileOnly('org.projectlombok:lombok')
-    compileOnly('org.springframework.boot:spring-boot-configuration-processor') // for custom props
+
+    runtime('org.springframework.boot:spring-boot-devtools')
+    runtime('mysql:mysql-connector-java')
+
+    // using h2 database while testing
+    testCompile('com.h2database:h2')
+    testCompile('org.apache.commons:commons-lang3')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
+    // Junit Jupiter dependencies
+    testCompile('org.junit.jupiter:junit-jupiter-api')
+    testCompile('org.junit.jupiter:junit-jupiter-engine')
+    testCompile('org.junit.jupiter:junit-jupiter-params') // to use @ParameterizedTest
+    testCompile('org.junit.platform:junit-platform-launcher')
+    testCompile('org.junit.platform:junit-platform-runner')
+    testCompile('org.mockito:mockito-junit-jupiter:2.23.0')
 }
