@@ -1,4 +1,4 @@
-overal design inspired by: https://material.io
+overall design inspired by: https://material.io
 
 color palette used:
 https://material.io/design/color/the-color-system.html
@@ -24,3 +24,6 @@ https://codepen.io
 
 most major icons downloaded from:
 https://thenounproject.com
+
+remember me check box adapted from:
+https://codepen.io/jsalazart/pen/qXYeaG

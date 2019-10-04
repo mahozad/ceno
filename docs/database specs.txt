@@ -1,4 +1,4 @@
-best datatype for url in mysql: varchar(2000)
+best datatype for url in mysql: varchar(2000) (maximum length of a url is 2000 characters). In our application, the url is made up from the post id and post title and its length cannot be more than 100 characters. So set the length of this column to 100.
 ------------------
 typical length for user name: varchar(50)
 ---------------------
