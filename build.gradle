@@ -1,3 +1,6 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
 buildscript {
     ext {
         springBootVersion = '2.1.0.RELEASE'
@@ -24,6 +27,14 @@ sourceCompatibility = 12
 repositories {
     jcenter()
     mavenCentral()
+}
+
+task cleanAll {
+    doLast {
+        Files.deleteIfExists(Paths.get("D:/IdeaProjects/ceno/out"))
+        Files.deleteIfExists(Paths.get("D:/IdeaProjects/ceno/build"))
+        Files.deleteIfExists(Paths.get("D:/IdeaProjects/ceno/index"))
+    }
 }
 
 dependencies {
