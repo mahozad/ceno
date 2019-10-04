@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Update logo" />
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Correct travis ci file name" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -500,7 +500,7 @@
       <workItem from="1570171850942" duration="69000" />
       <workItem from="1570172201538" duration="7486000" />
       <workItem from="1570184169827" duration="2409000" />
-      <workItem from="1570211471747" duration="240000" />
+      <workItem from="1570211471747" duration="486000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -670,7 +670,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570211506856</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Correct travis ci file name">
+      <created>1570211956583</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1570211956583</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -748,7 +755,8 @@
     <MESSAGE value="Add .idea folder to version control" />
     <MESSAGE value="Add some more entries to gitignore" />
     <MESSAGE value="Update logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update logo" />
+    <MESSAGE value="Correct travis ci file name" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct travis ci file name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
