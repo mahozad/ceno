@@ -36,13 +36,12 @@ public class HomeController {
      */
     @GetMapping({"/", "/index", "/home"})
     public String home(Model model) {
-        // top posts
         Slice<Post> topPosts = postService.getTopPosts();
         model.addAttribute("topPosts", topPosts);
-        // categories posts
+
         Map<HomepageCategory, Slice<Post>> catPosts = categoryService.getEachCatTopPosts();
         model.addAttribute("categoriesPosts", catPosts);
-        // pinned posts
+
         Slice<Post> pinnedPosts = postService.getPinnedPosts();
         model.addAttribute("pinnedPosts", pinnedPosts);
         return "index";
