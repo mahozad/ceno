@@ -1,3 +1,7 @@
+### General ###
+/src/main/resources/public
+
+### Gradle ###
 .gradle
 /build/
 
