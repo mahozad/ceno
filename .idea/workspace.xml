@@ -6,21 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Add some more entries to gitignore">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/1-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/2-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/3-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/4-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/ceno 2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/ceno 3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/ceno.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/ceno2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/ceno3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/ceno4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/logo unpolished.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/logo.svg" beforeDir="false" />
-    </list>
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Update logo" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -514,6 +500,7 @@
       <workItem from="1570171850942" duration="69000" />
       <workItem from="1570172201538" duration="7486000" />
       <workItem from="1570184169827" duration="2409000" />
+      <workItem from="1570211471747" duration="240000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -676,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570182280239</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Update logo">
+      <created>1570211506856</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1570211506856</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -733,7 +727,6 @@
     <MESSAGE value="Add spring boot version to banner" />
     <MESSAGE value="Update banner to include spring boot version" />
     <MESSAGE value="Remove javadocs" />
-    <MESSAGE value="Update logo" />
     <MESSAGE value="Update gitignore entries" />
     <MESSAGE value="Remove folder icon" />
     <MESSAGE value="Rename doc folder to docs" />
@@ -754,7 +747,8 @@
     <MESSAGE value="Add spring security&#10;Add a dedicated exception controller&#10;Convert app to https&#10;Update some file names&#10;Add some unit tests&#10;Update layouts and views&#10;Many more additions, modifications and deletions" />
     <MESSAGE value="Add .idea folder to version control" />
     <MESSAGE value="Add some more entries to gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add some more entries to gitignore" />
+    <MESSAGE value="Update logo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update logo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
