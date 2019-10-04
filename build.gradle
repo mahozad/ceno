@@ -19,9 +19,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'ir'
 version = '0.9.0-SNAPSHOT'
-sourceCompatibility = 9
-
-compileJava.dependsOn(processResources) // for custom props
+sourceCompatibility = 12
 
 repositories {
     jcenter()
