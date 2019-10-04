@@ -21,11 +21,11 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private long id;
+    private Long id;
 
     @NotEmpty
     @Lob
-    private String comment;
+    private String content;
 
     @ManyToOne(fetch = LAZY)
     private Post post;
@@ -33,8 +33,8 @@ public class Comment {
     @ManyToOne(fetch = LAZY)
     private User author;
 
-    public Comment(String comment, User author, Post post) {
-        this.comment = comment;
+    public Comment(String content, User author, Post post) {
+        this.content = content;
         this.author = author;
         this.post = post;
     }

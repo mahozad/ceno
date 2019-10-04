@@ -1,31 +1,46 @@
 package ir.ceno.service;
 
 import ir.ceno.model.Post;
-import org.apache.lucene.search.Query;
+import ir.ceno.model.User;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 @Service
 public class SearchService {
 
-    @Value("${search-max-results}")
-    private int searchMaxResults;
+    private static final int SEARCH_MAX_RESULTS = 10;
+    private static final int SEARCH_MAX_SIMILARS = 5;
 
-    @Value("${search-max-similars}")
-    private int searchMaxSimilars;
+    // @PersistenceContext
+    // private EntityManager entityManager;
 
-    private EntityManager entityManager;
+    private FullTextEntityManager fullTextEntityManager;
+    private QueryBuilder queryBuilder;
 
     @Autowired
     public SearchService(EntityManager entityManager) {
-        this.entityManager = entityManager;
+        entityManager = entityManager.getEntityManagerFactory().createEntityManager();
+        fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+    }
+
+    /**
+     * Initializes hibernate full text search by indexing existing posts.
+     *
+     * @throws InterruptedException if the hibernate search thread is interrupted while waiting
+     */
+    @PostConstruct
+    public void initialize() throws InterruptedException {
+        fullTextEntityManager.createIndexer().startAndWait();
+        queryBuilder = fullTextEntityManager.getSearchFactory()
+                .buildQueryBuilder().forEntity(Post.class).get();
     }
 
     /**
@@ -35,21 +50,14 @@ public class SearchService {
      * @return {@link List} of posts that matched the query
      */
     @SuppressWarnings("unchecked")
-    public List<Post> searchByQuery(String query) {
-        FullTextEntityManager fullTxtEntityManager = Search.getFullTextEntityManager(entityManager);
-        QueryBuilder queryBuilder = fullTxtEntityManager.getSearchFactory()
-                .buildQueryBuilder().forEntity(Post.class).get();
-
-        Query luceneQuery = queryBuilder.phrase()
+    public List<Post> searchPostsByQuery(String query) {
+        org.apache.lucene.search.Query luceneQuery = queryBuilder.phrase()
                 .withSlop(5)
                 .onField("title")
                 .sentence(query)
                 .createQuery();
-
-        javax.persistence.Query jpaQuery = fullTxtEntityManager.
-                createFullTextQuery(luceneQuery, Post.class);
-
-        return (List<Post>) jpaQuery.setMaxResults(searchMaxResults).getResultList();
+        Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Post.class);
+        return (List<Post>) jpaQuery.setMaxResults(SEARCH_MAX_RESULTS).getResultList();
     }
 
     /**
@@ -59,20 +67,21 @@ public class SearchService {
      * @return {@link List} of posts that were similar to the given post
      */
     @SuppressWarnings("unchecked")
-    public List<Post> searchByEntity(Post post) {
-        FullTextEntityManager fullTxtEntityManager = Search.getFullTextEntityManager(entityManager);
-        QueryBuilder queryBuilder = fullTxtEntityManager.getSearchFactory()
-                .buildQueryBuilder().forEntity(Post.class).get();
-
-        Query luceneQuery = queryBuilder.moreLikeThis()
+    public List<Post> searchPostsByEntity(Post post) {
+        org.apache.lucene.search.Query luceneQuery = queryBuilder.moreLikeThis()
                 .excludeEntityUsedForComparison()
                 .comparingAllFields()
                 .toEntity(post)
                 .createQuery();
+        Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Post.class);
+        return (List<Post>) jpaQuery.setMaxResults(SEARCH_MAX_SIMILARS).getResultList();
+    }
 
-        javax.persistence.Query jpaQuery = fullTxtEntityManager.
-                createFullTextQuery(luceneQuery, Post.class);
+    public List<User> searchUsersByQuery(String query) {
+        return null;
+    }
 
-        return (List<Post>) jpaQuery.setMaxResults(searchMaxSimilars).getResultList();
+    public List<User> searchUsersByEntity(User post) {
+        return null;
     }
 }

@@ -1,62 +1,65 @@
 package ir.ceno.service;
 
-import ir.ceno.exception.NotAllowedException;
+import ir.ceno.exception.PostNotFoundException;
 import ir.ceno.model.*;
 import ir.ceno.repository.CategoryRepository;
+import ir.ceno.repository.PostDetailsRepository;
 import ir.ceno.repository.PostRepository;
-import ir.ceno.util.UrlMaker;
+import ir.ceno.util.StringProcessor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
+import static org.springframework.data.domain.Sort.Direction.DESC;
+import static org.springframework.transaction.annotation.Propagation.REQUIRES_NEW;
 
 @Service
 @Slf4j
 public class PostService {
 
-    private static final Sort byScoreSort = Sort.by(Sort.Direction.DESC, "score");
-    private static final Sort byDateSort = Sort.by(Sort.Direction.DESC, "creationDateTime");
+    private static final int LIKE_SCORE = 20;
+    private static final int PINNED_POSTS_SIZE = 10;
+    private static final int TOP_POSTS_SIZE = 3;
+    private static final Sort byScoreSort = Sort.by(DESC, "score");
+    private static final Sort byDateSort = Sort.by(DESC, "creationDateTime");
     private static final Sort byScoreAndDateSort = byScoreSort.and(byDateSort);
 
-    @Value("${top-posts-size}")
-    private int topPostsSize;
-
-    @Value("${pinned-posts-size}")
-    private int pinnedPostsSize;
-
-    @Value("${like-score}")
-    private int likeScore;
-
-    @Value("${user-min-edit-score}")
-    private int minEditScore;
+    @Value("${posts-files-path}")
+    private String filesPath;
 
     private PostRepository postRepository;
+    private PostDetailsRepository postDetailsRepository;
     private CategoryRepository categoryRepository;
-    private UrlMaker urlMaker;
-    private FeedService feedService;
-    private Tika fileTypeDetector;
+    private SseService sseService;
+    private StringProcessor stringProcessor;
 
     @Autowired
-    public PostService(PostRepository postRepository, CategoryRepository categoryRepository,
-                       UrlMaker urlMaker, FeedService feedService, Tika fileTypeDetector) {
+    public PostService(PostRepository postRepository, PostDetailsRepository postDetailsRepository,
+                       CategoryRepository categoryRepository, SseService sseService,
+                       StringProcessor stringProcessor) {
         this.postRepository = postRepository;
+        this.postDetailsRepository = postDetailsRepository;
         this.categoryRepository = categoryRepository;
-        this.urlMaker = urlMaker;
-        this.feedService = feedService;
-        this.fileTypeDetector = fileTypeDetector;
+        this.sseService = sseService;
+        this.stringProcessor = stringProcessor;
     }
 
     /**
@@ -65,7 +68,7 @@ public class PostService {
      * @return {@link Slice} containing top posts
      */
     public Slice<Post> getTopPosts() {
-        PageRequest pageRequest = PageRequest.of(0, topPostsSize, byScoreSort);
+        Pageable pageRequest = PageRequest.of(0, TOP_POSTS_SIZE, byScoreSort);
         return postRepository.findAll(pageRequest);
     }
 
@@ -80,28 +83,38 @@ public class PostService {
      * @param author        the user who is trying to create the post
      * @throws IOException if execution of multipartFile.getBytes() is not successful
      */
-    public void createPost(String title, String summary, String article, String cats,
-                           MultipartFile multipartFile, User author) throws IOException {
-        Set<Category> categories = makeCategorySet(cats);
-        byte[] fileBytes = multipartFile.getBytes();
-        String fileMimeType = fileTypeDetector.detect(fileBytes);
-        File file = new File(fileBytes, MediaType.valueOf(fileMimeType));
-        String url = urlMaker.makeUrlOf(title);
-        Post newPost = new Post(author, url, title, summary, article, categories, file);
-        author.getPosts().add(newPost);
-        categories.forEach(category -> category.getPosts().add(newPost));
-        postRepository.save(newPost);
-        feedService.addItem(newPost);
+    @CacheEvict(cacheNames = "feeds", allEntries = true)
+    @Transactional(propagation = REQUIRES_NEW)
+    public void addPost(Post post, User author) throws IOException {
+        post.setAuthor(author);
+        author.addPost(post);
+
+        post.setTitle(stringProcessor.breakLongWords(post.getTitle()).trim());
+        post.setSummary(stringProcessor.breakLongWords(post.getSummary()).trim());
+        prepareCategoriesOf(post);
+        FileDetails fileDetails = new FileDetails(post.getUploadedFile());
+        post.setFileDetails(fileDetails);
+        Post persistedPost = postRepository.save(post);
+        String url = stringProcessor.makeUriOf(persistedPost.getId(), persistedPost.getTitle());
+        postRepository.setPostUrlById(url, persistedPost.getId());
+
+        PostDetails postDetails = new PostDetails(persistedPost);
+        postDetails.setArticle(stringProcessor.breakLongWords(persistedPost.getArticle()).trim());
+        postDetailsRepository.save(postDetails);
+
+        File storedFile = new File(filesPath + persistedPost.getId());
+        persistedPost.getUploadedFile().transferTo(storedFile);
     }
 
-    private Set<Category> makeCategorySet(String cats) {
-        Set<Category> categories = new HashSet<>();
-        for (String catName : cats.split(",")) {
-            catName = catName.toLowerCase().trim();
-            Optional<Category> category = categoryRepository.findByName(catName);
-            categories.add(category.orElse(new Category(catName)));
+    private void prepareCategoriesOf(Post post) {
+        Set<Category> postCategories = post.getCategories();
+        Set<String> categoryNames = postCategories.stream().map(Category::getName).collect(toSet());
+        Set<Category> persistedCategories = categoryRepository.findByNameIn(categoryNames);
+        for (Category persistedCategory : persistedCategories) {
+            persistedCategory.addPost(post);
+            postCategories.remove(persistedCategory); // removes if existing; does nothing otherwise
+            postCategories.add(persistedCategory);
         }
-        return categories;
     }
 
     /**
@@ -110,8 +123,18 @@ public class PostService {
      * @param url the url to find post by
      * @return Optional containing the post or empty if the post was not found
      */
-    public Optional<Post> findPostByUrl(String url) {
-        return postRepository.findByUrl(url);
+    public Post findPostById(long id) {
+        return postRepository.findById(id).orElseThrow(PostNotFoundException::new);
+    }
+
+    public void addVisitorIp(long postId, String ip) {
+        Optional<PostDetails> optionalPostDetails = postDetailsRepository.findById(postId);
+        optionalPostDetails.ifPresent(postDetails -> {
+                    postDetails.incrementTotalViews();
+                    postDetails.addVisitorIp(ip);
+                    postDetailsRepository.save(postDetails);
+                }
+        );
     }
 
     /**
@@ -123,20 +146,22 @@ public class PostService {
      */
     public void likePost(long postId, User user, boolean like) {
         Optional<Post> optionalPost = postRepository.findById(postId);
-        optionalPost.ifPresent(post -> {
-            if (like && !user.getFavorites().contains(post)) {
-                user.getFavorites().add(post);
-                post.getLikers().add(user);
-                post.getAuthor().setScore(post.getAuthor().getScore() + likeScore);
-                post.setLikesCount(post.getLikesCount() + 1);
-            } else if (user.getFavorites().contains(post)) {
-                user.getFavorites().remove(post);
-                post.getLikers().remove(user);
-                post.getAuthor().setScore(post.getAuthor().getScore() - likeScore);
-                post.setLikesCount(post.getLikesCount() - 1);
-            }
-            postRepository.save(post);
-        });
+        Post post = optionalPost.orElseThrow(PostNotFoundException::new);
+        User author = post.getAuthor();
+
+        if (like && !user.getFavorites().contains(post)) {
+            user.addFavorite(post);
+            post.addLiker(user);
+            author.incrementScore(LIKE_SCORE);
+            sseService.publishLike(author.getUsername(), "liked");
+        } else if (user.getFavorites().contains(post)) {
+            user.deleteFavorite(post);
+            post.deleteLiker(user);
+            author.decrementScore(LIKE_SCORE);
+            sseService.publishLike(author.getUsername(), "disliked");
+        }
+
+        postRepository.save(post);
     }
 
     /**
@@ -146,12 +171,11 @@ public class PostService {
      * @param user    the commenter
      * @param comment the user comment
      */
-    public void addComment(long postId, User user, String comment) {
+    public void addComment(long postId, User user, Object comment) {
         Optional<Post> optionalPost = postRepository.findById(postId);
         optionalPost.ifPresent(post -> {
-            Comment comm = new Comment(comment, user, post);
-            post.getComments().add(comm);
-            post.setCommentsCount(post.getCommentsCount() + 1);
+            Comment comm = new Comment((String) comment, user, post);
+            post.addComment(comm);
             postRepository.save(post);
         });
     }
@@ -163,7 +187,7 @@ public class PostService {
      */
     @Cacheable("pinnedPosts")
     public Slice<Post> getPinnedPosts() {
-        PageRequest pageRequest = PageRequest.of(0, pinnedPostsSize, byScoreAndDateSort);
+        Pageable pageRequest = PageRequest.of(0, PINNED_POSTS_SIZE, byScoreAndDateSort);
         return postRepository.findByPinnedTrue(pageRequest);
     }
 
@@ -171,49 +195,42 @@ public class PostService {
      * Pins the specified {@link Post post} to the homepage of the site.
      *
      * @param postId id of the post to pin
-     * @param user   the user who is trying to pin the post
      * @return true if the post was pinned, false if unpinned
      */
     @CacheEvict(cacheNames = "pinnedPosts", allEntries = true)
-    public boolean pinPost(long postId, User user) {
-        if (user.getScore() >= minEditScore) {
-            Optional<Post> optionalPost = postRepository.findById(postId);
-            if (optionalPost.isPresent()) {
-                Post post = optionalPost.get();
-                post.setPinned(!post.isPinned());
-                postRepository.save(post);
-                return post.isPinned();
-            }
+    public boolean pinPost(long postId) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            post.setPinned(!post.isPinned());
+            postRepository.save(post);
+            return post.isPinned();
         }
-        throw new NotAllowedException("You do not have minimum score to pin the post");
+        throw new PostNotFoundException();
     }
 
     /**
      * Deletes the specified {@link Post post} from the site.
      * <p>
+     * This method is transactional; if an {@link IOException} occurs then it will be rolled back.
+     * <p>
      * If the deletion succeeds then the <i>pinnedPosts</i> cache is evicted.
      *
      * @param postId id of the post to be deleted
-     * @param user   the user who is trying to delete the post
      */
     @CacheEvict(cacheNames = "pinnedPosts", allEntries = true)
-    public void deletePost(long postId, User user) {
-        if (user.getScore() >= minEditScore) {
-            Optional<Post> optionalPost = postRepository.findById(postId);
-            optionalPost.ifPresent(post -> {
-                post.getCategories().forEach(category -> {
-                    post.getAuthor().setScore(post.getAuthor().getScore()
-                            - post.getLikesCount() * likeScore);
-                    post.getCategories().remove(category);
-                    category.getPosts().remove(post);
-                    //if (category.getPosts().size() == 0) {
-                    //    categoryRepository.delete(category);
-                    //}
-                });
-                postRepository.deleteById(postId);
-            });
+    @Transactional(rollbackFor = IOException.class)
+    public void deletePost(long postId) throws IOException {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        Post post = optionalPost.orElseThrow(PostNotFoundException::new);
+
+        post.getAuthor().decrementScore(post.getLikesCount() * LIKE_SCORE);
+        for (Category category : post.getCategories()) {
+            category.getPosts().remove(post);
         }
-        throw new NotAllowedException("You do not have minimum score to delete the post");
+        Files.delete(Paths.get(filesPath + post.getId()));
+
+        postRepository.deleteById(postId);
     }
 
     /**
@@ -223,10 +240,13 @@ public class PostService {
      */
     public void reportPost(long postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
-        optionalPost.ifPresent(post -> {
-            post.setReported(true);
+        if (optionalPost.isPresent()) {
+            Post post = optionalPost.get();
+            // post.setReported(true);
             postRepository.save(post);
-        });
+        } else {
+            throw new PostNotFoundException();
+        }
     }
 
     /**
@@ -239,7 +259,7 @@ public class PostService {
      * otherwise
      */
     @Cacheable(cacheNames = "postFiles")
-    public Optional<File> getFile(long postId) {
-        return postRepository.findById(postId).map(Post::getFile);
+    public Resource getFile(long postId) {
+        return new FileSystemResource(filesPath + postId);
     }
 }

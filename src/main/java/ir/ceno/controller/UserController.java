@@ -1,15 +1,17 @@
 package ir.ceno.controller;
 
 import ir.ceno.exception.ResourceNotFoundException;
-import ir.ceno.model.File;
 import ir.ceno.model.User;
 import ir.ceno.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.CacheControl;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import static java.util.concurrent.TimeUnit.DAYS;
 
 /**
  * Controller that deals with user-related operations.
@@ -48,13 +50,10 @@ public class UserController {
      */
     @GetMapping("/avatars/{username}")
     @ResponseBody
-    public ResponseEntity<byte[]> getAvatar(@PathVariable String username)
-            throws ResourceNotFoundException {
-        Optional<File> optionalAvatar = userService.getAvatar(username);
-        if (optionalAvatar.isPresent()) {
-            File avatar = optionalAvatar.get();
-            return ResponseEntity.ok().contentType(avatar.getMediaType()).body(avatar.getBytes());
-        }
-        throw new ResourceNotFoundException("File not found");
+    public ResponseEntity<Resource> getAvatar(@PathVariable String username) {
+        Resource resource = userService.getAvatarByUsername(username);
+        CacheControl cacheControl = CacheControl.maxAge(1, DAYS).mustRevalidate();
+        MediaType mediaType = MediaType.valueOf("image/jpeg");
+        return ResponseEntity.ok().cacheControl(cacheControl).contentType(mediaType).body(resource);
     }
 }

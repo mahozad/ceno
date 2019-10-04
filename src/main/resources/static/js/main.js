@@ -1,7 +1,26 @@
 var body = $("body");
 var primaryColor = $("html").css("--primary-color");
 
-//========== prevent animations on page load ==========\\
+// consent cookie message
+// using HTML Web Storage [https://www.w3schools.com/html/html5_webstorage.asp]
+if (typeof(Storage) !== "undefined") { // if browser supports Web Storage...
+    if (localStorage.cookieMessage !== "shown") {
+        // make this block a function (it is reused for SSE as well)
+        var pagePromptElement = $(".page-prompt");
+
+        if (pagePromptElement.length) { // check if the element already exists
+            pagePromptElement.remove();
+        }
+        $("main").prepend(
+            "<div class=\"page-prompt\">" +
+            "  <div class=\"page-prompt-text\">Ceno uses cookies to provide the best browsing experience for you</div>" +
+            "</div>"
+        );
+    }
+    localStorage.cookieMessage = "shown";
+}
+
+//========== enable animations after the page is fully loaded ==========\\
 $(window).on("load", function () {
     $("body").removeClass("preload");
 });
@@ -53,7 +72,8 @@ $(".log-prompt").click(function () {
 //=========== Add comment to post ===========\\
 $(".wrt-comment button").on("click touch", function () {
     var postId = $(this).siblings("input").val();
-    var comment = $(this).siblings("textarea").val();
+    var commentField = $(this).siblings("textarea");
+    var comment = commentField.val();
     var userName = $(".usr-name").text();
     if (comment.length === 0) {
         return;
@@ -70,6 +90,8 @@ $(".wrt-comment button").on("click touch", function () {
                 "    </div>\n" +
                 "    <div class='comment-text'>" + comment + "</div>\n" +
                 "</div>");
+            commentField.val("");
+            $(".comm-count span").text(+$(".comm-count span").text().match(/\d+/) + 1);
         });
 });
 
@@ -186,7 +208,10 @@ $(window).click(function (ev) {
 //============== Check existing userName ==================\\
 var usernameInput = $(".register-form .input:nth-child(1) input");
 var passwordInput = $(".register-form .input:nth-child(2) input");
-var passRegex = /(\d\w*[a-zA-Z]\w*)|([a-zA-Z]\w*\d\w*)/;
+var passRegex =
+    /((?=.*\d)(?=.*\p{L}))./;
+//              /(\d+\p{L}+|\p{L}+\d+)[\d\p{L}]*/;
+//              /(\d\w*[a-zA-Z]\w*)|([a-zA-Z]\w*\d\w*)/;
 
 $(".flat-inp").focus(function () {
     var content = $(this).val();
@@ -276,7 +301,7 @@ $(".register-form").submit(function () {
     return submit;
 });
 
-//======== attach csrf header to every ajax post request =========\\
+//======== attach csrf header to every AJAX POST request =========\\
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 $(document).ajaxSend(function (e, xhr) {
@@ -313,6 +338,7 @@ $(".login-form button").on("click touch", function () {
     var submit = true;
     var name = usernameInputLogin.val();
     var pass = passwordInputLogin.val();
+    var rememberMe = $("input[name=remember-me]").prop("checked");
     var nameHighlight = usernameInputLogin.siblings(".highlight");
     var passHighlight = passwordInputLogin.siblings(".highlight");
     if (name.length === 0) {
@@ -330,13 +356,15 @@ $(".login-form button").on("click touch", function () {
         submit = false;
     }
     if (submit) {
-        $.post("/login", {username: name, password: pass}, function (successful) {
-            if (successful) {
-                location.reload();
-            } else {
-                $(".invalid-login").fadeTo(200, 1);
+        $.post("/login", {username: name, password: pass, rememberMe: rememberMe},
+            function (successful) {
+                if (successful) {
+                    location.reload();
+                } else {
+                    $(".invalid-login").fadeTo(200, 1);
+                }
             }
-        });
+        );
     }
 });
 
@@ -425,27 +453,28 @@ $(".input-np").on("change", function () {
 // });
 
 $(".actions form").submit(function () {
-    var userName = $(".usr-name").text(); // just to check if user is logged in
-    return !!userName;
+    // proceed only if the icon doesn't have "disabled" class
+    // (that is the user is logged in and has an appropriate role)
+    return !($(this).find("svg").hasClass("disabled"));
 });
 
-$(".del-icon").on("click touch", function () {
-    var postId = $(".article-container").attr("data-post-id");
-    $.post("/posts/delete", {postId: postId}, function (successful) {
-        if (successful) {
-            //
-        }
-    });
-});
+// $(".del-icon").on("click touch", function () {
+//     var postId = $(".article-container").attr("data-post-id");
+//     $.post("/posts/delete", {postId: postId}, function (successful) {
+//         if (successful) {
+//             //
+//         }
+//     });
+// });
 
-$(".rep-icon").on("click touch", function () {
-    var postId = $(".article-container").attr("data-post-id");
-    $.post("/posts/report", {postId: postId}, function (successful) {
-        if (successful) {
-            //
-        }
-    });
-});
+// $(".rep-icon").on("click touch", function () {
+//     var postId = $(".article-container").attr("data-post-id");
+//     $.post("/posts/report", {postId: postId}, function (successful) {
+//         if (successful) {
+//             //
+//         }
+//     });
+// });
 
 $(".chng-cats-icon").on("click touch", function () {
     var userName = $(".usr-name").text(); // just to check if user is logged in
@@ -503,4 +532,25 @@ $(".lang").on("click touch", function () {
 $(".theme").on("click touch", function () {
     var theme = $(this).attr("data-theme-name");
     location.replace("?theme=" + theme);
+});
+
+//================ SSE streams ================\\
+$(document).ready(function () {
+    var userName = $("nav .usr-name").text();
+    var source = new EventSource("/likes/" + userName + "/stream");
+    source.onmessage = function (event) {
+        var likeEvent = JSON.parse(event.data);
+
+        var promptText = "One of your posts was " + likeEvent.message;
+        var pagePromptElement = $(".page-prompt");
+
+        if (pagePromptElement.length) { // check if the element already exists
+            pagePromptElement.remove();
+        }
+        $("main").prepend(
+            "<div class=\"page-prompt\">" +
+            "  <div class=\"page-prompt-text\">" + promptText + "</div>" +
+            "</div>"
+        );
+    };
 });

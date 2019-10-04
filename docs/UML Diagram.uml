@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ir.ceno.config</OriginalElement>
+  <nodes>
+    <node x="450.0" y="932.0">ir.ceno.model.Category</node>
+    <node x="0.0" y="1226.0">ir.ceno.service.CategoryService</node>
+    <node x="0.0" y="1786.0">ir.ceno.exception.PostNotFoundException</node>
+    <node x="1105.0" y="1226.0">ir.ceno.repository.PostRepository</node>
+    <node x="701.0" y="932.0">ir.ceno.model.Comment</node>
+    <node x="0.0" y="1690.0">ir.ceno.controller.SearchController</node>
+    <node x="421.0" y="1786.0">ir.ceno.exception.ImageSizeException</node>
+    <node x="0.0" y="1572.0">ir.ceno.repository.CategoryRepository</node>
+    <node x="344.0" y="1572.0">ir.ceno.repository.UserRepository</node>
+    <node x="750.0" y="0.0">ir.ceno.util.StringProcessorTest</node>
+    <node x="724.0" y="1690.0">ir.ceno.exception.DuplicateUsernameException</node>
+    <node x="337.0" y="0.0">ir.ceno.model.User</node>
+    <node x="1217.0" y="1690.0">ir.ceno.exception.ImageAspectRatioException</node>
+    <node x="971.0" y="1690.0">ir.ceno.exception.ResourceNotFoundException</node>
+    <node x="937.0" y="932.0">ir.ceno.controller.ExceptionController</node>
+    <node x="1164.0" y="0.0">ir.ceno.service.PostService</node>
+    <node x="1457.0" y="1690.0">ir.ceno.exception.InvalidUsernameException</node>
+    <node x="0.0" y="0.0">ir.ceno.model.Post</node>
+    <node x="261.0" y="1690.0">ir.ceno.controller.FeedController</node>
+    <node x="1082.0" y="1410.0">ir.ceno.controller.UserController</node>
+    <node x="672.0" y="1572.0">ir.ceno.util.StringProcessor</node>
+    <node x="359.0" y="1410.0">ir.ceno.service.UserService</node>
+    <node x="785.0" y="1226.0">ir.ceno.service.SearchService</node>
+    <node x="0.0" y="932.0">ir.ceno.controller.PostController</node>
+    <node x="450.0" y="1226.0">ir.ceno.service.FeedService</node>
+    <node x="0.0" y="1410.0">ir.ceno.controller.CategoryController</node>
+    <node x="618.0" y="1786.0">ir.ceno.model.User.Role</node>
+    <node x="994.0" y="1572.0">ir.ceno.controller.RegisterController</node>
+    <node x="221.0" y="1786.0">ir.ceno.model.Category.HomepageCategory</node>
+    <node x="685.0" y="1410.0">ir.ceno.util.ImageProcessor</node>
+    <node x="503.0" y="1690.0">ir.ceno.controller.HomeController</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.5523764258555133" x="1743.0" y="1032.0000000000002" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -27,7 +27,8 @@
     -webkit-transform-style: preserve-3d;
 }
 
-.load-front, .load-back {
+.load-front,
+.load-back {
     background-color: var(--primary-color);
     display: block;
     height: 100%;

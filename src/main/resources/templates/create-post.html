@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--suppress SyntaxError -->
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="fragments::head(titleAppend=#{post.create})"/>
-    <link rel="stylesheet" th:href="@{/css/create-post.min.css}">
+  <th:block th:include="fragments::head(titleAppend=#{post.create})"/>
+  <link rel="stylesheet" th:href="@{/css/create-post.min.css}">
 </head>
 
 <body class="preload">
@@ -10,54 +11,58 @@
 <nav th:replace="fragments::navigation"></nav>
 
 <main>
-    <div class="form-container">
-        <form id="post-submit" action="/posts/submit" method="post" enctype="multipart/form-data"
-              novalidate>
-            <div class="left-container">
-                <div class="input-np inp-title">
-                    <input id="inp-title" class="flat-inp-np" type="text" name="title"
-                           maxlength="60" autofocus required/>
-                    <span class="highlight-np"></span>
-                    <label for="inp-title" class="label-np" th:text="#{title}">Title</label>
-                    <div class="prompt" th:text="#{prompt.required}">Required</div>
-                </div>
-                <div class="input-np inp-sum">
-                    <input id="inp-sum" class="flat-inp-np" type="text" name="summary"
-                           maxlength="100" required/>
-                    <span class="highlight-np"></span>
-                    <label for="inp-sum" class="label-np" th:text="#{summary}">Summary</label>
-                    <div class="prompt" th:text="#{prompt.required}">Required</div>
-                </div>
-                <div class="input-np inp-article">
-                    <textarea class="flat-inp-np multiline-text" name="article" id="inp-article"
-                              required></textarea>
-                    <span class="highlight-np"></span>
-                    <label for="inp-article" class="label-np" th:text="#{article}">Article</label>
-                    <div class="prompt" th:text="#{prompt.required}">Required</div>
-                </div>
-            </div>
-            <div class="right-container">
-                <fieldset class="post-file">
-                    <legend th:text="#{add-file}">Add an Image or Video</legend>
-                    <div class="file-select">
-                        <img class="file-prev" src="/img/placeholder-img.svg" alt="preview"/>
-                        <label class="file-upload post-input">
-                            <input type="file" name="file" accept="image/*, video/*"/>
-                            <span th:text="#{file-select}"></span>
-                        </label>
-                    </div>
-                </fieldset>
-                <div class="input-np inp-cats">
-                    <input id="inp-cats" class="flat-inp-np" type="text" name="category" required>
-                    <span class="highlight-np"></span>
-                    <label for="inp-cats" class="label-np" th:text="#{category}">Category(s)</label>
-                    <div class="prompt" th:text="#{prompt.required}">Required</div>
-                </div>
-            </div>
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <button type="submit" class="btn button" th:text="#{create}">Create</button>
-        </form>
-    </div>
+  <div class="form-container">
+
+    <!-- todo: either use name="..." attribute or th:field="*{...} attribute in inputs" -->
+
+    <form id="post-submit" th:action="@{/posts/submit}" method="post"
+          enctype="multipart/form-data" novalidate th:object="${post}">
+      <div class="left-container">
+        <div class="input-np inp-title">
+          <input th:field="*{title}" id="inp-title" class="flat-inp-np" type="text"
+                 name="title" maxlength="60" autofocus required/>
+          <span class="highlight-np"></span>
+          <label for="inp-title" class="label-np" th:text="#{title}">Title</label>
+          <div class="prompt" th:text="#{prompt.required}">Required</div>
+        </div>
+        <div class="input-np inp-sum">
+          <input th:field="*{summary}" id="inp-sum" class="flat-inp-np" type="text"
+                 name="summary" maxlength="100" required/>
+          <span class="highlight-np"></span>
+          <label for="inp-sum" class="label-np" th:text="#{summary}">Summary</label>
+          <div class="prompt" th:text="#{prompt.required}">Required</div>
+        </div>
+        <div class="input-np inp-article">
+          <!-- do not refactor this textarea-->
+          <textarea th:field="*{article}" class="flat-inp-np multiline-text"
+                    name="article" id="inp-article" required></textarea>
+          <span class="highlight-np"></span>
+          <label for="inp-article" class="label-np" th:text="#{article}">Article</label>
+          <div class="prompt" th:text="#{prompt.required}">Required</div>
+        </div>
+      </div>
+      <div class="right-container">
+        <fieldset class="post-file">
+          <legend th:text="#{add-file}">Add an Image or Video</legend>
+          <div class="file-select">
+            <img class="file-prev" th:src="@{/img/placeholder-img.svg}" alt="preview"/>
+            <label class="file-upload post-input">
+              <input th:field="*{uploadedFile}" type="file" name="file" accept="image/*, video/*"/>
+              <span th:text="#{file-select}"></span>
+            </label>
+          </div>
+        </fieldset>
+        <div class="input-np inp-cats">
+          <input id="inp-cats" class="flat-inp-np" type="text" name="categories" required/>
+          <span class="highlight-np"></span>
+          <label for="inp-cats" class="label-np" th:text="#{category}">Category(s)</label>
+          <div class="prompt" th:text="#{prompt.required}">Required</div>
+        </div>
+      </div>
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <button type="submit" class="btn button" th:text="#{create}">Create</button>
+    </form>
+  </div>
 </main>
 
 <footer th:replace="fragments::footer"></footer>

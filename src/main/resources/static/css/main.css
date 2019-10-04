@@ -1,58 +1,49 @@
-/*=======================================*/
-/*************** Common ****************/
-/*todo: extract #919da5 as icons color*/
-
+/****************************************************************************/
+/*******************************    Common    *******************************/
+/****************************************************************************/
 :root {
-    --nav-height: 52px;
-    --footer-height: 300px;
+    --nav-height: 52px; /* height of main navigation bar */
+    --footer-height: 300px; /* height of page footer */
+    --icons-color: #919da5;
+    --text-main-color: #212121;
+    --text-secondary-color: #757575;
 }
 
-@font-face {
-    font-family: Sahel;
-    src: url(../font/Sahel-FD.ttf);
-    unicode-range: U+0600-06FF;
-}
-
-@font-face {
-    font-family: Sahel;
-    src: url(../font/Sahel-FD-Bold.ttf);
-    unicode-range: U+0600-06FF;
-    font-weight: bold;
-}
-
-@font-face {
-    font-family: Roboto;
-    src: url(../font/Roboto-Regular.ttf);
-}
-
-@font-face {
-    font-family: Roboto;
-    src: url(../font/Roboto-Bold.ttf);
-    font-weight: bold;
-}
-
-* {
-    box-sizing: border-box;
-    font-family: "Sahel", "Roboto", sans-serif;
-}
-
-::selection {
-    /*background: #00BCD4;*/
-    background: var(--primary-color);
-    color: #222;
-}
-
-::-moz-selection {
-    /*background: #00BCD4;*/
-    background: var(--primary-color);
-    color: #222;
-}
-
-/*prevent animations to run on page load*/
+/* prevent animations to run while the page is loading;
+/* when the page is fully loaded, this class is removed by javascript
+/* Attention: alternative approaches (instead adding class) were tried but did not work */
 .preload * {
     -moz-transition: none !important;
     -o-transition: none !important;
     -webkit-transition: none !important;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url(../font/vazir-wol.woff2) format('woff2'); /* the font lacks latin characters */
+    unicode-range: U+0600-06FF; /* use only persian characters from this font */
+}
+
+@font-face {
+    font-family: Vazir;
+    font-weight: bold; /* apply to bold texts */
+    src: url(../font/vazir-bold-wol.woff2) format('woff2'); /* the font lacks latin characters */
+    unicode-range: U+0600-06FF; /* use only persian characters from this font */
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Vazir', 'Roboto', sans-serif;
+}
+
+::selection { /* set text and its background color when highlighted */
+    background: var(--primary-color);
+    color: var(--text-main-color);
+}
+
+::-moz-selection { /* Do not merge this with the above rule; DOES NOT WORK! */
+    background: var(--primary-color);
+    color: var(--text-main-color);
 }
 
 body {
@@ -66,8 +57,7 @@ main {
     max-width: 1200px;
 }
 
-.primary {
-    color: var(--primary-color) !important;
+.pinned {
     fill: var(--primary-color) !important;
 }
 
@@ -90,21 +80,17 @@ main {
 }
 
 .no-result-prompt {
-    background: #ffffff;
+    background: #fff;
     border-radius: 2px;
-    bottom: 0;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     font-size: 15px;
-    height: fit-content;
-    left: 0;
+    left: 50%;
     line-height: 36px;
-    margin: auto;
     padding: 20px;
     position: absolute;
-    right: 0;
     text-align: center;
-    top: -180px;
-    width: fit-content;
+    top: 35%;
+    transform: translate(-50%, -50%);
 }
 
 .no-result-prompt img {
@@ -128,12 +114,13 @@ main {
     justify-content: center;
     left: 0;
     margin: 24px auto -10px;
+    min-width: fit-content;
     opacity: 0.92;
-    padding: 22px;
+    padding: 20px 30px;
     position: fixed;
     right: 0;
     visibility: visible;
-    width: 25%;
+    width: 350px;
     z-index: 5;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
@@ -143,12 +130,15 @@ main {
     unicode-bidi: plaintext;
 }
 
-/****************************************/
-/************ Top navigation ************/
+/****************************************************************************/
+/***************************    Top navigation    ***************************/
+/****************************************************************************/
 nav {
     background: #fafafa;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
     color: #272727;
     height: var(--nav-height);
     position: fixed;
@@ -170,7 +160,7 @@ nav {
     max-width: 1200px;
 }
 
-.brand-search-container {
+.logo-search-container {
     display: flex;
 }
 
@@ -193,16 +183,20 @@ nav {
     display: flex;
     outline: none;
     position: relative;
+    transition: all ease 0.2s;
     right: 26px;
+    width: 26px;
 }
 
 .search-icon {
-    width: 12px;
+    fill: var(--icons-color);
+    transition: all ease 0.2s;
+    width: 100%;
 }
 
 .search-input {
     align-items: center;
-    background: #ebebeb;
+    background: #efefef;
     border: none;
     border-radius: 4px;
     color: #555;
@@ -215,16 +209,24 @@ nav {
 }
 
 .search-input:focus {
-    border-radius: 0;
     height: 34px;
-    width: 228px;
+    /*width: 228px;*/
+}
+
+.search-input:focus + .search-button {
+    width: 28px;
+    right: 30px;
+}
+
+.search-input:focus + .search-button > .search-icon {
+    fill: var(--primary-color);
 }
 
 .search-input::placeholder {
     color: #aaa;
 }
 
-.brand {
+.brand-logo {
     display: flex;
     height: 32px;
     margin: 2px 0 0 40px;
@@ -240,7 +242,7 @@ nav {
 
 .cat-container a {
     align-items: center;
-    color: #272727;
+    color: #212121;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -261,7 +263,9 @@ nav {
     margin-right: 40px;
 }
 
-.usr, .usr-inf-container, .usr-log {
+.usr,
+.usr-inf-container,
+.usr-log {
     align-items: center;
     -webkit-align-items: center;
     display: -ms-flexbox;
@@ -280,7 +284,7 @@ nav {
     transition: all ease 0.12s;
 }
 
-#log-in:hover, #sign-up:hover {
+#log-in:hover {
     color: var(--primary-color);
 }
 
@@ -298,6 +302,8 @@ nav {
 }
 
 #new-post {
+    align-items: center;
+    display: flex;
     font-size: 14px;
     margin-right: 36px;
     padding: 6px 8px;
@@ -316,11 +322,14 @@ nav {
     color: white;
     cursor: pointer;
     display: inline-block;
-    padding: 8px 10px;
+    min-height: 34px;
+    min-width: fit-content;
+    padding: 4px 12px;
     text-align: center;
     text-decoration: none;
     transition: all ease-in 450ms;
     -webkit-transition: 0.2s ease-out;
+    width: 64px;
 }
 
 .btn a {
@@ -406,6 +415,71 @@ nav {
 
 /****************************************/
 /************ Login dialog ************/
+
+.remember-me {
+    margin-top: 36px;
+}
+
+/********************************************/
+/************* check box **************/
+.check-box label {
+    color: var(--text-secondary-color);
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+/* The box */
+.check-box label:before {
+    background-color: white;
+    border: 2px solid rgba(0,0,0,0.3);
+    border-radius: 2px;
+    content: '';
+    display: inline-block;
+    height: 11px;
+    margin: 0 10px 0 0;
+    transition: all .2s ease;
+    vertical-align: middle;
+    width: 11px;
+    user-select: none;
+    will-change: background-color,border-color;
+}
+
+/* Check-mark */
+.check-box label:after {
+    border: 2px solid #fff;
+    border-right-style: none;
+    border-top-style: none;
+    content: '';
+    height: 3px;
+    right: 50%;
+    position: relative;
+    top: 7px;
+    transform: scale(0,0) rotate(-90deg) translateZ(0);
+    transform-origin: bottom left;
+    transition: all .2s ease;
+    width: 8px;
+    will-change: transform;
+}
+
+.check-box input[type=checkbox] {
+    display: none;
+}
+
+.check-box input[type=checkbox]:checked + label:before {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.check-box input[type=checkbox]:checked + label:after {
+    transform: scale(1, 1) rotate(-45deg) translateZ(0);
+}
+
+/************* check box **************/
+
 /* form starting stylings ------------------------------- */
 .flat-inp {
     border: none;
@@ -417,11 +491,11 @@ nav {
     width: 90%;
 }
 
-input:focus, textarea:focus {
+input:not([type=checkbox]):focus,
+textarea:focus {
     outline: none;
 }
 
-/* LABEL ======================================= */
 .label {
     color: #999;
     font-size: 17px;
@@ -434,7 +508,10 @@ input:focus, textarea:focus {
 }
 
 /*!* active state *!*/
-input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid ~ label {
+input:not([type=checkbox]):focus ~ label,
+input:not([type=checkbox]):valid ~ label,
+textarea:focus ~ label,
+textarea:valid ~ label {
     color: var(--primary-color);
     font-size: 13px;
     left: 10px;
@@ -452,6 +529,7 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
 }
 
 /**************************************************************************/
+
 #login-dialog {
     animation-duration: 0.4s;
     -webkit-animation-duration: 0.4s;
@@ -466,18 +544,15 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
 }
 
 .log-form {
-    background: #FFFFFF;
+    background: #fff;
     border-radius: 2px;
-    bottom: 50px;
-    height: fit-content;
-    left: 0;
-    margin: auto;
-    max-width: 340px;
+    left: 50%;
     padding: 40px 40px 20px;
     position: absolute;
-    right: 0;
     text-align: center;
-    top: 0;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    width: 340px;
 }
 
 #login-dialog .close {
@@ -495,11 +570,13 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
     background: rgba(0, 0, 0, 0.2);
 }
 
-#login-wrapper, #register-wrapper {
+#login-wrapper,
+#register-wrapper {
     display: none;
 }
 
-.register-form, .log-form {
+.register-form,
+.log-form {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -526,7 +603,7 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
     color: white;
     cursor: pointer;
     font-size: 14px;
-    padding: 8px 10px;
+    padding: 10px 10px;
     transition: background-color ease 0.2s;
 }
 
@@ -579,17 +656,19 @@ input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid
 }
 
 .invalid-login {
-    color: #DE1E26;
+    color: #de1e26;
     display: none;
     font-size: 13px;
     margin-top: 40px;
 }
 
-.login-form .input:first-child, .register-form .input:first-child {
+.login-form .input:first-child,
+.register-form .input:first-child {
     margin-top: 24px;
 }
 
-.login-form .input:nth-child(2), .register-form .input:nth-child(2) {
+.login-form .input:nth-child(2),
+.register-form .input:nth-child(2) {
     margin-bottom: 20px;
 }
 
@@ -690,9 +769,6 @@ main {
     margin: 0 8px;
 }
 
-/* color of primary text: #212121 */
-/* color of secondary text: #757575 */
-
 .card article {
     margin: 10px 16px 16px;
     /*word-break: break-all;*/
@@ -761,7 +837,7 @@ main {
 }
 
 .score span {
-    color: #919da5;
+    color: var(--icons-color);
     font-size: 11px;
     font-weight: bold;
     margin: 0;
@@ -784,6 +860,7 @@ main {
     border-radius: 2px;
     color: #757575;
     font-size: 12px;
+    line-height: 1.2; /* to correct line height of text in buttons for persian language */
     padding: 8px 10px 6px;
     text-align: center;
     text-decoration: none;
@@ -800,7 +877,8 @@ main {
     background: rgba(150, 150, 150, 0.5);
 }
 
-.card-img, .card .card-video {
+.card-img,
+.card .card-video {
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     transition: filter ease 0.25s;
@@ -832,23 +910,27 @@ main {
 
 .ply-btn {
     background-color: rgba(23, 33, 35, .75);
-    border-radius: 5px;
+    border-radius: 10%;
     bottom: 0;
     cursor: pointer;
-    height: 26%;
-    left: 3px;
+    height: 24%;
+    left: 0;
     margin: auto;
-    max-height: 40px;
-    max-width: 60px;
+    max-height: 50px;
+    max-width: 80px;
+    min-height: 30px;
+    min-width: 46px;
     position: absolute;
     right: 0;
     top: 0;
-    width: 20%;
+    transition: all .18s ease;
+    transition-property: width, height, background-color;
+    width: 18.5%;
 }
 
 .ply-btn:hover {
     background-color: var(--primary-color);
-    opacity: 0.91;
+    opacity: 0.9;
 }
 
 .ply-ico {
@@ -868,8 +950,10 @@ main {
     width: 30px;
 }
 
-.ply-ico::before, .ply-ico::after {
-    /*DO NOT OPTIMIZE*/
+/*noinspection CssOptimizeSimilarProperties,CssOptimizeSimilarProperties,CssOptimizeSimilarProperties,CssOptimizeSimilarProperties*/
+.ply-ico::before,
+.ply-ico::after {
+    /* DO NOT OPTIMIZE */
     border-color: transparent;
     border-left-color: #eee;
     border-style: solid;
@@ -893,7 +977,8 @@ main {
     top: 8px;
 }
 
-.ply-ico-active::before, .ply-ico-active::after {
+.ply-ico-active::before,
+.ply-ico-active::after {
     border-width: 0 0 0 12px;
     height: 32px;
 }
@@ -938,9 +1023,9 @@ progress::-webkit-progress-value {
 
 .hot-icon {
     height: 18px;
-    margin-right: 18px;
+    margin-right: 19px;
     vertical-align: middle;
-    fill: #919da5;
+    fill: var(--icons-color);
 }
 
 .share-container {
@@ -992,7 +1077,7 @@ progress::-webkit-progress-value {
     border-color: transparent transparent white transparent;
     border-style: solid;
     border-width: 0 9px 9px 9px;
-    content: "";
+    content: '';
     position: absolute;
     right: calc(50% - 9px);
     top: -8px;
@@ -1004,7 +1089,7 @@ progress::-webkit-progress-value {
     margin-right: 4px;
     vertical-align: middle;
     width: 13px;
-    fill: #919da5;
+    fill: var(--icons-color);
 }
 
 .meters {
@@ -1017,7 +1102,7 @@ progress::-webkit-progress-value {
 /*********** like icon ***********/
 
 .heart-static {
-    background: url('../img/ic-heart.png') no-repeat left;
+    background: url(../img/ic-heart.png) no-repeat left;
     background-size: 2900%;
     height: 48px;
     margin-right: 6px;
@@ -1025,7 +1110,7 @@ progress::-webkit-progress-value {
 }
 
 .not-liked {
-    background: url('../img/ic-heart.png') no-repeat left;
+    background: url(../img/ic-heart.png) no-repeat left;
     background-size: 2900%;
     cursor: pointer;
     height: 48px;
@@ -1038,7 +1123,7 @@ progress::-webkit-progress-value {
 }
 
 .liked {
-    background: url('../img/ic-heart.png') no-repeat right;
+    background: url(../img/ic-heart.png) no-repeat right;
     background-size: 2900%;
     cursor: pointer;
     height: 48px;
@@ -1061,7 +1146,7 @@ progress::-webkit-progress-value {
 
 /*******************************/
 .like-num {
-    color: #919da5;
+    color: var(--icons-color);
     font-size: 12px;
     font-weight: normal;
     margin-right: -4px;
@@ -1069,9 +1154,9 @@ progress::-webkit-progress-value {
     text-align: center;
 }
 
-.chip-container {
+.chips-container {
     display: flex;
-    width: 50%;
+    width: 60%;
 }
 
 .chip {
@@ -1130,7 +1215,7 @@ progress::-webkit-progress-value {
 }
 
 .hr {
-    border-top: 1px solid #E6E6E6;
+    border-top: 1px solid #e6e6e6;
 }
 
 /**************************************/
@@ -1150,15 +1235,16 @@ progress::-webkit-progress-value {
 
 .subject {
     align-items: center;
-    background: white;
+    background: linear-gradient(#eee, #fff);
+    background: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    color: #959595;
+    color: #909090;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    font-size: 48px;
-    height: 110px;
+    font-size: 40px;
+    height: 68px;
     justify-content: center;
     margin: 0 1rem 0;
     text-transform: capitalize;
@@ -1266,7 +1352,7 @@ progress::-webkit-progress-value {
 }
 
 @media screen and (max-width: 430px) {
-    .brand {
+    .brand-logo {
         display: none;
     }
 
@@ -1359,7 +1445,7 @@ progress::-webkit-progress-value {
 }
 
 .lang-name {
-    color: #444;
+    color: #272727;
     font-size: 11px;
 }
 
@@ -1436,17 +1522,17 @@ progress::-webkit-progress-value {
 }
 
 .theme-cyan {
-    background: #00ACC1;
+    background: #00acc1;
     color: rgba(0, 172, 193, 0.5);
 }
 
 .theme-orange {
-    background: #FF9800;
+    background: #ff9800;
     color: rgba(255, 152, 0, 0.5);
 }
 
 .theme-pink {
-    background: #E91E63;
+    background: #e91e63;
     color: rgba(233, 30, 99, 0.5);
 }
 

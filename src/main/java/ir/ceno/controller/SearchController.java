@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Controller that deals with full-text search operations.
@@ -32,8 +32,8 @@ public class SearchController {
      */
     @GetMapping("/search")
     public String search(@RequestParam("q") String query, Model model) {
-        List<Post> posts = searchService.searchByQuery(query);
         model.addAttribute("query", query);
+        Collection<Post> posts = searchService.searchPostsByQuery(query);
         model.addAttribute("posts", posts);
         return "search";
     }

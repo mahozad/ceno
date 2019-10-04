@@ -1,4 +1,3 @@
-
 .form-container {
     margin-top: 24px;
 }
@@ -63,7 +62,9 @@ form {
     unicode-bidi: plaintext;
 }
 
-#inp-title, #inp-sum, #inp-cats {
+#inp-title,
+#inp-sum,
+#inp-cats {
     height: 36px;
 }
 

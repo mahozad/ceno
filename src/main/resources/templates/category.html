@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="fragments::head(titleAppend=' - ' + #{${catName}} + ' ' + #{posts})"/>
-    <link rel="stylesheet" th:href="@{/css/category.min.css}">
+  <th:block th:include="fragments::head(titleAppend=' - ' + #{${catName}} + ' ' + #{posts})"/>
+  <link rel="stylesheet" th:href="@{/css/category.min.css}">
 </head>
 
 <body class="preload">
@@ -11,35 +11,33 @@
 <div th:replace="fragments::login-dialog"></div>
 
 <main>
-    <div th:replace="fragments::prompt"></div>
-    <div class="no-result-prompt" th:if="${posts.numberOfElements == 0}">
-        <img src="/img/ic-lamp.svg" alt="empty">
-        <div>
-            Sorry, there is no post in this category.<br/>
-            Be the first one and create a post here!
-        </div>
+  <div th:replace="fragments::prompt"></div>
+  <div class="no-result-prompt" th:if="${posts.numberOfElements == 0}">
+    <img th:src="@{/img/ic-lamp.svg}" alt="empty"/>
+    <div> Sorry, there is no post in this category.<br/>
+      Be the first one and create a post here!
     </div>
-    <section id="results-container">
-        <div class="card" th:fragment="card" th:each="post:${posts}"
-             th:attr="data-post-id=${post.id}">
-            <div th:replace="fragments::card-top-section"></div>
-            <div class="card-bottom">
-                <div class="hr"></div>
-                <footer class="card-footer">
-                    <div th:replace="fragments::card-datetime"></div>
-                    <div th:replace="fragments::card-read-more"></div>
-                </footer>
-            </div>
-        </div>
-    </section>
-    <div id="spinner" th:if="${posts.hasNext()}">
-        <div class="loader">
-            <div class="flipper">
-                <div class="load-front"></div>
-                <div class="load-back"></div>
-            </div>
-        </div>
+  </div>
+  <section id="results-container">
+    <div class="card" th:fragment="card" th:each="post:${posts}" th:attr="data-post-id=${post.id}">
+      <div th:replace="fragments::card-top-section"></div>
+      <div class="card-bottom">
+        <div class="hr"></div>
+        <footer class="card-footer">
+          <div th:replace="fragments::card-datetime"></div>
+          <div th:replace="fragments::card-read-more"></div>
+        </footer>
+      </div>
     </div>
+  </section>
+  <div id="spinner" th:if="${posts.hasNext()}">
+    <div class="loader">
+      <div class="flipper">
+        <div class="load-front"></div>
+        <div class="load-back"></div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <footer th:replace="fragments::footer"></footer>

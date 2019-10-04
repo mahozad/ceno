@@ -4,6 +4,9 @@ import ir.ceno.model.Post;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
@@ -27,6 +30,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * @param pageable the pageable object to paginate and sort results
      * @return {@link Slice} containing posts
      */
+    @SuppressWarnings("SpringDataRepositoryMethodParametersInspection")
     Slice<Post> findByCategoriesName(String name, Pageable pageable);
 
     /**
@@ -36,4 +40,16 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      * @return {@link Slice} containing posts
      */
     Slice<Post> findByPinnedTrue(Pageable pageable);
+
+    /**
+     * Updates the url of a post.
+     * <p>
+     * Annotated with {@code @Modifying} because the query is an update (not select).
+     *
+     * @param url    the new url for the post
+     * @param postId id of the post to update its url
+     */
+    @Modifying
+    @Query("update Post p set p.url = :url where p.id = :id")
+    void setPostUrlById(@Param("url") String url, @Param("id") long postId);
 }

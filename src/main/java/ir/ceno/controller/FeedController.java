@@ -36,6 +36,6 @@ public class FeedController {
      */
     @GetMapping("/{categoryName}")
     public Channel getFeed(@PathVariable String categoryName) {
-        return feedService.getFeed(categoryName);
+        return feedService.getFeedByCategoryName(categoryName);
     }
 }

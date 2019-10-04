@@ -3,7 +3,7 @@ package ir.ceno.controller;
 import ir.ceno.model.Post;
 import ir.ceno.service.CategoryService;
 import org.springframework.data.domain.Slice;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,32 @@ public class CategoryController {
 
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
+    }
+
+    /**
+     * Adds the category to the specified {@link Post post}.
+     *
+     * @param postId  id of the post to add category to
+     * @param catName name of the category to be added
+     */
+    @PostMapping("/add")
+    @ResponseBody
+    @PreAuthorize("isAuthenticated()")
+    public void addCategory(@RequestParam long postId, @RequestParam String catName) {
+        categoryService.addCategoryToPost(postId, catName);
+    }
+
+    /**
+     * Deletes the category from the specified {@link Post post}.
+     *
+     * @param postId  id of the post to delete its category
+     * @param catName name of the category to be deleted
+     */
+    @PostMapping("/delete")
+    @ResponseBody
+    @PreAuthorize("isAuthenticated()")
+    public void deletePostCategory(@RequestParam long postId, @RequestParam String catName) {
+        categoryService.deleteCategoryFromPost(postId, catName);
     }
 
     /**
@@ -56,37 +82,5 @@ public class CategoryController {
         Slice<Post> posts = categoryService.getPosts(category, sliceNumber);
         model.addAttribute("posts", posts);
         return "category::card";
-    }
-
-    /**
-     * Deletes the category from the specified {@link Post post}.
-     *
-     * @param postId         id of the post to delete its category
-     * @param catName        name of the category to be deleted
-     * @param authentication security authentication to check if the user is authenticated
-     */
-    @PostMapping("/delete")
-    @ResponseBody
-    public void deleteCategory(@RequestParam long postId, @RequestParam String catName,
-                               Authentication authentication) {
-        if (authentication != null) {
-            categoryService.deleteCategory(postId, catName);
-        }
-    }
-
-    /**
-     * Adds the category to the specified {@link Post post}.
-     *
-     * @param postId         id of the post to add category to
-     * @param catName        name of the category to be added
-     * @param authentication security authentication to check if the user is authenticated
-     */
-    @PostMapping("/add")
-    @ResponseBody
-    public void addCategory(@RequestParam long postId, @RequestParam String catName,
-                            Authentication authentication) {
-        if (authentication != null) {
-            categoryService.addCategory(postId, catName);
-        }
     }
 }

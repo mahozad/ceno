@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(titleAppend=' - ' + #{search} + ' ' + ${query})"></head>
 
 <body class="preload">
@@ -8,30 +8,30 @@
 <div th:replace="fragments::login-dialog"></div>
 
 <main>
-    <div th:replace="fragments::prompt"></div>
-    <div th:class="${posts.size() gt 0 ? 'result-prompt' : 'no-result-prompt'}">
-        <img th:if="${posts.size() == 0}" src="/img/ic-lamp.svg" alt="no results">
-        <div th:if="${posts.size() == 0}">No results found!</div>
-        <div th:if="${posts.size() gt 0}">
-            <span th:text="${posts.size()} + ' result' + ${posts.size() gt 1 ? 's':''} + ' found'"></span>
-            <span th:if="${posts.size()} == ${@environment.getProperty('search.max-results')}">
-                (only top <span th:text="${@environment.getProperty('search.max-results')}"></span> displayed)
-            </span>
-        </div>
+  <div th:replace="fragments::prompt"></div>
+  <div th:class="${posts.size() gt 0 ? 'result-prompt' : 'no-result-prompt'}">
+    <img th:if="${posts.size() == 0}" th:src="@{/img/ic-lamp.svg}" alt="no results">
+    <div th:if="${posts.size() == 0}">No results found!</div>
+    <div th:if="${posts.size() gt 0}">
+      <span th:text="${posts.size()} + ' result' + ${posts.size() gt 1 ? 's':''} + ' found'"></span>
+      <span th:if="${posts.size()} == ${@environment.getProperty('search.max-results')}">
+        <!-- todo: refactor the following to refrence the constant instead of property -->
+        (only top <span th:text="${@environment.getProperty('search.max-results')}"></span> displayed)
+      </span>
     </div>
-    <section id="results-container">
-        <div class="card" th:fragment="card" th:each="post:${posts}"
-             th:attr="data-post-id=${post.id}">
-            <div th:replace="fragments::card-top-section"></div>
-            <div class="card-bottom">
-                <div class="hr"></div>
-                <footer class="card-footer">
-                    <div th:replace="fragments::card-datetime"></div>
-                    <div th:replace="fragments::card-read-more"></div>
-                </footer>
-            </div>
-        </div>
-    </section>
+  </div>
+  <section id="results-container">
+    <div class="card" th:fragment="card" th:each="post:${posts}" th:attr="data-post-id=${post.id}">
+      <div th:replace="fragments::card-top-section"></div>
+      <div class="card-bottom">
+        <div class="hr"></div>
+        <footer class="card-footer">
+          <div th:replace="fragments::card-datetime"></div>
+          <div th:replace="fragments::card-read-more"></div>
+        </footer>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer th:replace="fragments::footer"></footer>

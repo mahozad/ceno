@@ -1,118 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="fragments::head(titleAppend=' - Error!')"/>
-    <link rel="stylesheet" th:href="@{/css/error.min.css}">
-    <style>
-        .text {
-            animation-name: glow;
-            color: var(--primary-color);
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translate(-50%, 0);
-            animation-duration: 10s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        .container {
-            margin: 170px auto 0;
-        }
-
-        .rect {
-            border: 2px solid var(--primary-color);
-            border-radius: 2px;
-            counter-increment: mycounter;
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            left: calc(50% - 100px);
-        }
-
-        .anim {
-            animation-name: rotate;
-            animation-duration: 40s;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        .anim2 {
-            animation-delay: 1s;
-        }
-
-        .anim3 {
-            animation-delay: 2s;
-        }
-
-        .anim4 {
-            animation-delay: 3s;
-        }
-
-        .anim5 {
-            animation-delay: 4s;
-        }
-
-        .anim6 {
-            animation-delay: 5s;
-        }
-
-        .anim7 {
-            animation-delay: 6s;
-        }
-
-        .anim8 {
-            animation-delay: 7s;
-        }
-
-        .anim9 {
-            animation-delay: 8s;
-        }
-
-        .anim10 {
-            animation-delay: 9s;
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            50% {
-                transform: rotate(180deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes glow {
-            0% {
-                font-size: 16px;
-            }
-            50% {
-                font-size: 20px;
-            }
-            100% {
-                font-size: 16px;
-            }
-        }
-    </style>
+  <th:block th:include="fragments::head(titleAppend=' - Error!')"/>
+  <link rel="stylesheet" th:href="@{/css/error.min.css}">
 </head>
 
 <body class="preload" style="min-height: auto">
 <div class="container">
-    <div class="rect anim" data-anim-delay="0"></div>
-    <div class="rect anim anim2" data-anim-delay="1"></div>
-    <div class="rect anim anim3" data-anim-delay="2"></div>
-    <div class="rect anim anim4" data-anim-delay="3"></div>
-    <div class="rect anim anim5" data-anim-delay="4"></div>
-    <div class="rect anim anim6" data-anim-delay="5"></div>
-    <div class="rect anim anim7" data-anim-delay="6"></div>
-    <div class="rect anim anim8" data-anim-delay="7"></div>
-    <div class="rect anim anim9" data-anim-delay="8"></div>
-    <div class="rect anim anim10" data-anim-delay="9"></div>
+  <div class="rect anim" data-anim-delay="0"></div>
+  <div class="rect anim anim2" data-anim-delay="1"></div>
+  <div class="rect anim anim3" data-anim-delay="2"></div>
+  <div class="rect anim anim4" data-anim-delay="3"></div>
+  <div class="rect anim anim5" data-anim-delay="4"></div>
+  <div class="rect anim anim6" data-anim-delay="5"></div>
+  <div class="rect anim anim7" data-anim-delay="6"></div>
+  <div class="rect anim anim8" data-anim-delay="7"></div>
+  <div class="rect anim anim9" data-anim-delay="8"></div>
+  <div class="rect anim anim10" data-anim-delay="9"></div>
 </div>
-<p class="text">Custom error page</p>
+<p class="text">
+  <span th:text="${code}"></span>
+  <span th:text="#{${message}}"></span>
+</p>
 </body>
 
 </html>

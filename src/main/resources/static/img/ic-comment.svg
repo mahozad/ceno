@@ -8,13 +8,13 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    data-name="Layer 1"
-   viewBox="0 0 56.200001 54.65218"
+   viewBox="0 0 59.200001 54.65218"
    x="0px"
    y="0px"
    version="1.1"
    id="svg10"
    sodipodi:docname="ic-comment.svg"
-   width="56.200001"
+   width="59.200001"
    height="54.65218"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
   <metadata
@@ -48,9 +48,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="1.888"
-     inkscape:cx="-131.13983"
-     inkscape:cy="27.361627"
+     inkscape:zoom="2.6700352"
+     inkscape:cx="-91.973275"
+     inkscape:cy="27.736152"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -58,7 +58,7 @@
   <title
      id="title2">03</title>
   <path
-     d="M 53.458524,0 H 2.7414642 A 2.7414642,2.7414642 0 0 0 0,2.741454 V 38.38048 a 2.7414642,2.7414642 0 0 0 2.7414642,2.741458 h 8.2243918 v 10.80138 a 2.7414642,2.7414642 0 0 0 4.441164,2.138338 L 31.794118,41.108257 H 53.458524 A 2.7414642,2.7414642 0 0 0 56.2,38.366786 V 2.727745 A 2.7414642,2.7414642 0 0 0 53.458524,0 Z"
+     d="M 54.956632,0.37452718 H 4.2395718 A 2.7414642,2.7414642 0 0 0 1.4981076,3.1159812 V 38.755007 a 2.7414642,2.7414642 0 0 0 2.7414642,2.741458 h 8.2243922 v 10.80138 a 2.7414642,2.7414642 0 0 0 4.441164,2.138338 L 33.292226,41.482784 h 21.664406 a 2.7414642,2.7414642 0 0 0 2.741476,-2.741471 V 3.1022722 A 2.7414642,2.7414642 0 0 0 54.956632,0.37452718 Z"
      id="path4"
      inkscape:connector-curvature="0"
      style="fill:#919da5;fill-opacity:1;stroke-width:0.68536615" />

@@ -32,7 +32,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToMany(mappedBy = "categories")
     private Set<Post> posts = new HashSet<>();
@@ -42,6 +42,10 @@ public class Category {
     private String name;
 
     public Category(String name) {
-        this.name = name;
+        this.name = name.toLowerCase().trim();
+    }
+
+    public void addPost(Post post) {
+        posts.add(post);
     }
 }

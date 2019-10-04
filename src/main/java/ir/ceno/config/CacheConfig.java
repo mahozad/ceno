@@ -9,8 +9,11 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
 
 /**
  * Configuration for creating and managing caches.
@@ -26,19 +29,19 @@ public class CacheConfig {
      */
     @Bean
     public CacheManager cacheManager() {
-        CaffeineCache cache1 = new CaffeineCache("pinnedPosts", Caffeine.newBuilder().build());
-        CaffeineCache cache2 = new CaffeineCache("postFiles", Caffeine.newBuilder()
-                .maximumSize(100)
-                .expireAfterAccess(1, TimeUnit.MINUTES)
-                .build()
-        );
-        CaffeineCache cache3 = new CaffeineCache("avatars", Caffeine.newBuilder()
-                .maximumSize(1000)
-                .expireAfterAccess(10, TimeUnit.MINUTES)
-                .build()
-        );
+        List<CaffeineCache> caches = new ArrayList<>();
+        caches.add(new CaffeineCache("pinnedPosts", newBuilder().build()));
+        caches.add(buildCache("postFiles", 100, 1));
+        caches.add(buildCache("avatars", 1_000, 10));
+        caches.add(buildCache("feeds", 100, 10));
         SimpleCacheManager cacheManager = new SimpleCacheManager();
-        cacheManager.setCaches(Arrays.asList(cache1, cache2, cache3));
+        cacheManager.setCaches(caches);
         return cacheManager;
+    }
+
+    private CaffeineCache buildCache(String name, long maxSize, long age) {
+        Caffeine<Object, Object> caffeine = newBuilder();
+        caffeine.maximumSize(maxSize).expireAfterAccess(age, TimeUnit.MINUTES);
+        return new CaffeineCache(name, caffeine.build());
     }
 }
