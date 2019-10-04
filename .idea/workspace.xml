@@ -6,8 +6,20 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Add .idea folder to version control">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Add some more entries to gitignore">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/1-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/2-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/3-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/4-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/ceno 2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/ceno 3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/ceno.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/ceno2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/ceno3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/ceno4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/logo unpolished.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/logo.svg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -130,18 +142,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ceno" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ceno" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ceno" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -321,12 +321,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ceno [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BootRun" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -335,17 +335,17 @@
             <option value="bootRun" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ceno [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -354,45 +354,7 @@
             <option value="build" />
           </list>
         </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="ceno [cleanAll]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="cleanAll" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="ceno [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
@@ -405,23 +367,6 @@
       <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <tag value="integration" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StringProcessorTest.makeUriOf_nullTitle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ir.ceno.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ir.ceno.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ir.ceno.util" />
-      <option name="MAIN_CLASS_NAME" value="ir.ceno.util.StringProcessorTest" />
-      <option name="METHOD_NAME" value="makeUriOf_nullTitle" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -463,24 +408,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Gradle.ceno [bootRun]" />
-      <item itemvalue="Gradle.ceno [clean]" />
-      <item itemvalue="Gradle.ceno [build]" />
+      <item itemvalue="Gradle.Build" />
+      <item itemvalue="Gradle.BootRun" />
       <item itemvalue="JUnit.Integrate test ALL" />
       <item itemvalue="JUnit.Unit test All" />
-      <item itemvalue="JUnit.StringProcessorTest.makeUriOf_nullTitle" />
       <item itemvalue="Spring Boot.CenoApplication" />
-      <item itemvalue="Gradle.ceno [cleanAll]" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.ceno [build]" />
-        <item itemvalue="Gradle.ceno [cleanAll]" />
-        <item itemvalue="Gradle.ceno [clean]" />
-        <item itemvalue="Gradle.ceno [bootRun]" />
-        <item itemvalue="JUnit.StringProcessorTest.makeUriOf_nullTitle" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
@@ -579,7 +512,8 @@
       <workItem from="1570041224676" duration="2286000" />
       <workItem from="1570171419297" duration="185000" />
       <workItem from="1570171850942" duration="69000" />
-      <workItem from="1570172201538" duration="7173000" />
+      <workItem from="1570172201538" duration="7486000" />
+      <workItem from="1570184169827" duration="2409000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -735,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570182200317</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Add some more entries to gitignore">
+      <created>1570182280239</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1570182280239</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -812,7 +753,8 @@
     <MESSAGE value="Remove unnecessary comments" />
     <MESSAGE value="Add spring security&#10;Add a dedicated exception controller&#10;Convert app to https&#10;Update some file names&#10;Add some unit tests&#10;Update layouts and views&#10;Many more additions, modifications and deletions" />
     <MESSAGE value="Add .idea folder to version control" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add .idea folder to version control" />
+    <MESSAGE value="Add some more entries to gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add some more entries to gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
