@@ -1,9 +1,17 @@
 ### General ###
 /src/main/resources/public
+/index
+lombok.config
 
 ### Gradle ###
 .gradle
 /build/
+
+### IntelliJ IDEA ###
+/out/
+*.iws
+*.iml
+*.ipr
 
 ### STS ###
 .apt_generated
@@ -13,9 +21,3 @@
 .settings
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
-/out/
-*.iws
-*.iml
-*.ipr
