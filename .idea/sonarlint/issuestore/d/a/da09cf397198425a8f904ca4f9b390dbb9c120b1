@@ -1,0 +1,11 @@
+
+Nsquid:S1135B"2Complete the task associated to this TODO comment.(’½Ïïûÿÿÿÿ
+]squid:S4684"@Replace this persistent entity with a simple POJO or DTO object.(©¿ûÊøÿÿÿÿ
+csquid:S1192\"GDefine a constant instead of duplicating this literal "prompt" 4 times.(÷äéÕûÿÿÿÿ
+Wsquid:S4684Y"@Replace this persistent entity with a simple POJO or DTO object.(ªÈ÷—
+Isquid:S1135C"2Complete the task associated to this TODO comment.(“î†Í
+Wsquid:S4684X"@Replace this persistent entity with a simple POJO or DTO object.(åÄÃ
+]squid:S4684÷"@Replace this persistent entity with a simple POJO or DTO object.(©¿ûÊøÿÿÿÿ
+Jsquid:S1135"2Complete the task associated to this TODO comment.(†Ü›
+Nsquid:S1135D"2Complete the task associated to this TODO comment.(µ³Ûûÿÿÿÿ
+ª%squid:RedundantThrowsDeclarationCheckÕ"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(ŒöÃúÿÿÿÿ8Í¸ïŞŞ,

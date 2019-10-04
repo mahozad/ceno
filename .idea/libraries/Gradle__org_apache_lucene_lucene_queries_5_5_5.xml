@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.lucene:lucene-queries:5.5.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-queries/5.5.5/d99719e7c58c149113f897bca301f1d68cbf3241/lucene-queries-5.5.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-queries/5.5.5/9c12522033955f0279976dbe9fde42c7ddc95fef/lucene-queries-5.5.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

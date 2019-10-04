@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.lucene:lucene-facet:5.5.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-facet/5.5.5/1278da87a6c5d7eaf502478b9d1686ff5f2cf9b3/lucene-facet-5.5.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.lucene/lucene-facet/5.5.5/a81a9126f05159d8a64583b4092f9d0a3aead12/lucene-facet-5.5.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
