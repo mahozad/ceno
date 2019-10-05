@@ -164,6 +164,26 @@ nav {
     display: flex;
 }
 
+@keyframes animate-logo {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -960px 0;
+    }
+}
+
+.brand-logo {
+    animation-duration: 500ms;
+    animation-timing-function: steps(30);
+    width: 32px;
+    height: 32px;
+}
+
+.brand-logo.animate {
+    animation-name: animate-logo;
+}
+
 .search-container {
     align-items: center;
     display: flex;
