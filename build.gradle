@@ -34,11 +34,18 @@ repositories {
     mavenCentral()
 }
 
-wrapper {
+wrapper /* task */ {
     // Add a gradle wrapper script to your source folders (by running the wrapper task).
     // The wrapper script when invoked, downloads the defined gradle version, and executes it.
     // By distributing the wrapper with your project, anyone can work with it without needing to install Gradle beforehand
     gradleVersion = '5.5'
+}
+
+test /* task */ {
+    // Even though Gradle 4.6 (and newer versions) has a native support for JUnit 5,
+    // this support is not enabled by default. If we want to enable it,
+    // we have to ensure that the test task uses JUnit 5 instead of JUnit 4.
+    useJUnitPlatform()
 }
 
 task cleanAll {

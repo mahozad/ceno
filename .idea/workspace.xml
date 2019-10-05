@@ -6,12 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Fix gradlew file permission for travis ci">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Enable junit 5 in gradle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo/logo3(final).svg" beforeDir="false" afterPath="$PROJECT_DIR$/logo/logo3(final).svg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +137,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ceno" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build setup" type="c8890929:TasksNode$1" />
+                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -306,7 +304,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Build">
+  <component name="RunManager" selected="Gradle.ceno [test]">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -389,6 +387,44 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="ceno [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ceno [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="ceno [wrapper]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -459,15 +495,19 @@
     <list>
       <item itemvalue="Gradle.Build" />
       <item itemvalue="Gradle.BootRun" />
-      <item itemvalue="JUnit.Integrate test ALL" />
-      <item itemvalue="JUnit.Unit test All" />
-      <item itemvalue="Spring Boot.CenoApplication" />
       <item itemvalue="Gradle.ceno [assemble]" />
       <item itemvalue="Gradle.ceno [cleanAll]" />
       <item itemvalue="Gradle.ceno [wrapper]" />
+      <item itemvalue="Gradle.ceno [clean]" />
+      <item itemvalue="JUnit.Integrate test ALL" />
+      <item itemvalue="JUnit.Unit test All" />
+      <item itemvalue="Spring Boot.CenoApplication" />
+      <item itemvalue="Gradle.ceno [test]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ceno [test]" />
+        <item itemvalue="Gradle.ceno [clean]" />
         <item itemvalue="Gradle.ceno [wrapper]" />
         <item itemvalue="Gradle.ceno [cleanAll]" />
         <item itemvalue="Gradle.ceno [assemble]" />
@@ -573,7 +613,8 @@
       <workItem from="1570171850942" duration="69000" />
       <workItem from="1570172201538" duration="7486000" />
       <workItem from="1570184169827" duration="2409000" />
-      <workItem from="1570211471747" duration="1356000" />
+      <workItem from="1570211471747" duration="1855000" />
+      <workItem from="1570260423401" duration="1057000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -764,40 +805,15 @@
       <option name="project" value="LOCAL" />
       <updated>1570212173007</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Configure and generate gradle wrapper; Use gradle wrapper instead of local one">
+      <created>1570212894885</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1570212894885</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="PostServiceTest_addPost - 2018.10.14 at 00h 05m 12s.xml">
-      <configuration name="PostServiceTest.addPost" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringProcessorTest_makeUriOf_emptyTitle - 2018.10.14 at 00h 11m 06s.xml">
-      <configuration name="StringProcessorTest.makeUriOf_emptyTitle" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringProcessorTest_makeUriOf_variedTitle - 2018.10.14 at 00h 11m 24s.xml">
-      <configuration name="StringProcessorTest.makeUriOf_variedTitle" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PostServiceTest_addPost - 2018.10.14 at 00h 11m 40s.xml">
-      <configuration name="PostServiceTest.addPost" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Unit_test_ALL - 2018.10.28 at 22h 06m 32s.xml">
-      <configuration name="Unit test ALL" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Unit_test_ALL - 2018.10.28 at 22h 21m 40s.xml">
-      <configuration name="Unit test ALL" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Unit_test_ALL - 2018.11.03 at 23h 21m 48s.xml">
-      <configuration name="Unit test ALL" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="StringProcessorTest_makeUriOf_nullTitle - 2018.11.03 at 23h 24m 53s.xml">
-      <configuration name="StringProcessorTest.makeUriOf_nullTitle" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Unit_test_ALL - 2018.11.03 at 23h 25m 06s.xml">
-      <configuration name="Unit test ALL" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Unit_test_All - 2018.11.03 at 23h 27m 14s.xml">
-      <configuration name="Unit test All" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -818,7 +834,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Remove javadocs" />
     <MESSAGE value="Update gitignore entries" />
     <MESSAGE value="Remove folder icon" />
     <MESSAGE value="Rename doc folder to docs" />
@@ -843,7 +858,8 @@
     <MESSAGE value="Correct travis ci file name" />
     <MESSAGE value="Add jdk property to travis script" />
     <MESSAGE value="Fix gradlew file permission for travis ci" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix gradlew file permission for travis ci" />
+    <MESSAGE value="Configure and generate gradle wrapper; Use gradle wrapper instead of local one" />
+    <option name="LAST_COMMIT_MESSAGE" value="Configure and generate gradle wrapper; Use gradle wrapper instead of local one" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
