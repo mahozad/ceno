@@ -1,0 +1,22 @@
+@keyframes play-logo {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -960px 0;
+    }
+}
+
+.logo-animated {
+    animation-duration: 500ms;
+    animation-timing-function: steps(30);
+    width: 32px;
+    height: 32px;
+    background-image: url(logo-animated.svg);
+    background-position: -960px 0;
+    background-repeat: no-repeat;
+}
+
+.logo-animated.play {
+    animation-name: play-logo;
+}

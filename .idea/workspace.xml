@@ -6,10 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Enable junit 5 in gradle">
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Optimize (cleanup) logo svg">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo/logo3(final).svg" beforeDir="false" afterPath="$PROJECT_DIR$/logo/logo3(final).svg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -614,7 +612,7 @@
       <workItem from="1570172201538" duration="7486000" />
       <workItem from="1570184169827" duration="2409000" />
       <workItem from="1570211471747" duration="1855000" />
-      <workItem from="1570260423401" duration="1057000" />
+      <workItem from="1570260423401" duration="3630000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -812,7 +810,21 @@
       <option name="project" value="LOCAL" />
       <updated>1570212894885</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Enable junit 5 in gradle">
+      <created>1570261490705</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1570261490706</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Optimize (cleanup) logo svg">
+      <created>1570261581027</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1570261581027</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -834,8 +846,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Update gitignore entries" />
-    <MESSAGE value="Remove folder icon" />
     <MESSAGE value="Rename doc folder to docs" />
     <MESSAGE value="Add a template module-info file" />
     <MESSAGE value="Update spring boot  version" />
@@ -859,7 +869,9 @@
     <MESSAGE value="Add jdk property to travis script" />
     <MESSAGE value="Fix gradlew file permission for travis ci" />
     <MESSAGE value="Configure and generate gradle wrapper; Use gradle wrapper instead of local one" />
-    <option name="LAST_COMMIT_MESSAGE" value="Configure and generate gradle wrapper; Use gradle wrapper instead of local one" />
+    <MESSAGE value="Enable junit 5 in gradle" />
+    <MESSAGE value="Optimize (cleanup) logo svg" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimize (cleanup) logo svg" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
