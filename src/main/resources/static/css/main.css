@@ -164,24 +164,32 @@ nav {
     display: flex;
 }
 
-@keyframes animate-logo {
-    from {
-        background-position: 0 0;
-    }
+.brand-logo g {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.brand-logo.animate .C {
+    /* The number is total length of the stoke. To get it I made the animation in
+    [http://shapeshifter.design] and then exported it as svg sprite sheet and then probed the svg.
+    For more info on animating svg strokes see [https://css-tricks.com/svg-line-animation-works/] */
+    stroke-dasharray: 47.040881;
+    stroke-dashoffset: 47.040881;
+    animation: animate-stroke 500ms ease-in-out 1 forwards;
+}
+
+.brand-logo.animate .E {
+    stroke-dasharray: 14.527;
+    stroke-dashoffset: 14.527;
+    animation: animate-stroke 300ms ease 200ms 1 forwards;
+}
+
+@keyframes animate-stroke {
     to {
-        background-position: -960px 0;
+        stroke-dashoffset: 0;
     }
-}
-
-.brand-logo {
-    animation-duration: 500ms;
-    animation-timing-function: steps(30);
-    width: 32px;
-    height: 32px;
-}
-
-.brand-logo.animate {
-    animation-name: animate-logo;
 }
 
 .search-container {
@@ -455,7 +463,7 @@ nav {
 /* The box */
 .check-box label:before {
     background-color: white;
-    border: 2px solid rgba(0,0,0,0.3);
+    border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 2px;
     content: '';
     display: inline-block;
@@ -465,7 +473,7 @@ nav {
     vertical-align: middle;
     width: 11px;
     user-select: none;
-    will-change: background-color,border-color;
+    will-change: background-color, border-color;
 }
 
 /* Check-mark */
@@ -478,7 +486,7 @@ nav {
     right: 50%;
     position: relative;
     top: 7px;
-    transform: scale(0,0) rotate(-90deg) translateZ(0);
+    transform: scale(0, 0) rotate(-90deg) translateZ(0);
     transform-origin: bottom left;
     transition: all .2s ease;
     width: 8px;

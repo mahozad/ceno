@@ -42,9 +42,13 @@
     </div>
     <div class="logo-search-container">
       <a th:href="@{/}" th:title="#{name}">
-        <div class="brand-logo animate" th:fragment="brand"
-             th:style="'background: url(' + @{|/img/logo-animated-${#themes.code('name')}.svg|} + ') no-repeat -960px 0;'">
-        </div>
+        <svg class="brand-logo animate" width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <g stroke-width="4.56763792">
+            <path class="C" d="m12.941641 27.61861c-5.3289107 0-10.6578224-3.80636-10.6578224-10.65782s5.3289117-10.65782 10.6578224-10.65782c4.567638 0 8.75464 0.99539 12.941641-1.90319"></path>
+            <path class="E" d="m14.083556 16.123384c2.701379-1.92435 5.856988-2.055442 6.851456-2.055438 0.994466 5e-6 4.150075-0.131087 6.851454-2.055437"></path>
+            <path class="E" d="m15.986736 23.736114c2.701379-1.92435 5.856988-2.055442 6.851456-2.055438 0.994466 5e-6 4.150075-0.131087 6.851454-2.055437"></path>
+          </g>
+        </svg>
       </a>
       <div class="search-container">
         <form class="search-form" th:action="@{/search}">
