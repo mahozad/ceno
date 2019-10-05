@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "layers": {
+    "vectorLayer": {
+      "id": "45",
+      "name": "vector",
+      "type": "vector",
+      "width": 32,
+      "height": 32,
+      "children": [
+        {
+          "id": "43",
+          "name": "group",
+          "type": "group",
+          "children": [
+            {
+              "id": "16",
+              "name": "path",
+              "type": "path",
+              "pathData": "M 12.942 27.619 C 7.613 27.619 2.284 23.812 2.284 16.961 C 2.284 10.109 7.613 6.303 12.942 6.303 C 17.509 6.303 21.696 7.298 25.883 4.4",
+              "strokeColor": "#00acc1",
+              "strokeWidth": 4.56763792,
+              "strokeLinecap": "round",
+              "strokeLinejoin": "round",
+              "trimPathEnd": 0
+            },
+            {
+              "id": "42",
+              "name": "path_1",
+              "type": "path",
+              "pathData": "M 14.084 16.123 C 16.785 14.199 19.941 14.068 20.935 14.068 C 21.929 14.068 25.085 13.937 27.786 12.013 M 15.987 23.736 C 18.688 21.812 21.844 21.681 22.838 21.681 C 23.833 21.681 26.988 21.55 29.69 19.625",
+              "strokeColor": "#00acc1",
+              "strokeWidth": 4.56763792,
+              "strokeLinecap": "round",
+              "strokeLinejoin": "round",
+              "trimPathEnd": 0
+            }
+          ]
+        }
+      ]
+    },
+    "hiddenLayerIds": []
+  },
+  "timeline": {
+    "animation": {
+      "id": "47",
+      "name": "anim",
+      "duration": 500,
+      "blocks": [
+        {
+          "id": "50",
+          "layerId": "16",
+          "propertyName": "trimPathEnd",
+          "startTime": 0,
+          "endTime": 500,
+          "interpolator": "FAST_OUT_SLOW_IN",
+          "type": "number",
+          "fromValue": 0,
+          "toValue": 1
+        },
+        {
+          "id": "52",
+          "layerId": "42",
+          "propertyName": "trimPathEnd",
+          "startTime": 229,
+          "endTime": 500,
+          "interpolator": "LINEAR_OUT_SLOW_IN",
+          "type": "number",
+          "fromValue": 0,
+          "toValue": 1
+        }
+      ]
+    }
+  }
+}
