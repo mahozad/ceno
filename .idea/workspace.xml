@@ -6,14 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Replace static brand logo with one that starts animated">
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Add">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/img/logo-animated-cyan.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/img/logo-animated-orange.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/img/logo-animated-pink.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -549,7 +544,9 @@
       <workItem from="1570260423401" duration="4049000" />
       <workItem from="1570272871088" duration="4004000" />
       <workItem from="1570276901867" duration="444000" />
-      <workItem from="1570277349943" duration="4948000" />
+      <workItem from="1570277349943" duration="5135000" />
+      <workItem from="1570299255373" duration="628000" />
+      <workItem from="1570378390710" duration="996000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -789,7 +786,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570278950916</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Embed brand logo and its animation in html and css">
+      <created>1570282408182</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1570282408182</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -811,7 +815,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Add idea plugin" />
     <MESSAGE value="Update java sourceCompatibility version; Remove an unneeded configuration" />
     <MESSAGE value="Add a new gradle task for cleaning all outputs" />
     <MESSAGE value="Add lombok plugin" />
@@ -836,7 +839,8 @@
     <MESSAGE value="Add shape shifter raw animation file" />
     <MESSAGE value="Replace static brand logo with one that starts animated" />
     <MESSAGE value="Add svg name space to svg elements so the viewbox attribute doesn't show warning" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add svg name space to svg elements so the viewbox attribute doesn't show warning" />
+    <MESSAGE value="Embed brand logo and its animation in html and css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Embed brand logo and its animation in html and css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
