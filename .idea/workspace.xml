@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Add">
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Update README screenshot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -546,7 +546,7 @@
       <workItem from="1570276901867" duration="444000" />
       <workItem from="1570277349943" duration="5135000" />
       <workItem from="1570299255373" duration="628000" />
-      <workItem from="1570378390710" duration="996000" />
+      <workItem from="1570378390710" duration="2019000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -793,11 +793,28 @@
       <option name="project" value="LOCAL" />
       <updated>1570282408182</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Update README screenshot">
+      <created>1570379408489</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1570379408489</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -815,7 +832,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Update java sourceCompatibility version; Remove an unneeded configuration" />
     <MESSAGE value="Add a new gradle task for cleaning all outputs" />
     <MESSAGE value="Add lombok plugin" />
     <MESSAGE value="Add public folder to gitignore" />
@@ -840,7 +856,8 @@
     <MESSAGE value="Replace static brand logo with one that starts animated" />
     <MESSAGE value="Add svg name space to svg elements so the viewbox attribute doesn't show warning" />
     <MESSAGE value="Embed brand logo and its animation in html and css" />
-    <option name="LAST_COMMIT_MESSAGE" value="Embed brand logo and its animation in html and css" />
+    <MESSAGE value="Update README screenshot" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update README screenshot" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
