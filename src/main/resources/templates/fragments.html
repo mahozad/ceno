@@ -11,7 +11,7 @@
   <meta name="_csrf" th:content="${_csrf.token}"/>
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <meta name="theme-color" th:content="${#themes.code('primary-color')}"/>
-  <link rel="icon" type="image/png" sizes="32x32" th:href="@{|/img/favicon-32x32-${#themes.code('name')}.png|}"/>
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{|/img/favicon-${#themes.code('name')}.png|}"/>
   <link rel="stylesheet" th:href="@{/css/main.min.css}"/>
   <style th:text="':root{'
         + '--primary-color:' + ${#themes.code('primary-color')} + ';'

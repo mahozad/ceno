@@ -6,8 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Add new logo instead of the old 3d one">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="99121690-4381-4242-8e71-b2fdeaeb6b50" name="Default" comment="Remove logo from README">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/img/favicon-32x32-cyan.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/img/favicon-32x32-cyan.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -545,7 +547,8 @@
       <workItem from="1570276901867" duration="444000" />
       <workItem from="1570277349943" duration="5135000" />
       <workItem from="1570299255373" duration="628000" />
-      <workItem from="1570378390710" duration="2262000" />
+      <workItem from="1570378390710" duration="2454000" />
+      <workItem from="1570381511282" duration="1230000" />
     </task>
     <task id="LOCAL-00001" summary="Update banner to include spring boot version">
       <created>1570173453024</created>
@@ -806,7 +809,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570380654975</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Remove logo from README">
+      <created>1570380791642</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1570380791642</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -838,7 +848,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Add lombok plugin" />
     <MESSAGE value="Add public folder to gitignore" />
     <MESSAGE value="Add favicon for urls of static files" />
     <MESSAGE value="Use single quote instead of double quote" />
@@ -863,7 +872,8 @@
     <MESSAGE value="Embed brand logo and its animation in html and css" />
     <MESSAGE value="Update README screenshot" />
     <MESSAGE value="Add new logo instead of the old 3d one" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new logo instead of the old 3d one" />
+    <MESSAGE value="Remove logo from README" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove logo from README" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
