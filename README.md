@@ -30,3 +30,9 @@ As of version 2018.3, IntelliJ can sort CSS properties.
 To enable it go to `Settings -> Editor -> Code Style -> Style Sheets -> Arrangement tab`.
 To do the rearrangement, from main menu, select `Code -> Show Reformat File Dialog` and check `Rearrange code` checkbox.
 Checkbox state is remembered, so next time the code is reformatted it is also rearranged.
+
+#
+
+The following picture shows the effect of different placements of `<script>` element
+([see this post for more info](https://stackoverflow.com/a/24070373)):
+![`<script>` element placement](docs/script-element-placement.png)
