@@ -16,8 +16,10 @@ The following plugins are used in IntelliJ IDEA for developing this project:
 - LiveEdit: To automatically refresh the page when CSS or HTML is modified
 - WakaTime: To keep track of coding activity. [Plugin dashboard](https://wakatime.com/dashboard)
 
-<hr>
+#
 
 [Google style guides](https://google.github.io/styleguide/) is followed for coding.
 
-<hr>
+#
+
+[Can I use](https://caniuse.com/) could be used to check if browsers support a feature. 
