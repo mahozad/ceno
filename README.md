@@ -33,6 +33,5 @@ Checkbox state is remembered, so next time the code is reformatted it is also re
 
 #
 
-The following picture shows the effect of different placements of `<script>` element
-([see this post for more info](https://stackoverflow.com/a/24070373)):
+The following picture shows the effect of different placements of `<script>` element ([see this post for more info](https://stackoverflow.com/a/24070373)):
 ![`<script>` element placement](docs/script-element-placement.png)
