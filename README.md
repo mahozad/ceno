@@ -22,7 +22,19 @@ The following plugins are used in IntelliJ IDEA for developing this project:
 
 #
 
+To manage vendor-provided CSS and JavaScript files (like jQuery, Bootstrap and so on)
+and be able to add/change them in project dependencies, we can use [**webjars**](https://www.webjars.org/all).
+
+#
+
 [Can I use](https://caniuse.com/) could be used to check if browsers support a feature. 
+
+#
+
+Good charting libraries for html:
+- [Chart.js](https://github.com/chartjs/Chart.js)
+- [Recharts](http://recharts.org/en-US)
+- [Chartist](http://gionkunz.github.io/chartist-js/)
 
 #
 
