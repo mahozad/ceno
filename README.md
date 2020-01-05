@@ -18,6 +18,16 @@ The following plugins are used in IntelliJ IDEA for developing this project:
 
 #
 
+It's not needed to add .idea directory to VCS (it is by default ignored in the .gitignore file).
+If it is already added to git, you can remove it (just from git and not filesystem) by the command:
+- `git rm --cached -r foldername` for a folder and all its files
+- `git rm --cached filename` for a file
+and then do a commit.
+
+I prefer to keep the .iml file because it is the required file for an IntelliJ project.
+
+#
+
 [Google style guides](https://google.github.io/styleguide/) is followed for coding (Java, HTML, CSS, JavaScript).
 
 #
@@ -45,5 +55,8 @@ Checkbox state is remembered, so next time the code is reformatted it is also re
 
 #
 
-The following picture shows the effect of different placements of `<script>` element ([see this post for more info](https://stackoverflow.com/a/24070373)):
+The following picture shows the effect of different placements of `<script>` element
+(see [this](https://stackoverflow.com/a/24070373)
+and [this](https://stackoverflow.com/a/13062316)
+and [this](https://stackoverflow.com/a/41809792) for more info):
 ![`<script>` element placement](docs/script-element-placement.png)
