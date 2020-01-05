@@ -11,7 +11,6 @@ lombok.config
 .idea
 /out/
 *.iws
-*.iml
 *.ipr
 
 ### STS ###
