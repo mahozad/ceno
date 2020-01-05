@@ -8,6 +8,7 @@ lombok.config
 /build/
 
 ### IntelliJ IDEA ###
+.idea
 /out/
 *.iws
 *.iml
