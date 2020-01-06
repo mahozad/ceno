@@ -47,18 +47,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll() // permit requests to any url
-                .and().formLogin().usernameParameter("username").passwordParameter("password")
+        http.authorizeRequests()
+                .anyRequest().permitAll() // permit requests to any url
+                .and()
+                .formLogin()
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .loginProcessingUrl("/login")
                 .successHandler((request, response, authentication) ->
-                        response.getOutputStream().print(true)) // TODO: modify this
+                        response.getOutputStream().print(true) // TODO: modify this
+                )
                 .failureHandler((request, response, exception) ->
-                        response.getOutputStream().print("")) // TODO: modify this
-                .and().rememberMe().rememberMeParameter("rememberMe")
-                .and().logout()
+                        response.getOutputStream().print("") // TODO: modify this
+                )
+                .and()
+                .rememberMe()
+                .rememberMeParameter("rememberMe")
+                .and()
+                .logout()
                 .logoutSuccessHandler((request, response, authentication) ->
-                        response.sendRedirect(request.getHeader("referer")))
-                .and().cors().disable();
+                        response.sendRedirect(request.getHeader("referer"))
+                )
+                .and()
+                .cors().disable();
     }
 
     @Override
