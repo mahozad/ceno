@@ -60,6 +60,17 @@ Checkbox state is remembered, so next time the code is reformatted it is also re
 
 #
 
+A way to make the text in the element at most two lines ([see here](https://stackoverflow.com/a/11989697))
+`
+#someDiv {
+    line-height: 1.5em;
+    height: 3em;       /* height is 2x line-height, so two lines will display */
+    overflow: hidden;  /* prevents extra lines from being visible */
+}
+`
+
+#
+
 The following picture shows the effect of different placements of `<script>` element
 (see [this](https://stackoverflow.com/a/24070373)
 and [this](https://stackoverflow.com/a/13062316)
