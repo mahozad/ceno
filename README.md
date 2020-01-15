@@ -76,3 +76,10 @@ The following picture shows the effect of different placements of `<script>` ele
 and [this](https://stackoverflow.com/a/13062316)
 and [this](https://stackoverflow.com/a/41809792) for more info):
 ![`<script>` element placement](docs/script-element-placement.png)
+
+#
+
+If you use Ajax, jQuery expects some return value (could be empty) even when the server has responded with
+200 status code; in this case if no return value is returned, the jQuery error() callback will be called.
+To solve this we can return 204 status code as described [here](https://stackoverflow.com/a/34832455)
+or return a simple object as described [here](https://codingexplained.com/coding/java/spring-framework/returning-empty-json-object-spring-framework).
