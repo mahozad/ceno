@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/mahozad/ceno.svg?branch=master)](https://travis-ci.org/mahozad/ceno)
 
-![Screenshot](docs/screenshot.png)
+![Website preview](docs/screenshot.png)
 
 # Ceno 
 Ceno social news website
