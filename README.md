@@ -60,6 +60,17 @@ Checkbox state is remembered, so next time the code is reformatted it is also re
 
 #
 
+### Absolute vs relative paths
+An absolute path starts with the **`/`** character, a relative does not.
+
+Suppose we are in the following path (or file): `www.ceno.com/static/files`;
+the relative path `image.jpg` would become `www.ceno.com/static/files/image.jpg`
+while the absolute path `/image.jpg` would become `www.ceno.com/image.jpg`.
+
+That's all there is to absolute and relative paths!
+
+#
+
 A way to make the text in the element at most two lines ([see here](https://stackoverflow.com/a/11989697))
 `
 #someDiv {
