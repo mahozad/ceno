@@ -1,0 +1,51 @@
+Download and install node.js
+
+===========================================================
+
+Transpiling in IntelliJ: https://blog.jetbrains.com/webstorm/2015/05/ecmascript-6-in-webstorm-transpiling/
+
+===========================================================
+
+Install babel (first cd to C:/program files/nodejs/nodemodules or if access is denied to e.g. C:users/mahdi/):
+npm install --save-dev @babel/core @babel/cli @babel/preset-env
+npm install --save @babel/polyfill
+
+In IntelliJ file watcher window, click + and select "Babel"
+In the "Program" field choose node_modules/.bin/babel.cmd from the path where you installed it
+
+Replace "Argument" field: $FilePathRelativeToProjectRoot$ --out-file $FileDir$/$FileNameWithoutExtension$.transpiled.js --source-maps --presets "C:/Users/Mahdi/node_modules/@babel/preset-env"
+Note that --presets @babel/preset-env makes babel support ES2015+ (ES6+): https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000129490-Babel-path
+
+Replace "Output paths to refresh" field: $FileDir$\$FileNameWithoutExtension$.transpiled.js:$FileDir$\$FileNameWithoutExtension$.transpiled.js.map:$FileDir$\$FileNameWithoutExtension$.min.js
+
+===========================================================
+
+Install yuicompressor (again first cd to the desired folder):
+npm install -g yuicompressor
+
+In IntelliJ file watcher window, click + and select "YUI Compressor JS"
+Click on [...] next to scope field. Select "Project" from the dropdown below the "Pattern".
+Select the folder containig the transpiled js files and click "Include".
+Append *.transpiled.js at the end of the "Pattern".
+Click ok.
+In the "Program" field choose yuicopmressor.jar from where you installed it
+Replace "Argument" field: $FileName$ -o $FileNameWithoutAllExtensions$.min.js
+Replace "Output paths to refresh" field: $FileNameWithoutAllExtension$.min.js:
+
+===========================================================
+
+Install SCSS (again first cd to the desired folder):
+npm install -g sass
+
+In IntelliJ file watcher window, click + and select "SCSS"
+In the "Program" field choose scss.cmd from where you installed it
+
+===========================================================
+
+yuicompressor is installed already in the previous step.
+
+Just add "YUI Compressor CSS" and select the path to the jar.
+
+===========================================================
+
+DONE

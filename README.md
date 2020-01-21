@@ -17,10 +17,12 @@ The following plugins are used in IntelliJ IDEA for developing this project:
 - File Watchers [(follow this guide)](https://www.jetbrains.com/help/idea/compressing-css.html)
   - SCSS: To automatically convert SCSS files to CSS
   - YUI Compressor CSS: To automatically minify CSS files
-  - YUI Compressor JS: To automatically minify JavaScript files
+  - Babel: To transpile ES6+ JavaScript to older ES5 JavaScript
+  - YUI Compressor JS: To automatically minify JavaScript files (does not support ES6 and above)
 - LiveEdit: To automatically refresh the page when CSS or HTML is modified
 - WakaTime: To keep track of coding activity. [View your statistics here.](https://wakatime.com/dashboard)
 
+See [file-watchers.txt](file-watchers.txt) for instructions on how to install the file watchers.
 ### VCS
 
 It's not needed to add .idea directory to VCS (it is by default ignored in the .gitignore file).
