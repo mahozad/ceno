@@ -110,3 +110,7 @@ If you use Ajax, jQuery expects some return value (could be empty) even when the
 200 status code; in this case if no return value is returned, the jQuery error() callback will be called.
 To solve this we can return 204 status code as described [here](https://stackoverflow.com/a/34832455)
 or return a simple object as described [here](https://codingexplained.com/coding/java/spring-framework/returning-empty-json-object-spring-framework).
+
+#
+
+When submitting a form, follow [Post/Redirect/Get Pattern](https://www.baeldung.com/spring-web-flash-attributes#1-postredirectget-pattern)
