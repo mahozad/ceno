@@ -17,7 +17,7 @@ The following plugins are used in IntelliJ IDEA for developing this project:
 - File Watchers [(follow this guide)](https://www.jetbrains.com/help/idea/compressing-css.html)
   - SCSS: To automatically convert SCSS files to CSS
   - YUI Compressor CSS: To automatically minify CSS files
-  - Babel: To transpile ES6+ JavaScript to older ES5 JavaScript
+  - Babel: To transpile ES6+ and React JSX JavaScript to older ES5 JavaScript
   - YUI Compressor JS: To automatically minify JavaScript files (does not support ES6 and above)
 - LiveEdit: To automatically refresh the page when CSS or HTML is modified
 - WakaTime: To keep track of coding activity. [View your statistics here.](https://wakatime.com/dashboard)

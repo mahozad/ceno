@@ -6,15 +6,15 @@ Transpiling in IntelliJ: https://blog.jetbrains.com/webstorm/2015/05/ecmascript-
 
 ===========================================================
 
-Install babel (first cd to C:/program files/nodejs/nodemodules or if access is denied to e.g. C:users/mahdi/):
-npm install --save-dev @babel/core @babel/cli @babel/preset-env
+Install babel (first cd to C:/Program Files/nodejs or if access is denied to e.g. C:/Users/Mahdi/):
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-react
 npm install --save @babel/polyfill
 
 In IntelliJ file watcher window, click + and select "Babel"
 In the "Program" field choose node_modules/.bin/babel.cmd from the path where you installed it
 
-Replace "Argument" field: $FilePathRelativeToProjectRoot$ --out-file $FileDir$/$FileNameWithoutExtension$.transpiled.js --source-maps --presets "C:/Users/Mahdi/node_modules/@babel/preset-env"
-Note that --presets @babel/preset-env makes babel support ES2015+ (ES6+): https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000129490-Babel-path
+Replace "Argument" field: $FilePathRelativeToProjectRoot$ --out-file $FileDir$/$FileNameWithoutExtension$.transpiled.js --source-maps --presets="C:/Users/Mahdi/node_modules/@babel/preset-env","C:/Users/Mahdi/node_modules/@babel/preset-react"
+Note that @babel/preset-env makes babel support ES2015+ (ES6+) and @babel/preset-react makes babel support React JSX syntax: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000129490-Babel-path
 
 Replace "Output paths to refresh" field: $FileDir$\$FileNameWithoutExtension$.transpiled.js:$FileDir$\$FileNameWithoutExtension$.transpiled.js.map:$FileDir$\$FileNameWithoutExtension$.min.js
 
