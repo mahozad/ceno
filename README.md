@@ -26,6 +26,11 @@ See [file-watchers.txt](file-watchers.txt) for instructions on how to install th
 
 #
 
+To disable TypeScript error its service can be disabled in IntelliJ:
+Go to `Settings` -> `Languages & Frameworks` -> `TypeScript` -> uncheck `TypeScript Language Service`
+
+#
+
 To add support for jQuery docs and autocomplete, add its library to IntelliJ:
 Go to `Settings` -> `Languages & Frameworks` -> `JavaScript` -> `Libraries` -> `Download...` -> search jquery and install it.
 
