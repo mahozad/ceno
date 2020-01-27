@@ -6,35 +6,55 @@ Transpiling in IntelliJ: https://blog.jetbrains.com/webstorm/2015/05/ecmascript-
 
 ===========================================================
 
-If you develop in TypeScript language there is no need for babel.
-See README.md on how to configure TypeScript and then return here and follow the next instruction.
+Do not use IntelliJ compiler for transpiling TypeScript to JS because the result sometimes doesn't work on browsers.
+Use babel instead. If for any reason you want to use IntelliJ compiler do this:
+Go to `Settings` -> `Languages & Frameworks` -> `TypeScript`
+Note that Node.js should be installed on system.
+Check `Recompile on Changes` for the IDE to automatically compile the TypeScript files on changes.
+Some of the options worth including (see [list of all options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)):
+- Target JS version (the default is ES3): `--target ES6`
+- Generate source map: `--sourceMap`
+- Inline sourcemaps in the JS file: `--inlineSourceMap`
+- Prettify compile errors and messages: `--pretty`
+- Output directory: `--outDir src/main/webapp/static/script/js`
+
+===========================================================
 
 Install babel (first cd to C:/Program Files/nodejs or if access is denied to e.g. C:/Users/Mahdi/):
-npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-react
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-typescript @babel/preset-react
 npm install --save @babel/polyfill
 
 In IntelliJ file watcher window, click + and select "Babel"
 In the "Program" field choose node_modules/.bin/babel.cmd from the path where you installed it
 
-Replace "Argument" field: $FilePathRelativeToProjectRoot$ --out-file $FileDir$/$FileNameWithoutExtension$.transpiled.js --source-maps --presets="C:/Users/Mahdi/node_modules/@babel/preset-env","C:/Users/Mahdi/node_modules/@babel/preset-react"
-Note that @babel/preset-env makes babel support ES2015+ (ES6+) and @babel/preset-react makes babel support React JSX syntax: https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000129490-Babel-path
+If you develop in TypeScript choose TypeScript from file type otherwise leave that to JavaScript.
 
-Replace "Output paths to refresh" field: $FileDir$\$FileNameWithoutExtension$.transpiled.js:$FileDir$\$FileNameWithoutExtension$.transpiled.js.map:$FileDir$\$FileNameWithoutExtension$.min.js
+Replace "Argument" field:
+for JS: $FilePathRelativeToProjectRoot$ --out-file $FileDir$/$FileNameWithoutExtension$.transpiled.js --source-maps --presets="C:/Users/Mahdi/node_modules/@babel/preset-env"
+for TS: $FilePathRelativeToProjectRoot$ --out-file $FileDir$/js/$FileNameWithoutExtension$.js --source-maps --presets="C:/Users/Mahdi/node_modules/@babel/preset-env","C:/Users/Mahdi/node_modules/@babel/preset-typescript"
+for JSX: $FilePathRelativeToProjectRoot$ --out-file $FileDir$/$FileNameWithoutExtension$.transpiled.js --source-maps --presets="C:/Users/Mahdi/node_modules/@babel/preset-env","C:/Users/Mahdi/node_modules/@babel/preset-react"
+Note that @babel/preset-env makes babel support ES2015+ (ES6+) and
+@babel/preset-typescript makes babel support TypeScript and
+@babel/preset-react makes babel support React JSX syntax
+(https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000129490-Babel-path)
 
+Replace "Output paths to refresh" field:
+$FileDir$\$FileNameWithoutExtension$.transpiled.js:$FileDir$\$FileNameWithoutExtension$.transpiled.js.map:$FileDir$\$FileNameWithoutExtension$.min.js
 ===========================================================
 
 Install yuicompressor (again first cd to the desired folder):
 npm install -g yuicompressor
 
-In IntelliJ file watcher window, click + and select "YUI Compressor JS"
-Click on [...] next to scope field. Select "Project" from the dropdown below the "Pattern".
-Select the folder containig the transpiled js files and click "Include".
-Append *.transpiled.js at the end of the "Pattern".
-If using TypeScript, append only * at the end of the "Pattern".
-Click ok.
-In the "Program" field choose yuicopmressor.jar from where you installed it
+In IntelliJ file watcher window, click + and select "YUI Compressor JS".
+Leave the "Scope" field to "Project Files". If the YUI loops all files infinitely then try bellow method:
+    Click on [...] next to scope field. Select "Project" from the dropdown below the "Pattern".
+    Select the folder containig the transpiled js files and click "Include".
+    Append *.transpiled.js at the end of the "Pattern".
+    If using TypeScript, append only * at the end of the "Pattern".
+    Click ok.
+In the "Program" field choose yuicopmressor.jar from where you installed it.
 Replace "Argument" field: $FileName$ -o $FileNameWithoutAllExtensions$.min.js
-Replace "Output paths to refresh" field: $FileNameWithoutAllExtension$.min.js:
+Replace "Output paths to refresh" field: $FileNameWithoutAllExtensions$.min.js:$FileNameWithoutAllExtensions$.map
 
 ===========================================================
 
