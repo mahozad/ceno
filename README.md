@@ -27,7 +27,7 @@ See [file-watchers.txt](file-watchers.txt) for instructions on how to install th
 #
 
 To add support for jQuery docs and autocomplete, add its library to IntelliJ:
-Go to `Settings` -> `Languages & Frameworks` -> `JavaScript` -> `Libraries` -> `Add...` -> search jquery and install it.
+Go to `Settings` -> `Languages & Frameworks` -> `JavaScript` -> `Libraries` -> `Download...` -> search jquery and install it.
 
 #
 
