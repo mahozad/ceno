@@ -23,6 +23,11 @@ The following plugins are used in IntelliJ IDEA for developing this project:
 - WakaTime: To keep track of coding activity. [View your statistics here.](https://wakatime.com/dashboard)
 
 See [file-watchers.txt](file-watchers.txt) for instructions on how to install the file watchers.
+
+#
+
+To configure IntelliJ to recognize React JSX syntax, set the JavaScript version in settings to JSX.
+
 ### VCS
 
 It's not needed to add .idea directory to VCS (it is by default ignored in the .gitignore file).
