@@ -31,7 +31,10 @@ You can configure the compiler settings in:
 `Settings` -> `Languages & Frameworks` -> `TypeScript`
 Note that Node.js should be installed.
 Check `Recompile on Changes` for the IDE to automatically compile the files on changes.
-You can specify the target JS version in `Options` (the default seems to be ES5): `--target es6`
+Some of the options worth including (see [list of all options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)):
+Target JS version (the default seems to be ES3): `--target ES6`
+Generate source map: `--sourceMap`
+Prettify compile errors and messages: `--pretty`
 
 #
 
