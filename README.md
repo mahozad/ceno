@@ -26,6 +26,15 @@ See [file-watchers.txt](file-watchers.txt) for instructions on how to install th
 
 #
 
+If you want to develop with TypeScript, then IntelliJ has default JS compiler.
+You can configure the compiler settings in:
+`Settings` -> `Languages & Frameworks` -> `TypeScript`
+Note that Node.js should be installed.
+Check `Recompile on Changes` for the IDE to automatically compile the files on changes.
+You can specify the target JS version in `Options` (the default seems to be ES5): `--target es6`
+
+#
+
 To configure IntelliJ to recognize React JSX syntax, set the JavaScript version in settings to JSX.
 
 ### VCS
