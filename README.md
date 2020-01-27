@@ -17,7 +17,7 @@ The following plugins are used in IntelliJ IDEA for developing this project:
 - File Watchers [(follow this guide)](https://www.jetbrains.com/help/idea/compressing-css.html)
   - SCSS: To automatically convert SCSS files to CSS
   - YUI Compressor CSS: To automatically minify CSS files
-  - Babel: To transpile ES6+ and React JSX JavaScript to older ES5 JavaScript
+  - Babel (not needed if you use TypeScript. see the next note): To transpile ES6+ and React JSX JavaScript to older ES5 JavaScript
   - YUI Compressor JS: To automatically minify JavaScript files (does not support ES6 and above)
 - LiveEdit: To automatically refresh the page when CSS or HTML is modified
 - WakaTime: To keep track of coding activity. [View your statistics here.](https://wakatime.com/dashboard)
@@ -32,9 +32,11 @@ You can configure the compiler settings in:
 Note that Node.js should be installed.
 Check `Recompile on Changes` for the IDE to automatically compile the files on changes.
 Some of the options worth including (see [list of all options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)):
-Target JS version (the default seems to be ES3): `--target ES6`
-Generate source map: `--sourceMap`
-Prettify compile errors and messages: `--pretty`
+- Target JS version (the default is ES3): `--target ES6`<br>
+- Generate source map: `--sourceMap`
+- Inline sourcemaps in the JS file: `--inlineSourceMap`
+- Prettify compile errors and messages: `--pretty`
+- Output directory: `--outDir src/main/webapp/static/script/js`
 
 #
 

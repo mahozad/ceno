@@ -6,6 +6,9 @@ Transpiling in IntelliJ: https://blog.jetbrains.com/webstorm/2015/05/ecmascript-
 
 ===========================================================
 
+If you develop in TypeScript language there is no need for babel.
+See README.md on how to configure TypeScript and then return here and follow the next instruction.
+
 Install babel (first cd to C:/Program Files/nodejs or if access is denied to e.g. C:/Users/Mahdi/):
 npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-react
 npm install --save @babel/polyfill
@@ -27,6 +30,7 @@ In IntelliJ file watcher window, click + and select "YUI Compressor JS"
 Click on [...] next to scope field. Select "Project" from the dropdown below the "Pattern".
 Select the folder containig the transpiled js files and click "Include".
 Append *.transpiled.js at the end of the "Pattern".
+If using TypeScript, append only * at the end of the "Pattern".
 Click ok.
 In the "Program" field choose yuicopmressor.jar from where you installed it
 Replace "Argument" field: $FileName$ -o $FileNameWithoutAllExtensions$.min.js
