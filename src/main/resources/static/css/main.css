@@ -11,7 +11,7 @@
 
 /* prevent animations to run while the page is loading;
 /* when the page is fully loaded, this class is removed by javascript
-/* Attention: alternative approaches (instead adding class) were tried but did not work */
+/* Attention: alternative approaches (instead of adding class) were tried but did not work */
 .preload * {
     -moz-transition: none !important;
     -o-transition: none !important;
