@@ -95,6 +95,15 @@ Checkbox state is remembered, so next time the code is reformatted it is also re
 
 #
 
+To debug JavaScript code in IntelliJ, install "JetBrains IDE Support" extension on chrome.
+Set your desired breakpoint(s) in the IDE.
+In chrome, right click on the JetBrains extension icon and select "Inspect in IDEA".
+Reload the page or do something that reaches the breakpoint.
+
+Note that for this to correctly work, if you code in TypeScript or use the minified version of the js file, the .map file of the js file should be provided.   
+
+#
+
 ### Absolute vs relative paths
 An absolute path starts with the **`/`** character, a relative does not.
 
