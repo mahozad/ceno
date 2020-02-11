@@ -68,6 +68,10 @@ select "Unshelve..." -> commit
 
 #
 
+For a good article about JavaScript modules click [here](https://intellij-support.jetbrains.com/hc/en-us/community/posts/360002146919-The-Significance-of-Modules-in-JavaScript-Applications)
+
+#
+
 To manage vendor-provided CSS and JavaScript files (like jQuery, Bootstrap and so on)
 and be able to add/change them in project dependencies, we can use [**webjars**](https://www.webjars.org/all).
 
