@@ -49,6 +49,8 @@ public class CenoApplication {
      *  and san-serif for body so don't use serif with serif or san-serif with san-serif
      */
 
+    // https://www.javaguides.net/2018/11/spring-boot-spring-mvc-spring-security-hibernate-mysql-tutorial.html1
+
     // from a book: "I want about one info-level log message for every significant application
     // event."
 
