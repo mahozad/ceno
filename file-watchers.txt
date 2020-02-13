@@ -21,7 +21,7 @@ Some of the options worth including (see [list of all options](https://www.types
 ===========================================================
 
 Install babel (first cd to C:/Program Files/nodejs or if access is denied to e.g. C:/Users/Mahdi/):
-npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-typescript @babel/preset-react
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-typescript babel-minify @babel/preset-react
 npm install --save @babel/polyfill
 
 In IntelliJ file watcher window, click + and select "Babel"
@@ -40,6 +40,36 @@ Note that @babel/preset-env makes babel support ES2015+ (ES6+) and
 
 Replace "Output paths to refresh" field:
 $FileDir$\$FileNameWithoutExtension$.transpiled.js:$FileDir$\$FileNameWithoutExtension$.transpiled.js.map:$FileDir$\$FileNameWithoutExtension$.min.js
+
+If the script files contain JS modules and you don't want the preset-env of babel to convert the JS modules to CommonJS modules (require(...)),
+config the babel (specifically its preset-env) as follows:
+- Create a file at the root directory of the project and name it babel.config.json (babel would read its config from this file).
+- Edit its content as follows:
+    {
+      "presets": [
+        [
+          "C:/Users/Mahdi/node_modules/@babel/preset-env",
+          {
+            "targets": {
+              "esmodules": true
+            },
+            "modules": false
+          }
+        ],
+        [
+          "C:/Users/Mahdi/node_modules/@babel/preset-typescript"
+        ],
+        [
+          "C:/Users/Mahdi/node_modules/babel-preset-minify"
+        ]
+      ]
+    }
+
+(see https://babeljs.io/docs/en/babel-preset-env for more info about configuring preset-env)
+- Now that we have configured babel here, there is no need to specify presets in the program arguments
+    so remove the --presets=... in "Argument" field of babel file watcher.
+
+Note: YUICompressor won't work because the generated syntax is new JavaScript syntax. Use babel-preset-minify instead.
 ===========================================================
 
 Install yuicompressor (again first cd to the desired folder):
