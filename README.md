@@ -95,6 +95,16 @@ Checkbox state is remembered, so next time the code is reformatted it is also re
 
 #
 
+To use ES modules in JavaScript, if a file doesn't provide exports, use this form of input:
+
+`import "/static/vendor/jquery/jquery-3.3.1.js";`
+
+Importing in the form `import "..."` is exactly like placing `<script>` element in the HTML head;
+the script is run once and order of `import "..."`s is important (e.g. try to reorder jquery import and see what happens).
+See [this SO question](https://stackoverflow.com/q/41179828)
+
+#
+
 To debug JavaScript code in IntelliJ, install "JetBrains IDE Support" extension on chrome.
 Set your desired breakpoint(s) in the IDE.
 In chrome, right click on the JetBrains extension icon and select "Inspect in IDEA".
