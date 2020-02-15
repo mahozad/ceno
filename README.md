@@ -99,6 +99,10 @@ Checkbox state is remembered, so next time the code is reformatted it is also re
 
 #
 
+To integrate Jira or other task management tools on IntelliJ, see [here](https://www.jetbrains.com/help/idea/managing-tasks-and-context.html)
+
+#
+
 To use ES modules in JavaScript, if a file doesn't provide exports, use this form of input:
 
 `import "/static/vendor/jquery/jquery-3.3.1.js";`
