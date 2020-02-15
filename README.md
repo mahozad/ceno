@@ -50,6 +50,10 @@ I prefer to keep the .iml file because it is the required file for an IntelliJ p
 
 #
 
+For files to ignore and not to ignore in .idea directory see [this article](https://intellij-support.jetbrains.com/hc/en-us/articles/206544839).
+
+#
+
 If it's needed to switch to another VCS branch but there is uncommitted
 changes that we do not want to commit right now, there is an option in IntelliJ just for this:
 
