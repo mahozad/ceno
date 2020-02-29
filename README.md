@@ -38,6 +38,10 @@ Go to `Settings` -> `Languages & Frameworks` -> `JavaScript` -> `Libraries` -> `
 
 To configure IntelliJ to recognize React JSX syntax, set the JavaScript version in settings to JSX.
 
+#
+
+[Here](https://stackoverflow.com/q/2952196) and [Here](http://ant.apache.org/manual/dirtasks.html#patterns) describe Ant path style
+
 ### VCS
 
 It's not needed to add .idea directory to VCS (it is by default ignored in the .gitignore file).
