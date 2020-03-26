@@ -171,27 +171,6 @@ nav {
     stroke-linejoin: round;
 }
 
-.brand-logo.animate .C {
-    /* The number is total length of the stoke. To get it I made the animation in
-    [http://shapeshifter.design] and then exported it as svg sprite sheet and then probed the svg.
-    For more info on animating svg strokes see [https://css-tricks.com/svg-line-animation-works/] */
-    stroke-dasharray: 47.040881;
-    stroke-dashoffset: 47.040881;
-    animation: animate-stroke 500ms ease-in-out 1 forwards;
-}
-
-.brand-logo.animate .E {
-    stroke-dasharray: 14.527;
-    stroke-dashoffset: 14.527;
-    animation: animate-stroke 300ms ease 200ms 1 forwards;
-}
-
-@keyframes animate-stroke {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
 .search-container {
     align-items: center;
     display: flex;

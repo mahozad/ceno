@@ -42,11 +42,20 @@
     </div>
     <div class="logo-search-container">
       <a th:href="@{/}" th:title="#{name}">
-        <svg class="brand-logo animate" width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <svg class="brand-logo" width="32" height="32" version="1.1" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <g stroke-width="4.56763792">
-            <path class="C" d="m12.941641 27.61861c-5.3289107 0-10.6578224-3.80636-10.6578224-10.65782s5.3289117-10.65782 10.6578224-10.65782c4.567638 0 8.75464 0.99539 12.941641-1.90319"></path>
-            <path class="E" d="m14.083556 16.123384c2.701379-1.92435 5.856988-2.055442 6.851456-2.055438 0.994466 5e-6 4.150075-0.131087 6.851454-2.055437"></path>
-            <path class="E" d="m15.986736 23.736114c2.701379-1.92435 5.856988-2.055442 6.851456-2.055438 0.994466 5e-6 4.150075-0.131087 6.851454-2.055437"></path>
+            <path d="m12.941641 27.61861c-5.3289107 0-10.6578224-3.80636-10.6578224-10.65782s5.3289117-10.65782 10.6578224-10.65782c4.567638 0 8.75464 0.99539 12.941641-1.90319" stroke-dasharray="47" stroke-dashoffset="47">
+              <animate id="anim1" attributeName="stroke-dashoffset" from="47" to="0" dur="1500ms" fill="freeze" calcMode="spline" keyTimes="0; 1" keySplines=".42,0,.58,1" begin="0s; anim2.end"></animate>
+              <animate id="anim2" attributeName="stroke-dashoffset" from="94" to="47" dur="1500ms" fill="freeze" calcMode="spline" keyTimes="0; 1" keySplines=".42,0,.58,1" begin="anim1.end + 10s"></animate>
+            </path>
+            <path d="m14.083556 16.123384c2.701379-1.92435 5.856988-2.055442 6.851456-2.055438 0.994466 5e-6 4.150075-0.131087 6.851454-2.055437" stroke-dashoffset="15" stroke-dasharray="15">
+              <animate id="anim3" attributeName="stroke-dashoffset" from="15" to="0" dur="500ms" fill="freeze" calcMode="spline" keyTimes="0; 1" keySplines=".42,0,.58,1" begin="anim1.begin + 1200ms"></animate>
+              <animate id="anim4" attributeName="stroke-dashoffset" from="30" to="15" dur="500ms" fill="freeze" calcMode="spline" keyTimes="0; 1" keySplines=".42,0,.58,1" begin="anim2.begin + 1200ms"></animate>
+            </path>
+            <path d="m15.986736 23.736114c2.701379-1.92435 5.856988-2.055442 6.851456-2.055438 0.994466 5e-6 4.150075-0.131087 6.851454-2.055437" stroke-dashoffset="15" stroke-dasharray="15">
+              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="500ms" fill="freeze" calcMode="spline" keyTimes="0; 1" keySplines=".42,0,.58,1" begin="anim3.begin + 150ms"></animate>
+              <animate attributeName="stroke-dashoffset" from="30" to="15" dur="500ms" fill="freeze" calcMode="spline" keyTimes="0; 1" keySplines=".42,0,.58,1" begin="anim4.begin + 150ms"></animate>
+            </path>
           </g>
         </svg>
       </a>
