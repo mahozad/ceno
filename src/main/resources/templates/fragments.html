@@ -173,7 +173,7 @@
   <header class="card-header">
     <div class="author-info">
       <img class="card-avatar" onerror="this.src='/img/placeholder.svg'"
-           th:src=" ${'/users/avatars/' + post.author.username}" th:alt="${post.author.username}"/>
+           th:src="@{|/users/avatars/${post.author.username}|}" th:alt="${post.author.username}"/>
       <div class="author">
         <div class="usr-name" th:text="${post.author.username}">Username</div>
         <div class="score" th:fragment="score" th:with="score=${post.author.score}">
@@ -208,7 +208,7 @@
         <div class="share-content">
           <div class="arrow"></div>
           <a th:fragment="share" th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}"
-             th:href="${share.url + post.url}" target="_blank" rel="noopener">
+             th:href="@{|${share.url + post.url}|}" target="_blank" rel="noopener">
             <img th:src="@{|/img/ic-soc-${share.name}.svg|}" th:alt="${share.name}"
                  th:title="${'Share on ' + share.name}"/>
           </a>
