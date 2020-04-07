@@ -310,7 +310,11 @@
       </div>
     </div>
   </div>
-  <div class="copyright" th:text="' © ' + #{name} + ' ' + ${T(java.time.LocalDate).now().getYear()}"></div>
+  <div class="copyright">
+    <span>©</span>
+    <span th:text="#{name}"></span>
+    <span th:text="${#calendars.format(#calendars.createToday(), 'yyyy')}"></span>
+  </div>
 </footer>
 
 </body>
