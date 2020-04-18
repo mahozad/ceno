@@ -12,7 +12,7 @@
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <!-- For android browsers [https://stackoverflow.com/q/26960703] -->
   <meta name="theme-color" th:content="${#themes.code('primary-color')}"/>
-  <link rel="icon" type="image/png" sizes="32x32" th:href="@{|/img/favicon-${#themes.code('name')}.png|}"/>
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{${#themes.code('favicon')}}"/>
   <link rel="stylesheet" th:href="@{/css/main.min.css}"/>
   <style th:text="':root{'
         + '--primary-color:' + ${#themes.code('primary-color')} + ';'
