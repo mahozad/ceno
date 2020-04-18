@@ -15,7 +15,7 @@
 <main>
   <div th:replace="fragments::prompt"></div>
   <div class="page-container">
-    <section class="article-container" th:attr="data-post-id=${post.id}">
+    <section class="article-container" th:data-post-id="${post.id}">
       <div th:include="fragments::card-file" class="article-file"></div>
       <div class="main-content">
         <div class="article-header">

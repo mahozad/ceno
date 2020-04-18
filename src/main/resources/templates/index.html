@@ -13,7 +13,7 @@
 <main>
   <div th:replace="fragments::prompt"></div>
   <section class="top-cards">
-    <div class="card" th:each="post:${topPosts}" th:attr="data-post-id=${post.id}">
+    <div class="card" th:each="post:${topPosts}" th:data-post-id="${post.id}">
       <div th:replace="fragments::card-top-section"></div>
       <div class="card-bottom">
         <div class="hr"></div>

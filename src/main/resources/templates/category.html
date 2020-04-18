@@ -19,7 +19,7 @@
     </div>
   </div>
   <section id="results-container">
-    <div class="card" th:fragment="card" th:each="post:${posts}" th:attr="data-post-id=${post.id}">
+    <div class="card" th:fragment="card" th:each="post:${posts}" th:data-post-id="${post.id}">
       <div th:replace="fragments::card-top-section"></div>
       <div class="card-bottom">
         <div class="hr"></div>
