@@ -27,7 +27,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'ir'
 version = '0.9.0-SNAPSHOT'
-sourceCompatibility = 12
+sourceCompatibility = 11
 
 repositories {
     jcenter()
