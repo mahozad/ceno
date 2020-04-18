@@ -11,14 +11,10 @@
   <meta name="_csrf" th:content="${_csrf.token}"/>
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <!-- For android browsers [https://stackoverflow.com/q/26960703] -->
-  <meta name="theme-color" th:content="${#themes.code('primary-color')}"/>
+  <meta name="theme-color" th:content="${#themes.code('android-toolbar-color')}"/>
   <link rel="icon" type="image/png" sizes="32x32" th:href="@{${#themes.code('favicon')}}"/>
+  <link rel="stylesheet" th:href="@{${#themes.code('colors')}}"/>
   <link rel="stylesheet" th:href="@{/css/main.min.css}"/>
-  <style th:text="':root{'
-        + '--primary-color:' + ${#themes.code('primary-color')} + ';'
-        + '--secondary-color:' + ${#themes.code('secondary-color')} + ';'
-        + '--tertiary-color:' + ${#themes.code('tertiary-color')} + ';' + '}'">
-  </style>
   <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script> <!-- todo: replace with cdn -->
   <script th:src="@{/js/main.min.js}" defer></script>
 </head>
