@@ -259,8 +259,7 @@
           <a th:href="@{http://www.twitter.com/ceno}" target="_blank" rel="noopener">
             <img class="follow-us-image" alt="twitter" th:src="@{/img/ic-soc-twitter.svg}">
           </a>
-          <a th:if="${#httpServletRequest.requestURI.startsWith('/categories')} " th:href="@{|/rss/${catName}|}">
-            <!--suppress RequiredAttributes -->
+          <a th:if="${#request.requestURI.startsWith('/categories')} " th:href="@{|/rss/${catName}|}">
             <img class="follow-us-rss" alt="rss" th:src="@{/img/ic-rss.svg}"/>
           </a>
         </div>
