@@ -129,7 +129,7 @@
           <button type="submit" class="btn" th:text="#{send}"></button>
         </div>
         <div class="comments">
-          <p th:text="${post.commentsCount} + ' ' + #{comments} + (${post.commentsCount > 0} ? ':':'')"></p>
+          <p th:text="#{title.post-comments(${post.commentsCount})}"></p>
           <div class="comment" th:each="comment:${post.comments}">
             <div class="comment-author">
               <img th:alt="${comment.author.username}" onerror="this.src='/img/placeholder.svg'"

@@ -16,8 +16,7 @@
     <img th:if="${posts.isEmpty()}" th:src="@{/img/ic-lamp.svg}" alt="no results">
     <div th:if="${posts.isEmpty()}">No results found!</div>
     <div th:if="${not posts.isEmpty()}">
-      <!--/* TODO: Use standard Java choice formatting. See https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/MessageFormat.html */-->
-      <span th:text="${posts.size()} + ' result' + ${posts.size() > 1 ? 's':''} + ' found'"></span>
+      <span th:text="#{title.search-result(${posts.size()})}"></span>
       <span th:if="${posts.size()} == ${@environment.getProperty('search.max-results')}">
         <!--/* TODO: Refactor the following to reference the constant instead of property */-->
         (only top <span th:text="${@environment.getProperty('search.max-results')}"></span> displayed)
