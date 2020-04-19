@@ -2,9 +2,9 @@
 <html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-<!-- head -->
+<!--/* head */-->
 <head th:fragment="head(title, description, stylesheet)">
-  <!-- Meta elements -->
+  <!--/* Meta elements */-->
   <meta charset="UTF-8"/>
   <meta name="description" th:replace="${description}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,28 +13,28 @@
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <meta name="theme-color" th:content="${#themes.code('android-toolbar-color')}"/>
 
-  <!-- Page title -->
+  <!--/* Page title */-->
   <title th:replace="${title}"></title>
 
-  <!-- Stylesheets -->
+  <!--/* Stylesheets */-->
   <link rel="icon" type="image/png" sizes="32x32" th:href="@{${#themes.code('favicon')}}"/>
   <link rel="stylesheet" th:href="@{${#themes.code('colors')}}"/>
   <link rel="stylesheet" th:href="@{/css/main.min.css}"/>
   <link th:replace="${stylesheet}"/>
 
-  <!-- Scripts -->
-  <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script> <!-- todo: replace with cdn -->
+  <!--/* Scripts */-->
+  <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script> <!--/* TODO: Replace with cdn */-->
   <script th:src="@{/js/main.min.js}" defer></script>
 </head>
 
 <body>
 
-<!-- page prompt -->
+<!--/* Page prompt */-->
 <div class="page-prompt" th:fragment="prompt" th:if="${prompt != null}">
   <div class="page-prompt-text" th:text="#{${prompt}}"></div>
 </div>
 
-<!-- navigation bar -->
+<!--/* Top navigation bar */-->
 <nav th:fragment="navigation">
   <div class="nav-container">
     <div class="hamburger-icon hidden">&#9776;</div>
@@ -113,7 +113,7 @@
   </div>
 </nav>
 
-<!-- login and sign up -->
+<!--/* Login and sign up dialogs */-->
 <div th:fragment="login-dialog" id="login-dialog" sec:authorize="!isAuthenticated()">
   <div class="log-form">
     <span class="close">&times;</span>
@@ -172,7 +172,7 @@
   </div>
 </div>
 
-<!-- card top section -->
+<!--/* Card top section */-->
 <div class="top-container" th:fragment="card-top-section">
   <header class="card-header">
     <div class="author-info">
@@ -241,20 +241,20 @@
   </article>
 </div>
 
-<!-- card chips -->
+<!--/* Card chips */-->
 <div class="chips-container" th:fragment="card-chips">
   <div th:each="cat:${post.categories}">
     <a class="chip" th:text="${cat.name}" th:href="@{|/categories/${cat.name}|}"></a>
   </div>
 </div>
 
-<!-- card read more -->
+<!--/* Card read more */-->
 <a class="read-more" th:fragment="card-read-more" th:href="@{|/posts/${post.url}|}" th:text="#{card.read-more}"></a>
 
-<!-- card date -->
+<!--/* Card date */-->
 <div class="card-date" th:fragment="card-datetime" th:text="${@dateTimeFormatter.formatPostDataTime(post)}"></div>
 
-<!-- footer -->
+<!--/* Page footer */-->
 <footer class="page-footer" th:fragment="footer">
   <div class="footer-container">
     <div class="up-foot">

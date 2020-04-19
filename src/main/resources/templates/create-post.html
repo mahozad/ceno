@@ -13,7 +13,7 @@
 <main>
   <div class="form-container">
 
-    <!-- todo: either use name="..." attribute or th:field="*{...} attribute in inputs" -->
+    <!--/* TODO: Either use name="..." attribute or th:field="*{...} attribute in inputs" */-->
 
     <form id="post-submit" th:action="@{/posts/submit}" method="post"
           enctype="multipart/form-data" novalidate th:object="${post}">
@@ -33,9 +33,7 @@
           <div class="prompt" th:text="#{prompt.required}">Required</div>
         </div>
         <div class="input-np inp-article">
-          <!-- do not refactor this textarea-->
-          <textarea th:field="*{article}" class="flat-inp-np multiline-text"
-                    name="article" id="inp-article" required></textarea>
+          <textarea th:field="*{article}" class="flat-inp-np multiline-text" name="article" id="inp-article" required></textarea>
           <span class="highlight-np"></span>
           <label for="inp-article" class="label-np" th:text="#{article}">Article</label>
           <div class="prompt" th:text="#{prompt.required}">Required</div>
