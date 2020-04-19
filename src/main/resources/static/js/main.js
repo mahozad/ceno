@@ -524,14 +524,18 @@ $(".cat-add-ico").on("click touch", function () {
 
 //======= change language =========\\
 $(".lang").on("click touch", function () {
+    let searchParams = new URLSearchParams(window.location.search); // NOTE: IE is not supported
     var lang = $(this).attr("data-lang-name");
-    location.replace("?lang=" + lang);
+    searchParams.set("lang", lang);
+    location.replace("?" + searchParams.toString());
 });
 
 //======= change theme ========\\
 $(".theme").on("click touch", function () {
+    let searchParams = new URLSearchParams(window.location.search); // NOTE: IE is not supported
     var theme = $(this).attr("data-theme-name");
-    location.replace("?theme=" + theme);
+    searchParams.set("theme", theme);
+    location.replace("?" + searchParams.toString());
 });
 
 //================ SSE streams ================\\
