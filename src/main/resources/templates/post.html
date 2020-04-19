@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <th:block th:include="fragments::head(titleAppend=${' - ' + post.title})"/>
-  <!-- TODO: extract common css of all pages in main.css into another css file -->
+
+<head th:replace="fragments::head(~{this::title}, ~{this::meta}, ~{this::link})">
+  <title th:text="#{page-title.post(${post.title})}"></title>
   <meta name="description" th:content="${post.summary}"/>
   <link rel="stylesheet" th:href="@{/css/post.min.css}">
 </head>

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html th:lang="${#locale}" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments::head(titleAppend=' - ' + #{search} + ' ' + ${query})"></head>
+
+<head th:replace="fragments::head(~{this::title}, ~{}, ~{})">
+  <title th:text="#{page-title.search(${query})}"></title>
+</head>
 
 <body class="preload">
 

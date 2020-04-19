@@ -3,18 +3,26 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <!-- head -->
-<head th:fragment="head(titleAppend)">
+<head th:fragment="head(title, description, stylesheet)">
+  <!-- Meta elements -->
   <meta charset="UTF-8"/>
-  <title th:text="#{name} + ${titleAppend}"></title>
+  <meta name="description" th:replace="${description}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="author" content="Mahdi Hosseinzadeh, Babak Shahriari"/>
+  <meta name="author" content="Mahdi Hosseinzadeh"/>
   <meta name="_csrf" th:content="${_csrf.token}"/>
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-  <!-- For android browsers [https://stackoverflow.com/q/26960703] -->
   <meta name="theme-color" th:content="${#themes.code('android-toolbar-color')}"/>
+
+  <!-- Page title -->
+  <title th:replace="${title}"></title>
+
+  <!-- Stylesheets -->
   <link rel="icon" type="image/png" sizes="32x32" th:href="@{${#themes.code('favicon')}}"/>
   <link rel="stylesheet" th:href="@{${#themes.code('colors')}}"/>
   <link rel="stylesheet" th:href="@{/css/main.min.css}"/>
+  <link th:replace="${stylesheet}"/>
+
+  <!-- Scripts -->
   <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script> <!-- todo: replace with cdn -->
   <script th:src="@{/js/main.min.js}" defer></script>
 </head>
