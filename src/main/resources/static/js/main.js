@@ -46,7 +46,7 @@ function showModal(toShow, toHide) {
 }
 
 $(window).add(closeBtn).click(function (event) {
-    if (event.target === loginDialog[0] || event.target === closeBtn[0]) {
+    if (event.target === loginDialog[0] || event.target === closeBtn[0]) { // Required check
         loginDialog.fadeOut(200, function () {
             registerWrapper.hide();
             loginWrapper.hide();
@@ -60,12 +60,11 @@ $(window).add(closeBtn).click(function (event) {
 
 function emptyInput(input) {
     input.val("");
-    input.siblings(".highlight").hide();
-    input.siblings(".highlight").css("background", primaryColor);
+    input.siblings(".highlight").hide().css({background: primaryColor});
     input.siblings(".prompt").hide();
 }
 
-$(".log-prompt").click(function () {
+$(".log-prompt").on("click touch", () => {
     $(".log-form>div").animate({height: "toggle", opacity: "toggle"}, 450);
 });
 
@@ -81,7 +80,7 @@ $(".wrt-comment button").on("click touch", function () {
     $.post("/posts/comments/add", {postId: postId, comment: comment},
         function () {
             var commCount = $(".comments p");
-            commCount.text("Comments (" + (+commCount.text().match(/\d+/) + 1) + "):");
+            commCount.text((_, oldVal) => `Comments (${Number(oldVal.match(/\d+/)) + 1}):`);
             commCount.after(
                 `<div class="comment">
                      <div class="comment-author">
@@ -92,7 +91,7 @@ $(".wrt-comment button").on("click touch", function () {
                  </div>`
             );
             commentField.val("");
-            $(".comm-count span").text(+$(".comm-count span").text().match(/\d+/) + 1);
+            $(".comm-count span").text((_, oldVal) => Number(oldVal) + 1);
         });
 });
 
@@ -100,17 +99,16 @@ $(".wrt-comment button").on("click touch", function () {
 var sliceNumber = 1;
 var hasNext = true;
 if ($(location).attr("pathname").match("^/categories")) {
-    var category = $(location).attr("pathname").replace("/categories/", '');
+    var category = $(location).attr("pathname").replace("/categories/", "");
     $(window).scroll(function () {
         if (hasNext && $(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-            $.get(`/categories/${category}/slice`, {sliceNumber: sliceNumber},
-                function (slice) {
-                    if (slice === "") {
-                        $("#spinner").hide();
-                        hasNext = false;
-                    }
-                    $(".card:last-child").after(slice);
-                });
+            $.get(`/categories/${category}/slice`, {sliceNumber: sliceNumber}, slice => {
+                if (slice === "") {
+                    $("#spinner").hide();
+                    hasNext = false;
+                }
+                $(".card:last-child").after(slice);
+            });
             sliceNumber++;
         }
     });
@@ -120,9 +118,7 @@ if ($(location).attr("pathname").match("^/categories")) {
 $(".avatar-upload input").on("change", function () {
     if (this.files && this.files[0]) {
         var reader = new FileReader();
-        reader.onload = function (e) {
-            $(".avatar-upload img").attr("src", e.target.result);
-        };
+        reader.onload = e => $(".avatar-upload img").attr("src", e.target.result);
         reader.readAsDataURL(this.files[0]);
     }
 });
@@ -130,9 +126,7 @@ $(".avatar-upload input").on("change", function () {
 $(".post-file input").on("change", function () {
     if (this.files && this.files[0]) {
         var reader = new FileReader();
-        reader.onload = function (e) {
-            $(".file-prev").attr("src", e.target.result);
-        };
+        reader.onload = e => $(".file-prev").attr("src", e.target.result);
         reader.readAsDataURL(this.files[0]);
     }
 });
@@ -163,30 +157,28 @@ $body.on('animationend', ".heart", function () {
 });
 
 //============== Side navigation ================\\
-$(".hamburger-icon").click(function () {
-    $(".side-nav").css({"width": "240px", "max-width": "100%"});
+$(".hamburger-icon").on("click touch", () => {
+    $(".side-nav").css({width: "240px", maxWidth: "100%"});
 });
 
-$(".close-cat").click(function () {
-    $(".side-nav").css("width", "0");
-});
+$(".close-cat").on("click touch", () => $(".side-nav").css({width: "0"}));
 
 //================= Share icon ==================\\
-$body.on("click", ".share-icon", function () {
+$body.on("click touch", ".share-icon", function () {
     var container = $(this).next();
     if (container.css("visibility") === "visible") {
-        $(this).css("fill", "#919da5");
+        $(this).css({fill: "#919da5"});
         container.css({
-            "opacity": "0",
-            "visibility": "hidden",
-            "transform": "translate(-20px, 0)"
+            opacity: "0",
+            visibility: "hidden",
+            transform: "translate(-20px, 0)"
         });
     } else {
-        $(this).css("fill", primaryColor);
+        $(this).css({fill: primaryColor});
         container.css({
-            "opacity": "1",
-            "visibility": "visible",
-            "transform": "translate(-20px, 10px)"
+            opacity: "1",
+            visibility: "visible",
+            transform: "translate(-20px, 10px)"
         });
     }
 });
@@ -195,11 +187,11 @@ $(window).click(function (ev) {
     if (ev.target.tagName !== "svg" && ev.target.tagName !== "path") {
         $(".share-content").each(function () {
             if ($(this).is(":visible")) {
-                $(this).siblings(".share-icon").css("fill", "#919da5");
+                $(this).siblings(".share-icon").css({fill: "#919da5"});
                 $(this).css({
-                    "opacity": "0",
-                    "visibility": "hidden",
-                    "transform": "translate(-20px, 0)"
+                    opacity: "0",
+                    visibility: "hidden",
+                    transform: "translate(-20px, 0)"
                 });
             }
         });
@@ -224,13 +216,10 @@ $(".flat-inp").focus(function () {
 function checkUserName(name, highlight) {
     $.post("/users/check-username", {name: name}, function (exists) {
         if (exists) {
-            highlight.css("background", "#de1e26");
-            highlight.fadeTo(200, 1);
-            usernameInput.siblings(".prompt").text("Already taken");
-            usernameInput.siblings(".prompt").fadeTo(200, 1);
+            highlight.css({background: "#de1e26"}).fadeTo(200, 1);
+            usernameInput.siblings(".prompt").text("Already taken").fadeTo(200, 1);
         } else {
-            highlight.css("background", "#4CAF50");
-            highlight.fadeTo(200, 1);
+            highlight.css({background: "#4CAF50"}).fadeTo(200, 1);
             usernameInput.siblings(".prompt").fadeTo(200, 0);
         }
     });
@@ -240,9 +229,7 @@ usernameInput.blur(function () {
     var name = usernameInput.val();
     var highlight = usernameInput.siblings(".highlight");
     if (name === "") {
-        highlight.fadeTo(200, 0, function () {
-            highlight.css("background", primaryColor);
-        });
+        highlight.fadeTo(200, 0, () => highlight.css({background: primaryColor}));
         usernameInput.siblings(".prompt").fadeTo(200, 0);
     } else {
         checkUserName(name, highlight);
@@ -253,22 +240,13 @@ passwordInput.blur(function () {
     var pass = passwordInput.val();
     var highlight = passwordInput.siblings(".highlight");
     if (pass.length === 0) {
-        highlight.fadeTo(180, 0, function () {
-            highlight.css("background", primaryColor);
-        });
+        highlight.fadeTo(180, 0, () => highlight.css({background: primaryColor}));
         passwordInput.siblings(".prompt").fadeTo(200, 0);
     } else if (pass.length < 6 || !passRegex.test(pass)) {
-        highlight.fadeTo(200, 1);
-        highlight.css("background", "#de1e26");
-        if (pass.length < 6) {
-            passwordInput.siblings(".prompt").text("Too short");
-        } else {
-            passwordInput.siblings(".prompt").text("Invalid");
-        }
-        passwordInput.siblings(".prompt").fadeTo(200, 1);
+        highlight.css({background: "#de1e26"}).fadeTo(200, 1);
+        passwordInput.siblings(".prompt").text(`${pass.length < 6 ? "Too short" : "Invalid"}`).fadeTo(200, 1);
     } else {
-        highlight.fadeTo(200, 1);
-        highlight.css("background", "#4CAF50");
+        highlight.css({background: "#4CAF50"}).fadeTo(200, 1);
         passwordInput.siblings(".prompt").fadeTo(200, 0);
     }
 });
@@ -280,57 +258,45 @@ $(".register-form").submit(function () {
     var nameHighlight = usernameInput.siblings(".highlight");
     var passHighlight = passwordInput.siblings(".highlight");
     if (name.length === 0) {
-        nameHighlight.css("background", "#de1e26");
-        nameHighlight.fadeTo(200, 1);
-        usernameInput.siblings(".prompt").text("Required");
-        usernameInput.siblings(".prompt").fadeTo(200, 1);
+        nameHighlight.css({background: "#de1e26"}).fadeTo(200, 1);
+        usernameInput.siblings(".prompt").text("Required").fadeTo(200, 1);
         submit = false;
     }
     if (pass.length === 0) {
-        passHighlight.css("background", "#de1e26");
-        passHighlight.fadeTo(200, 1);
-        passwordInput.siblings(".prompt").text("Required");
-        passwordInput.siblings(".prompt").fadeTo(200, 1);
+        passHighlight.css({background: "#de1e26"}).fadeTo(200, 1);
+        passwordInput.siblings(".prompt").text("Required").fadeTo(200, 1);
         submit = false;
     } else if (!passRegex.test(pass)) {
-        passHighlight.css("background", "#de1e26");
-        passHighlight.fadeTo(200, 1);
-        passwordInput.siblings(".prompt").text("Invalid");
-        passwordInput.siblings(".prompt").fadeTo(200, 1);
+        passHighlight.css({background: "#de1e26"}).fadeTo(200, 1);
+        passwordInput.siblings(".prompt").text("Invalid").fadeTo(200, 1);
         submit = false;
     }
     return submit;
 });
 
 //======== attach csrf header to every AJAX POST request =========\\
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
-$(document).ajaxSend(function (e, xhr) {
-    xhr.setRequestHeader(header, token);
-});
+var token = $(`meta[name="_csrf"]`).attr("content");
+var header = $(`meta[name="_csrf_header"]`).attr("content");
+$(document).ajaxSend((e, xhr) => xhr.setRequestHeader(header, token));
 
 //======================== AJAX login ======================
 var usernameInputLogin = $(".login-form .input:nth-child(1) input");
 var passwordInputLogin = $(".login-form .input:nth-child(2) input");
 
-usernameInputLogin.blur(function () {
+usernameInputLogin.on("blur", () => {
     var name = usernameInputLogin.val();
     var highlight = usernameInputLogin.siblings(".highlight");
     if (name.length === 0) {
-        highlight.fadeTo(200, 0, function () {
-            highlight.css("background", primaryColor);
-        });
+        highlight.fadeTo(200, 0, () => highlight.css({background: primaryColor}));
         usernameInputLogin.siblings(".prompt").fadeTo(200, 0);
     }
 });
 
-passwordInputLogin.blur(function () {
+passwordInputLogin.on("blur", () => {
     var pass = passwordInputLogin.val();
     var highlight = passwordInputLogin.siblings(".highlight");
     if (pass.length === 0) {
-        highlight.fadeTo(200, 0, function () {
-            highlight.css("background", primaryColor);
-        });
+        highlight.fadeTo(200, 0, () => highlight.css({background: primaryColor}));
         passwordInputLogin.siblings(".prompt").fadeTo(200, 0);
     }
 });
@@ -343,27 +309,18 @@ $(".login-form button").on("click touch", function () {
     var nameHighlight = usernameInputLogin.siblings(".highlight");
     var passHighlight = passwordInputLogin.siblings(".highlight");
     if (name.length === 0) {
-        nameHighlight.css("background", "#de1e26");
-        nameHighlight.fadeTo(200, 1);
-        usernameInputLogin.siblings(".prompt").text("Required");
-        usernameInputLogin.siblings(".prompt").fadeTo(200, 1);
+        nameHighlight.css({background: "#de1e26"}).fadeTo(200, 1);
+        usernameInputLogin.siblings(".prompt").text("Required").fadeTo(200, 1);
         submit = false;
     }
     if (pass.length === 0) {
-        passHighlight.css("background", "#de1e26");
-        passHighlight.fadeTo(200, 1);
-        passwordInputLogin.siblings(".prompt").text("Required");
-        passwordInputLogin.siblings(".prompt").fadeTo(200, 1);
+        passHighlight.css({background: "#de1e26"}).fadeTo(200, 1);
+        passwordInputLogin.siblings(".prompt").text("Required").fadeTo(200, 1);
         submit = false;
     }
     if (submit) {
-        $.post("/login", {username: name, password: pass, rememberMe: rememberMe},
-            function (successful) {
-                if (successful) {
-                    location.reload();
-                } else {
-                    $(".invalid-login").fadeTo(200, 1);
-                }
+        $.post("/login", {username: name, password: pass, rememberMe: rememberMe}, successful => {
+                if (successful) location.reload(); else $(".invalid-login").fadeTo(200, 1);
             }
         );
     }
@@ -380,10 +337,8 @@ $body.on("click touch", ".ply-btn", function () {
 
     if (video.paused) {
         video.play();
-        setTimeout(function () {
-            if (!button.is(":hover")) {
-                button.fadeTo(200, 0);
-            }
+        setTimeout(() => {
+            if (!button.is(":hover")) button.fadeTo(200, 0);
         }, 1000);
     } else {
         video.pause();
@@ -400,10 +355,8 @@ $body.on("mouseleave", ".ply-btn", function () {
     var button = $(this);
     var video = $(this).siblings("video")[0];
     if (!video.paused) {
-        setTimeout(function () {
-            if (!button.is(":hover")) {
-                button.fadeTo(80, 0);
-            }
+        setTimeout(() => {
+            if (!button.is(":hover")) button.fadeTo(80, 0);
         }, 300);
     }
 });
@@ -412,7 +365,7 @@ $body.on("click touch", ".ply-btn", function () {
     $(this).find(".ply-ico").toggleClass("ply-ico-active");
 });
 
-document.addEventListener("timeupdate", function (e) { // supports dynamically inserted videos as well
+document.addEventListener("timeupdate", e => { // supports dynamically inserted videos as well
     var video = $(e.target);
     var progressBar = video.siblings("progress");
     var percent = video[0].currentTime / video[0].duration * 100;
@@ -426,8 +379,7 @@ $("#post-submit").submit(function () {
         var input = $(this).find("input, textarea").val();
         if (input.length === 0) {
             var highlight = $(this).find(".highlight-np");
-            highlight.css("background", "#de1e26");
-            highlight.fadeTo(200, 1);
+            highlight.css({background: "#de1e26"}).fadeTo(200, 1);
             $(this).find(".prompt").fadeTo(200, 1);
             submit = false;
         }
@@ -479,23 +431,22 @@ $(".actions form").submit(function () {
 
 $(".chng-cats-icon").on("click touch", function () {
     var userName = $(".usr-name").text(); // just to check if user is logged in
-    if (!userName) {
-        return;
-    }
+    if (!userName) return;
+
     var container = $(this).next();
     if (container.css("visibility") === "visible") {
-        $(this).css("fill", "#919da5");
+        $(this).css({fill: "#919da5"});
         container.css({
-            "opacity": "0",
-            "visibility": "hidden",
-            "transform": "translate(-20px, 0)"
+            opacity: "0",
+            visibility: "hidden",
+            transform: "translate(-20px, 0)"
         });
     } else {
-        $(this).css("fill", primaryColor);
+        $(this).css({fill: primaryColor});
         container.css({
-            "opacity": "1",
-            "visibility": "visible",
-            "transform": "translate(-20px, 10px)"
+            opacity: "1",
+            visibility: "visible",
+            transform: "translate(-20px, 10px)"
         });
     }
 });
@@ -504,17 +455,13 @@ $(".cat-del-ico").on("click touch", function () {
     var postId = $(".article-container").attr("data-post-id");
     var catName = $(this).siblings(".changeable-cat").text();
     var toRemove = $(this).parent();
-    $.post("/categories/delete", {postId: postId, catName: catName},
-        function () {
-            toRemove.remove();
-        });
+    $.post("/categories/delete", {postId: postId, catName: catName}, () => toRemove.remove());
 });
 
 $(".cat-add-ico").on("click touch", function () {
     var postId = $(".article-container").attr("data-post-id");
     var catName = $(".cat-add-inp").val();
-    $.post("/categories/add", {postId: postId, catName: catName},
-        function () {
+    $.post("/categories/add", {postId: postId, catName: catName}, () => {
             $(".cat-del:last-of-type").after(
                 `<a class="cat-del">
                      <div class="changeable-cat chip">${catName}</div>
@@ -545,8 +492,9 @@ $(".theme").on("click touch", function () {
 $(document).ready(function () {
     var userName = $("nav .usr-name").text();
     if (userName.length === 0) return;
+
     var source = new EventSource(`/likes/${userName}/stream`);
-    source.onmessage = function (event) {
+    source.onmessage = event => {
         var likeEvent = JSON.parse(event.data);
         showPrompt(`One of your posts was ${likeEvent.message}`)
     };
