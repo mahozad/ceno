@@ -1,23 +1,26 @@
 const $body = $("body");
 const primaryColor = $("html").css("--primary-color");
+const $pagePrompt = $(".page-prompt");
 
 showCookieConsentMessage();
 
 function showCookieConsentMessage() {
     if (!localStorage.isCookieConsentMessageShown) {
-        // TODO: make this block a function (it is reused for SSE as well)
-        let $pagePrompt = $(".page-prompt");
-
-        // Remove the prompt from page if it already exists
-        if ($pagePrompt.length > 0) $pagePrompt.remove();
-
-        $("main").prepend(
-            "<div class=\"page-prompt\">" +
-            "  <div class=\"page-prompt-text\">Ceno uses cookies to provide the best browsing experience for you</div>" +
-            "</div>"
-        );
+        showPrompt("Ceno uses cookies to provide the best browsing experience for you");
     }
     localStorage.isCookieConsentMessageShown = false;
+}
+
+function showPrompt(message) {
+    // Remove the prompt from page if it already exists
+    if ($pagePrompt.length > 0) $pagePrompt.remove();
+
+    let pagePromptHTML =
+        "<div class='page-prompt'>" +
+        "  <div class='page-prompt-text'>" + message + "</div>" +
+        "</div>";
+
+    $("main").prepend(pagePromptHTML);
 }
 
 //========== enable animations after the page is fully loaded ==========\\
@@ -545,17 +548,6 @@ $(document).ready(function () {
     var source = new EventSource("/likes/" + userName + "/stream");
     source.onmessage = function (event) {
         var likeEvent = JSON.parse(event.data);
-
-        var promptText = "One of your posts was " + likeEvent.message;
-        var pagePromptElement = $(".page-prompt");
-
-        if (pagePromptElement.length) { // check if the element already exists
-            pagePromptElement.remove();
-        }
-        $("main").prepend(
-            "<div class=\"page-prompt\">" +
-            "  <div class=\"page-prompt-text\">" + promptText + "</div>" +
-            "</div>"
-        );
+        showPrompt("One of your posts was " + likeEvent.message)
     };
 });
