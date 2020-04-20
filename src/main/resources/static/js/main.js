@@ -1,23 +1,23 @@
 const $body = $("body");
 const primaryColor = $("html").css("--primary-color");
 
-// consent cookie message
-// using HTML Web Storage [https://www.w3schools.com/html/html5_webstorage.asp]
-if (typeof (Storage) !== "undefined") { // if browser supports Web Storage...
-    if (localStorage.cookieMessage !== "shown") {
-        // make this block a function (it is reused for SSE as well)
-        var pagePromptElement = $(".page-prompt");
+showCookieConsentMessage();
 
-        if (pagePromptElement.length) { // check if the element already exists
-            pagePromptElement.remove();
-        }
+function showCookieConsentMessage() {
+    if (!localStorage.isCookieConsentMessageShown) {
+        // TODO: make this block a function (it is reused for SSE as well)
+        let $pagePrompt = $(".page-prompt");
+
+        // Remove the prompt from page if it already exists
+        if ($pagePrompt.length > 0) $pagePrompt.remove();
+
         $("main").prepend(
             "<div class=\"page-prompt\">" +
             "  <div class=\"page-prompt-text\">Ceno uses cookies to provide the best browsing experience for you</div>" +
             "</div>"
         );
     }
-    localStorage.cookieMessage = "shown";
+    localStorage.isCookieConsentMessageShown = false;
 }
 
 //========== enable animations after the page is fully loaded ==========\\
