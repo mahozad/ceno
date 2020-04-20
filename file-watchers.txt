@@ -69,6 +69,9 @@ config the babel (specifically its preset-env) as follows:
 - Now that we have configured babel here, there is no need to specify presets in the program arguments
     so remove the --presets=... in "Argument" field of babel file watcher.
 
+Note: If babel doesn't read configs from the babel.config.json file, add this to the arguments field: --config-file $ProjectFileDir$/babel.config.json
+Note: Currently the sourcemap: true|both in babel.config.json does not produce map file because of [https://github.com/babel/babel/issues/5261]
+   so to produce the source map, add the option as program argument: --source-maps
 Note: YUICompressor won't work because the generated syntax is new JavaScript syntax. Use babel-preset-minify instead.
 ===========================================================
 

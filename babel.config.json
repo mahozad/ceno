@@ -1,0 +1,12 @@
+{
+  "presets": [
+    [
+      "C:/Users/Mahdi/node_modules/@babel/preset-env"
+    ],
+    [
+      "C:/Users/Mahdi/node_modules/babel-preset-minify"
+    ]
+  ],
+  "comments": false,
+  "sourceMaps": true
+}

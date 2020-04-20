@@ -36,13 +36,8 @@ var loginDialog = $("#login-dialog");
 var loginWrapper = $("#login-wrapper");
 var registerWrapper = $("#register-wrapper");
 
-$("#log-in").click(function () {
-    showModal(loginWrapper, registerWrapper);
-});
-
-$("#sign-up").click(function () {
-    showModal(registerWrapper, loginWrapper);
-});
+$("#log-in").on("click touch", () => showModal(loginWrapper, registerWrapper));
+$("#sign-up").on("click touch", () => showModal(registerWrapper, loginWrapper));
 
 function showModal(toShow, toHide) {
     toHide.hide();
