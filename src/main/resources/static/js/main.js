@@ -3,7 +3,7 @@ var primaryColor = $("html").css("--primary-color");
 
 // consent cookie message
 // using HTML Web Storage [https://www.w3schools.com/html/html5_webstorage.asp]
-if (typeof(Storage) !== "undefined") { // if browser supports Web Storage...
+if (typeof (Storage) !== "undefined") { // if browser supports Web Storage...
     if (localStorage.cookieMessage !== "shown") {
         // make this block a function (it is reused for SSE as well)
         var pagePromptElement = $(".page-prompt");
@@ -541,6 +541,7 @@ $(".theme").on("click touch", function () {
 //================ SSE streams ================\\
 $(document).ready(function () {
     var userName = $("nav .usr-name").text();
+    if (userName.length === 0) return;
     var source = new EventSource("/likes/" + userName + "/stream");
     source.onmessage = function (event) {
         var likeEvent = JSON.parse(event.data);
