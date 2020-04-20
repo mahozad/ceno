@@ -1,6 +1,6 @@
 const $body = $("body");
-const primaryColor = $("html").css("--primary-color");
 const $pagePrompt = $(".page-prompt");
+const themeColor = $("html").css("--primary-color");
 
 enableCSSAnimations();
 showCookieConsentMessage();
@@ -60,7 +60,7 @@ $(window).add(closeBtn).click(function (event) {
 
 function emptyInput(input) {
     input.val("");
-    input.siblings(".highlight").hide().css({background: primaryColor});
+    input.siblings(".highlight").hide().css({background: themeColor});
     input.siblings(".prompt").hide();
 }
 
@@ -176,7 +176,7 @@ $body.on("click touch", ".share-icon", function () {
             transform: "translate(-20px, 0)"
         });
     } else {
-        $(this).css({fill: primaryColor});
+        $(this).css({fill: themeColor});
         container.css({
             opacity: "1",
             visibility: "visible",
@@ -231,7 +231,7 @@ usernameInput.blur(function () {
     var name = usernameInput.val();
     var highlight = usernameInput.siblings(".highlight");
     if (name === "") {
-        highlight.fadeTo(200, 0, () => highlight.css({background: primaryColor}));
+        highlight.fadeTo(200, 0, () => highlight.css({background: themeColor}));
         usernameInput.siblings(".prompt").fadeTo(200, 0);
     } else {
         checkUserName(name, highlight);
@@ -242,7 +242,7 @@ passwordInput.blur(function () {
     var pass = passwordInput.val();
     var highlight = passwordInput.siblings(".highlight");
     if (pass.length === 0) {
-        highlight.fadeTo(180, 0, () => highlight.css({background: primaryColor}));
+        highlight.fadeTo(180, 0, () => highlight.css({background: themeColor}));
         passwordInput.siblings(".prompt").fadeTo(200, 0);
     } else if (pass.length < 6 || !passRegex.test(pass)) {
         highlight.css({background: "#de1e26"}).fadeTo(200, 1);
@@ -289,7 +289,7 @@ usernameInputLogin.on("blur", () => {
     var name = usernameInputLogin.val();
     var highlight = usernameInputLogin.siblings(".highlight");
     if (name.length === 0) {
-        highlight.fadeTo(200, 0, () => highlight.css({background: primaryColor}));
+        highlight.fadeTo(200, 0, () => highlight.css({background: themeColor}));
         usernameInputLogin.siblings(".prompt").fadeTo(200, 0);
     }
 });
@@ -298,7 +298,7 @@ passwordInputLogin.on("blur", () => {
     var pass = passwordInputLogin.val();
     var highlight = passwordInputLogin.siblings(".highlight");
     if (pass.length === 0) {
-        highlight.fadeTo(200, 0, () => highlight.css({background: primaryColor}));
+        highlight.fadeTo(200, 0, () => highlight.css({background: themeColor}));
         passwordInputLogin.siblings(".prompt").fadeTo(200, 0);
     }
 });
@@ -444,7 +444,7 @@ $(".chng-cats-icon").on("click touch", function () {
             transform: "translate(-20px, 0)"
         });
     } else {
-        $(this).css({fill: primaryColor});
+        $(this).css({fill: themeColor});
         container.css({
             opacity: "1",
             visibility: "visible",
