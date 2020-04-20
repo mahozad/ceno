@@ -211,12 +211,12 @@ $(window).click(function (ev) {
 });
 
 //============== Check existing userName ==================\\
-var usernameInput = $(".register-form .input:nth-child(1) input");
-var passwordInput = $(".register-form .input:nth-child(2) input");
-var passRegex =
-    /((?=.*\d)(?=.*\p{L}))./;
-//              /(\d+\p{L}+|\p{L}+\d+)[\d\p{L}]*/;
-//              /(\d\w*[a-zA-Z]\w*)|([a-zA-Z]\w*\d\w*)/;
+var usernameInput = $(".register-form input[name=username]");
+var passwordInput = $(".register-form input[name=password]");
+var passRegex = /.*/;
+// /((?=.*\d)(?=.*\\p{L}))./;
+// /(\d+\p{L}+|\p{L}+\d+)[\d\p{L}]*/;
+// /(\d\w*[a-zA-Z]\w*)|([a-zA-Z]\w*\d\w*)/;
 
 $(".flat-inp").focus(function () {
     var content = $(this).val();
