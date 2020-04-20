@@ -23,9 +23,9 @@ function showPrompt(message) {
     if ($pagePrompt.length > 0) $pagePrompt.remove();
 
     let pagePromptHTML =
-        "<div class='page-prompt'>" +
-        "  <div class='page-prompt-text'>" + message + "</div>" +
-        "</div>";
+        `<div class="page-prompt">
+             <div class="page-prompt-text">${message}</div>
+         </div>`;
 
     $("main").prepend(pagePromptHTML);
 }
@@ -83,13 +83,14 @@ $(".wrt-comment button").on("click touch", function () {
             var commCount = $(".comments p");
             commCount.text("Comments (" + (+commCount.text().match(/\d+/) + 1) + "):");
             commCount.after(
-                "<div class='comment'>\n" +
-                "    <div class='comment-author'>\n" +
-                "        <img src='/users/avatars/" + userName + "'" + " alt='" + userName + "'>\n" +
-                "        <div class='com-auth-name'>" + userName + "</div>\n" +
-                "    </div>\n" +
-                "    <div class='comment-text'>" + comment + "</div>\n" +
-                "</div>");
+                `<div class="comment">
+                     <div class="comment-author">
+                         <img src="/users/avatars/${userName}" alt="${userName}">
+                         <div class="com-auth-name">${userName}</div>
+                     </div>
+                     <div class="comment-text">${comment}</div>
+                 </div>`
+            );
             commentField.val("");
             $(".comm-count span").text(+$(".comm-count span").text().match(/\d+/) + 1);
         });
@@ -102,7 +103,7 @@ if ($(location).attr("pathname").match("^/categories")) {
     var category = $(location).attr("pathname").replace("/categories/", '');
     $(window).scroll(function () {
         if (hasNext && $(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-            $.get("/categories/" + category + "/slice", {sliceNumber: sliceNumber},
+            $.get(`/categories/${category}/slice`, {sliceNumber: sliceNumber},
                 function (slice) {
                     if (slice === "") {
                         $("#spinner").hide();
@@ -515,11 +516,13 @@ $(".cat-add-ico").on("click touch", function () {
     $.post("/categories/add", {postId: postId, catName: catName},
         function () {
             $(".cat-del:last-of-type").after(
-                "<a class=\"cat-del\">" +
-                "<div class=\"changeable-cat chip\">" + catName + "</div>" +
-                "<div class=\"cat-del-ico\">&times;</div>" +
-                "</a>");
-        });
+                `<a class="cat-del">
+                     <div class="changeable-cat chip">${catName}</div>
+                     <div class="cat-del-ico">&times;</div>
+                 </a>`
+            );
+        }
+    );
 });
 
 //======= change language =========\\
@@ -527,7 +530,7 @@ $(".lang").on("click touch", function () {
     let searchParams = new URLSearchParams(window.location.search); // NOTE: IE is not supported
     var lang = $(this).attr("data-lang-name");
     searchParams.set("lang", lang);
-    location.replace("?" + searchParams.toString());
+    location.replace(`?${searchParams.toString()}`);
 });
 
 //======= change theme ========\\
@@ -535,16 +538,16 @@ $(".theme").on("click touch", function () {
     let searchParams = new URLSearchParams(window.location.search); // NOTE: IE is not supported
     var theme = $(this).attr("data-theme-name");
     searchParams.set("theme", theme);
-    location.replace("?" + searchParams.toString());
+    location.replace(`?${searchParams.toString()}`);
 });
 
 //================ SSE streams ================\\
 $(document).ready(function () {
     var userName = $("nav .usr-name").text();
     if (userName.length === 0) return;
-    var source = new EventSource("/likes/" + userName + "/stream");
+    var source = new EventSource(`/likes/${userName}/stream`);
     source.onmessage = function (event) {
         var likeEvent = JSON.parse(event.data);
-        showPrompt("One of your posts was " + likeEvent.message)
+        showPrompt(`One of your posts was ${likeEvent.message}`)
     };
 });
