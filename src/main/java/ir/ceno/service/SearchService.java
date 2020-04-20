@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class SearchService {
 
-    private static final int SEARCH_MAX_RESULTS = 10;
+    public static final int SEARCH_MAX_RESULTS = 10;
     private static final int SEARCH_MAX_SIMILARS = 5;
 
     // @PersistenceContext
