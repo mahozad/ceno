@@ -91,6 +91,8 @@ $(".wrt-comment button").on("click touch", function () {
                  </div>`
             );
             commentField.val("");
+            // FIXME: This and the above cmmCount.text(...) don't work correctly.
+            //  Try when there is no or 1 comment for the post and see what happens.
             $(".comm-count span").text((_, oldVal) => Number(oldVal) + 1);
         });
 });
