@@ -2,6 +2,7 @@ const $body = $("body");
 const primaryColor = $("html").css("--primary-color");
 const $pagePrompt = $(".page-prompt");
 
+enableCSSAnimations();
 showCookieConsentMessage();
 
 function showCookieConsentMessage() {
@@ -9,6 +10,12 @@ function showCookieConsentMessage() {
         showPrompt("Ceno uses cookies to provide the best browsing experience for you");
     }
     localStorage.isCookieConsentMessageShown = false;
+}
+
+function enableCSSAnimations() {
+    // This should be done after the page is fully loaded;
+    // we know that the page is fully loaded because the script is deferred.
+    $body.removeClass("preload");
 }
 
 function showPrompt(message) {
@@ -22,11 +29,6 @@ function showPrompt(message) {
 
     $("main").prepend(pagePromptHTML);
 }
-
-//========== enable animations after the page is fully loaded ==========\\
-$(window).on("load", function () {
-    $("body").removeClass("preload");
-});
 
 //================= Login modal =================\\
 var closeBtn = $(".close");
