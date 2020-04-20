@@ -1,5 +1,5 @@
-var body = $("body");
-var primaryColor = $("html").css("--primary-color");
+const $body = $("body");
+const primaryColor = $("html").css("--primary-color");
 
 // consent cookie message
 // using HTML Web Storage [https://www.w3schools.com/html/html5_webstorage.asp]
@@ -137,7 +137,7 @@ $(".post-file input").on("change", function () {
 });
 
 //==================== Like =====================\\
-body.on("click touch", ".heart", function () {
+$body.on("click touch", ".heart", function () {
     var numElement = $(this).siblings(".like-num");
     var postId = $(this).parents(".card,.article-container").attr("data-post-id");
     if ($(this).hasClass("liked")) {
@@ -157,7 +157,7 @@ function like(postId, isLike, numElement, quantity) {
         });
 }
 
-body.on('animationend', ".heart", function () {
+$body.on('animationend', ".heart", function () {
     $(this).toggleClass('not-liked liked');
 });
 
@@ -171,7 +171,7 @@ $(".close-cat").click(function () {
 });
 
 //================= Share icon ==================\\
-body.on("click", ".share-icon", function () {
+$body.on("click", ".share-icon", function () {
     var container = $(this).next();
     if (container.css("visibility") === "visible") {
         $(this).css("fill", "#919da5");
@@ -373,7 +373,7 @@ $(".logout").on("click touch", function () {
     $(this).parent().submit();
 });
 
-body.on("click touch", ".ply-btn", function () {
+$body.on("click touch", ".ply-btn", function () {
     var video = $(this).siblings("video")[0];
     var button = $(this);
 
@@ -390,11 +390,11 @@ body.on("click touch", ".ply-btn", function () {
     }
 });
 
-body.on("mouseover", ".ply-btn", function () {
+$body.on("mouseover", ".ply-btn", function () {
     $(this).fadeTo(60, 1);
 });
 
-body.on("mouseleave", ".ply-btn", function () {
+$body.on("mouseleave", ".ply-btn", function () {
     $(this).fadeTo(60, 1);
     var button = $(this);
     var video = $(this).siblings("video")[0];
@@ -407,7 +407,7 @@ body.on("mouseleave", ".ply-btn", function () {
     }
 });
 
-body.on("click touch", ".ply-btn", function () {
+$body.on("click touch", ".ply-btn", function () {
     $(this).find(".ply-ico").toggleClass("ply-ico-active");
 });
 
