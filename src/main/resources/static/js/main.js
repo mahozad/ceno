@@ -276,10 +276,10 @@ $(".register-form").submit(function () {
     return submit;
 });
 
-//======== attach csrf header to every AJAX POST request =========\\
-var token = $(`meta[name="_csrf"]`).attr("content");
-var header = $(`meta[name="_csrf_header"]`).attr("content");
-$(document).ajaxSend((e, xhr) => xhr.setRequestHeader(header, token));
+//======== Attach csrf header to every AJAX POST request =========\\
+// var token = $(`meta[name="_csrf"]`).attr("content");
+// var header = $(`meta[name="_csrf_header"]`).attr("content");
+// $(document).ajaxSend((e, xhr) => xhr.setRequestHeader(header, token));
 
 //======================== AJAX login ======================
 var usernameInputLogin = $(".login-form .input:nth-child(1) input");

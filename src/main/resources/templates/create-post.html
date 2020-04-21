@@ -57,7 +57,6 @@
           <div class="prompt" th:text="#{prompt.required}">Required</div>
         </div>
       </div>
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
       <button type="submit" class="btn button" th:text="#{create}">Create</button>
     </form>
   </div>
