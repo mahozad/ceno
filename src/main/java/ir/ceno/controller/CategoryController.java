@@ -81,6 +81,6 @@ public class CategoryController {
                                    @RequestParam Integer sliceNumber, Model model) {
         Slice<Post> posts = categoryService.getPosts(category, sliceNumber);
         model.addAttribute("posts", posts);
-        return "category::card";
+        return "category :: card";
     }
 }
