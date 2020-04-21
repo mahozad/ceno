@@ -10,6 +10,11 @@ Ceno social news website
 A [good article](https://proandroiddev.com/the-real-repository-pattern-in-android-efba8662b754)
 about layered architecture and entity, value object, etc.
 
+Free and open source java: https://adoptopenjdk.net/releases.html
+https://stackoverflow.com/questions/52431764/difference-between-openjdk-and-adoptopenjdk
+
+Java roadmap: https://www.oracle.com/java/technologies/java-se-support-roadmap.html
+
 ### Plugins
 
 The following plugins are used in IntelliJ IDEA for developing this project:
