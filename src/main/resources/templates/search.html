@@ -19,8 +19,8 @@
     </th:block>
     <div th:if="${not posts.isEmpty()}">
       <span th:text="#{title.search-result(${posts.size()})}"></span>
-      <span th:if="${posts.size() > T(ir.ceno.service.SearchService).SEARCH_MAX_RESULTS}"
-            th:text="#{prompt.max-search-results-shown(${T(ir.ceno.service.SearchService).SEARCH_MAX_RESULTS})}">
+      <span th:if="${posts.size() > @searchService.SEARCH_MAX_RESULTS}"
+            th:text="#{prompt.max-search-results-shown(${@searchService.SEARCH_MAX_RESULTS})}">
       </span>
     </div>
   </div>
