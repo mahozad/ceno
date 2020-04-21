@@ -68,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler((request, response, authentication) ->
                         response.sendRedirect(request.getHeader("referer"))
                 )
+                .and().csrf()
                 .and()
                 .cors().disable();
     }
