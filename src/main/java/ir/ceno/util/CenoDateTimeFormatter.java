@@ -19,7 +19,6 @@ import static java.time.temporal.ChronoUnit.*;
 @Component("dateTimeFormatter")
 public class CenoDateTimeFormatter {
 
-    // @formatter:off
     public String formatPostDataTime(Post post) {
         LocalDateTime postCreationDateTime = post.getCreationDateTime();
         Duration age = Duration.between(postCreationDateTime, now());
@@ -38,9 +37,8 @@ public class CenoDateTimeFormatter {
             return postCreationDateTime.format(ofPattern("d MMMM uuuu"));
         }
     }
-    // @formatter:on
 
-    public String formatNow(String pattern) {
+    public String formatToday(String pattern) {
         return formatDate(LocalDate.now(), pattern);
     }
 

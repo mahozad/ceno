@@ -314,7 +314,7 @@
     <span>©</span>
     <span th:text="#{name}"></span>
     <!--/* <span th:text="${#calendars.format(#calendars.createToday(), 'yyyy')}"></span> */-->
-    <span th:text="${@dateTimeFormatter.formatNow('yyyy')}"></span>
+    <span th:text="${@dateTimeFormatter.formatToday('yyyy')}"></span>
   </div>
 </footer>
 
