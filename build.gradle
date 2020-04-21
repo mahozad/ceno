@@ -97,4 +97,5 @@ dependencies {
     testCompile('org.junit.platform:junit-platform-launcher')
     testCompile('org.junit.platform:junit-platform-runner')
     testCompile('org.mockito:mockito-junit-jupiter:2.23.0')
+    implementation 'com.github.mfathi91:persian-date-time:4.0.0'
 }
