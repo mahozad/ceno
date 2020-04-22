@@ -64,12 +64,12 @@ public class CenoDateTimeFormatter {
      */
     public String formatDate(LocalDate date, String pattern) {
         Locale locale = LocaleContextHolder.getLocale();
-        DateTimeFormatter formatter = ofPattern(pattern);
+        DateTimeFormatter formatter = ofPattern(pattern).localizedBy(locale);
         if (locale.getLanguage().equals("fa")) {
             PersianDate dateFa = PersianDate.fromGregorian(date);
-            return formatter.localizedBy(locale).format(dateFa);
+            return formatter.format(dateFa);
         } else {
-            return formatter.localizedBy(locale).format(date);
+            return formatter.format(date);
         }
     }
 }
