@@ -477,7 +477,7 @@ $(".cat-add-ico").on("click touch", function () {
 //======= change language =========\\
 $(".lang").on("click touch", function () {
     let searchParams = new URLSearchParams(window.location.search); // NOTE: IE is not supported
-    var lang = $(this).attr("data-lang-name");
+    var lang = $(this).data("lang-name");
     searchParams.set("lang", lang);
     location.replace(`?${searchParams.toString()}`);
 });
@@ -485,7 +485,7 @@ $(".lang").on("click touch", function () {
 //======= change theme ========\\
 $(".theme").on("click touch", function () {
     let searchParams = new URLSearchParams(window.location.search); // NOTE: IE is not supported
-    var theme = $(this).attr("data-theme-name");
+    var theme = $(this).data("theme-name");
     searchParams.set("theme", theme);
     location.replace(`?${searchParams.toString()}`);
 });
