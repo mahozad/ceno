@@ -946,10 +946,6 @@ main {
     transition: all .3s ease;
 }
 
-.ply-btn.active path {
-    d: path("M 2,2 L 2,22 L 10,22 L 10,2 Z M 22,2 L 22,22 L 14,22 L 14,2 Z");
-}
-
 progress {
     border: none;
     left: 0;
