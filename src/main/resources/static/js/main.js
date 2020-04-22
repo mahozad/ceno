@@ -366,10 +366,10 @@ $body.on("mouseleave", ".ply-btn", function () {
 });
 
 document.addEventListener("timeupdate", e => { // supports dynamically inserted videos as well
-    var video = $(e.target);
-    var progressBar = video.siblings("progress");
-    var percent = video[0].currentTime / video[0].duration * 100;
-    progressBar.stop().animate({value: percent}, (percent === 0) ? 100 : 400);
+    var $video = $(e.target);
+    var progressBar = $video.siblings("progress");
+    var percent = $video[0].currentTime / $video[0].duration * 100;
+    progressBar.stop().animate({value: percent}, (percent === 0) ? 100 : 250, "linear");
 }, true);
 
 //================= submit post =================\\
