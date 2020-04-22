@@ -916,6 +916,7 @@ main {
 }
 
 .ply-btn {
+    fill: #fff;
     background-color: rgba(23, 33, 35, .75);
     border-radius: 10%;
     bottom: 0;
@@ -923,16 +924,17 @@ main {
     height: 24%;
     left: 0;
     margin: auto;
-    max-height: 50px;
-    max-width: 80px;
-    min-height: 30px;
-    min-width: 46px;
+    /*max-height: 50px;*/
+    /*max-width: 80px;*/
+    min-height: 32px;
+    min-width: 50px;
     position: absolute;
     right: 0;
     top: 0;
     transition: all .18s ease;
     transition-property: width, height, background-color;
     width: 18.5%;
+    padding: 3.5%;
 }
 
 .ply-btn:hover {
@@ -940,59 +942,12 @@ main {
     opacity: 0.9;
 }
 
-.ply-ico {
-    background: transparent;
-    border: 0;
-    bottom: 0;
-    cursor: pointer;
-    height: 32px;
-    left: 0;
-    margin: auto;
-    outline: none;
-    position: absolute;
-    right: 0;
-    text-indent: 30px;
-    top: 0;
-    transform: scale(.5, .5);
-    width: 30px;
+.ply-btn path {
+    transition: all .3s ease;
 }
 
-/*noinspection CssOptimizeSimilarProperties,CssOptimizeSimilarProperties,CssOptimizeSimilarProperties,CssOptimizeSimilarProperties*/
-.ply-ico::before,
-.ply-ico::after {
-    /* DO NOT OPTIMIZE */
-    border-color: transparent;
-    border-left-color: #eee;
-    border-style: solid;
-    border-width: 8px 0 8px 15px;
-    content: '';
-    display: block;
-    height: 0;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transition: all 0.2s linear;
-    width: 0;
-}
-
-.ply-ico::before {
-    height: 16px;
-}
-
-.ply-ico::after {
-    left: 15px;
-    top: 8px;
-}
-
-.ply-ico-active::before,
-.ply-ico-active::after {
-    border-width: 0 0 0 12px;
-    height: 32px;
-}
-
-.ply-ico-active::after {
-    left: 18px;
-    top: 0;
+.ply-btn.active path {
+    d: path("M 2,2 L 2,22 L 10,22 L 10,2 Z M 22,2 L 22,22 L 14,22 L 14,2 Z");
 }
 
 progress {

@@ -225,9 +225,7 @@
         <source th:src="@{|/posts/videos/${post.id}|}"/>
         <span th:text="#{prompt.video-not-supported}"></span>
       </video>
-      <div class="ply-btn">
-        <button class="ply-ico" aria-label="play"></button>
-      </div>
+      <svg class="ply-btn" viewBox="0 0 24 24"><path d="M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z"/></svg>
       <progress max="100" value="0" class="prog-bar"></progress>
     </div>
   </div>

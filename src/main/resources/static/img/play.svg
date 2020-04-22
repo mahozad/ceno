@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+ <path d="M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z">
+  <animate attributeName="d" to="M 2,2 L 2,22 L 10,22 L 10,2 Z M 22,2 L 22,22 L 14,22 L 14,2 Z" dur="200ms"
+           fill="freeze" begin="click" calcMode="spline" keySplines=".42,0,.58,1" keyTimes="0; 1"
+           onend="if (this.getAttribute('to') === 'M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z') {
+                      this.parentElement.setAttribute('d', 'M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z');
+                      this.setAttribute('to', 'M 2,2 L 2,22 L 10,22 L 10,2 Z M 22,2 L 22,22 L 14,22 L 14,2 Z');
+                  } else {
+                      this.parentElement.setAttribute('d', 'M 2,2 L 2,22 L 10,22 L 10,2 Z M 22,2 L 22,22 L 14,22 L 14,2 Z');
+                      this.setAttribute('to', 'M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z');
+                  }"
+  />
+ </path>
+</svg>

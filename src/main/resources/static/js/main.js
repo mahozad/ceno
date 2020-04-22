@@ -334,6 +334,8 @@ $(".logout").on("click touch", function () {
 });
 
 $body.on("click touch", ".ply-btn", function () {
+    $(this).toggleClass("active");
+
     var video = $(this).siblings("video")[0];
     var button = $(this);
 
@@ -361,10 +363,6 @@ $body.on("mouseleave", ".ply-btn", function () {
             if (!button.is(":hover")) button.fadeTo(80, 0);
         }, 300);
     }
-});
-
-$body.on("click touch", ".ply-btn", function () {
-    $(this).find(".ply-ico").toggleClass("ply-ico-active");
 });
 
 document.addEventListener("timeupdate", e => { // supports dynamically inserted videos as well
