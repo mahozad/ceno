@@ -249,7 +249,7 @@
 <a class="read-more" th:fragment="card-read-more" th:href="@{|/posts/${post.url}|}" th:text="#{card.read-more}"></a>
 
 <!--/* Card date */-->
-<div class="card-date" th:fragment="card-datetime" th:text="${@dateTimeFormatter.formatPostDataTime(post)}"></div>
+<div class="card-date" th:fragment="card-datetime" th:text="${@dateTimeFormatter.formatAge(post.creationDateTime)}"></div>
 
 <!--/* Page footer */-->
 <footer class="page-footer" th:fragment="footer">

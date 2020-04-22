@@ -1,7 +1,7 @@
 package ir.ceno.util;
 
 import com.github.mfathi91.time.PersianDate;
-import ir.ceno.model.Post;
+import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -19,22 +19,31 @@ import static java.time.temporal.ChronoUnit.*;
 @Component("dateTimeFormatter")
 public class CenoDateTimeFormatter {
 
-    public String formatPostDataTime(Post post) {
-        LocalDateTime postCreationDateTime = post.getCreationDateTime();
-        Duration age = Duration.between(postCreationDateTime, now());
+    private final MessageSource messageSource;
+
+    public CenoDateTimeFormatter(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    public String formatAge(LocalDateTime creationDateTime) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Duration age = Duration.between(creationDateTime, now());
 
         if (age.toSeconds() < MINUTES.getDuration().getSeconds()) {
-            return "seconds ago";
+            return messageSource.getMessage("age.seconds-old", null, locale);
         } else if (age.toMinutes() < HOURS.getDuration().toMinutes()) {
-            return age.toMinutes() + (age.toMinutes() < 2 ? " minute" : " minutes") + " ago";
+            Object[] args = {age.toMinutes()};
+            return messageSource.getMessage("age.minutes-old", args, locale);
         } else if (age.toHours() < DAYS.getDuration().toHours()) {
-            return age.toHours() + (age.toHours() < 2 ? " hour" : " hours") + " ago";
+            Object[] args = {age.toHours()};
+            return messageSource.getMessage("age.hours-old", args, locale);
         } else if (age.toDays() < 3) {
-            return age.toDays() + (age.toDays() < 2 ? " day" : " days") + " ago";
-        } else if (now().getYear() == postCreationDateTime.getYear()) {
-            return postCreationDateTime.format(ofPattern("d MMMM"));
+            Object[] args = {age.toDays()};
+            return messageSource.getMessage("age.days-old", args, locale);
+        } else if (creationDateTime.getYear() == now().getYear()) {
+            return formatDate(creationDateTime.toLocalDate(), "d MMMM");
         } else {
-            return postCreationDateTime.format(ofPattern("d MMMM uuuu"));
+            return formatDate(creationDateTime.toLocalDate(), "d MMMM uuuu");
         }
     }
 
