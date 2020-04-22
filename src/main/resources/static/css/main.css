@@ -997,6 +997,7 @@ main {
 
 progress {
     border: none;
+    left: 0;
     bottom: 0;
     height: 4px;
     position: absolute;
