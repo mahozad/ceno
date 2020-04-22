@@ -54,10 +54,11 @@ public class CenoDateTimeFormatter {
     /**
      * Unlike {@link DateFormat}, the {@link DateTimeFormatter}
      * does not take into account the number system by default.
-     * So the number system should be explicitly specified through
-     * {@link DateTimeFormatter#localizedBy(Locale)} method like {@code "fa-u-nu-arabext"}.
-     * For more info about this
-     * <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8243162">refer here</a>.
+     * So the number system should be explicitly specified in the locale like
+     * {@code "fa-u-nu-arabext"} as we did in out lang parameter in HTML or with
+     * {@code Locale.forLanguageTag("fa-u-nu-arabext")}. For more info about this refer
+     * <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8243162">here</a> and
+     * <a href="https://docs.oracle.com/javase/tutorial/i18n/locale/extensions.html">here</a>.
      *
      * @return the current year formatted according to the locale and its calendar system
      */
@@ -65,11 +66,10 @@ public class CenoDateTimeFormatter {
         Locale locale = LocaleContextHolder.getLocale();
         DateTimeFormatter formatter = ofPattern(pattern);
         if (locale.getLanguage().equals("fa")) {
-            Locale localeFa = Locale.forLanguageTag("fa-u-nu-arabext");
             PersianDate dateFa = PersianDate.fromGregorian(date);
-            return formatter.localizedBy(localeFa).format(dateFa);
+            return formatter.localizedBy(locale).format(dateFa);
         } else {
-            return formatter.format(date);
+            return formatter.localizedBy(locale).format(date);
         }
     }
 }
