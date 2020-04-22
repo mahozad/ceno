@@ -225,7 +225,9 @@
         <source th:src="@{|/posts/videos/${post.id}|}"/>
         <span th:text="#{prompt.video-not-supported}"></span>
       </video>
-      <svg class="ply-btn" viewBox="0 0 24 24"><path d="M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z"/></svg>
+      <svg class="ply-btn" viewBox="0 0 24 24">
+        <path d="M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z"/>
+      </svg>
       <progress max="100" value="0" class="prog-bar"></progress>
     </div>
   </div>
@@ -269,14 +271,14 @@
           <div class="theme-choose">
             <span class="theme-prompt" th:text="#{footer.select-theme}"></span>
             <div class="themes">
-              <div class="theme theme-cyan" data-theme-name="cyan"
-                   th:classappend="${#themes.code('name') == 'cyan'}?'theme-active'">
+              <div class="theme-container" data-theme-name="cyan">
+                <div class="theme theme-cyan" th:classappend="${#themes.code('name') == 'cyan'} ? 'theme-active'"></div>
               </div>
-              <div class="theme theme-orange" data-theme-name="orange"
-                   th:classappend="${#themes.code('name') == 'orange'}?'theme-active'">
+              <div class="theme-container" data-theme-name="orange">
+                <div class="theme theme-orange" th:classappend="${#themes.code('name') == 'orange'} ? 'theme-active'"></div>
               </div>
-              <div class="theme theme-pink" data-theme-name="pink"
-                   th:classappend="${#themes.code('name') == 'pink'}?'theme-active'">
+              <div class="theme-container" data-theme-name="pink">
+                <div class="theme theme-pink" th:classappend="${#themes.code('name') == 'pink'} ? 'theme-active'"></div>
               </div>
             </div>
           </div>

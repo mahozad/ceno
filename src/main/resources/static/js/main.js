@@ -481,7 +481,7 @@ $(".lang").on("click touch", function () {
 });
 
 //======= change theme ========\\
-$(".theme").on("click touch", function () {
+$(".theme-container").on("click touch", function () {
     let searchParams = new URLSearchParams(window.location.search); // NOTE: IE is not supported
     var theme = $(this).data("theme-name");
     searchParams.set("theme", theme);
