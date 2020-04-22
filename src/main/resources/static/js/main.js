@@ -277,9 +277,9 @@ $(".register-form").submit(function () {
 });
 
 //======== Attach csrf header to every AJAX POST request =========\\
-// var token = $(`meta[name="_csrf"]`).attr("content");
-// var header = $(`meta[name="_csrf_header"]`).attr("content");
-// $(document).ajaxSend((e, xhr) => xhr.setRequestHeader(header, token));
+var csrfHeader = $(`meta[name="_csrf_header"]`).attr("content");
+var csrfToken = $(`meta[name="_csrf"]`).attr("content");
+$(document).ajaxSend((_, xhr) => xhr.setRequestHeader(csrfHeader, csrfToken));
 
 //======================== AJAX login ======================
 var usernameInputLogin = $(".login-form .input:nth-child(1) input");

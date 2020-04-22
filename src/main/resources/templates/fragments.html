@@ -9,9 +9,9 @@
   <meta name="description" th:replace="${description}"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="author" content="Mahdi Hosseinzadeh"/>
-  <meta name="_csrf" th:content="${_csrf.token}"/>
-  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
   <meta name="theme-color" th:content="${#themes.code('android-toolbar-color')}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
 
   <!--/* Page title */-->
   <title th:replace="${title}"></title>
