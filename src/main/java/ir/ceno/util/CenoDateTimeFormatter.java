@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DecimalStyle;
 import java.util.Locale;
 
 import static java.time.LocalDateTime.now;
@@ -52,11 +53,20 @@ public class CenoDateTimeFormatter {
     }
 
     /**
-     * Unlike {@link DateFormat}, the {@link DateTimeFormatter}
-     * does not take into account the number system by default.
-     * So the number system should be explicitly specified in the locale like
-     * {@code "fa-u-nu-arabext"} as we did in out lang parameter in HTML or with
-     * {@code Locale.forLanguageTag("fa-u-nu-arabext")}. For more info about this refer
+     * Unlike {@link DateFormat}, the {@link DateTimeFormatter} by default
+     * does not take into account the number system of the given locale.
+     * So the number system should be explicitly specified either with
+     * <li>
+     *     specifying number system extension ({@code fa-u-nu-arabext}) in lang parameter in HTML
+     *     or with {@code .localizedBy(Locale.forLanguageTag("fa-u-nu-arabext"))}
+     * </li>
+     * or with
+     * <li>
+     *     specifying explicitly to the formatter that it should use the decimal style of this locale:
+     *     {@code .withLocale(locale).withDecimalStyle(DecimalStyle.of(locale))}
+     * </li>
+     *
+     * For more info about this refer
      * <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8243162">here</a> and
      * <a href="https://docs.oracle.com/javase/tutorial/i18n/locale/extensions.html">here</a>.
      *
@@ -64,7 +74,7 @@ public class CenoDateTimeFormatter {
      */
     public String formatDate(LocalDate date, String pattern) {
         Locale locale = LocaleContextHolder.getLocale();
-        DateTimeFormatter formatter = ofPattern(pattern).localizedBy(locale);
+        DateTimeFormatter formatter = ofPattern(pattern).withLocale(locale).withDecimalStyle(DecimalStyle.of(locale));
         if (locale.getLanguage().equals("fa")) {
             PersianDate dateFa = PersianDate.fromGregorian(date);
             return formatter.format(dateFa);
