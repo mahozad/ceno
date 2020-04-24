@@ -53,24 +53,31 @@ public class CenoDateTimeFormatter {
     }
 
     /**
+     * Formats the given date according to the specified pattern and
+     * with respect to the user locale and its calendar system.
+     * <p>
      * Unlike {@link DateFormat}, the {@link DateTimeFormatter} by default
      * does not take into account the number system of the given locale.
      * So the number system should be explicitly specified either with
-     * <li>
+     * <ul>
+     *   <li>
      *     specifying number system extension ({@code fa-u-nu-arabext}) in lang parameter in HTML
      *     or with {@code .localizedBy(Locale.forLanguageTag("fa-u-nu-arabext"))}
-     * </li>
+     *   </li>
+     * </ul>
      * or with
-     * <li>
+     * <ul>
+     *   <li>
      *     specifying explicitly to the formatter that it should use the decimal style of this locale:
      *     {@code .withLocale(locale).withDecimalStyle(DecimalStyle.of(locale))}
-     * </li>
+     *   </li>
+     * </ul>
      *
-     * For more info about this refer
+     * For more info refer
      * <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8243162">here</a> and
      * <a href="https://docs.oracle.com/javase/tutorial/i18n/locale/extensions.html">here</a>.
      *
-     * @return the current year formatted according to the locale and its calendar system
+     * @return the formatted date
      */
     public String formatDate(LocalDate date, String pattern) {
         Locale locale = LocaleContextHolder.getLocale();
