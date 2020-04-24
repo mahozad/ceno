@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DecimalStyle;
+import java.time.temporal.Temporal;
 import java.util.Locale;
 
 import static java.time.LocalDateTime.now;
@@ -79,7 +80,8 @@ public class CenoDateTimeFormatter {
      *
      * @return the formatted date
      */
-    public String formatDate(LocalDate date, String pattern) {
+    public String formatDate(Temporal temporal, String pattern) {
+        LocalDate date = LocalDate.from(temporal);
         Locale locale = LocaleContextHolder.getLocale();
         DateTimeFormatter formatter = ofPattern(pattern).withLocale(locale).withDecimalStyle(DecimalStyle.of(locale));
         if (locale.getLanguage().equals("fa")) {
