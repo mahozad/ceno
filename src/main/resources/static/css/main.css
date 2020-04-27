@@ -196,8 +196,9 @@ nav {
 }
 
 .search-icon {
-    fill: var(--icons-color);
-    transition: all ease 0.2s;
+    fill: none;
+    stroke: var(--icons-color);
+    transition: all ease 200ms;
     width: 100%;
 }
 
@@ -226,7 +227,7 @@ nav {
 }
 
 .search-input:focus + .search-button > .search-icon {
-    fill: var(--primary-color);
+    stroke: var(--primary-color);
 }
 
 .search-input::placeholder {
