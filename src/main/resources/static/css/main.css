@@ -744,7 +744,8 @@ textarea:valid ~ label {
     cursor: pointer;
     height: 18px;
     vertical-align: middle;
-    fill: #838e9b;;
+    stroke: #758190;
+    fill: none;
 }
 
 /****************************************/
