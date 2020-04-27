@@ -198,7 +198,7 @@ nav {
 .search-icon {
     fill: none;
     stroke: var(--icons-color);
-    transition: all ease 200ms;
+    transition: all ease-out 200ms;
     width: 100%;
 }
 
@@ -289,7 +289,7 @@ nav {
     font-size: 15px;
     font-weight: bold;
     margin-right: 30px;
-    transition: all ease 0.12s;
+    transition: all ease 100ms;
 }
 
 #log-in:hover {
@@ -306,7 +306,7 @@ nav {
     font-size: 15px;
     font-weight: bold;
     margin-right: 40px;
-    transition: all ease 0.12s;
+    transition: all ease 100ms;
 }
 
 #new-post {
@@ -389,7 +389,7 @@ nav {
     font-size: 25px;
     margin: 0 0 20px;
     text-decoration: none;
-    transition: linear 0.12s;
+    transition: linear 100ms;
 }
 
 .side-nav a:hover {
