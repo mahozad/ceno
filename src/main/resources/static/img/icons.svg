@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="128" height="128" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
 
-  <!-- To add a new icon here, it is better to be in 128 × 128 (to make all icons uniform) -->
+  <!-- NOTE: To add a new icon here, it is better to be in 128 × 128 (to make all icons uniform) -->
 
   <svg id="search" stroke-width="10">
     <path d="m123 123-39-39" stroke-linecap="round"/>
@@ -14,6 +14,11 @@
     <circle cx="27" cy="64" r="21"/>
     <path d="m101 107-74-43" stroke-linecap="round" stroke-width="10"/>
     <circle cx="101" cy="107" r="21"/>
+  </svg>
+
+  <svg id="logout" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m90.711 113.36a57 57 0 0 1-72.165-12.725 57 57 0 0 1 1e-6 -73.278 57 57 0 0 1 72.165-12.725"/>
+    <path d="m56 64h67m-21-21 21 21-21 21"/>
   </svg>
 
 </svg>

@@ -100,9 +100,8 @@
           </div>
         </div>
         <form th:action="@{/logout}" method="post" th:title="#{log-out}">
-          <svg class="logout" viewBox="0 0 128 128" stroke-linecap="round" stroke-linejoin="round" stroke-width="10">
-            <path d="m56 64h67m-21-21 21 21-21 21"/>
-            <path d="m90.499 113.36a56.999 56.999 0 0 1-72.163-12.724 56.999 56.999 0 0 1 4e-6 -73.276 56.999 56.999 0 0 1 72.163-12.724"/>
+          <svg class="logout" viewBox="0 0 128 128">
+            <use th:href="@{/img/icons.svg#logout}"></use>
           </svg>
         </form>
       </div>
