@@ -3,26 +3,26 @@
 
   <!-- NOTE: To add a new icon here, it is better to be in 128 × 128 (to make all icons uniform) -->
 
-  <svg id="search" stroke-width="10">
+  <symbol id="search" viewBox="0 0 128 128" stroke-width="10">
     <path d="m123 123-39-39" stroke-linecap="round"/>
     <circle cx="51" cy="51" r="46"/>
-  </svg>
+  </symbol>
 
-  <svg id="share">
+  <symbol id="share" viewBox="0 0 128 128">
     <circle cx="101" cy="21" r="21"/>
     <path d="m102 21-75 43" stroke-linecap="round" stroke-width="10"/>
     <circle cx="27" cy="64" r="21"/>
     <path d="m101 107-74-43" stroke-linecap="round" stroke-width="10"/>
     <circle cx="101" cy="107" r="21"/>
-  </svg>
+  </symbol>
 
-  <svg id="logout" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+  <symbol id="logout" viewBox="0 0 128 128" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
     <path d="m90.711 113.36a57 57 0 0 1-72.165-12.725 57 57 0 0 1 1e-6 -73.278 57 57 0 0 1 72.165-12.725"/>
     <path d="m56 64h67m-21-21 21 21-21 21"/>
-  </svg>
+  </symbol>
 
-  <svg id="pin">
+  <symbol id="pin" viewBox="0 0 128 128">
     <path d="m94 0c2 0 3.552 1.584 3 6-1 8-5 14-11 19v29c11 5 18 17 20 31 0.294 2.058-0.76393 4-3 4h-34v34c0 3-2 5-5 5s-5-2-5-5v-34h-34c-2.2361 0-3.294-1.942-3-4 2-14 9-26 20-31v-29c-6-5-10-11-11-19-0.552-4.416 1-6 3-6h30z"/>
-  </svg>
+  </symbol>
 
 </svg>
