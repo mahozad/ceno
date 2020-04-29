@@ -47,11 +47,10 @@
                 <label>
                   <input type="submit" class="hidden"/>
                   <input type="hidden" name="postId" th:value="${post.id}"/>
-                  <svg class="pin-icon" viewBox="0 0 40 60"
+                  <svg class="pin-icon" viewBox="0 0 128 128"
                        th:classappend="${(post.pinned?'pinned':'') + (authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')')?'':' disabled')}">
-                    <path
-                        d="m 39.008476,39.9 c 0.1,0.9 -0.7,1.8 -1.6,1.8 h -15.7 v 16 c 0,1.2 -1,2.2 -2.2,2.2 -1.2,0 -2.2,-1 -2.2,-2.2 v -16 H 1.6084759 c -0.90000005,0 -1.70000005,-0.8 -1.60000005,-1.8 0.6,-6.2 4.00000005,-11.6 9.10000005,-14.8 V 11.6 c -2.7,-2.5 -4.6,-5.9 -5.1,-9.7 -0.1,-1 0.7,-1.9 1.7,-1.9 H 33.308476 c 1,0 1.9,0.9 1.7,1.9 -0.5,3.9 -2.3,7.3 -5.1,9.7 v 13.5 c 5.1,3.2 8.5,8.5 9.1,14.8 z"></path>
                     <title th:text="${authenticated}?#{post.pin}:#{prompt.not-logged-in}"></title>
+                    <use th:href="@{/img/icons.svg#pin}"></use>
                   </svg>
                 </label>
               </form>
