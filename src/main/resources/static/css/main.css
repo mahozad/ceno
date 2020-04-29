@@ -1372,7 +1372,7 @@ progress::-webkit-progress-value {
     margin-bottom: 4px;
 }
 
-.follow-us-image {
+.follow-us-item {
     margin-top: 18px;
     filter: contrast(0%) brightness(130%);
 }
@@ -1392,7 +1392,7 @@ progress::-webkit-progress-value {
     height: 15px;
 }
 
-.follow-us-image:hover {
+.follow-us-item:hover {
     filter: none;
 }
 

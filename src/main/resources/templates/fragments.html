@@ -255,18 +255,18 @@
       <div class="foot-links">
         <div class="foot-follow-us">
           <span class="follow-prompt" th:text="#{footer.follow}">Follow Ceno</span>
-          <a th:href="@{http://www.facebook.com/ceno}" target="_blank" rel="noopener">
-            <svg id="follow-on-facebook" class="follow-us-image" viewBox="0 0 128 128">
+          <a th:href="@{http://www.facebook.com/ceno}" class="follow-us-item" target="_blank" rel="noopener">
+            <svg id="follow-on-facebook" viewBox="0 0 128 128">
               <use th:href="@{/img/icons.svg#facebook}"></use>
             </svg>
           </a>
-          <a th:href="@{http://www.twitter.com/ceno}" target="_blank" rel="noopener">
-            <svg id="follow-on-twitter" class="follow-us-image" viewBox="0 0 128 128">
+          <a th:href="@{http://www.twitter.com/ceno}" class="follow-us-item" target="_blank" rel="noopener">
+            <svg id="follow-on-twitter" viewBox="0 0 128 128">
               <use th:href="@{/img/icons.svg#twitter}"></use>
             </svg>
           </a>
-          <a th:href="@{|/rss/${catName}|}" th:if="${#request.requestURI.startsWith('/categories')} ">
-            <svg id="follow-rss" class="follow-us-image" viewBox="0 0 128 128">
+          <a th:href="@{|/rss/${catName}|}" class="follow-us-item" th:if="${#request.requestURI.startsWith('/categories')} ">
+            <svg id="follow-rss" viewBox="0 0 128 128">
               <use th:href="@{/img/icons.svg#rss}"></use>
             </svg>
           </a>
