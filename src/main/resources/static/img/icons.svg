@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- To add a new icon here, it is better to be in 128 × 128 (to make all icons uniform) -->
+
+  <svg id="search" stroke-width="10">
+    <path d="m123 123-39-39" stroke-linecap="round"/>
+    <circle cx="51" cy="51" r="46"/>
+  </svg>
+
+  <svg id="share">
+    <circle cx="101" cy="21" r="21"/>
+    <path d="m102 21-75 43" stroke-linecap="round" stroke-width="10"/>
+    <circle cx="27" cy="64" r="21"/>
+    <path d="m101 107-74-43" stroke-linecap="round" stroke-width="10"/>
+    <circle cx="101" cy="107" r="21"/>
+  </svg>
+
+</svg>

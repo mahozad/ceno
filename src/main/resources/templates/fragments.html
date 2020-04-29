@@ -71,7 +71,7 @@
                  th:placeholder="#{search-placeholder}" aria-label="search"/>
           <button type="submit" class="search-button">
             <svg class="search-icon" viewBox="0 0 128 128">
-              <path fill="none" stroke-linecap="round" stroke-width="11" d="m122 122-37-37m12.737-33.466c0 25.517-20.686 46.203-46.203 46.203s-46.203-20.686-46.203-46.203 20.686-46.203 46.203-46.203 46.203 20.686 46.203 46.203z"/>
+              <use th:href="@{/img/icons.svg#search}"></use>
             </svg>
           </button>
         </form>
@@ -201,12 +201,7 @@
       </svg>
       <div class="share-container">
         <svg class="share-icon" viewBox="0 0 128 128">
-          <!--<use th:href="@{/img/ic-share.svg#share}"></use>-->
-          <circle cx="101" cy="21" r="21"/>
-          <path d="m102 21-75 43" stroke-linecap="round" stroke-width="10"/>
-          <circle cx="27" cy="64" r="21"/>
-          <path d="m101 107-74-43" stroke-linecap="round" stroke-width="10"/>
-          <circle cx="101" cy="107" r="21"/>
+          <use th:href="@{/img/icons.svg#share}"></use>
         </svg>
         <div class="share-content">
           <div class="arrow"></div>
