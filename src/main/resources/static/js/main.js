@@ -167,37 +167,14 @@ $(".close-cat").on("click touch", () => $(".side-nav").css({width: "0"}));
 
 //================= Share icon ==================\\
 $body.on("click touch", ".share-icon", function () {
-    var container = $(this).next();
-    if (container.css("visibility") === "visible") {
-        $(this).css({fill: "#919da5", stroke: "#919da5"});
-        container.css({
-            opacity: "0",
-            visibility: "hidden",
-            transform: "translate(-20px, 0)"
-        });
-    } else {
-        $(this).css({fill: themeColor, stroke: themeColor});
-        container.css({
-            opacity: "1",
-            visibility: "visible",
-            transform: "translate(-20px, 10px)"
-        });
-    }
+    $(this).parent().toggleClass("active");
 });
 
-$(window).click(function (ev) {
-    if (ev.target.tagName !== "svg" && ev.target.tagName !== "path") {
-        $(".share-content").each(function () {
-            if ($(this).is(":visible")) {
-                $(this).siblings(".share-icon").css({fill: "#919da5"});
-                $(this).css({
-                    opacity: "0",
-                    visibility: "hidden",
-                    transform: "translate(-20px, 0)"
-                });
-            }
-        });
-    }
+$body.on("click touch", function (e) {
+    let $target = $(e.target);
+    if ($target.is(".share-icon") || $target.parents().is(".share-icon")) return
+
+    $(".share-container").removeClass("active");
 });
 
 //============== Check existing userName ==================\\

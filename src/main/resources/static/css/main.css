@@ -1054,6 +1054,17 @@ progress::-webkit-progress-value {
     stroke: var(--icons-color);
 }
 
+.share-container.active .share-icon {
+    fill: var(--primary-color);
+    stroke: var(--primary-color);
+}
+
+.share-container.active .share-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-20px, 10px)
+}
+
 .meters {
     align-items: center;
     display: flex;
