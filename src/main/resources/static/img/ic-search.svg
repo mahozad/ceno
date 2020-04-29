@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg class="search-icon" version="1.1" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
- <circle cx="29" cy="29" r="26" fill="none" stroke="#000" stroke-width="6"/>
- <path d="m69 69-21-21" fill="none" stroke="#000" stroke-linecap="round" stroke-width="6"/>
+<svg width="128" height="128" version="1.1" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+ <path d="m122 122-37-37m12.737-33.466c0 25.517-20.686 46.203-46.203 46.203s-46.203-20.686-46.203-46.203 20.686-46.203 46.203-46.203 46.203 20.686 46.203 46.203z" fill="none" stroke="#000" stroke-linecap="round" stroke-width="11"/>
 </svg>
