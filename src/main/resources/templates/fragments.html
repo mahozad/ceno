@@ -256,13 +256,19 @@
         <div class="foot-follow-us">
           <span class="follow-prompt" th:text="#{footer.follow}">Follow Ceno</span>
           <a th:href="@{http://www.facebook.com/ceno}" target="_blank" rel="noopener">
-            <img class="follow-us-image" alt="facebook" th:src="@{/img/ic-soc-facebook.svg}"/>
+            <svg id="follow-on-facebook" class="follow-us-image" viewBox="0 0 128 128">
+              <use th:href="@{/img/icons.svg#facebook}"></use>
+            </svg>
           </a>
           <a th:href="@{http://www.twitter.com/ceno}" target="_blank" rel="noopener">
-            <img class="follow-us-image" alt="twitter" th:src="@{/img/ic-soc-twitter.svg}">
+            <svg id="follow-on-twitter" class="follow-us-image" viewBox="0 0 128 128">
+              <use th:href="@{/img/icons.svg#twitter}"></use>
+            </svg>
           </a>
-          <a th:if="${#request.requestURI.startsWith('/categories')} " th:href="@{|/rss/${catName}|}">
-            <img class="follow-us-rss" alt="rss" th:src="@{/img/ic-rss.svg}"/>
+          <a th:href="@{|/rss/${catName}|}" th:if="${#request.requestURI.startsWith('/categories')} ">
+            <svg id="follow-rss" class="follow-us-image" viewBox="0 0 128 128">
+              <use th:href="@{/img/icons.svg#rss}"></use>
+            </svg>
           </a>
         </div>
         <div class="foot-preferences">

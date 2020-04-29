@@ -1373,23 +1373,26 @@ progress::-webkit-progress-value {
 }
 
 .follow-us-image {
-    height: 20px;
-    width: 17px;
-}
-
-.follow-us-rss {
-    width: 14px;
-}
-
-.follow-us-image, .follow-us-rss {
-    margin-top: 12px;
-}
-
-.foot-follow-us img {
+    margin-top: 18px;
     filter: contrast(0%) brightness(130%);
 }
 
-.foot-follow-us img:hover {
+#follow-on-facebook {
+    width: 20px;
+    height: 20px;
+}
+
+#follow-on-twitter {
+    width: 17px;
+    height: 17px;
+}
+
+#follow-rss {
+    width: 15px;
+    height: 15px;
+}
+
+.follow-us-image:hover {
     filter: none;
 }
 
