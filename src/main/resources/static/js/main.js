@@ -320,8 +320,8 @@ $body.on("click touch", ".ply-btn", function () {
            .ply-btn.active path {d: path("...");}
        but the d: path(""); was only supported by chrome browsers.
        Anyway the transform:... in CSS is still needed so the path is changed with animation. */
-    if (video.paused) $(this).find("path").attr("d", "M 2,2 L 2,22 L 10,22 L 10,2 Z M 22,2 L 22,22 L 14,22 L 14,2 Z");
-    else $(this).find("path").attr("d", "M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z");
+    if (video.paused) $(this).find("path").attr("d", "M2,2 L2,22 L10,22 L10,2 Z M22,2 L22,22 L14,22 L14,2 Z");
+    else $(this).find("path").attr("d", "M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z");
 
     if (video.paused) {
         video.play();
