@@ -169,14 +169,14 @@ $(".close-cat").on("click touch", () => $(".side-nav").css({width: "0"}));
 $body.on("click touch", ".share-icon", function () {
     var container = $(this).next();
     if (container.css("visibility") === "visible") {
-        $(this).css({fill: "#919da5"});
+        $(this).css({fill: "#919da5", stroke: "#919da5"});
         container.css({
             opacity: "0",
             visibility: "hidden",
             transform: "translate(-20px, 0)"
         });
     } else {
-        $(this).css({fill: themeColor});
+        $(this).css({fill: themeColor, stroke: themeColor});
         container.css({
             opacity: "1",
             visibility: "visible",
@@ -337,12 +337,12 @@ $body.on("click touch", ".ply-btn", function () {
     var video = $(this).siblings("video")[0];
     var button = $(this);
 
-   /* The CSS way to animate was to toggle a class here for example: $(this).toggleClass("active");
-      and in CSS have selectors like this:
-          .ply-btn path {transform: all 200ms;}
-          .ply-btn.active path {d: path("...");}
-      but the d: path(""); was only supported by chrome browsers.
-      Anyway the transform:... in CSS is still needed so the path is changed with animation. */
+    /* The CSS way to animate was to toggle a class here for example: $(this).toggleClass("active");
+       and in CSS have selectors like this:
+           .ply-btn path {transform: all 200ms;}
+           .ply-btn.active path {d: path("...");}
+       but the d: path(""); was only supported by chrome browsers.
+       Anyway the transform:... in CSS is still needed so the path is changed with animation. */
     if (video.paused) $(this).find("path").attr("d", "M 2,2 L 2,22 L 10,22 L 10,2 Z M 22,2 L 22,22 L 14,22 L 14,2 Z");
     else $(this).find("path").attr("d", "M 2,2 L 2,22 L 22,12 L 22,12 Z M 22,12 L 22,12 L 22,12 L 22,12 Z");
 
