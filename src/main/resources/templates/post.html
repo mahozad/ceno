@@ -47,15 +47,13 @@
                 <label>
                   <input type="submit" class="hidden"/>
                   <input type="hidden" name="postId" th:value="${post.id}"/>
-                  <svg class="pin-icon" viewBox="0 0 128 128"
-                       th:classappend="${(post.pinned?'pinned':'') + (authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')')?'':' disabled')}">
+                  <svg class="pin-icon" viewBox="0 0 128 128" th:classappend="${(post.pinned?'pinned':'') + (authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')')?'':' disabled')}">
                     <title th:text="${authenticated}?#{post.pin}:#{prompt.not-logged-in}"></title>
                     <use th:href="@{/img/icons.svg#pin}"></use>
                   </svg>
                 </label>
               </form>
-              <svg class="chng-cats-icon" viewBox="0 0 128 128"
-                   th:classappend="${authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')') ?'':'disabled'}">
+              <svg class="chng-cats-icon" viewBox="0 0 128 128" th:classappend="${authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')') ?'':'disabled'}">
                 <title th:text="${authenticated}?#{post.change-cats}:#{prompt.not-logged-in}"></title>
                 <use th:href="@{/img/icons.svg#category}"></use>
               </svg>
