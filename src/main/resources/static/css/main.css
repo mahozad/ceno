@@ -1072,6 +1072,13 @@ progress::-webkit-progress-value {
     transform: translate(-20px, 10px)
 }
 
+.meters {
+    align-items: center;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
 /*********** like icon ***********/
 
 .heart-static {
