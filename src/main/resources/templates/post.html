@@ -41,7 +41,9 @@
               </div>
               <div class="visits-count">
                 <span th:text="${postDetails.totalViews}"></span>
-                <img th:src="@{/img/ic-eye.svg}" alt="views"/>
+                <svg class="visits-count-img" viewBox="0 0 128 128">
+                  <use th:href="@{/img/icons.svg#eye}"></use>
+                </svg>
               </div>
             </div>
             <div class="actions">
