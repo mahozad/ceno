@@ -202,10 +202,11 @@
         </svg>
         <div class="share-content">
           <div class="arrow"></div>
-          <a th:fragment="share" th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}"
-             th:href="@{|${share.url + post.url}|}" target="_blank" rel="noopener">
-            <img th:src="@{|/img/ic-soc-${share.name}.svg|}" th:alt="${share.name}"
-                 th:title="${'Share on ' + share.name}"/>
+          <a th:fragment="share" th:each="share:${T(ir.ceno.model.Post.ShareUrl).values()}" th:href="@{|${share.url + post.url}|}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 128 128">
+              <title th:text="${'Share on ' + share.name}"></title>
+              <use th:href="@{|/img/icons.svg#${share.name.toLowerCase()}|}"></use>
+            </svg>
           </a>
         </div>
       </div>

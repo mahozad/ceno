@@ -1015,15 +1015,26 @@ progress::-webkit-progress-value {
     z-index: 10;
 }
 
-.share-content img {
-    height: 18px;
-    margin: 10px 10px 0;
-    width: 15px;
+.share-content svg {
+    padding: 8px
 }
 
-.share-content a:last-child img {
-    margin-bottom: 5px;
-    width: 14px;
+.share-content svg:hover {
+    background: #e5e5e5;
+}
+
+.share-content a:nth-of-type(1) svg {
+    width: 34px;
+}
+.share-content a:nth-of-type(2) svg {
+    width: 34px;
+    padding: 9px;
+}
+.share-content a:nth-of-type(3) svg {
+    width: 34px;
+}
+.share-content a:nth-of-type(4) svg {
+    width: 34px;
 }
 
 /* arrow for triangle */
