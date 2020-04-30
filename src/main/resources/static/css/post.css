@@ -240,6 +240,8 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    fill: var(--icons-color);
+    stroke: var(--icons-color);
 }
 
 .comm-count span {
@@ -247,7 +249,7 @@
     padding-right: 10px;
 }
 
-.comm-count img {
+.comm-count-img {
     direction: rtl;
     margin-right: 22px;
     margin-top: 1px;

@@ -35,7 +35,9 @@
               <div class="likes" th:include="fragments::card-like"></div>
               <div class="comm-count">
                 <span th:text="${post.commentsCount}"></span>
-                <img th:src="@{/img/ic-comment.svg}" alt="comments"/>
+                <svg class="comm-count-img" viewBox="0 0 128 128">
+                  <use th:href="@{/img/icons.svg#comment}"></use>
+                </svg>
               </div>
               <div class="visits-count">
                 <span th:text="${postDetails.totalViews}"></span>
