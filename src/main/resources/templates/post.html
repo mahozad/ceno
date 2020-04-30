@@ -88,12 +88,9 @@
                 <label>
                   <input type="submit" class="hidden"/>
                   <input type="hidden" name="postId" th:value="${post.id}"/>
-                  <svg class="rep-icon" viewBox="13 13 74 74"
-                       th:classappend="${authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')')?'':'disabled'}">
-                    <path
-                        d="M 50,13.5 C 29.874,13.5 13.5,29.874 13.5,50 13.5,70.126 29.874,86.5 50,86.5 70.126,86.5 86.5,70.126 86.5,50 86.5,29.874 70.126,13.5 50,13.5 Z m 3.5,57.23589 h -7 v -6.77 h 7 z m 0,-15.497688 h -7 v -28.59466 h 7 z"></path>
-                    <title
-                        th:text="${authenticated}?#{post.report}:#{prompt.not-logged-in}"></title>
+                  <svg class="rep-icon" viewBox="0 0 128 128" th:classappend="${authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')')?'':'disabled'}">
+                    <title th:text="${authenticated}?#{post.report}:#{prompt.not-logged-in}"></title>
+                    <use th:href="@{/img/icons.svg#report}"></use>
                   </svg>
                 </label>
               </form>
