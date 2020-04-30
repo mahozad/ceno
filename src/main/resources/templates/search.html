@@ -14,7 +14,9 @@
   <div th:replace="fragments::prompt"></div>
   <div th:class="${posts.isEmpty() ? 'no-result-prompt' : 'result-prompt'}">
     <th:block th:if="${posts.isEmpty()}">
-      <img th:src="@{/img/ic-lamp.svg}" alt="no results">
+      <svg class="no-result-icon" viewBox="0 0 128 128">
+        <use th:href="@{/img/icons.svg#lamp}"></use>
+      </svg>
       <div th:text="#{prompt.no-search-result}"></div>
     </th:block>
     <div th:if="${not posts.isEmpty()}">

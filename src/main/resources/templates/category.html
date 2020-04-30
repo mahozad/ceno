@@ -14,7 +14,9 @@
 <main>
   <div th:replace="fragments::prompt"></div>
   <div class="no-result-prompt" th:if="${posts.isEmpty()}">
-    <img th:src="@{/img/ic-lamp.svg}" alt="empty"/>
+    <svg class="no-result-icon" viewBox="0 0 128 128">
+      <use th:href="@{/img/icons.svg#lamp}"></use>
+    </svg>
     <div> Sorry, there is no post in this category.<br/>
       Be the first one and create a post here!
     </div>

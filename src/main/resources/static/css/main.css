@@ -79,6 +79,13 @@ main {
     width: 87.5%;
 }
 
+.no-result-icon {
+    width: 48px;
+    height: 48px;
+    fill: var(--icons-color);
+    stroke: var(--icons-color);
+}
+
 .no-result-prompt {
     background: #fff;
     border-radius: 2px;
