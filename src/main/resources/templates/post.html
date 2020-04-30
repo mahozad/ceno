@@ -54,12 +54,10 @@
                   </svg>
                 </label>
               </form>
-              <svg class="chng-cats-icon" viewBox="1 0 33 33"
+              <svg class="chng-cats-icon" viewBox="0 0 128 128"
                    th:classappend="${authenticated && #authorization.expression('hasAnyRole(''EDITOR'',''ADMIN'')') ?'':'disabled'}">
-                <path
-                    d="m 32.00025,1.997 c 0,-1.102 -0.896,-1.997 -2,-1.997 l -13,0.012 c -0.401,0 -0.688,0.132 -1.083,0.527 l -15.378,15.358 c -0.719,0.718 -0.719,1.88 0,2.598 l 13.14,12.966 c 0.719,0.719 1.883,0.719 2.603,0 l 15.25,-15.328 c 0.396,-0.394 0.468,-0.802 0.468,-1.152 z M 25.01225,10 c -1.657,0 -3.004,-1.345 -3.004,-3 0,-1.655 1.347,-3 3.004,-3 1.657,0 3.003,1.345 3.003,3 0,1.655 -1.346,3 -3.003,3 z"></path>
-                <title
-                    th:text="${authenticated}?#{post.change-cats}:#{prompt.not-logged-in}"></title>
+                <title th:text="${authenticated}?#{post.change-cats}:#{prompt.not-logged-in}"></title>
+                <use th:href="@{/img/icons.svg#category}"></use>
               </svg>
               <div class="chng-cats-container"
                    th:title="${authenticated}?#{post.change-cats}:#{prompt.not-logged-in}">
