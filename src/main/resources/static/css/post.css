@@ -301,9 +301,7 @@
     background: #d5d5d5;
 }
 
-.article-share img {
-    /*margin-right: 18px;*/
-    /*margin-top: 4px;*/
+.article-share svg {
     height: 14px;
     width: 13px;
 }
