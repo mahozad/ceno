@@ -171,13 +171,6 @@ nav {
     display: flex;
 }
 
-.brand-logo g {
-    fill: none;
-    stroke: var(--primary-color);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
 .search-container {
     align-items: center;
     display: flex;
@@ -245,7 +238,13 @@ nav {
     display: flex;
     height: 32px;
     margin: 2px 0 0 40px;
-    fill: var(--primary-color);
+    fill: none;
+    stroke: var(--primary-color);
+    transition: all 100ms;
+}
+
+.brand-logo:hover {
+    filter: brightness(70%);
 }
 
 .cat-container {
