@@ -318,10 +318,15 @@ $body.on("click touch", ".ply-btn", function () {
        and in CSS have selectors like this:
            .ply-btn path {transform: all 200ms;}
            .ply-btn.active path {d: path("...");}
-       but the d: path(""); was only supported by chrome browsers.
-       Anyway the transform:... in CSS is still needed so the path is changed with animation. */
-    if (video.paused) $(this).find("path").attr("d", "M2,2 L2,22 L10,22 L10,2 Z M22,2 L22,22 L14,22 L14,2 Z");
-    else $(this).find("path").attr("d", "M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z");
+       but the d: path(""); was only supported by chrome browsers. */
+    if (video.paused) {
+        $(this).find("path").attr("d", "M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z");
+        $(this).find("animate").attr("to", "M2,2 L2,22 L10,22 L10,2 Z M22,2 L22,22 L14,22 L14,2 Z");
+    } else {
+        $(this).find("path").attr("d", "M2,2 L2,22 L10,22 L10,2 Z M22,2 L22,22 L14,22 L14,2 Z");
+        $(this).find("animate").attr("to", "M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z");
+    }
+    $(this).find("animate")[0].beginElement(); // begin the animation
 
     if (video.paused) {
         video.play();

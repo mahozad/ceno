@@ -222,8 +222,10 @@
         <span th:text="#{prompt.video-not-supported}"></span>
       </video>
       <svg class="ply-btn" viewBox="0 0 24 24">
-        <!-- NOTE: Cannot take advantage of <use> because the path is animated -->
-        <path d="M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z"/>
+        <!-- NOTE: Couldn't take advantage of <use> because cannot manipulate elements in Shadow DOM -->
+        <path d="M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z">
+          <animate attributeName="d" dur="300ms" fill="freeze" calcMode="spline" keySplines=".25,.1,.25,1" keyTimes="0; 1"/>
+        </path>
       </svg>
       <progress max="100" value="0" class="prog-bar"></progress>
     </div>

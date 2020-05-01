@@ -950,10 +950,6 @@ main {
     opacity: 0.9;
 }
 
-.ply-btn path {
-    transition: all .3s ease;
-}
-
 progress {
     border: none;
     left: 0;
