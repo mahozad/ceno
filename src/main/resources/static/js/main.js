@@ -310,15 +310,14 @@ $(".logout").on("click touch", function () {
     $(this).parent().submit();
 });
 
+// The CSS way to animate was to toggle a class here for example: $(this).toggleClass("active");
+// and have rules like this:
+//     .ply-btn path {transform: all 200ms;}
+//     .ply-btn.active path {d: path("...");}
+// but the d: path(""); was only supported by chrome browsers.
 $body.on("click touch", ".ply-btn", function () {
-    var video = $(this).siblings("video")[0];
-    var button = $(this);
+    let video = $(this).siblings("video")[0];
 
-    /* The CSS way to animate was to toggle a class here for example: $(this).toggleClass("active");
-       and in CSS have selectors like this:
-           .ply-btn path {transform: all 200ms;}
-           .ply-btn.active path {d: path("...");}
-       but the d: path(""); was only supported by chrome browsers. */
     if (video.paused) {
         $(this).find("path").attr("d", "M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z");
         $(this).find("animate").attr("to", "M2,2 L2,22 L10,22 L10,2 Z M22,2 L22,22 L14,22 L14,2 Z");
@@ -328,30 +327,20 @@ $body.on("click touch", ".ply-btn", function () {
     }
     $(this).find("animate")[0].beginElement(); // begin the animation
 
-    if (video.paused) {
-        video.play();
-        setTimeout(() => {
-            if (!button.is(":hover")) button.fadeTo(200, 0);
-        }, 1000);
-    } else {
-        video.pause();
-        $(this).fadeTo(80, 1);
-    }
+    if (video.paused) video.play(); else video.pause();
 });
 
-$body.on("mouseover", ".ply-btn", function () {
-    $(this).fadeTo(60, 1);
+$body.on("mouseenter", ".ply-btn", function () {
+    $(this).fadeTo(100, 1);
 });
 
 $body.on("mouseleave", ".ply-btn", function () {
-    $(this).fadeTo(60, 1);
-    var button = $(this);
-    var video = $(this).siblings("video")[0];
-    if (!video.paused) {
-        setTimeout(() => {
-            if (!button.is(":hover")) button.fadeTo(80, 0);
-        }, 300);
-    }
+    let button = $(this);
+    let video = $(this).siblings("video")[0];
+    setTimeout(() => {
+        // NOTE: To prevent subtle bugs, the checks should be in the callback
+        if (!video.paused && !button.is(":hover")) button.fadeTo(100, 0);
+    }, 300);
 });
 
 document.addEventListener("timeupdate", e => { // supports dynamically inserted videos as well
