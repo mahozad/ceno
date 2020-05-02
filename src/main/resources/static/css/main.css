@@ -906,6 +906,9 @@ main {
 
 .video-container {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card .card-video {
@@ -927,18 +930,11 @@ main {
     fill: #fff;
     background-color: rgba(23, 33, 35, .75);
     border-radius: 10%;
-    bottom: 0;
     cursor: pointer;
     height: 24%;
-    left: 0;
-    margin: auto;
-    /*max-height: 50px;*/
-    /*max-width: 80px;*/
     min-height: 32px;
     min-width: 50px;
     position: absolute;
-    right: 0;
-    top: 0;
     transition: all .18s ease;
     transition-property: width, height, background-color;
     width: 18.5%;
@@ -950,15 +946,18 @@ main {
     opacity: 0.9;
 }
 
-progress {
-    border: none;
-    left: 0;
-    bottom: 0;
+.video-progress {
+    bottom: -2px;
     height: 4px;
     position: absolute;
     width: 100%;
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+progress {
+    border: none; /* For Firefox */
+    background: transparent; /* For Firefox */
 }
 
 progress::-moz-progress-bar {

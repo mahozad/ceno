@@ -212,7 +212,7 @@
       </div>
     </div>
   </header>
-  <div th:fragment="card-file">
+  <th:block th:fragment="card-file">
     <img th:if="${post.fileDetails.type.name() == 'IMAGE'}" class="card-img"
          th:src="@{|/posts/images/${post.id}|}" alt="cover" onerror="this.src='/img/placeholder-img.svg'"/>
 
@@ -222,14 +222,14 @@
         <span th:text="#{prompt.video-not-supported}"></span>
       </video>
       <svg class="ply-btn" viewBox="0 0 24 24">
-        <!-- NOTE: Couldn't take advantage of <use> because cannot manipulate elements in Shadow DOM -->
+        <!--/* NOTE: Couldn't take advantage of <use> because cannot manipulate elements in Shadow DOM */-->
         <path d="M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z">
           <animate attributeName="d" dur="300ms" fill="freeze" calcMode="spline" keySplines=".25,.1,.25,1" keyTimes="0; 1"/>
         </path>
       </svg>
-      <progress max="100" value="0" class="prog-bar"></progress>
+      <progress class="video-progress" max="100" value="0"></progress>
     </div>
-  </div>
+  </th:block>
   <article th:fragment="card-article">
     <h1 th:text="${post.title}">Title</h1>
     <p th:text="${post.summary}">Summary</p>
