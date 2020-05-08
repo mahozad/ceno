@@ -77,13 +77,17 @@ public class CenoDateTimeFormatter {
      * For more info refer
      * <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8243162">here</a> and
      * <a href="https://docs.oracle.com/javase/tutorial/i18n/locale/extensions.html">here</a>.
+     * <p>
+     * As of JDK 15 the bug is resolved. Just use {@link DateTimeFormatter#localizedBy(Locale)}.
+     * See <a href="https://github.com/openjdk/jdk/commit/ed4bc1bf237c3875174d559f8c5a05d50cc88bf2">this</a>.
      *
      * @return the formatted date
      */
     public String formatDate(Temporal temporal, String pattern) {
         LocalDate date = LocalDate.from(temporal);
         Locale locale = LocaleContextHolder.getLocale();
-        DateTimeFormatter formatter = ofPattern(pattern).withLocale(locale).withDecimalStyle(DecimalStyle.of(locale));
+        // FIXME: As of JDK 15 just call localizedBy(); specifying the decimal style won't be necessary.
+        DateTimeFormatter formatter = ofPattern(pattern).localizedBy(locale).withDecimalStyle(DecimalStyle.of(locale));
         if (locale.getLanguage().equals("fa")) {
             PersianDate dateFa = PersianDate.fromGregorian(date);
             return formatter.format(dateFa);
