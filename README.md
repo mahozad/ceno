@@ -31,6 +31,11 @@ See [file-watchers.txt](file-watchers.txt) for instructions on how to install th
 
 #
 
+To build the application jar run the "bootjar" task or if it is a plain program without a build tool,
+create the jar with artifacts of IDEA.
+
+#
+
 To disable TypeScript error its service can be disabled in IntelliJ:
 Go to `Settings` -> `Languages & Frameworks` -> `TypeScript` -> uncheck `TypeScript Language Service`
 
