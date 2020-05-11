@@ -321,13 +321,14 @@ $body.on("click touch", ".ply-btn", function () {
     if (video.paused) {
         $(this).find("path").attr("d", "M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z");
         $(this).find("animate").attr("to", "M2,2 L2,22 L10,22 L10,2 Z M22,2 L22,22 L14,22 L14,2 Z");
+        video.play();
     } else {
         $(this).find("path").attr("d", "M2,2 L2,22 L10,22 L10,2 Z M22,2 L22,22 L14,22 L14,2 Z");
         $(this).find("animate").attr("to", "M2,2 L2,22 L22,12 L22,12 Z M22,12 L22,12 L22,12 L22,12 Z");
+        video.pause();
     }
-    $(this).find("animate")[0].beginElement(); // begin the animation
 
-    if (video.paused) video.play(); else video.pause();
+    $(this).find("animate")[0].beginElement(); // Begin the icon animation
 });
 
 $body.on("mouseenter", ".ply-btn", function () {
@@ -335,11 +336,11 @@ $body.on("mouseenter", ".ply-btn", function () {
 });
 
 $body.on("mouseleave", ".ply-btn", function () {
-    let button = $(this);
+    let $button = $(this);
     let video = $(this).siblings("video")[0];
     setTimeout(() => {
-        // NOTE: To prevent subtle bugs, the checks should be in the callback
-        if (!video.paused && !button.is(":hover")) button.fadeTo(100, 0);
+        // NOTE: To prevent subtle bugs, the checks should be here in the callback
+        if (!video.paused && !$button.is(":hover")) $button.fadeTo(100, 0);
     }, 300);
 });
 
