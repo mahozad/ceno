@@ -31,6 +31,10 @@ See [file-watchers.txt](file-watchers.txt) for instructions on how to install th
 
 #
 
+In JavaScript use requestAnimationFrame() instead of setInterval()
+
+#
+
 To build the application jar run the "bootjar" task or if it is a plain program without a build tool,
 create the jar with artifacts of IDEA.
 
