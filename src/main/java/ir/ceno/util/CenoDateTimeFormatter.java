@@ -79,7 +79,8 @@ public class CenoDateTimeFormatter {
      * <a href="https://docs.oracle.com/javase/tutorial/i18n/locale/extensions.html">here</a>.
      * <p>
      * As of JDK 15 the bug is resolved. Just use {@link DateTimeFormatter#localizedBy(Locale)}.
-     * See <a href="https://github.com/openjdk/jdk/commit/ed4bc1bf237c3875174d559f8c5a05d50cc88bf2">this</a>.
+     * See <a href="https://github.com/openjdk/jdk/commit/ed4bc1bf237c3875174d559f8c5a05d50cc88bf2">this</a> and
+     * <a href="https://jdk.java.net/15/release-notes#JDK-8244245">this</a>.
      *
      * @return the formatted date
      */
