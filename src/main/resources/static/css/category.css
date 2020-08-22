@@ -4,7 +4,7 @@
 
 .loader {
     height: 36px;
-    left: 50%;
+    left: 50%; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     position: absolute;
     transform: translate3d(-50%, -50%, 0);
     -moz-transform: translate3d(-50%, -50%, 0);
@@ -32,7 +32,7 @@
     background-color: var(--primary-color);
     display: block;
     height: 100%;
-    left: 0;
+    left: 0; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     position: absolute;
     top: 0;
     width: 100%;

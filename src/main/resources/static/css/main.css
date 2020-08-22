@@ -34,6 +34,7 @@
 * {
     box-sizing: border-box;
     font-family: 'Vazir', 'Roboto', sans-serif;
+    /*direction: rtl;*/
 }
 
 ::selection { /* set text and its background color when highlighted */
@@ -91,7 +92,7 @@ main {
     border-radius: 2px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     font-size: 15px;
-    left: 50%;
+    left: 50%; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     line-height: 36px;
     padding: 20px;
     position: absolute;
@@ -119,13 +120,13 @@ main {
     font-weight: bold;
     height: 40px;
     justify-content: center;
-    left: 0;
+    left: 0; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     margin: 24px auto -10px;
     min-width: fit-content;
     opacity: 0.92;
     padding: 20px 30px;
     position: fixed;
-    right: 0;
+    right: 0; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
     visibility: visible;
     width: 350px;
     z-index: 5;
@@ -174,7 +175,7 @@ nav {
 .search-container {
     align-items: center;
     display: flex;
-    margin-left: 40px;
+    margin-inline-start: 40px;
     width: 240px;
 }
 
@@ -191,7 +192,7 @@ nav {
     outline: none;
     position: relative;
     transition: all ease 0.2s;
-    right: 26px;
+    right: 26px; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
     width: 26px;
 }
 
@@ -223,7 +224,7 @@ nav {
 
 .search-input:focus + .search-button {
     width: 28px;
-    right: 30px;
+    right: 30px; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
 }
 
 .search-input:focus + .search-button > .search-icon {
@@ -237,7 +238,10 @@ nav {
 .brand-logo {
     display: flex;
     height: 32px;
-    margin: 2px 0 0 40px;
+    margin-block-start: 2px;
+    margin-block-end: 0;
+    margin-inline-start: 40px;
+    margin-inline-end: 0;
     fill: none;
     stroke: var(--primary-color);
     transition: all 100ms;
@@ -251,7 +255,7 @@ nav {
     display: flex;
     font-size: 15px;
     height: 100%;
-    margin-left: -110px;
+    margin-inline-start: -110px;
 }
 
 .cat-container a {
@@ -273,8 +277,8 @@ nav {
 }
 
 .usr-inf-container {
-    margin-left: -65px;
-    margin-right: 40px;
+    margin-inline-start: -65px;
+    margin-inline-end: 40px;
 }
 
 .usr,
@@ -294,7 +298,7 @@ nav {
     cursor: pointer;
     font-size: 15px;
     font-weight: bold;
-    margin-right: 30px;
+    margin-inline-end: 30px;
     transition: all ease 100ms;
 }
 
@@ -311,7 +315,7 @@ nav {
     cursor: pointer;
     font-size: 15px;
     font-weight: bold;
-    margin-right: 40px;
+    margin-inline-end: 40px;
     transition: all ease 100ms;
 }
 
@@ -319,7 +323,7 @@ nav {
     align-items: center;
     display: flex;
     font-size: 14px;
-    margin-right: 36px;
+    margin-inline-end: 36px;
     padding: 6px 8px;
     transition: all ease 0.4s;
 }
@@ -353,7 +357,6 @@ nav {
 
 .btn:hover {
     background-color: var(--tertiary-color);
-
 }
 
 .hamburger-icon {
@@ -378,7 +381,7 @@ nav {
     box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.14);
     -webkit-box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.14);
     height: 100%;
-    left: 0;
+    left: 0; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     overflow-x: hidden;
     padding-top: 60px;
     position: fixed;
@@ -408,7 +411,7 @@ nav {
     font-size: 36px;
     padding: 2px 14px 4px;
     position: absolute;
-    right: 0;
+    right: 0; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
     top: 0;
     transition: all ease 0.1s;
 }
@@ -454,7 +457,8 @@ nav {
     content: '';
     display: inline-block;
     height: 11px;
-    margin: 0 10px 0 0;
+    margin: 0;
+    margin-inline-end: 10px;
     transition: all .2s ease;
     vertical-align: middle;
     width: 11px;
@@ -469,7 +473,7 @@ nav {
     border-top-style: none;
     content: '';
     height: 3px;
-    right: 50%;
+    right: 50%; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
     position: relative;
     top: 7px;
     transform: scale(0, 0) rotate(-90deg) translateZ(0);
@@ -496,12 +500,14 @@ nav {
 
 /* form starting stylings ------------------------------- */
 .flat-inp {
+    direction: ltr; /* Fields that take latin input such as username and password should be ltr */
     border: none;
     border-bottom: 1px solid #d0dce7;
     display: block;
     font-size: 18px;
     margin: 0 auto;
-    padding: 0.625em 0.625em 0.625em 0.3125em;
+    padding:  0.625em;
+    padding-inline-start: 0.3125em;
     width: 90%;
 }
 
@@ -514,7 +520,7 @@ textarea:focus {
     color: #999;
     font-size: 17px;
     font-weight: normal;
-    left: 12px;
+    left: 12px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     pointer-events: none;
     position: absolute;
     top: 0.625em;
@@ -528,7 +534,7 @@ textarea:focus ~ label,
 textarea:valid ~ label {
     color: var(--primary-color);
     font-size: 13px;
-    left: 10px;
+    left: 10px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     top: -20px;
 }
 
@@ -536,7 +542,7 @@ textarea:valid ~ label {
     background: var(--primary-color);
     bottom: 0;
     height: 2px;
-    left: 11px;
+    left: 11px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     opacity: 0;
     position: absolute;
     width: 90%;
@@ -560,7 +566,7 @@ textarea:valid ~ label {
 .log-form {
     background: #fff;
     border-radius: 2px;
-    left: 50%;
+    left: 50%; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     padding: 40px 40px 20px;
     position: absolute;
     text-align: center;
@@ -575,7 +581,7 @@ textarea:valid ~ label {
     font-size: 24px;
     padding: 5px 14px 6px;
     position: absolute;
-    right: 0;
+    right: 0; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
     top: 0;
     transition: all ease 0.1s;
 }
@@ -650,7 +656,6 @@ textarea:valid ~ label {
 #login-dialog p {
     font-size: 12px;
     margin-top: 30px;
-
 }
 
 #login-dialog button {
@@ -665,8 +670,7 @@ textarea:valid ~ label {
     font-size: 12px;
     opacity: 0;
     position: absolute;
-    right: 10px;
-
+    right: 10px; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
 }
 
 .invalid-login {
@@ -804,19 +808,19 @@ main {
     border-radius: 50%;
     display: flex;
     height: 36px;
-    margin-right: 12px;
+    margin-inline-end: 12px;
 }
 
 .author-info {
     align-items: center;
     display: flex;
-    margin-left: 2px;
+    margin-inline-start: 2px;
 }
 
 .author-inf-nav {
     align-items: center;
     display: flex;
-    margin-right: 32px;
+    margin-inline-end: 32px;
 }
 
 .author {
@@ -860,7 +864,7 @@ main {
 
 .score img {
     height: 12px;
-    margin-left: 12px;
+    margin-inline-start: 12px;
 }
 
 .card-footer {
@@ -947,6 +951,7 @@ main {
 }
 
 .video-progress {
+    direction: ltr; /* For both ltr and rtl layouts the direction of progress bar should be ltr */
     bottom: -2px;
     height: 4px;
     position: absolute;
@@ -985,7 +990,7 @@ progress::-webkit-progress-value {
 
 .hot-icon {
     height: 18px;
-    margin-right: 19px;
+    margin-inline-end: 19px;
     vertical-align: middle;
     fill: var(--icons-color);
 }
@@ -998,7 +1003,7 @@ progress::-webkit-progress-value {
     background: white;
     border-radius: 2px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
-    left: 10px;
+    left: 10px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     opacity: 0;
     position: absolute;
     top: 22px;
@@ -1039,7 +1044,7 @@ progress::-webkit-progress-value {
     display: inline-block;
     padding: 6px;
     position: absolute;
-    right: calc(50% - 7px);
+    right: calc(50% - 7px); /* TODO: Replace with inset-inline-end when major browsers start supporting it */
     top: -7px;
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
@@ -1052,14 +1057,14 @@ progress::-webkit-progress-value {
     border-width: 0 9px 9px 9px;
     content: '';
     position: absolute;
-    right: calc(50% - 9px);
+    right: calc(50% - 9px); /* TODO: Replace with inset-inline-end when major browsers start supporting it */
     top: -8px;
     z-index: -1;
 }
 
 .share-icon {
     cursor: pointer;
-    margin-right: 4px;
+    margin-inline-end: 4px;
     vertical-align: middle;
     width: 14px;
     fill: var(--icons-color);
@@ -1080,7 +1085,7 @@ progress::-webkit-progress-value {
 .meters {
     align-items: center;
     display: flex;
-    margin-left: 20px;
+    margin-inline-start: 20px;
     margin-top: 4px;
 }
 
@@ -1090,7 +1095,7 @@ progress::-webkit-progress-value {
     background: url(../img/ic-heart.png) no-repeat left;
     background-size: 2900%;
     height: 48px;
-    margin-right: 6px;
+    margin-inline-end: 6px;
     width: 48px;
 }
 
@@ -1099,7 +1104,7 @@ progress::-webkit-progress-value {
     background-size: 2900%;
     cursor: pointer;
     height: 48px;
-    margin-right: 6px;
+    margin-inline-end: 6px;
     width: 48px;
 }
 
@@ -1112,7 +1117,7 @@ progress::-webkit-progress-value {
     background-size: 2900%;
     cursor: pointer;
     height: 48px;
-    margin-right: 6px;
+    margin-inline-end: 6px;
     width: 48px;
 }
 
@@ -1134,7 +1139,7 @@ progress::-webkit-progress-value {
     color: var(--icons-color);
     font-size: 12px;
     font-weight: normal;
-    margin-right: -4px;
+    margin-inline-end: -4px;
     margin-top: 0;
     text-align: center;
 }
@@ -1150,7 +1155,7 @@ progress::-webkit-progress-value {
     color: #666;
     font-size: 13px;
     height: fit-content;
-    margin-right: 5px;
+    margin-inline-end: 5px;
     overflow: hidden;
     padding: 5px 12px;
     text-decoration: none;
@@ -1165,7 +1170,7 @@ progress::-webkit-progress-value {
 .card-date {
     color: #757575;
     font-size: 10px;
-    margin-left: 8px;
+    margin-inline-start: 8px;
 }
 
 .card {
@@ -1192,7 +1197,7 @@ progress::-webkit-progress-value {
 .sum h1 {
     font-size: 15px;
     padding: 10px;
-    text-align: left;
+    text-align: start;
 }
 
 .sum a {
@@ -1424,7 +1429,7 @@ progress::-webkit-progress-value {
 
 .lang-flag {
     filter: grayscale(100%) opacity(40%);
-    margin-right: 8px;
+    margin-inline-end: 8px;
     width: 18px;
     transition: all 100ms;
 }

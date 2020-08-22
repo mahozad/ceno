@@ -37,7 +37,10 @@ form {
     border-bottom: 1px solid #d0dce7;
     display: block;
     font-size: 15px;
-    padding: 0.625em 0.625em 0.625em 0.3125em;
+    padding-block-start: 0.625em;
+    padding-block-end: 0.625em;
+    padding-inline-start: 0.3125em;
+    padding-inline-end: 0.625em;
     width: 100%;
 }
 
@@ -54,7 +57,7 @@ form {
     color: #999;
     font-size: 15px;
     font-weight: normal;
-    left: 12px;
+    left: 12px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     pointer-events: none;
     position: absolute;
     top: 9px;

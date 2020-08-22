@@ -3,7 +3,7 @@
     color: var(--primary-color);
     position: absolute;
     top: 80px;
-    left: 50%;
+    left: 50%; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
     transform: translate(-50%, 0);
     animation-duration: 10s;
     animation-iteration-count: infinite;
@@ -21,7 +21,7 @@
     width: 200px;
     height: 200px;
     position: absolute;
-    left: calc(50% - 100px);
+    left: calc(50% - 100px); /* TODO: Replace with inset-inline-start when major browsers start supporting it */
 }
 
 .anim {
