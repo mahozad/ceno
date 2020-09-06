@@ -19,17 +19,17 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 import static java.time.temporal.ChronoUnit.*;
 
 @Component("dateTimeFormatter")
-public class CenoDateTimeFormatter {
+public class DefaultDateAndTimeFormatter implements DateAndTimeFormatter {
 
     private final MessageSource messageSource;
 
-    public CenoDateTimeFormatter(MessageSource messageSource) {
+    public DefaultDateAndTimeFormatter(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
-    public String formatAge(LocalDateTime creationDateTime) {
+    public String format(LocalDateTime dateTime) {
         Locale locale = LocaleContextHolder.getLocale();
-        Duration age = Duration.between(creationDateTime, now());
+        Duration age = Duration.between(dateTime, now());
 
         if (age.toSeconds() < MINUTES.getDuration().getSeconds()) {
             return messageSource.getMessage("age.seconds-old", null, locale);
@@ -42,15 +42,15 @@ public class CenoDateTimeFormatter {
         } else if (age.toDays() < 3) {
             Object[] args = {age.toDays()};
             return messageSource.getMessage("age.days-old", args, locale);
-        } else if (creationDateTime.getYear() == now().getYear()) {
-            return formatDate(creationDateTime.toLocalDate(), "d MMMM");
+        } else if (dateTime.getYear() == now().getYear()) {
+            return formatTemporal(dateTime, "d MMMM");
         } else {
-            return formatDate(creationDateTime.toLocalDate(), "d MMMM uuuu");
+            return formatTemporal(dateTime, "d MMMM uuuu");
         }
     }
 
-    public String formatToday(String pattern) {
-        return formatDate(LocalDate.now(), pattern);
+    public String formatNow(String pattern) {
+        return formatTemporal(LocalDateTime.now(), pattern);
     }
 
     /**
@@ -84,7 +84,7 @@ public class CenoDateTimeFormatter {
      *
      * @return the formatted date
      */
-    public String formatDate(Temporal temporal, String pattern) {
+    private String formatTemporal(Temporal temporal, String pattern) {
         LocalDate date = LocalDate.from(temporal);
         Locale locale = LocaleContextHolder.getLocale();
         // FIXME: As of JDK 15 just call localizedBy(); specifying the decimal style won't be necessary.

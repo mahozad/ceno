@@ -247,7 +247,7 @@
 <a class="read-more" th:fragment="card-read-more" th:href="@{|/posts/${post.url}|}" th:text="#{card.read-more}"></a>
 
 <!--/* Card date */-->
-<div class="card-date" th:fragment="card-datetime" th:text="${@dateTimeFormatter.formatAge(post.creationDateTime)}"></div>
+<div class="card-date" th:fragment="card-datetime" th:text="${@dateTimeFormatter.format(post.creationDateTime)}"></div>
 
 <!--/* Page footer */-->
 <footer class="page-footer" th:fragment="footer">
@@ -318,7 +318,7 @@
     <span>©</span>
     <span th:text="#{name}"></span>
     <!--/* <span th:text="${#calendars.format(#calendars.createToday(), 'yyyy')}"></span> */-->
-    <span th:text="${@dateTimeFormatter.formatToday('yyyy')}"></span>
+    <span th:text="${@dateTimeFormatter.formatNow('yyyy')}"></span>
   </div>
 </footer>
 
