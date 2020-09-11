@@ -16,11 +16,12 @@ import java.util.Map;
 @Controller
 public class SseController {
 
+    private static final long EMITTER_TIMEOUT = 1_800_000;
     private Map<String, SseEmitter> userToEmitter = new HashMap<>();
 
     @GetMapping("/likes/{username}/stream")
     public ResponseBodyEmitter subscribeLike(@PathVariable String username) {
-        SseEmitter emitter = new SseEmitter();
+        SseEmitter emitter = new SseEmitter(EMITTER_TIMEOUT);
         userToEmitter.put(username, emitter);
         return emitter;
     }
