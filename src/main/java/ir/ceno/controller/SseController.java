@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+// A good article about SSE: https://dzone.com/articles/server-sent-events-using-spring
 @Controller
 public class SseController {
 
