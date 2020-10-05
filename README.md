@@ -7,6 +7,8 @@ Ceno social news website
 
 ## Notes
 
+https://github.com/WICG/scroll-to-text-fragment
+
 A [good article](https://proandroiddev.com/the-real-repository-pattern-in-android-efba8662b754)
 about layered architecture and entity, value object, etc.
 
