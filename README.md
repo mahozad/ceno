@@ -178,3 +178,45 @@ or return a simple object as described [here](https://codingexplained.com/coding
 #
 
 When submitting a form, follow [Post/Redirect/Get Pattern](https://www.baeldung.com/spring-web-flash-attributes#1-postredirectget-pattern)
+
+#
+
+[Some sites](https://stackoverflow.com/q/63858721) to see the status of web technologies
+
+https://www.youtube.com/watch?v=aJnFGMclhU8&ab_channel=GitHubTraining%26Guides
+
+
+#
+
+ 1. [The MDN repository][1] "contains compatibility data for Web technologies as displayed on MDN"
+ 2. [Can I use][2] "provides up-to-date browser support tables" for Web technologies and features
+ 3. [ECMAScript compatibility tables][3] provides status of ECMAScript support like caniuse
+ 4. [HTML5TEST][4] scores and lets you know how well your browser supports HTML5
+ 5. [WHAT WEB CAN DO TODAY][5] is something similar to HTML5TEST site
+
+ &#10;
+
+ 6. Google Chrome [roadmap][6] and [features][7] (including proposed etc)
+ 7. Firefox [implementation and standardization roadmap][8]
+ 8. Microsoft Edge [platform status][9] 
+ 9. Safari [webKit feature status][10]
+ 10. Opera ([same as chrome][7])
+
+---
+
+<sub>Note that Google Chrome, Microsoft Edge and Opera are all [Chromium][11]-based browsers that use [Blink][12] browser engine.  
+Thanks to this [GitHub gist][13].</sub>
+
+  [1]: https://github.com/mdn/browser-compat-data
+  [2]: https://caniuse.com
+  [3]: https://kangax.github.io/compat-table/es6/
+  [4]: https://html5test.com/
+  [5]: https://whatwebcando.today/
+  [6]: https://www.chromestatus.com/features/schedule
+  [7]: https://www.chromestatus.com/features
+  [8]: https://platform-status.mozilla.org/
+  [9]: https://developer.microsoft.com/en-us/microsoft-edge/status/
+  [10]: https://webkit.org/status/
+  [11]: https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium
+  [12]: https://en.wikipedia.org/wiki/Blink_(browser_engine)
+  [13]: https://gist.github.com/mathiasbynens/9e26f733b53dd6a9d417
