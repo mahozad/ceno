@@ -57,7 +57,7 @@ form {
     color: #999;
     font-size: 15px;
     font-weight: normal;
-    left: 12px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 12px;
     pointer-events: none;
     position: absolute;
     top: 9px;

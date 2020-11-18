@@ -92,7 +92,7 @@ main {
     border-radius: 2px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     font-size: 15px;
-    left: 50%; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 50%;
     line-height: 36px;
     padding: 20px;
     position: absolute;
@@ -120,13 +120,13 @@ main {
     font-weight: bold;
     height: 40px;
     justify-content: center;
-    left: 0; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 0;
     margin: 24px auto -10px;
     min-width: fit-content;
     opacity: 0.92;
     padding: 20px 30px;
     position: fixed;
-    right: 0; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: 0;
     visibility: visible;
     width: 350px;
     z-index: 5;
@@ -192,7 +192,7 @@ nav {
     outline: none;
     position: relative;
     transition: all ease 0.2s;
-    right: 26px; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: 26px;
     width: 26px;
 }
 
@@ -224,7 +224,7 @@ nav {
 
 .search-input:focus + .search-button {
     width: 28px;
-    right: 30px; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: 30px;
 }
 
 .search-input:focus + .search-button > .search-icon {
@@ -381,7 +381,7 @@ nav {
     box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.14);
     -webkit-box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.14);
     height: 100%;
-    left: 0; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 0;
     overflow-x: hidden;
     padding-top: 60px;
     position: fixed;
@@ -411,7 +411,7 @@ nav {
     font-size: 36px;
     padding: 2px 14px 4px;
     position: absolute;
-    right: 0; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: 0;
     top: 0;
     transition: all ease 0.1s;
 }
@@ -473,7 +473,7 @@ nav {
     border-top-style: none;
     content: '';
     height: 3px;
-    right: 50%; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: 50%;
     position: relative;
     top: 7px;
     transform: scale(0, 0) rotate(-90deg) translateZ(0);
@@ -520,7 +520,7 @@ textarea:focus {
     color: #999;
     font-size: 17px;
     font-weight: normal;
-    left: 12px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 12px;
     pointer-events: none;
     position: absolute;
     top: 0.625em;
@@ -534,7 +534,7 @@ textarea:focus ~ label,
 textarea:valid ~ label {
     color: var(--primary-color);
     font-size: 13px;
-    left: 10px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 10px;
     top: -20px;
 }
 
@@ -542,7 +542,7 @@ textarea:valid ~ label {
     background: var(--primary-color);
     bottom: 0;
     height: 2px;
-    left: 11px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 11px;
     opacity: 0;
     position: absolute;
     width: 90%;
@@ -566,7 +566,7 @@ textarea:valid ~ label {
 .log-form {
     background: #fff;
     border-radius: 2px;
-    left: 50%; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 50%;
     padding: 40px 40px 20px;
     position: absolute;
     text-align: center;
@@ -581,7 +581,7 @@ textarea:valid ~ label {
     font-size: 24px;
     padding: 5px 14px 6px;
     position: absolute;
-    right: 0; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: 0;
     top: 0;
     transition: all ease 0.1s;
 }
@@ -670,7 +670,7 @@ textarea:valid ~ label {
     font-size: 12px;
     opacity: 0;
     position: absolute;
-    right: 10px; /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: 10px;
 }
 
 .invalid-login {
@@ -1003,7 +1003,7 @@ progress::-webkit-progress-value {
     background: white;
     border-radius: 2px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 -1px 4px 0 rgba(0, 0, 0, 0.2);
-    left: 10px; /* TODO: Replace with inset-inline-start when major browsers start supporting it */
+    inset-inline-start: 10px;
     opacity: 0;
     position: absolute;
     top: 22px;
@@ -1044,7 +1044,7 @@ progress::-webkit-progress-value {
     display: inline-block;
     padding: 6px;
     position: absolute;
-    right: calc(50% - 7px); /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: calc(50% - 7px);
     top: -7px;
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
@@ -1057,7 +1057,7 @@ progress::-webkit-progress-value {
     border-width: 0 9px 9px 9px;
     content: '';
     position: absolute;
-    right: calc(50% - 9px); /* TODO: Replace with inset-inline-end when major browsers start supporting it */
+    inset-inline-end: calc(50% - 9px);
     top: -8px;
     z-index: -1;
 }
