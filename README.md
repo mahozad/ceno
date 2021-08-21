@@ -133,6 +133,14 @@ See [this SO question](https://stackoverflow.com/q/41179828)
 
 #
 
+[Shimmer effect example](https://codepen.io/umng/pen/xMXXRj?editors=1100)
+
+#
+
+[A good video about clean architecture](https://youtu.be/7Lz9mvnK-x8)
+
+#
+
 To debug JavaScript code in IntelliJ, install "JetBrains IDE Support" extension on chrome.
 Set your desired breakpoint(s) in the IDE.
 In chrome, right click on the JetBrains extension icon and select "Inspect in IDEA".
